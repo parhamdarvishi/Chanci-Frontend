@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist_Mono } from "next/font/google";
+// import { Geist_Mono } from "next/font/google";
 import { Poppins } from "next/font/google";
 import { MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
@@ -7,10 +7,10 @@ import "./globals.css";
 import Header from "./shared/ui/Header/header";
 import Footer from "./shared/ui/Footer/footer";
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+// });
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
