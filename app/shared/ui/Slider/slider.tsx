@@ -29,7 +29,7 @@ const Slider = ({ slides }: props) => {
     setTimeout(() => setIsAnimating(false), 500);
   };
 
-  const visibleCards = slides.slice(currentIndex, currentIndex + cardsToShow);
+  // const visibleCards = slides.slice(currentIndex, currentIndex + cardsToShow);
   const hasMoreCards = currentIndex < slides.length - cardsToShow;
   const hasPrevCards = currentIndex > 0;
 

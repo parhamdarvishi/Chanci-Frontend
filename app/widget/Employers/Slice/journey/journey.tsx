@@ -42,7 +42,7 @@ const Journey = () => {
           <div className={styles.feature}>
             <div className={styles.dot} />
             <p>
-              Support for Every Stage: Tailored solutions to fuel your startup's
+              Support for Every Stage: Tailored solutions to fuel your startups
               growth.
             </p>
           </div>

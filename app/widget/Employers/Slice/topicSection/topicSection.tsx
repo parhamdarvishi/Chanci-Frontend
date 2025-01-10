@@ -21,6 +21,7 @@ const TopicSection = ({
   condidates,
 }: TopicSectionProps) => {
   const [windowWidth, setWindowWidth] = useState(0);
+  console.log({ condidates });
 
   useEffect(() => {
     // Set initial width

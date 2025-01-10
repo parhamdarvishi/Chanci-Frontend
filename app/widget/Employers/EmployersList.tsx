@@ -14,6 +14,7 @@ const EmployersList = () => {
         title={"Unlock Smarter Talent Acquisition"}
         desc={"Future-proof your team with bright talents and top graduates!"}
         btnTxt={"Post a job with us"}
+        condidates={false}
       />
       <ShowCase />
       <Journey />

@@ -17,7 +17,7 @@ const RightRoom = () => {
             Discover NGN events designed for your goals, including professional
             networking, co-founder matching, and industry-focused gatherings.
             Become part of the NGN network to access exclusive offers and expand
-            your company's opportunities.
+            your company&apos;s opportunities.
           </p>
           <Button
             size="lg"
