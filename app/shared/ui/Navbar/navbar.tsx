@@ -9,6 +9,7 @@ import searchIc from "@public/image/search.svg";
 import profileIc from "@public/image/icons/profile.svg";
 import awardIc from "@public/image/icons/award.svg";
 import teacherIc from "@public/image/icons/teacher.svg";
+// import bubbleR from "@public/image/bubble/bubble1.svg";
 
 const Navbar = () => {
   return (
@@ -54,6 +55,9 @@ const Navbar = () => {
         </Group>
       </div>
       <div className={style.NgnBox}>
+        {/* <div className={style.bubbleR}>
+          <Image src={bubbleR} alt="bubbleR" />
+        </div> */}
         <h1>New Generation Network </h1>
         <p>
           We deliver Chanci AI to the next generation of talents by combining
@@ -97,10 +101,10 @@ const Navbar = () => {
         >
           <div className={style.cardHeader}>
             <Image src={teacherIc} alt="search" />
-            <h4>Employers</h4>
+            <h4>Candidates</h4>
           </div>
-          <p>You’re a company looking for top talents?</p>
-          <Button variant="filled">Build Your Team</Button>
+          <p>Ready to apply for a role that fits your ambitions?</p>
+          <Button variant="filled">Start Now</Button>
         </Card>
         <Card
           shadow="sm"
@@ -111,10 +115,10 @@ const Navbar = () => {
         >
           <div className={style.cardHeader}>
             <Image src={awardIc} alt="search" />
-            <h4>Employers</h4>
+            <h4>NGN Events</h4>
           </div>
-          <p>You’re a company looking for top talents?</p>
-          <Button variant="filled">Build Your Team</Button>
+          <p>Looking to build your professional network?</p>
+          <Button variant="filled">Explore NGN Events</Button>
         </Card>
       </div>
     </div>

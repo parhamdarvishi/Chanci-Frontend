@@ -15,6 +15,7 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: "Poppins", sans-serif;
 }
 
 html {
@@ -65,11 +66,6 @@ h4,
 h5,
 h6 {
   line-height: 1.2;
-  margin-bottom: 0.5em;
-}
-
-p {
-  margin-bottom: 1rem;
 }
 
 /* Remove default focus outline and add custom one */
@@ -84,6 +80,17 @@ p {
   color: var(--background);
 }
 .m_8fb7ebe7 {
-  height: 58px !important;
-  border-radius: 12px !important;
+  height: 72px !important;
+  border-radius: 23px !important;
+  padding: 0 6rem !important;
+  font-size: 1.3rem !important;
+}
+
+@media screen and (max-width: 980px) {
+  .m_8fb7ebe7 {
+    height: 52px !important;
+    border-radius: 23px !important;
+    padding: 0 2.7rem !important;
+    font-size: 1rem !important;
+  }
 }

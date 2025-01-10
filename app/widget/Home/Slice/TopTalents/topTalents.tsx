@@ -40,8 +40,8 @@ const TopTalents = () => {
         <Image
           src={Empowering}
           alt="Modern office building"
-          width={500}
-          height={600}
+          width={550}
+          height={700}
           className={style.image}
         />
       </div>

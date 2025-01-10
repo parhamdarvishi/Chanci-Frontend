@@ -1,8 +1,9 @@
 .container {
   background-color: #2026ce;
   padding-bottom: 3rem;
+  position: relative;
   .wrapper {
-    padding: 1rem 3rem;
+    padding: 1rem 4rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -14,8 +15,8 @@
       align-items: center;
       gap: 48px;
       list-style: none;
-      margin-right: 2rem;
-
+      margin-right: 2.4rem;
+      z-index: 11;
       li {
         cursor: pointer;
         a {
@@ -43,18 +44,24 @@
     }
     .btnGroup {
       display: flex;
-      gap: 1rem;
+      gap: 1.3rem;
       align-items: center;
 
       .btnLogin {
         border-radius: 8px !important;
         color: #4752f3;
+        height: 50px;
         background-color: #fff;
+        font-size: 20px;
+        font-weight: 400;
       }
       .btnGet {
         border-radius: 12px;
         color: #fff;
+        height: 50px;
         background: linear-gradient(to right, #8e15ba, #5175f0);
+        font-size: 20px;
+        font-weight: 400 !important;
       }
     }
   }
@@ -63,72 +70,100 @@
     flex-direction: column;
     align-items: center;
     color: #fff;
-    gap: 1.5rem;
-    margin: 2rem 0;
+    gap: 42px;
+    width: 100%;
+    margin-top: 3rem;
+    .bubbleR {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      z-index: 0;
+      img {
+        width: 100%;
+        height: 1300px;
+      }
+    }
     .btnChanci {
-      border-radius: 10px;
+      border-radius: 16px !important;
       color: #fff;
-      width: 200px;
-      height: 42px;
+      width: 278px;
+      height: 63px;
+      font-size: 20px;
+      font-weight: 400;
       background: linear-gradient(to right, #8e15ba, #6154fd, #3d9dd4, #31eec8);
     }
     .inputBox {
       position: relative;
-      margin: 1.2rem 0;
+      margin: 2.2rem 0;
 
       .input {
-        min-width: 750px;
-        height: 57px !important;
-        border-radius: 12px !important;
+        min-width: 1027px;
+        height: 72px !important;
+        border-radius: 23px !important;
       }
       .inputBtn {
         position: absolute;
         border-radius: 12px !important;
-        right: 15px;
-        top: 8px;
-        height: 42px;
+        right: 20px;
+        font-size: 18px;
+        top: 10px;
+        height: 52px;
+        font-weight: 400;
       }
       .inputIc {
         position: absolute;
-        top: 12px;
-        left: 15px;
-        height: 34px !important;
+        top: 16px;
+        left: 22px;
+        height: 40px !important;
       }
     }
     h1 {
-      font-size: 48px !important;
+      font-size: 72px !important;
     }
     p {
-      max-width: 720px;
+      max-width: 930px;
       text-align: center;
+      line-height: 36px;
+      font-size: 20px;
     }
   }
   .cardWrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 2.2rem;
+    gap: 3.1rem;
     margin-top: 3rem;
     .cardBox {
       min-width: 390px;
-      height: 172px;
+      height: 192px;
       display: flex;
       justify-content: center;
       border-radius: 1rem;
+      padding: 1rem !important;
+      gap: 0.5rem;
       Button {
+        margin-top: 0.3rem;
         background-color: #4752f3;
-        border-radius: 12px;
+        border-radius: 16px;
         font-size: 18px;
+        font-weight: 400 !important;
+        height: 49px;
       }
       p {
         padding-left: 2.2rem;
-        max-width: 250px;
+        max-width: 322px;
         color: #737373;
       }
       .cardHeader {
         display: flex;
         align-items: center;
         gap: 0.5rem;
+
+        h4 {
+          font-size: 18px !important;
+          font-weight: 500 !important;
+        }
       }
     }
   }
@@ -147,6 +182,10 @@
 
 @media screen and (max-width: 980px) {
   .container {
+    background-color: unset !important;
+    object-fit: fill !important;
+    width: 100%;
+    background-image: url("../../../../public/image/homeBg.png");
     .wrapper {
       background-color: none;
       padding: 0.5rem 0.5rem;
@@ -173,57 +212,83 @@
       }
       .btnGroup {
         display: flex;
-        gap: 0.5rem;
+        gap: 0.6rem;
         align-items: center;
 
         .btnLogin {
-          height: 24px;
+          height: 28px;
           font-size: 12px;
           font-weight: 400;
+          padding: 0.2rem 0.9rem !important;
         }
         .btnGet {
-          height: 24px;
+          height: 28px;
           font-size: 12px;
           font-weight: 400;
+          padding: 0.2rem 1rem !important;
         }
       }
     }
     .NgnBox {
-      padding: 0 2.3rem;
-      margin: 1.4rem 0;
+      padding: 0 1.2rem;
+      margin: 1.6rem 0;
+      gap: 20px;
       h1 {
-        font-size: 24px !important;
+        font-size: 26px !important;
+        font-weight: 700;
       }
       p {
         text-align: center;
+        font-size: 16px;
+        line-height: 28px;
+      }
+      .btnChanci {
+        border-radius: 8px !important;
+        color: #fff;
+        width: 206px;
+        height: 34px;
+        font-size: 16px;
+        font-weight: 400;
+        background: linear-gradient(
+          to right,
+          #8e15ba,
+          #6154fd,
+          #3d9dd4,
+          #31eec8
+        );
       }
       .inputBox {
         width: 100%;
+        margin: 1.2rem 0 !important;
         .input {
           min-width: unset !important;
           width: 100%;
-          height: 57px !important;
+          height: 46px !important;
           border-radius: 12px !important;
         }
         .inputBtn {
           position: absolute;
           border-radius: 12px !important;
-          right: 15px;
-          top: 8px;
-          height: 42px;
+          right: 12px;
+          top: 6px;
+          font-size: 12px;
+          height: 40px;
+          width: 128px;
+          padding: 0 !important;
         }
         .inputIc {
           position: absolute;
-          top: 12px;
-          left: 15px;
-          height: 34px !important;
+          top: 14px;
+          left: 6px;
+          height: 24px !important;
         }
       }
     }
     .cardWrapper {
       display: flex;
       flex-direction: column;
-      padding: 0 3.4rem;
+      padding: 0 2.6rem;
+      margin-top: 1rem;
       .cardBox {
         min-width: unset !important;
         width: 100%;

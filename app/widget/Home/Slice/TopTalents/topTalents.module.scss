@@ -1,9 +1,10 @@
 .wrapper {
   display: flex;
-  gap: 4rem;
-  max-width: 1200px;
+  gap: 4.5rem;
+  max-width: 1310px;
   margin: 0 auto;
   padding: 2rem;
+  margin-top: 3rem;
 }
 
 .imageSection {
@@ -11,7 +12,7 @@
   border-radius: 1rem;
   .image {
     width: 100%;
-    height: 96%;
+    height: 97%;
     object-fit: cover;
     border-radius: 1rem;
   }
@@ -24,9 +25,9 @@
 }
 
 .title {
-  font-size: 2.5rem;
+  font-size: 32px;
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 48px;
   margin-bottom: 1rem;
 }
 
@@ -99,5 +100,11 @@
 
   .imageSection {
     height: 300px;
+  }
+  .title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
+    margin-bottom: 1rem;
   }
 }
