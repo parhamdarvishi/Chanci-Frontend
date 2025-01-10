@@ -3,8 +3,12 @@ import Logo from "@public/LogoNGN.svg";
 import Menu from "@public/menu.svg";
 import Image from "next/image";
 import style from "./navbar.module.scss";
-import { Button, Group } from "@mantine/core";
+import { Button, Card, Group, Input } from "@mantine/core";
 import Link from "next/link";
+import searchIc from "@public/image/search.svg";
+import profileIc from "@public/image/icons/profile.svg";
+import awardIc from "@public/image/icons/award.svg";
+import teacherIc from "@public/image/icons/teacher.svg";
 
 const Navbar = () => {
   return (
@@ -48,6 +52,70 @@ const Navbar = () => {
           <Button className={style.btnLogin}>Log in</Button>
           <Button className={style.btnGet}>Get in Touch</Button>
         </Group>
+      </div>
+      <div className={style.NgnBox}>
+        <h1>New Generation Network </h1>
+        <p>
+          We deliver Chanci AI to the next generation of talents by combining
+          advanced analytics, psychological assessments, and updated job market
+          data.
+        </p>
+        <Button className={style.btnChanci}>Take me to Chanci AI</Button>
+        <div className={style.inputBox}>
+          <Input type="text" className={style.input} />
+          <Button variant="outline" className={style.inputBtn}>
+            Advanced Search
+          </Button>
+          <Image
+            src={searchIc}
+            alt="searchIcon"
+            className={style.inputIc}
+          ></Image>
+        </div>
+      </div>
+      <div className={style.cardWrapper}>
+        <Card
+          shadow="sm"
+          padding="lg"
+          radius="md"
+          withBorder
+          className={style.cardBox}
+        >
+          <div className={style.cardHeader}>
+            <Image src={profileIc} alt="search" />
+            <h4>Employers</h4>
+          </div>
+          <p>You’re a company looking for top talents?</p>
+          <Button variant="filled">Build Your Team</Button>
+        </Card>
+        <Card
+          shadow="sm"
+          padding="lg"
+          radius="md"
+          withBorder
+          className={style.cardBox}
+        >
+          <div className={style.cardHeader}>
+            <Image src={teacherIc} alt="search" />
+            <h4>Employers</h4>
+          </div>
+          <p>You’re a company looking for top talents?</p>
+          <Button variant="filled">Build Your Team</Button>
+        </Card>
+        <Card
+          shadow="sm"
+          padding="lg"
+          radius="md"
+          withBorder
+          className={style.cardBox}
+        >
+          <div className={style.cardHeader}>
+            <Image src={awardIc} alt="search" />
+            <h4>Employers</h4>
+          </div>
+          <p>You’re a company looking for top talents?</p>
+          <Button variant="filled">Build Your Team</Button>
+        </Card>
       </div>
     </div>
   );
