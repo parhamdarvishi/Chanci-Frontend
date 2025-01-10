@@ -1,0 +1,128 @@
+.wrapper {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 0 2rem;
+  .cardSpan {
+    color: #969595;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 5rem;
+
+    h2 {
+      font-size: 2.6rem;
+      font-weight: 400;
+
+      span {
+        font-weight: 700;
+      }
+    }
+    .desc {
+      max-width: 1028px;
+      line-height: 2.1rem;
+      font-size: 24px;
+      color: #2e2e2ecc;
+    }
+  }
+  .card {
+    min-height: 350px;
+    position: relative;
+    .cardSLine {
+      position: absolute;
+      right: 150px;
+      top: -5px;
+    }
+    .cardLine {
+      position: absolute;
+      left: 340px;
+    }
+    .cardCircle {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .cardTitle {
+      padding: 2rem;
+    }
+    .cardBody {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      gap: 3rem;
+      p {
+        max-width: 400px;
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 0 1rem;
+  }
+  .header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem !important;
+    gap: 0.4rem;
+    h2 {
+      font-size: 1.5rem !important;
+      font-weight: 400;
+      max-width: 220px;
+      line-height: 2rem;
+      span {
+        font-weight: 700;
+      }
+    }
+    .desc {
+      font-size: 20px !important;
+      line-height: 1.7rem !important;
+    }
+  }
+  .card {
+    min-height: 700px !important;
+    .cardCircle {
+      display: none !important;
+    }
+    .cardSLine {
+      display: none !important;
+    }
+    .cardLine {
+      position: absolute;
+      right: 20px !important;
+      left: unset !important;
+      top: 65px;
+      width: 12 0px;
+    }
+    .cardSpanPart {
+      max-width: 190px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .cardBody {
+      flex-direction: column;
+      text-align: center;
+      gap: 4rem !important;
+      p {
+        font-size: 21px;
+        line-height: 1.8rem;
+      }
+      span {
+        font-size: 19px;
+        line-height: 1.6rem;
+      }
+    }
+    .cardTitle {
+      display: flex;
+      justify-content: center;
+      img {
+        width: 160px;
+      }
+    }
+  }
+}

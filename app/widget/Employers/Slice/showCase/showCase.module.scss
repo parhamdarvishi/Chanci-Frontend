@@ -1,0 +1,30 @@
+.title {
+    display: flex;
+    align-items: center;
+    gap: .3rem;
+    justify-content: center;
+    padding-top: 2rem;
+  }
+  
+  .gridContainer {
+    margin-top: 2rem;
+    overflow: hidden;
+  }
+  
+  .gridItem {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  .percentageText {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+    color: blue;
+  }
+  
+  .descriptionText {
+    font-size: 1.2rem;
+    margin: 0;
+  }
+  

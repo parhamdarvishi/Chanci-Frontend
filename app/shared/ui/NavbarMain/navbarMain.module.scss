@@ -1,0 +1,93 @@
+.wrapper {
+  padding: 1rem 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .navList {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    list-style: none;
+
+    li {
+      cursor: pointer;
+      font-size: 20px;
+      a {
+        color: #0d131d !important;
+      }
+    }
+    .menuBar {
+      display: none;
+    }
+    img {
+      width: 90px;
+      height: 80px;
+    }
+  }
+  .btnGroup {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    .btnLogin {
+      color: #4752f3;
+      background-color: #fff;
+      border: 1px solid #4752f3;
+      border-radius: 10px;
+    }
+    .btnGet {
+      border-radius: 10px;
+      color: #fff;
+      background: linear-gradient(to right, #8e15ba, #5175f0);
+    }
+  }
+}
+
+@media screen and (max-width: 1340px) {
+  .wrapper {
+    padding: 1rem;
+    .navList {
+      gap: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .wrapper {
+    background-color: none;
+    padding: 0.5rem 0.5rem;
+    .navList {
+      gap: 10px;
+      align-items: start;
+      .navItems {
+        display: none;
+      }
+      img {
+        width: 45px;
+        height: 45px;
+      }
+      .menuBar {
+        display: block;
+        width: 24px;
+        height: 24px;
+      }
+    }
+    .btnGroup {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+
+      .btnLogin {
+        height: 24px;
+        font-size: 12px;
+        font-weight: 400;
+      }
+      .btnGet {
+        height: 24px;
+        font-size: 12px;
+        font-weight: 400;
+      }
+    }
+  }
+}
