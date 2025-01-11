@@ -7,6 +7,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
+    z-index: 1;
     div {
       display: flex;
     }
@@ -74,18 +76,34 @@
     width: 100%;
     margin-top: 3rem;
     .bubbleR {
-      position: absolute;
-      left: 0;
-      top: 0;
       width: 100%;
       z-index: 0;
       img {
-        width: 100%;
-        height: 1300px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 510px;
+        z-index: 0;
+      }
+    }
+    .bubbleL {
+      width: 100%;
+      z-index: 0;
+      img {
+        position: absolute;
+        left: -210px;
+        bottom: -44px;
+        width: 1150px;
+        z-index: 0;
       }
     }
     .btnChanci {
       border-radius: 16px !important;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 10;
       color: #fff;
       width: 278px;
       height: 63px;
@@ -122,10 +140,10 @@
       font-size: 72px !important;
     }
     p {
-      max-width: 930px;
+      max-width: 850px;
       text-align: center;
       line-height: 36px;
-      font-size: 20px;
+      font-size: 24px;
     }
   }
   .cardWrapper {
@@ -179,7 +197,24 @@
     }
   }
 }
-
+@media screen and (max-width: 1200px) {
+  .container {
+    .wrapper {
+      padding: 1rem;
+      .NgnBox {
+        .bubbleR {
+          display: none !important;
+        }
+        .bubbleL {
+          display: none !important;
+        }
+      }
+      .navList {
+        gap: 20px;
+      }
+    }
+  }
+}
 @media screen and (max-width: 980px) {
   .container {
     background-color: unset !important;
@@ -233,6 +268,12 @@
       padding: 0 1.2rem;
       margin: 1.6rem 0;
       gap: 20px;
+      .bubbleR {
+        display: none !important;
+      }
+      .bubbleL {
+        display: none !important;
+      }
       h1 {
         font-size: 26px !important;
         font-weight: 700;

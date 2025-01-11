@@ -7,6 +7,7 @@ import Email from "@public/image/smsTracking.svg";
 import linkedin from "@public/image/file/SocialMedia.svg";
 import footerLine from "@public/image/LineFooter.svg";
 import footerLineN from "@public/image/LineFooterN.svg";
+import arrowRight from "@public/arrowRight.svg";
 
 const Footer = () => {
   return (
@@ -32,12 +33,26 @@ const Footer = () => {
               </Link>
             </div>
           </div>
-          <nav className={style.navigation}>
-            <Link href="/employers">Employers</Link>
-            <Link href="/candidates">Candidates</Link>
-            <Link href="/events">Events</Link>
-            <Link href="/contact">Get in Touch</Link>
-          </nav>
+          <div className={style.navigationBox}>
+            <nav className={style.navigation}>
+              <Link href="/employers">Employers</Link>
+              <Link href="/candidates">Candidates</Link>
+              <Link href="/events">Events</Link>
+              <Link href="/contact">Get in Touch</Link>
+            </nav>
+            <div className={style.navigationField}>
+              <input type="text" placeholder="Enter your Email Address" />
+              <Link href="/find-talent" className={style.button}>
+                Subscribe
+                <Image
+                  className={style.cardArrow}
+                  src={arrowRight}
+                  alt="arrowRight"
+                  width={22}
+                />
+              </Link>
+            </div>
+          </div>
 
           <div className={style.contact}>
             <Link href="mailto:Contact@ukngn.com" className={style.email}>

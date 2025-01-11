@@ -9,7 +9,8 @@ import searchIc from "@public/image/search.svg";
 import profileIc from "@public/image/icons/profile.svg";
 import awardIc from "@public/image/icons/award.svg";
 import teacherIc from "@public/image/icons/teacher.svg";
-// import bubbleR from "@public/image/bubble/bubble1.svg";
+import bubbleR from "@public/image/bubble/right.svg";
+import bubbleL from "@public/image/bubble/left.svg";
 
 const Navbar = () => {
   return (
@@ -55,18 +56,26 @@ const Navbar = () => {
         </Group>
       </div>
       <div className={style.NgnBox}>
-        {/* <div className={style.bubbleR}>
+        <div className={style.bubbleR}>
           <Image src={bubbleR} alt="bubbleR" />
-        </div> */}
+        </div>
         <h1>New Generation Network </h1>
         <p>
-          We deliver Chanci AI to the next generation of talents by combining
-          advanced analytics, psychological assessments, and updated job market
-          data.
+          Get your employability score and personal career progress plan for +20
+          industries here
         </p>
-        <Button className={style.btnChanci}>Take me to Chanci AI</Button>
+        <div className={style.bubbleL}>
+          <Image src={bubbleL} alt="bubbleR" />
+        </div>
+        <Link className={style.btnChanci} href="/find-talent">
+          Take me to Chanci AI
+        </Link>
         <div className={style.inputBox}>
-          <Input type="text" className={style.input} />
+          <Input
+            type="text"
+            className={style.input}
+            placeholder="Search Jobs"
+          />
           <Button variant="outline" className={style.inputBtn}>
             Advanced Search
           </Button>

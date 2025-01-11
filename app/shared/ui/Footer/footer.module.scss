@@ -19,7 +19,7 @@
   align-items: flex-start;
   position: relative;
   padding-top: 2rem;
-  padding-bottom: 1.2rem;
+  padding-bottom: 2rem;
 }
 
 .logoSection {
@@ -43,18 +43,60 @@
     }
   }
 }
-
-.navigation {
+.navigationBox {
   display: flex;
-  gap: 4rem;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  transform: translateY(10px);
+  .navigation {
+    display: flex;
+    gap: 4rem;
 
-  a {
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.3s ease;
-    transform: translateY(12px);
-    &:hover {
-      color: #9ca3af;
+    a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #9ca3af;
+      }
+    }
+  }
+  .navigationField {
+    position: relative;
+    input {
+      border-radius: 16px;
+      width: 476px;
+      height: 52px;
+      border: none;
+      padding-left: 1.2rem;
+      font-size: 18px;
+      font-weight: 400;
+      &::placeholder {
+        color: #adb5bd;
+      }
+    }
+    .button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      position: absolute;
+      top: 5px;
+      right: 55px;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 16px;
+      width: 172px;
+      height: 42px;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+      background: linear-gradient(to right, #8e15ba, #5175f0);
+
+      svg {
+        width: 22px;
+      }
     }
   }
 }
@@ -105,6 +147,9 @@
 }
 
 .copyright {
+  .copyrightLineRes {
+    display: none;
+  }
   text-align: center;
   color: #fff;
   font-size: 0.875rem;
@@ -115,6 +160,9 @@
 }
 
 @media (max-width: 768px) {
+  .container {
+    padding: 0 0.8rem;
+  }
   .content {
     flex-direction: column;
     gap: 1rem;
@@ -162,11 +210,29 @@
       }
     }
   }
-
-  .navigation {
-    flex-direction: column;
-    transform: translateY(0px) !important;
-    gap: 1rem;
+  .navigationBox {
+    width: 100%;
+    .navigation {
+      flex-direction: column;
+      transform: translateY(0px) !important;
+      gap: 1rem;
+    }
+    .navigationField {
+      width: 100%;
+      input {
+        width: 100%;
+        font-size: 14px;
+        padding-left: 0.6rem;
+      }
+      .button {
+        width: 124px;
+        right: 3%;
+        font-size: 16px;
+        gap: 0.5rem;
+        font-weight: 400 !important;
+        border-radius: 8px;
+      }
+    }
   }
 
   .contact {
@@ -185,6 +251,7 @@
     color: #9ca3af;
     font-size: 0.875rem;
     .copyrightLineRes {
+      display: block;
       width: 100%;
       padding: 0.4rem 0;
 
