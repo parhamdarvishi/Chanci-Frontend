@@ -1,7 +1,7 @@
 .journeySection {
   display: flex;
   align-items: center;
-  background: linear-gradient(to right, #1a1464, #271fc0);
+  background: radial-gradient(circle, #5175f0, #1b3aa3);
   min-height: 500px;
   width: 100%;
   padding: 4rem 0;
@@ -11,7 +11,7 @@
 
 .imageWrapper {
   flex: 1;
-  padding-left: 8rem;
+  padding-left: 6rem;
   position: relative;
 }
 
@@ -73,14 +73,14 @@
 
 .contentContainer {
   flex: 1;
-  padding-right: 8rem;
+  padding-right: 7rem;
   color: white;
   display: flex;
   flex-direction: column;
   gap: 2rem;
-
+  position: relative;
   h2 {
-    font-size: 2.5rem;
+    font-size: 38px;
     font-weight: 600;
     margin: 0;
     color: #fff;
@@ -90,14 +90,21 @@
 .features {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.7rem;
+  .arrow {
+    position: absolute;
+    bottom: 0;
+    right: 280px;
+  }
 }
 
 .feature {
   display: flex;
   align-items: flex-start;
   gap: 1rem;
-
+  img {
+    transform: translateY(3px);
+  }
   .dot {
     width: 12px;
     height: 12px;
@@ -108,7 +115,7 @@
   }
 
   p {
-    font-size: 1.1rem;
+    font-size: 19px;
     line-height: 1.5;
     margin: 0;
     color: #fff;

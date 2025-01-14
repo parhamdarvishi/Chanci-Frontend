@@ -39,6 +39,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.5;
 }
+.slider_wrapper {
+  padding: 0 !important;
+}
 
 /* Links */
 a {

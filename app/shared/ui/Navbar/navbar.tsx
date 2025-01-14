@@ -1,9 +1,10 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Logo from "@public/LogoNGN.svg";
 import Menu from "@public/menu.svg";
 import Image from "next/image";
 import style from "./navbar.module.scss";
-import { Button, Card, Group, Input } from "@mantine/core";
+import { Button, Card, Drawer, Group, Input } from "@mantine/core";
 import Link from "next/link";
 import searchIc from "@public/image/search.svg";
 import profileIc from "@public/image/icons/profile.svg";
@@ -11,17 +12,62 @@ import awardIc from "@public/image/icons/award.svg";
 import teacherIc from "@public/image/icons/teacher.svg";
 import bubbleR from "@public/image/bubble/right.svg";
 import bubbleL from "@public/image/bubble/left.svg";
+import logoNav from "@public/image/icons/logoNav.svg";
+import loginNav from "@public/image/icons/loginNav.svg";
+import { useDisclosure } from "@mantine/hooks";
 
 const Navbar = () => {
+  const [loc, setLoc] = useState(0);
+  const [opened, { open, close }] = useDisclosure(false);
+
+  const links = [
+    "Home",
+    "Employers",
+    "Candidates",
+    "Events",
+    "Academy",
+    "About us",
+  ];
+
+  const handleActiveNav = (index: number) => {
+    setLoc(index);
+  };
+
   return (
     <div className={style.container}>
+      <Drawer.Root opened={opened} onClose={close} radius={8} size={"310px"}>
+        <Drawer.Overlay />
+        <Drawer.Content style={{ padding: ".5rem" }}>
+          <Drawer.Header>
+            <Drawer.Title>
+              {" "}
+              <Image src={logoNav} alt="header" width={46} height={42} />
+            </Drawer.Title>
+            <Drawer.CloseButton size={42} color="#585858" />
+          </Drawer.Header>
+          <Drawer.Body>
+            <Image src={loginNav} alt="login" />
+          </Drawer.Body>
+        </Drawer.Content>
+      </Drawer.Root>
       <div className={style.wrapper}>
         <div>
           <ul className={style.navActions}>
             <li className={style.menuBar}>
-              <Link href="/">
-                <Image src={Menu} alt="Menu" />
-              </Link>
+              <div onClick={open}>
+                <Card
+                  style={{
+                    width: "38px",
+                    height: "38px",
+                    padding: "0 !important",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Image src={Menu} alt="Menu" />
+                </Card>
+              </div>
             </li>
             <li>
               <Link href="/">
@@ -30,24 +76,17 @@ const Navbar = () => {
             </li>
           </ul>
           <ul className={style.navList}>
-            <li>
-              <Link href="/Home">Home</Link>
-            </li>
-            <li>
-              <Link href="/Employers">Employers</Link>
-            </li>
-            <li>
-              <Link href="/Condidates">Condidates</Link>
-            </li>
-            <li>
-              <Link href="/Events">Events</Link>
-            </li>
-            <li>
-              <Link href="/Academy">Academy</Link>
-            </li>
-            <li>
-              <Link href="/About">About us</Link>
-            </li>
+            {links?.map((item, index) => (
+              <li
+                key={index}
+                className={loc === index ? style.activeLi : style.li}
+              >
+                <Link href={item} onClick={() => handleActiveNav(index)}>
+                  {item}{" "}
+                </Link>
+                {loc === index && <div className={style.line}></div>}
+              </li>
+            ))}
           </ul>
         </div>
         <Group className={style.btnGroup}>

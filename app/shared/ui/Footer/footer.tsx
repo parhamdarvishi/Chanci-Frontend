@@ -35,10 +35,10 @@ const Footer = () => {
           </div>
           <div className={style.navigationBox}>
             <nav className={style.navigation}>
-              <Link href="/employers">Employers</Link>
-              <Link href="/candidates">Candidates</Link>
-              <Link href="/events">Events</Link>
-              <Link href="/contact">Get in Touch</Link>
+              <Link href="/Employers">Employers</Link>
+              <Link href="/Candidates">Candidates</Link>
+              <Link href="/Events">Events</Link>
+              <Link href="/Contact">Get in Touch</Link>
             </nav>
             <div className={style.navigationField}>
               <input type="text" placeholder="Enter your Email Address" />
@@ -75,7 +75,7 @@ const Footer = () => {
           <div className={style.copyrightLine}>
             <Image alt="footerLine" src={footerLineN} />
           </div>
-          <p>CopyRight © 2025 Cube. All Rights Reserved.</p>
+          <p>© 2025 New Generation Network-All Rights Reserved.</p>
         </div>
       </div>
     </footer>

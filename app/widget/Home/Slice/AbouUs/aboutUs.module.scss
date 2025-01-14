@@ -84,30 +84,33 @@
   width: 180px;
   font-size: 20px;
   text-align: center;
+  font-weight: 300 !important;
   z-index: 1000;
 }
 
 .card h3,
 .cardR h3 {
   color: #fff;
-  font-size: 1.75rem;
-  font-weight: 600;
+  font-size: 32px;
+  font-weight: 500;
   line-height: 1.2;
   margin: 0;
 }
 
 .card p,
 .cardR p {
-  color: #ffffffad;
-  line-height: 1.6;
+  color: #ffffffb7;
+  line-height: 27px;
+  font-size: 18px;
   margin-bottom: 1rem;
+  max-width: 510px;
 }
 
 .button {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-
+  font-weight: 400;
   color: #fff;
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;

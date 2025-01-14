@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import style from "./slider.module.scss";
-import { SlideData } from "@/widget/Condidates/model";
+import { SlideData } from "@/widget/Candidates/model";
 
 interface props {
   slides: SlideData[];

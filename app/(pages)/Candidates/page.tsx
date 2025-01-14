@@ -1,5 +1,5 @@
 import NavbarMain from "@/shared/ui/NavbarMain/navbarMain";
-import CondidatesList from "@/widget/Condidates/CondidatesList";
+import CondidatesList from "@/widget/Candidates/CondidatesList";
 import React from "react";
 
 const Page = () => {

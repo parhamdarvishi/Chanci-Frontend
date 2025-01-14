@@ -1,23 +1,38 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "@public/LogoNav.svg";
 import Menu from "@public/menu.svg";
 import Image from "next/image";
 import style from "./navbarMain.module.scss";
 import { Button, Group } from "@mantine/core";
 import Link from "next/link";
-// import { usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const NavbarMain = () => {
-  // const path = usePathname();
+  const path = usePathname();
+
+  const findPath = path.split("/")[1];
+
+  const [loc, setLoc] = useState(1);
   const links = [
     "Home",
     "Employers",
-    "Condidates",
+    "Candidates",
     "Events",
     "Academy",
-    "About",
+    "About us",
   ];
+  const handleActiveNav = (index: number) => {
+    setLoc(index);
+  };
+
+  useEffect(() => {
+    links.forEach((element, index) => {
+      if (element === findPath) {
+        setLoc(index);
+      }
+    });
+  }, []);
 
   return (
     <div className={style.wrapper}>
@@ -31,10 +46,13 @@ const NavbarMain = () => {
         {links.map((item, index) => (
           <li
             style={{ marginLeft: "1rem" }}
-            className={style.navItems}
+            className={loc === index ? style.activeLi : style.navItems}
             key={index}
           >
-            <Link href={item}>{item} </Link>
+            <Link href={item} onClick={() => handleActiveNav(index)}>
+              {item}{" "}
+            </Link>
+            {loc === index && <div className={style.line}></div>}
           </li>
         ))}
       </ul>

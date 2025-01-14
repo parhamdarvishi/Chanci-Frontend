@@ -7,9 +7,18 @@
   .navList {
     display: flex;
     align-items: center;
-    gap: 60px;
+    gap: 32px;
     list-style: none;
-
+    .activeLi {
+      a {
+        color: #11a184 !important;
+      }
+    }
+    .line {
+      width: 28px;
+      height: 2.2px;
+      background-color: #11a184;
+    }
     li {
       cursor: pointer;
       font-size: 20px;
@@ -34,11 +43,17 @@
       color: #4752f3;
       background-color: #fff;
       border: 1px solid #4752f3;
-      border-radius: 10px;
+      border-radius: 16px;
+      height: 50px;
+      font-size: 20px;
+      font-weight: 400;
     }
     .btnGet {
-      border-radius: 10px;
+      border-radius: 16px;
+      height: 50px;
+      font-size: 20px;
       color: #fff;
+      font-weight: 400;
       background: linear-gradient(to right, #8e15ba, #5175f0);
     }
   }
@@ -56,8 +71,11 @@
 @media screen and (max-width: 980px) {
   .wrapper {
     background-color: none;
-    padding: 0.5rem 0.5rem;
+    padding: 0.5rem 1rem;
     .navList {
+      .activeLi {
+        display: none;
+      }
       gap: 10px;
       align-items: start;
       .navItems {
@@ -79,12 +97,12 @@
       align-items: center;
 
       .btnLogin {
-        height: 24px;
+        height: 40px;
         font-size: 12px;
         font-weight: 400;
       }
       .btnGet {
-        height: 24px;
+        height: 40px;
         font-size: 12px;
         font-weight: 400;
       }

@@ -58,11 +58,12 @@ const TopicSection = ({
 
       <div className={styles.content}>
         <h1>{title}</h1>
-        <p>{desc}</p>
+        <p className={condidates ? styles.pCanDidate : styles.p}>{desc}</p>
         <Button
           size="lg"
           variant="gradient"
           gradient={{ from: "grape", to: "indigo", deg: 90 }}
+          className={condidates ? styles.btnCanDidate : styles.btn}
         >
           {btnTxt}
         </Button>

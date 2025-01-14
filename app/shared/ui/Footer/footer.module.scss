@@ -31,9 +31,9 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: #9ca3af;
-    font-size: 1.1rem;
-    font-weight: 600;
+    color: #fff;
+    font-size: 19px;
+    font-weight: 300;
     &::before {
       content: "";
       display: inline-block;
@@ -51,7 +51,7 @@
   transform: translateY(10px);
   .navigation {
     display: flex;
-    gap: 4rem;
+    gap: 5rem;
 
     a {
       color: #fff;
@@ -84,16 +84,16 @@
       gap: 1rem;
       position: absolute;
       top: 5px;
-      right: 55px;
+      right: 105px;
+      font-weight: 400;
       color: #fff;
       padding: 0.75rem 1.5rem;
       border-radius: 16px;
       width: 172px;
       height: 42px;
-      font-weight: 500;
       transition: background-color 0.3s ease;
       background: linear-gradient(to right, #8e15ba, #5175f0);
-
+      font-size: 16px;
       svg {
         width: 22px;
       }
@@ -154,8 +154,9 @@
   color: #fff;
   font-size: 0.875rem;
   p {
-    font-size: 20px;
+    font-size: 18px;
     padding: 1rem 0;
+    font-weight: 400;
   }
 }
 

@@ -15,7 +15,7 @@
     .navActions {
       display: flex;
       align-items: center;
-      gap: 48px;
+      gap: 47px;
       list-style: none;
       margin-right: 2.4rem;
       z-index: 11;
@@ -35,7 +35,16 @@
       align-items: center;
       gap: 48px;
       list-style: none;
-
+      .activeLi {
+        a {
+          color: #31eec8 !important;
+        }
+      }
+      .line {
+        width: 28px;
+        height: 2.2px;
+        background-color: #31eec8;
+      }
       li {
         cursor: pointer;
         font-size: 20px;
@@ -50,7 +59,7 @@
       align-items: center;
 
       .btnLogin {
-        border-radius: 8px !important;
+        border-radius: 16px;
         color: #4752f3;
         height: 50px;
         background-color: #fff;
@@ -58,7 +67,7 @@
         font-weight: 400;
       }
       .btnGet {
-        border-radius: 12px;
+        border-radius: 16px;
         color: #fff;
         height: 50px;
         background: linear-gradient(to right, #8e15ba, #5175f0);
@@ -82,7 +91,7 @@
         position: absolute;
         right: 0;
         top: 0;
-        width: 510px;
+        width: 880px;
         z-index: 0;
       }
     }
@@ -91,8 +100,8 @@
       z-index: 0;
       img {
         position: absolute;
-        left: -210px;
-        bottom: -44px;
+        left: -250px;
+        bottom: -40px;
         width: 1150px;
         z-index: 0;
       }
@@ -138,12 +147,14 @@
     }
     h1 {
       font-size: 72px !important;
+      position: relative;
     }
     p {
       max-width: 850px;
       text-align: center;
       line-height: 36px;
       font-size: 24px;
+      position: relative;
     }
   }
   .cardWrapper {
@@ -187,16 +198,6 @@
   }
 }
 
-@media screen and (max-width: 1340px) {
-  .container {
-    .wrapper {
-      padding: 1rem;
-      .navList {
-        gap: 20px;
-      }
-    }
-  }
-}
 @media screen and (max-width: 1200px) {
   .container {
     .wrapper {
@@ -226,8 +227,7 @@
       padding: 0.5rem 0.5rem;
       .navActions {
         display: flex;
-        align-items: start;
-        gap: 10px;
+        gap: 8px;
         list-style: none;
         img {
           width: 45px;
@@ -238,8 +238,11 @@
         }
         .menuBar {
           display: block;
-          width: 24px;
-          height: 24px;
+
+          img {
+            width: 24px;
+            height: 24px;
+          }
         }
       }
       .navList {
@@ -251,16 +254,18 @@
         align-items: center;
 
         .btnLogin {
-          height: 28px;
+          height: 40px;
           font-size: 12px;
           font-weight: 400;
           padding: 0.2rem 0.9rem !important;
+          border-radius: 8px;
         }
         .btnGet {
-          height: 28px;
+          height: 40px;
           font-size: 12px;
           font-weight: 400;
           padding: 0.2rem 1rem !important;
+          border-radius: 8px;
         }
       }
     }

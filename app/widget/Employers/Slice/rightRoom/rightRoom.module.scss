@@ -1,13 +1,13 @@
 .container {
-  padding: 6rem 0;
+  padding-top: 5rem;
+  padding-bottom: 1rem;
   display: flex;
   justify-content: center;
-  background: #18181b;
 }
 
 .content {
   width: 85%;
-  max-width: 1200px;
+  max-width: 1280px;
   background: linear-gradient(145deg, #1a1a1a 0%, #262626 100%);
   border-radius: 24px;
   padding: 0 2rem;
@@ -21,10 +21,23 @@
   padding-right: 4rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2.1rem;
   display: flex;
   justify-content: center;
   padding-left: 1rem;
+  position: relative;
+  z-index: 1;
+  .ellipsBg {
+    position: absolute;
+    right: 110px;
+    z-index: 0;
+  }
+  .arrowR {
+    position: absolute;
+    right: 30px;
+    top: 125px;
+    z-index: 0;
+  }
   .tag {
     background: linear-gradient(90deg, #1a1a1a, #333333);
     color: #fff;
@@ -34,20 +47,24 @@
     font-size: 1.2rem;
     width: 120px;
     text-align: center;
+    z-index: 1;
   }
 
   h2 {
-    font-size: 2.5rem;
+    font-size: 32px;
     color: #fff;
     font-weight: 600;
     line-height: 1.2;
+    z-index: 1;
   }
 
   p {
-    color: #a1a1aa;
-    font-size: 1.1rem;
-    line-height: 1.6;
+    color: #ffffff;
+    font-size: 19px;
+    font-weight: 300 !important;
+    line-height: 30px;
     margin-bottom: 1rem;
+    z-index: 1;
   }
 }
 
@@ -58,7 +75,8 @@
   gap: 0.5rem;
   background: linear-gradient(90deg, #7c3aed, #9747ff);
   color: white;
-  border: none;
+  border: 5px solid transparent;
+  border-image: linear-gradient(90deg, #ffffff, #99999933, #ffffff00, #ffffff) 1;
   padding: 1rem 2rem;
   border-radius: 8px;
   font-size: 1rem;
@@ -126,7 +144,9 @@
   border-radius: 12px;
   overflow: hidden;
   flex-shrink: 0;
-
+  .imageBtn {
+    cursor: pointer;
+  }
   img {
     width: 100%;
     height: 100%;
