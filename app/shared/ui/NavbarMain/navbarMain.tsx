@@ -4,13 +4,14 @@ import Logo from "@public/LogoNav.svg";
 import Menu from "@public/menu.svg";
 import Image from "next/image";
 import style from "./navbarMain.module.scss";
-import { Button, Group } from "@mantine/core";
+import { Button, Group, Drawer, Divider, Card, Box } from "@mantine/core";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useDisclosure } from "@mantine/hooks";
 
 const NavbarMain = () => {
   const path = usePathname();
-
+  const [opened, { open, close }] = useDisclosure(false);
   const findPath = path.split("/")[1];
 
   const [loc, setLoc] = useState(1);
@@ -35,31 +36,78 @@ const NavbarMain = () => {
   }, []);
 
   return (
-    <div className={style.wrapper}>
-      <ul className={style.navList}>
-        <li className={style.menuBar}>
-          <Image src={Menu} alt="NGNlogo" />
-        </li>
-        <li>
-          <Image src={Logo} objectFit="cover" alt="NGNlogo" />
-        </li>
-        {links.map((item, index) => (
-          <li
-            style={{ marginLeft: "1rem" }}
-            className={loc === index ? style.activeLi : style.navItems}
-            key={index}
-          >
-            <Link href={item} onClick={() => handleActiveNav(index)}>
-              {item}{" "}
-            </Link>
-            {loc === index && <div className={style.line}></div>}
+    <div className={style.container}>
+      <Drawer.Root opened={opened} onClose={close} radius={8} size={"310px"}>
+        <Drawer.Overlay />
+        <Drawer.Content style={{ padding: ".5rem" }}>
+          <Drawer.Header style={{ marginBottom: ".6rem" }}>
+            <Drawer.Title>
+              {" "}
+              <Image src={Logo} alt="header" width={46} height={42} />
+            </Drawer.Title>
+            <Drawer.CloseButton size={42} color="#585858" />
+          </Drawer.Header>
+          <Drawer.Body>
+            <Divider color="#efefef" />
+            {links.map((item, index) => (
+              <Box
+                style={{ position: "relative" }}
+                key={index}
+                onClick={() => handleActiveNav(index)}
+              >
+                {loc === index && <div className={style.liActive}></div>}
+
+                <Link
+                  href={item}
+                  className={
+                    loc === index ? style.liSidebarActive : style.liSidebar
+                  }
+                >
+                  <p>{item}</p>
+                </Link>
+                <Divider color="#efefef" />
+              </Box>
+            ))}
+          </Drawer.Body>
+        </Drawer.Content>
+      </Drawer.Root>
+      <div className={style.wrapper}>
+        <ul className={style.navList}>
+          <li className={style.menuBar}>
+            <div onClick={open}>
+              <Card
+                style={{
+                  padding: "0 !important",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Image src={Menu} alt="Menu" className={style.menuBarIm} />
+              </Card>
+            </div>
           </li>
-        ))}
-      </ul>
-      <Group className={style.btnGroup}>
-        <Button className={style.btnLogin}>Log in</Button>
-        <Button className={style.btnGet}>Get in Touch</Button>
-      </Group>
+          <li>
+            <Image src={Logo} objectFit="cover" alt="NGNlogo" />
+          </li>
+          {links.map((item, index) => (
+            <li
+              style={{ marginLeft: "1rem" }}
+              className={loc === index ? style.activeLi : style.navItems}
+              key={index}
+            >
+              <Link href={item} onClick={() => handleActiveNav(index)}>
+                {item}{" "}
+              </Link>
+              {loc === index && <div className={style.line}></div>}
+            </li>
+          ))}
+        </ul>
+        <Group className={style.btnGroup}>
+          <Button className={style.btnLogin}>Log in</Button>
+          <Button className={style.btnGet}>Get in Touch</Button>
+        </Group>
+      </div>
     </div>
   );
 };

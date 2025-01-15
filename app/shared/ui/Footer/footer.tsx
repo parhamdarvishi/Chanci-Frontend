@@ -62,7 +62,7 @@ const Footer = () => {
 
             <div className={style.social}>
               <Link
-                href="https://www.linkedin.com/search/results/all/?fetchDeterministicClustersOnly=true&heroEntityKey=urn%3Ali%3Aorganization%3A101835603&keywords=ngn&origin=RICH_QUERY_SUGGESTION&position=2&searchId=fc822b3f-9d3c-49e0-b913-76170c1fc5aa&sid=Iw7&spellCorrectionEnabled=false"
+                href="https://www.linkedin.com/company/new-generation-network/"
                 target="_blank"
               >
                 <Image src={linkedin} alt="linkedin" height={50} />

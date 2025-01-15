@@ -2,6 +2,7 @@
 import { Button } from "@mantine/core";
 import Image, { StaticImageData } from "next/image";
 import condidatesRes from "@public/image/responsive/condidatesRes.png";
+import EmployersRes from "@public/image/responsive/EmployersRes.png";
 import styles from "./topicSection.module.scss";
 import { useEffect, useState } from "react";
 
@@ -38,7 +39,8 @@ const TopicSection = ({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const displayImage = windowWidth > 600 ? image : condidatesRes;
+  const displayImage =
+    windowWidth > 600 ? image : condidates ? condidatesRes : EmployersRes;
 
   return (
     <div className={styles.topicSection}>
@@ -65,7 +67,9 @@ const TopicSection = ({
           gradient={{ from: "grape", to: "indigo", deg: 90 }}
           className={condidates ? styles.btnCanDidate : styles.btn}
         >
-          {btnTxt}
+          {condidates && windowWidth < 600
+            ? "Take the Free Assessment"
+            : btnTxt}
         </Button>
       </div>
     </div>

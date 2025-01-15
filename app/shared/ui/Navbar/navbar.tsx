@@ -1,10 +1,18 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "@public/LogoNGN.svg";
 import Menu from "@public/menu.svg";
 import Image from "next/image";
 import style from "./navbar.module.scss";
-import { Button, Card, Drawer, Group, Input } from "@mantine/core";
+import {
+  Box,
+  Button,
+  Card,
+  Divider,
+  Drawer,
+  Group,
+  Input,
+} from "@mantine/core";
 import Link from "next/link";
 import searchIc from "@public/image/search.svg";
 import profileIc from "@public/image/icons/profile.svg";
@@ -13,13 +21,15 @@ import teacherIc from "@public/image/icons/teacher.svg";
 import bubbleR from "@public/image/bubble/right.svg";
 import bubbleL from "@public/image/bubble/left.svg";
 import logoNav from "@public/image/icons/logoNav.svg";
-import loginNav from "@public/image/icons/loginNav.svg";
 import { useDisclosure } from "@mantine/hooks";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const [loc, setLoc] = useState(0);
   const [opened, { open, close }] = useDisclosure(false);
+  const path = usePathname();
 
+  const findPath = path.split("/")[1];
   const links = [
     "Home",
     "Employers",
@@ -33,12 +43,20 @@ const Navbar = () => {
     setLoc(index);
   };
 
+  useEffect(() => {
+    links.forEach((element, index) => {
+      if (element === findPath) {
+        setLoc(index);
+      }
+    });
+  }, []);
+
   return (
     <div className={style.container}>
       <Drawer.Root opened={opened} onClose={close} radius={8} size={"310px"}>
         <Drawer.Overlay />
         <Drawer.Content style={{ padding: ".5rem" }}>
-          <Drawer.Header>
+          <Drawer.Header style={{ marginBottom: ".6rem" }}>
             <Drawer.Title>
               {" "}
               <Image src={logoNav} alt="header" width={46} height={42} />
@@ -46,7 +64,26 @@ const Navbar = () => {
             <Drawer.CloseButton size={42} color="#585858" />
           </Drawer.Header>
           <Drawer.Body>
-            <Image src={loginNav} alt="login" />
+            <Divider />
+            {links.map((item, index) => (
+              <Box
+                style={{ position: "relative" }}
+                key={index}
+                onClick={() => handleActiveNav(index)}
+              >
+                {loc === index && <div className={style.liActive}></div>}
+
+                <Link
+                  href={item}
+                  className={
+                    loc === index ? style.liSidebarActive : style.liSidebar
+                  }
+                >
+                  <p>{item}</p>
+                </Link>
+                <Divider />
+              </Box>
+            ))}
           </Drawer.Body>
         </Drawer.Content>
       </Drawer.Root>
@@ -57,8 +94,8 @@ const Navbar = () => {
               <div onClick={open}>
                 <Card
                   style={{
-                    width: "38px",
-                    height: "38px",
+                    width: "45px",
+                    height: "40px",
                     padding: "0 !important",
                     display: "flex",
                     justifyContent: "center",
