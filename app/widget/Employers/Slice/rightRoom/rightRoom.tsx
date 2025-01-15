@@ -8,6 +8,7 @@ import eventBtn from "@public/image/icons/eventBtn.svg";
 import ellipse from "@public/image/EllipseBg.svg";
 import arrowR from "@public/image/icons/arrowR.svg";
 import styles from "./rightRoom.module.scss";
+import Link from "next/link";
 
 const RightRoom = () => {
   return (
@@ -30,7 +31,9 @@ const RightRoom = () => {
             your company&apos;s opportunities.
           </p>
           <div style={{ cursor: "pointer", zIndex: "100" }}>
-            <Image src={eventBtn} alt="eventBtn" />
+            <Link href="/Events">
+              <Image src={eventBtn} alt="eventBtn" />
+            </Link>
           </div>
         </div>
         <div className={styles.rightSection}>

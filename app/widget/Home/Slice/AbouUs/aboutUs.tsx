@@ -52,7 +52,7 @@ const AboutUs = () => {
               to upskill, and Chanci AI to guide you. All affordable and
               designed to give your career a 100% boost.
             </p>
-            <Link href="/boost-career" className={style.button}>
+            <Link href="/Candidates" className={style.button}>
               Boost your career Now
               <Image
                 className={style.cardArrow}
@@ -85,7 +85,7 @@ const AboutUs = () => {
               Access top graduate talents and diversity-focused recruitment.
               Everything is tailored to help your business grow and succeed.
             </p>
-            <Link href="/find-talent" className={style.button}>
+            <Link href="/Employers" className={style.button}>
               Find a Talent Today
               <Image
                 className={style.cardArrow}

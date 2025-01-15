@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import style from "./slider.module.scss";
 import { SlideData } from "@/widget/Candidates/model";
+import arrowSlide from "@public/image/icons/arrowSlide.svg";
 
 interface props {
   slides: SlideData[];
@@ -78,7 +79,10 @@ const Slider = ({ slides }: props) => {
               <div className={style.content}>
                 <h3>{slide.title}</h3>
                 <p>{slide.description}</p>
-                <button className={style.readMore}>Read More →</button>
+                <button className={style.readMore}>
+                  Read More
+                  <Image src={arrowSlide} alt="arrowSlide" />
+                </button>
               </div>
             </div>
           ))}

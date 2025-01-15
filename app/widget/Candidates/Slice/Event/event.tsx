@@ -23,7 +23,7 @@ const Event = () => {
             Our events connect you with industry leaders, fresh ideas, and
             career-changing opportunities.
           </p>
-          <Link href="/find-talent" className={style.button}>
+          <Link href="/Events" className={style.button}>
             Upcoming Events
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -46,6 +46,7 @@ const Event = () => {
         </div>
       </div>
       <Box
+        id="target-Ambassador"
         style={{
           display: "flex",
           justifyContent: "center",

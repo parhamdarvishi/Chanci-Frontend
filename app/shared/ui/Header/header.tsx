@@ -2,9 +2,15 @@
 import { Button } from "@mantine/core";
 import React, { useEffect, useState } from "react";
 import style from "./header.module.scss";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const router = useRouter();
+
+  const goToTarget = () => {
+    router.push("/Candidates#target-Ambassador");
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -24,7 +30,7 @@ const Header = () => {
   return (
     <div className={style.wrapper}>
       <h4 className={style.headerTitle}>Want to become an event sponsor?</h4>
-      <Button className={style.btn}>
+      <Button className={style.btn} onClick={goToTarget}>
         {isMobile
           ? "Become a student ambassador"
           : "Become a student ambassador at your university!"}

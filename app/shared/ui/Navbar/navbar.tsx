@@ -138,7 +138,11 @@ const Navbar = () => {
             <h4>Employers</h4>
           </div>
           <p>You’re a company looking for top talents?</p>
-          <Button variant="filled">Build Your Team</Button>
+          <Link href="/Employers">
+            <Button variant="filled" style={{ width: "100%" }}>
+              Build Your Team
+            </Button>
+          </Link>
         </Card>
         <Card
           shadow="sm"
@@ -152,7 +156,11 @@ const Navbar = () => {
             <h4>Candidates</h4>
           </div>
           <p>Ready to apply for a role that fits your ambitions?</p>
-          <Button variant="filled">Start Now</Button>
+          <Link href="/Candidates">
+            <Button variant="filled" style={{ width: "100%" }}>
+              Start Now
+            </Button>
+          </Link>
         </Card>
         <Card
           shadow="sm"
@@ -166,7 +174,11 @@ const Navbar = () => {
             <h4>NGN Events</h4>
           </div>
           <p>Looking to build your professional network?</p>
-          <Button variant="filled">Explore NGN Events</Button>
+          <Link href="/Events">
+            <Button variant="filled" style={{ width: "100%" }}>
+              Explore NGN Events
+            </Button>
+          </Link>
         </Card>
       </div>
     </div>
