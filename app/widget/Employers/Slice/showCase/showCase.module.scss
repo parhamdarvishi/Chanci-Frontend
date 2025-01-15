@@ -5,12 +5,26 @@
   justify-content: center;
   padding: 1rem;
   padding-top: 4rem;
+  h2 {
+    font-size: 42px !important;
+    .titleH {
+      font-weight: 700;
+      font-size: 42px;
+    }
+    .titleB {
+      font-weight: 500;
+      font-size: 42px;
+    }
+  }
 }
 
 .gridContainer {
-  margin: 6rem;
+  margin: 4rem 2rem;
   overflow: hidden;
-  gap: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
 }
 
 .gridItem {
@@ -31,4 +45,33 @@
   color: #2e2e2e;
   line-height: 60px;
   margin: 0;
+}
+@media (max-width: 600px) {
+  .title {
+    h2 {
+      font-size: 24px !important;
+      .titleH {
+        font-weight: 700;
+        font-size: 24px;
+      }
+      .titleB {
+        font-weight: 300 !important;
+        font-size: 24px;
+      }
+    }
+  }
+  .gridContainer {
+    margin: 2rem;
+    .percentageText {
+      font-size: 22px;
+      text-align: center;
+    }
+    .descriptionText {
+      font-size: 17px;
+      line-height: 24px;
+      font-weight: 500;
+      max-width: 140px;
+      text-align: center;
+    }
+  }
 }

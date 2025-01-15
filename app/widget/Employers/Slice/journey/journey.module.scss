@@ -179,3 +179,46 @@
     margin: 0 auto;
   }
 }
+@media (max-width: 600px) {
+  .journeySection {
+    flex-direction: column;
+    padding: 1rem;
+    text-align: center;
+  }
+  .contentContainer {
+    flex: 1;
+    text-align: left;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    position: relative;
+    align-items: flex-start;
+    h2 {
+      font-size: 25px;
+      line-height: 36px;
+      font-weight: 600;
+      margin: 0;
+      color: #fff;
+    }
+  }
+  .feature {
+    gap: 0.5rem;
+    p {
+      font-size: 16px;
+      max-width: 288px;
+    }
+  }
+  .features {
+    .arrow {
+      position: absolute;
+      bottom: 30px;
+      right: 15px;
+      width: 85px;
+    }
+  }
+  .bookBtn {
+    width: 205px;
+    height: 44px;
+  }
+}

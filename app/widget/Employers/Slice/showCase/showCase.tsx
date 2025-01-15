@@ -1,38 +1,32 @@
 "use client";
 import React from "react";
-import { Grid } from "@mantine/core";
 import styles from "./showCase.module.scss";
 
 const ShowCase = () => {
   return (
     <div>
       <div className={styles.title}>
-        <h2 style={{ fontSize: "42px" }}>
+        <h2>
           <span
-            style={{
-              borderBottom: "4px solid #5E62FC",
-              borderRadius: "4px",
-              fontWeight: "700",
-              fontSize: "42px",
-            }}
+            className={styles.titleH}
+            style={{ borderBottom: "4px solid #5e62fc", borderRadius: "4px" }}
           >
             N
           </span>
           GN {""}
-          <span style={{ fontWeight: "400", fontSize: "42px" }}>
-            Talent Showcase
-          </span>
+          <span className={styles.titleB}>Talent Showcase</span>
         </h2>
       </div>
 
-      <Grid gutter="lg" justify="center" className={styles.gridContainer}>
-        <Grid.Col
-          span={{ base: 12, md: 6 }}
+      <div
+        className={styles.gridContainer}
+        style={{ display: "flex", justifyContent: "center" }}
+      >
+        <div
           style={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
-            gap: "3rem",
+            gap: "2rem",
           }}
         >
           <div className={styles.gridItem}>
@@ -43,47 +37,37 @@ const ShowCase = () => {
           </div>
           <div className={styles.gridItem}>
             <p className={styles.percentageText}>17%</p>
-            <p className={styles.descriptionText}>
-              Technology and software development
-            </p>
+            <p className={styles.descriptionText}>Marketing, PR, Media</p>
           </div>
           <div className={styles.gridItem}>
             <p className={styles.percentageText}>11.7%</p>
-            <p className={styles.descriptionText}>
-              Technology and software development
-            </p>
+            <p className={styles.descriptionText}>Creative Industries</p>
           </div>
-        </Grid.Col>
+        </div>
 
-        <Grid.Col
-          span={{ base: 12, md: 6 }}
+        <div
           style={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
-            gap: "3rem",
+            gap: "2rem",
           }}
         >
           <div className={styles.gridItem}>
-            <p className={styles.percentageText}>11.7%</p>
+            <p className={styles.percentageText}>18.1%</p>
             <p className={styles.descriptionText}>
-              Technology and software development
+              Healthcare and Biomedical Sciences
             </p>
           </div>
           <div className={styles.gridItem}>
-            <p className={styles.percentageText}>11.7%</p>
-            <p className={styles.descriptionText}>
-              Technology and software development
-            </p>
+            <p className={styles.percentageText}>13.8%</p>
+            <p className={styles.descriptionText}>Finance, Investment</p>
           </div>
           <div className={styles.gridItem}>
-            <p className={styles.percentageText}>11.7%</p>
-            <p className={styles.descriptionText}>
-              Technology and software development
-            </p>
+            <p className={styles.percentageText}>7.5%</p>
+            <p className={styles.descriptionText}>Education, Research</p>
           </div>
-        </Grid.Col>
-      </Grid>
+        </div>
+      </div>
     </div>
   );
 };

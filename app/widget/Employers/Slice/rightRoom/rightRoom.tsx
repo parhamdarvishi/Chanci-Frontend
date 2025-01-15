@@ -32,7 +32,7 @@ const RightRoom = () => {
           </p>
           <div style={{ cursor: "pointer", zIndex: "100" }}>
             <Link href="/Events">
-              <Image src={eventBtn} alt="eventBtn" />
+              <Image src={eventBtn} className={styles.eventB} alt="eventBtn" />
             </Link>
           </div>
         </div>

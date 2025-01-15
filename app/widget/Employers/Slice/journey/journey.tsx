@@ -41,7 +41,12 @@ const Journey = () => {
             <Image src={arrowL} alt="arrowL" width={110} />
           </div>
         </div>
-        <Image src={bookBtn} alt="bookBtn" style={{ cursor: "pointer" }} />
+        <Image
+          src={bookBtn}
+          alt="bookBtn"
+          style={{ cursor: "pointer" }}
+          className={styles.bookBtn}
+        />
       </div>
     </div>
   );

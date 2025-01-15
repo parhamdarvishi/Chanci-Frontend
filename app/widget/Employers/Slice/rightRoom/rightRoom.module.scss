@@ -176,3 +176,32 @@
     padding-bottom: 2rem;
   }
 }
+@media (max-width: 600px) {
+  .content {
+    flex-direction: column-reverse;
+    padding: 0.8rem;
+  }
+
+  .leftSection {
+    padding: 2rem 0;
+    padding-left: 0.5rem;
+    h2 {
+      font-size: 24px;
+      text-align: left;
+      font-weight: 500;
+      line-height: 36px;
+    }
+    p {
+      font-size: 20px;
+      line-height: 34px;
+      font-weight: 400;
+    }
+    .arrowR {
+      display: none;
+    }
+    .eventB {
+      width: 246px;
+      height: 44px;
+    }
+  }
+}
