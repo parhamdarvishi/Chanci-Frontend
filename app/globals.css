@@ -89,6 +89,16 @@ h6 {
   font-size: 1.3rem !important;
 }
 
+.m_7485cace {
+  --container-size-xs: calc(30.75rem * var(--mantine-scale));
+  --container-size-sm: calc(45rem * var(--mantine-scale));
+  --container-size-md: calc(78rem * var(--mantine-scale)) !important;
+  --container-size-lg: calc(78rem * var(--mantine-scale));
+  --container-size-xl: calc(82.5rem * var(--mantine-scale));
+  --container-size: var(--container-size-md);
+  max-width: var(--container-size);
+}
+
 @media screen and (max-width: 980px) {
   .m_8fb7ebe7 {
     height: 52px !important;
