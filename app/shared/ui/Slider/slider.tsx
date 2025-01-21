@@ -7,9 +7,10 @@ import arrowSlide from "@public/image/icons/arrowSlide.svg";
 
 interface props {
   slides: SlideData[];
+  title: boolean;
 }
 
-const Slider = ({ slides }: props) => {
+const Slider = ({ slides, title }: props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const cardsToShow = 3;
@@ -37,18 +38,20 @@ const Slider = ({ slides }: props) => {
   return (
     <div className={style.wrapper}>
       <div className={style.header}>
-        <h1 style={{ fontWeight: "500", fontSize: "40px" }}>
-          <span
-            style={{
-              borderBottom: "4px solid #5E62FC",
-              borderRadius: "4px",
-              fontWeight: "500",
-            }}
-          >
-            A
-          </span>
-          rticles
-        </h1>
+        {title && (
+          <h1 style={{ fontWeight: "500", fontSize: "40px" }}>
+            <span
+              style={{
+                borderBottom: "4px solid #5E62FC",
+                borderRadius: "4px",
+                fontWeight: "500",
+              }}
+            >
+              A
+            </span>
+            rticles
+          </h1>
+        )}
       </div>
       <div className={style.slider}>
         <div
@@ -71,19 +74,21 @@ const Slider = ({ slides }: props) => {
                 <Image
                   src={slide.image}
                   alt={slide.title}
-                  width={400}
-                  height={300}
+                  width={title ? 400 : 416}
+                  height={320}
                   className={style.image}
                 />
               </div>
-              <div className={style.content}>
-                <h3>{slide.title}</h3>
-                <p>{slide.description}</p>
-                <button className={style.readMore}>
-                  Read More
-                  <Image src={arrowSlide} alt="arrowSlide" />
-                </button>
-              </div>
+              {title && (
+                <div className={style.content}>
+                  <h3>{slide.title}</h3>
+                  <p>{slide.description}</p>
+                  <button className={style.readMore}>
+                    Read More
+                    <Image src={arrowSlide} alt="arrowSlide" />
+                  </button>
+                </div>
+              )}
             </div>
           ))}
         </div>
