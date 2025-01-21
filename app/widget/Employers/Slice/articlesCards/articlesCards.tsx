@@ -52,7 +52,7 @@ const ArticlesCards = () => {
       ></div>
       <div>
         <div>
-          <Slider slides={slides} />
+          <Slider slides={slides} title={true} />
         </div>
       </div>
       <div

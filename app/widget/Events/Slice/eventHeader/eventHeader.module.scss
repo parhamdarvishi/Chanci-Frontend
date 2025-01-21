@@ -30,3 +30,22 @@
     }
   }
 }
+@media (max-width: 768px) {
+  .imageWrapper {
+    .imageContainer {
+      .h4cl {
+        z-index: 10;
+        width: 100%; /* Ensure text is above the background image */
+        margin-left: 4%;
+        font-size: 25px;
+      }
+      p {
+        margin-bottom: 9%;
+        margin-left: 4%;
+        font-size: 24px;
+        font-weight: 300 !important;
+        width: 100%;
+      }
+    }
+  }
+}

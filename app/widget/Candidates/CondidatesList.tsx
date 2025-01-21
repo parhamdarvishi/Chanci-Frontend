@@ -56,7 +56,7 @@ const CondidatesList = () => {
       <Section />
       <Event />
       <div style={{ maxWidth: "80%", margin: "0 auto" }}>
-        <Slider slides={slides} />
+        <Slider slides={slides} title={true} />
         <div
           style={{
             display: "flex",
