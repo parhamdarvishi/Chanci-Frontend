@@ -2,7 +2,7 @@
 import { Button } from "@mantine/core";
 import Image, { StaticImageData } from "next/image";
 import condidatesRes from "@public/image/responsive/condidatesRes.png";
-import EmployersRes from "@public/image/responsive/EmployersRes.png";
+import balanceRes from "@public/image/responsive/balanceRes.png";
 import styles from "./topicSection.module.scss";
 import { useEffect, useState } from "react";
 
@@ -40,7 +40,7 @@ const TopicSection = ({
   }, []);
 
   const displayImage =
-    windowWidth > 600 ? image : condidates ? condidatesRes : EmployersRes;
+    windowWidth > 768 ? image : condidates ? condidatesRes : balanceRes;
 
   return (
     <div className={styles.topicSection}>
