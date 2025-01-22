@@ -51,14 +51,11 @@ const TopicSection = ({
         quality={100}
         priority
         className={styles.backgroundImage}
-        style={{ objectFit: "fill" }}
+        style={{ objectFit: "fill", width: "100%" }}
         placeholder="blur"
-        blurDataURL={`data:image/svg+xml;base64,${Buffer.from(
-          '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1 1"><rect width="1" height="1" fill="#18181B"/></svg>'
-        ).toString("base64")}`}
       />
 
-      <div className={styles.content}>
+      <div className={condidates ? styles.content : styles.contentEmp}>
         <h1>{title}</h1>
         <p className={condidates ? styles.pCanDidate : styles.p}>{desc}</p>
         <Button

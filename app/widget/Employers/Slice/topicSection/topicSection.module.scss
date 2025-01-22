@@ -2,7 +2,10 @@
   position: relative;
   width: 100%;
   height: 88vh;
-
+  img {
+    width: 100%;
+    height: 90vh !important;
+  }
   .content {
     position: absolute;
     top: 70%;
@@ -23,6 +26,47 @@
       margin: 0 0 20px 0;
     }
     .p {
+      font-size: 48px;
+      margin: 10px 0 20px 0;
+    }
+    .btnCanDidate {
+      margin-top: 0.6rem;
+      max-width: 370px;
+      border-radius: 12px;
+      font-size: 20px;
+      font-weight: 400;
+      cursor: pointer;
+    }
+    .btn {
+      max-width: 237px;
+      height: 60px;
+      border-radius: 16px;
+      font-size: 20px;
+      font-weight: 400;
+      cursor: pointer;
+    }
+  }
+  .contentEmp {
+    position: absolute;
+    top: 74%;
+    left: 8%;
+    transform: translateY(-50%);
+    color: #2e2e2e;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    gap: 0.4rem;
+    h1 {
+      font-size: 3rem;
+      margin: 0 0 10px 0;
+    }
+    .pCanDidate {
+      font-size: 32px;
+      margin: 0 0 20px 0;
+    }
+    .p {
+      max-width: 1000px;
       font-size: 48px;
       margin: 10px 0 20px 0;
     }
