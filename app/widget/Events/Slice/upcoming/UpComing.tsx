@@ -49,8 +49,8 @@ const UpComing = () => {
         graduate and university-focused events, job fairs, and more. Each event
         is designed to bring together top talent and industry leaders, featuring
         a diverse range of expert speakers who share valuable insights. Sign up
-        here to be among the first to receive invitations. We'll take care of
-        the planning so you can focus on building valuable connections!
+        here to be among the first to receive invitations. We&apos;ll take care
+        of the planning so you can focus on building valuable connections!
       </Box>
       <Slider title={false} slides={slides} />
       <div
