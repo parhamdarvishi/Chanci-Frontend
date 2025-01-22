@@ -4,7 +4,7 @@ import ShowCase from "./Slice/showCase/showCase";
 import Journey from "./Slice/journey/journey";
 import RightRoom from "./Slice/rightRoom/rightRoom";
 import ArticlesCards from "./Slice/articlesCards/articlesCards";
-import TopicPhoto from "@public/image/TopicPhoto.png";
+import TopicPhoto from "@public/image/responsive/balann.png";
 
 const EmployersList = () => {
   return (
