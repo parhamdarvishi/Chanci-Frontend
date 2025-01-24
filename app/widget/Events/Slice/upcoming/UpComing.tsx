@@ -3,7 +3,9 @@ import style from "./UpComing.module.scss";
 import { Box } from "@mantine/core";
 import Slider from "@/shared/ui/Slider/slider";
 import talk from "@public/image/slides/talk.png";
-import visa from "@public/image/slides/visa.png";
+import event1 from "@public/image/events/event1.png";
+import event2 from "@public/image/events/event2.png";
+import event3 from "@public/image/events/event3.png";
 import write from "@public/image/slides/write.png";
 import { SlideData } from "@/widget/Candidates/model";
 import Link from "next/link";
@@ -15,28 +17,28 @@ const UpComing = () => {
       title: "Increasing brand awareness | Study Permit",
       description:
         "Increasing brand awareness and growing female engagement. Study permit services guide you through the application process.",
-      image: visa,
+      image: event1,
     },
     {
       id: 2,
       title: "Discovering hard to reach talent | Work Permit",
       description:
         "Discovering hard to reach talent - from awareness to successful hire, ensuring your documents are ready and deadlines met.",
-      image: write,
+      image: event2,
     },
     {
       id: 3,
       title: "Permanent Residency to reach talent | PR Card",
       description:
         "Study permit services guide you through the application process, ensuring your documents are ready and deadlines met.",
-      image: talk,
+      image: event3,
     },
     {
       id: 4,
       title: "Permanent Residency to reach talent | PR Card",
       description:
         "Study permit services guide you through the application process, ensuring your documents are ready and deadlines met.",
-      image: write,
+      image: event1,
     },
   ];
   return (

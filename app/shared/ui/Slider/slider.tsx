@@ -74,8 +74,6 @@ const Slider = ({ slides, title }: props) => {
                 <Image
                   src={slide.image}
                   alt={slide.title}
-                  width={title ? 400 : 425}
-                  height={320}
                   className={style.image}
                 />
               </div>
