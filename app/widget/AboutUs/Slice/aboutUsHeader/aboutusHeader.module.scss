@@ -1,0 +1,208 @@
+.aboutDesc {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin: 4rem 0;
+  h1 {
+    font-size: 42px;
+  }
+  p {
+    font-size: 28px;
+    line-height: 1.5;
+    max-width: 1440px;
+  }
+}
+.aboutAreas {
+  background: linear-gradient(to right, #b428e6, #456ffd, #456ffd);
+  color: #fff;
+  padding: 2.5rem 0;
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 3.6rem;
+    h2 {
+      font-size: 42px;
+    }
+    h3 {
+      font-size: 32px;
+    }
+    p {
+      max-width: 1440px;
+      padding-left: 3.1rem;
+    }
+    .areaBox {
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+      font-size: 32px;
+    }
+  }
+}
+.ourValue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  margin: 3.5rem 0;
+
+  h1 {
+    font-size: 42px;
+    padding-bottom: 2.2rem;
+  }
+  // .ourValueCard {
+  //   width: 100%;
+  //   padding: 1rem;
+  //   min-width: 200px;
+  //   min-height: 260px;
+  //   border-width: 2px;
+  //   border: 2px solid transparent;
+  //   border-style: solid;
+  //   border-image: linear-gradient(to LEFT, #31eec8, #408fd7, #682dd1, #8e15ba)
+  //     10;
+  //   -webkit-mask-image: radial-gradient(
+  //     circle,
+  //     rgba(0, 0, 0, 1) 99%,
+  //     rgba(0, 0, 0, 0) 100%
+  //   );
+  //   mask-image: radial-gradient(
+  //     circle,
+  //     rgba(0, 0, 0, 1) 99%,
+  //     rgba(0, 0, 0, 0) 100%
+  //   );
+  //   border-radius: 20px !important;
+  //   pointer-events: none;
+  //   p {
+  //     padding: 1rem 0;
+  //     color: #3d3d3d;
+  //     max-width: 260px;
+  //   }
+  //   .valueHeader {
+  //     padding: 1rem 0;
+  //   }
+  // }
+  .ourValueCard {
+    position: relative;
+    overflow: hidden;
+    padding: 1rem;
+    min-height: 270px;
+    min-width: 315px;
+    border-radius: 10px;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 2px;
+      right: 2px;
+      bottom: 0;
+      border: 2px solid transparent; // Border width
+      border-image: linear-gradient(to LEFT, #31eec8, #408fd7, #682dd1, #8e15ba)
+        30; // Border image
+      border-radius: 200px; // Match the card’s border radius
+      pointer-events: none; // Prevent it from blocking interactions
+      z-index: 1;
+    }
+    p {
+      padding: 1rem 0;
+      color: #3d3d3d;
+      max-width: 260px;
+    }
+    .valueHeader {
+      padding: 1rem 0;
+    }
+  }
+  .mission {
+    margin-top: 3rem;
+    padding: 2rem 5rem;
+    p {
+      font-size: 26px;
+      text-align: center;
+    }
+    .missionBtn {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      .button {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        margin-top: 2rem;
+        color: #4752f3;
+        border: 1px solid #4752f3;
+        padding: 0.75rem 1.9rem;
+        border-radius: 0.5rem;
+        width: fit-content;
+        font-weight: 500;
+        background-color: #fff;
+        position: relative;
+        z-index: 100;
+        svg {
+          width: 1.25rem;
+          height: 1.25rem;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
+  .aboutDesc {
+    gap: 1.8rem;
+    h1 {
+      font-size: 24px;
+      text-align: center;
+    }
+    p {
+      text-align: center;
+      font-size: 17px;
+    }
+  }
+  .aboutAreas {
+    .container {
+      h2 {
+        font-size: 26px;
+        text-align: center;
+      }
+      h3 {
+        font-size: 24px;
+      }
+      p {
+        font-size: 20px;
+        padding-left: 0.4rem;
+      }
+    }
+  }
+  .ourValue {
+    h1 {
+      font-size: 26px;
+    }
+  }
+  .ourGrid {
+    padding: 0 1.2rem;
+    .ourValueCard {
+      min-width: unset;
+      width: unset;
+      height: 240px !important;
+      padding: 1.4rem 2rem;
+    }
+  }
+  .imageHeader {
+    height: 378px;
+  }
+  .mission {
+    padding: 2rem 0rem !important;
+    p {
+      font-size: 18px !important;
+      text-align: center;
+    }
+    .missionBtn {
+      flex-direction: column;
+      margin-top: 2rem !important;
+      .button {
+        margin: 0 !important;
+        font-size: 20px !important;
+        padding: 0 0.3rem !important;
+        height: 45px !important;
+        border-radius: 8px !important;
+      }
+    }
+  }
+}
