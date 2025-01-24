@@ -46,6 +46,7 @@
   margin: 3.5rem 0;
 
   h1 {
+    margin-top: 1.5rem;
     font-size: 42px;
     padding-bottom: 2.2rem;
   }
@@ -117,6 +118,9 @@
   .mission {
     margin-top: 3rem;
     padding: 2rem 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
     p {
       font-size: 26px;
       text-align: center;
@@ -176,6 +180,7 @@
   }
   .ourValue {
     h1 {
+      margin-top: 0;
       font-size: 26px;
     }
   }
