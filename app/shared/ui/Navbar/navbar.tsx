@@ -36,7 +36,7 @@ const Navbar = () => {
     "Candidates",
     "Events",
     "Academy",
-    "About us",
+    "AboutUs",
   ];
 
   const handleActiveNav = (index: number) => {

@@ -21,7 +21,7 @@ const NavbarMain = () => {
     "Candidates",
     "Events",
     "Academy",
-    "About us",
+    "AboutUs",
   ];
   const handleActiveNav = (index: number) => {
     setLoc(index);
