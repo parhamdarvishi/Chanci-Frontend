@@ -41,7 +41,6 @@ const UpComing = () => {
   ];
   return (
     <div className={style.wrapper}>
-      <div></div>
       <Box className={style.detailDesc}>
         <strong>NGN</strong>
         hosts a variety of engaging events, including professional business
@@ -52,7 +51,10 @@ const UpComing = () => {
         here to be among the first to receive invitations. We&apos;ll take care
         of the planning so you can focus on building valuable connections!
       </Box>
-      <Slider title={false} slides={slides} />
+      <div className={style.sliderBox}>
+        <Slider title={false} slides={slides} />
+      </div>
+
       <div
         style={{
           display: "flex",

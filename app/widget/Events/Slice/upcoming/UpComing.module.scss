@@ -1,5 +1,12 @@
+.upcomingHeader {
+  text-align: center;
+  margin: 3rem 0;
+}
 .wrapper {
   margin: 3rem 0;
+  .sliderBox {
+    padding: 0 10rem;
+  }
   .button {
     display: flex;
     align-items: center;
@@ -20,7 +27,6 @@
     }
   }
   .detailDesc {
-    max-width: 1238px;
     font-size: 22px;
     font-weight: 400 !important;
     text-align: center;
@@ -33,6 +39,9 @@
 @media (max-width: 768px) {
   .wrapper {
     margin: 3rem 0rem;
+    .sliderBox {
+      padding: 0;
+    }
     .detailDesc {
       max-width: 1238px;
       font-size: 16px;
