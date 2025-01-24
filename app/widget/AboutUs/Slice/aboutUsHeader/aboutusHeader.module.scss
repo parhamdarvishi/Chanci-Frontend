@@ -83,24 +83,28 @@
   .ourValueCard {
     position: relative;
     overflow: hidden;
-    padding: 1rem;
+    padding: 1.3rem 1.8rem;
     min-height: 270px;
     min-width: 315px;
-    border-radius: 10px;
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 2px;
-      right: 2px;
-      bottom: 0;
-      border: 2px solid transparent; // Border width
-      border-image: linear-gradient(to LEFT, #31eec8, #408fd7, #682dd1, #8e15ba)
-        30; // Border image
-      border-radius: 200px; // Match the card’s border radius
-      pointer-events: none; // Prevent it from blocking interactions
-      z-index: 1;
-    }
+
+    border: 2px solid #0000;
+    border-radius: 16px;
+    background: linear-gradient(white, white) padding-box,
+      linear-gradient(to LEFT, #31eec8, #408fd7, #682dd1, #8e15ba) border-box;
+    // &::before {
+    //   content: "";
+    //   position: absolute;
+    //   top: 0;
+    //   left: 2px;
+    //   right: 2px;
+    //   bottom: 0;
+    //   border: 2px solid transparent; // Border width
+    //   border-image: linear-gradient(to LEFT, #31eec8, #408fd7, #682dd1, #8e15ba)
+    //     30; // Border image
+    //   border-radius: 200px; // Match the card’s border radius
+    //   pointer-events: none; // Prevent it from blocking interactions
+    //   z-index: 1;
+    // }
     p {
       padding: 1rem 0;
       color: #3d3d3d;

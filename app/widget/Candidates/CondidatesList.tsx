@@ -7,7 +7,7 @@ import write from "@public/image/slides/write.png";
 import Slider from "@/shared/ui/Slider/slider";
 import { SlideData } from "./model";
 import TopicSection from "../Employers/Slice/topicSection/topicSection";
-import condidates from "@public/image/file/condidates.png";
+import condidates from "@public/image/file/candidate.png";
 import Section from "./Slice/Section/section";
 import Link from "next/link";
 import style from "../Candidates/Slice/Event/event.module.scss";
