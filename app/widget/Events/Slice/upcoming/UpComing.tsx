@@ -2,11 +2,9 @@ import React from "react";
 import style from "./UpComing.module.scss";
 import { Box } from "@mantine/core";
 import Slider from "@/shared/ui/Slider/slider";
-import talk from "@public/image/slides/talk.png";
 import event1 from "@public/image/events/event1.png";
 import event2 from "@public/image/events/event2.png";
 import event3 from "@public/image/events/event3.png";
-import write from "@public/image/slides/write.png";
 import { SlideData } from "@/widget/Candidates/model";
 import Link from "next/link";
 
