@@ -1,7 +1,7 @@
 .imageWrapper {
   background: #040e15 url("../../../../../public/image/events/events.png")
     center center no-repeat;
-  height: 86vh;
+  height: 87vh;
   display: flex;
   justify-content: end;
   flex-direction: column;
@@ -32,6 +32,7 @@
 }
 @media (max-width: 768px) {
   .imageWrapper {
+    height: 73vh;
     .imageContainer {
       .h4cl {
         z-index: 10;
@@ -40,7 +41,7 @@
         font-size: 25px;
       }
       p {
-        margin-bottom: 9%;
+        margin-bottom: 14%;
         margin-left: 4%;
         font-size: 24px;
         font-weight: 300 !important;
