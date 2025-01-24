@@ -1,0 +1,137 @@
+.sliderContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden; // Hide overflow to show only part of the third card
+  max-width: 1500px;
+  justify-content: center;
+}
+
+.slider {
+  display: flex;
+  overflow-x: auto; // Allow horizontal scrolling
+  scroll-behavior: smooth;
+  width: calc(100% - 60px); // Adjust width to account for buttons
+  padding: 2rem 0;
+  &::-webkit-scrollbar {
+    display: none; // Hide scrollbar
+  }
+}
+.button {
+  display: flex;
+  gap: 0.8rem;
+  color: #4752f3;
+  border: 1px solid #4752f3;
+  padding: 0.75rem 1.9rem;
+  border-radius: 0.5rem;
+  width: fit-content;
+  font-weight: 500;
+  background-color: #fff;
+  position: relative;
+  z-index: 100;
+  svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+.card {
+  min-width: 580px; // Adjust card width
+  margin: 0 10px; // Space between cards
+  background: white;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0; // Prevent cards from shrinking
+  display: flex;
+  .cardIc {
+    display: flex;
+    gap: 1rem;
+
+    p {
+      color: #878787;
+      font-size: 14px;
+    }
+  }
+  h3 {
+    font-size: 24px;
+  }
+  p {
+    max-width: 283px;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #0d131d;
+  }
+  .desc {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 1.3rem;
+  }
+  .imgCard {
+    width: 280px;
+    height: 256px;
+  }
+}
+
+.scrollButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 24px; // Adjust button size
+  z-index: 1; // Ensure buttons are above the slider
+}
+
+@media (max-width: 768px) {
+  .slider {
+    width: unset; // Adjust width to account for buttons
+  }
+  .button {
+    height: 42px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px !important;
+    max-width: 155px !important;
+  }
+  .card {
+    min-width: unset; // Adjust card width
+    width: 100%;
+    margin: 0 !important; // Space between cards
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0; // Prevent cards from shrinking
+    display: flex;
+    .cardIc {
+      flex-direction: column;
+      gap: 0.5rem;
+      img {
+        width: 16px;
+        height: 16px;
+      }
+      p {
+        font-size: 12px !important;
+      }
+    }
+    h3 {
+      font-size: 14px;
+    }
+    p {
+      max-width: 283px;
+      font-size: 12px;
+      line-height: 1.5;
+      color: #0d131d;
+    }
+    .desc {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-left: 0.7rem;
+    }
+    .imgCard {
+      width: 160px !important;
+      height: 195px !important;
+    }
+  }
+}
