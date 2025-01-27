@@ -23,6 +23,8 @@ import bubbleL from "@public/image/bubble/left.svg";
 import logoNav from "@public/image/icons/logoNav.svg";
 import { useDisclosure } from "@mantine/hooks";
 import { usePathname } from "next/navigation";
+import { modals } from "@mantine/modals";
+import ModalTouch from "../ModalTouch/modalTouch";
 
 const Navbar = () => {
   const [loc, setLoc] = useState(0);
@@ -42,6 +44,13 @@ const Navbar = () => {
   const handleActiveNav = (index: number) => {
     setLoc(index);
   };
+  const openModal = () =>
+    modals.open({
+      radius: "lg",
+      size: "lg",
+      title: <strong className={style.modalTitle}>Get in touch</strong>,
+      children: <ModalTouch />,
+    });
 
   useEffect(() => {
     links.forEach((element, index) => {
@@ -127,8 +136,10 @@ const Navbar = () => {
           </ul>
         </div>
         <Group className={style.btnGroup}>
-          <Button className={style.btnLogin}>Log in</Button>
-          <Button className={style.btnGet}>Get in Touch</Button>
+          {/* <Button className={style.btnLogin}>Log in</Button> */}
+          <Button className={style.btnGet} onClick={openModal}>
+            Get in Touch
+          </Button>
         </Group>
       </div>
       <div className={style.NgnBox}>
