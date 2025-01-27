@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -8,8 +9,17 @@ import linkedin from "@public/image/file/SocialMedia.svg";
 import footerLine from "@public/image/LineFooter.svg";
 import footerLineN from "@public/image/LineFooterN.svg";
 import arrowRight from "@public/arrowRight.svg";
+import { modals } from "@mantine/modals";
+import ModalTouch from "../ModalTouch/modalTouch";
 
 const Footer = () => {
+  const openModal = () =>
+    modals.open({
+      radius: "lg",
+      size: "lg",
+      title: <strong className={style.modalTitle}>Get in touch</strong>,
+      children: <ModalTouch />,
+    });
   return (
     <footer className={style.footer}>
       <div className={style.container}>
@@ -38,7 +48,7 @@ const Footer = () => {
               <Link href="/Employers">Employers</Link>
               <Link href="/Candidates">Candidates</Link>
               <Link href="/Events">Events</Link>
-              <Link href="/Contact">Get in Touch</Link>
+              <div onClick={openModal}>Get in Touch</div>
             </nav>
             <div className={style.navigationField}>
               <input type="text" placeholder="Enter your Email Address" />
