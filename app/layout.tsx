@@ -6,6 +6,7 @@ import "@mantine/core/styles.css";
 import "./globals.css";
 import Header from "./shared/ui/Header/header";
 import Footer from "./shared/ui/Footer/footer";
+import { ModalsProvider } from "@mantine/modals";
 
 // const geistMono = Geist_Mono({
 //   variable: "--font-geist-mono",
@@ -47,9 +48,11 @@ export default function RootLayout({
       </head>
       <body className={poppins.className}>
         <MantineProvider>
-          <Header />
-          {children}
-          <Footer />
+          <ModalsProvider>
+            <Header />
+            {children}
+            <Footer />
+          </ModalsProvider>
         </MantineProvider>
       </body>
     </html>

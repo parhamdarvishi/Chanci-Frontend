@@ -99,6 +99,12 @@ h6 {
   max-width: var(--container-size);
 }
 
+.mantine-Select-input {
+  height: 50px !important;
+  padding: 0 1rem !important;
+  border-radius: 8px !important;
+}
+
 @media screen and (max-width: 980px) {
   .m_8fb7ebe7 {
     height: 52px !important;
