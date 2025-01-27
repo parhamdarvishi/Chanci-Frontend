@@ -7,10 +7,18 @@ import eventBtn from "@public/image/events/GetInTouch.svg";
 import ellipse from "@public/image/EllipseBg.svg";
 import arrowR from "@public/image/icons/arrowR.svg";
 import styles from "./Businesses.module.scss";
-import Link from "next/link";
+import ModalTouch from "@/shared/ui/ModalTouch/modalTouch";
+import { modals } from "@mantine/modals";
 
 const Businesses = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const openModal = () =>
+    modals.open({
+      radius: "lg",
+      size: "lg",
+      title: <strong className={styles.modalTitle}>Get in touch</strong>,
+      children: <ModalTouch />,
+    });
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -55,9 +63,12 @@ const Businesses = () => {
                 "sponsor based on your budget and facilities."}
           </p>
           <div style={{ cursor: "pointer", zIndex: "100" }}>
-            <Link href="/Events">
-              <Image src={eventBtn} className={styles.eventB} alt="eventBtn" />
-            </Link>
+            <Image
+              src={eventBtn}
+              className={styles.eventB}
+              alt="eventBtn"
+              onClick={openModal}
+            />
           </div>
         </div>
 
