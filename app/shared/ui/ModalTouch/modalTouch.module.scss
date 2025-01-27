@@ -1,0 +1,82 @@
+.modalBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 0.7rem;
+}
+.root {
+  width: 100%;
+}
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px !important;
+  font-size: 22px !important;
+  gap: 0.5rem;
+  font-weight: 400;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  width: 100%;
+  transition: background-color 0.3s ease;
+  background: linear-gradient(to right, #8e15ba, #5175f0);
+}
+.labelSelect,
+.label {
+  font-size: 19px !important;
+}
+.description {
+  font-size: 17px !important;
+}
+.input {
+  margin: 0.5rem 0;
+  height: 50px !important;
+  border-radius: 8px !important;
+  padding: 0 1rem !important;
+  font-size: 19px !important;
+  background-color: #f1f3f5;
+  border-color: #f1f3f5;
+}
+.inputTextArea {
+  border-radius: 8px !important;
+  padding: 0.2rem 1rem !important;
+  font-size: 19px !important;
+  min-height: 120px;
+}
+.inputInquiry {
+  font-size: 19px !important;
+  border-radius: 8px !important;
+  padding: 0 1rem !important;
+}
+.button {
+  height: 54px;
+}
+
+@media (max-width: 768px) {
+  .labelSelect,
+  .label {
+    font-size: 16px !important;
+  }
+  .description {
+    font-size: 15px !important;
+  }
+  .input {
+    height: 45px !important;
+  }
+  .inputInquiry {
+    height: 45px !important;
+    font-size: 19px !important;
+    border-radius: 8px !important;
+    padding: 0 1rem !important;
+  }
+  .inputTextArea {
+    border-radius: 8px !important;
+    padding: 0.2rem 1rem !important;
+    font-size: 19px !important;
+    min-height: 100px;
+  }
+  .button {
+    height: 50px;
+  }
+}
