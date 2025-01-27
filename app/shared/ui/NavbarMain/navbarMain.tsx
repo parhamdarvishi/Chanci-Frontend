@@ -8,6 +8,8 @@ import { Button, Group, Drawer, Divider, Card, Box } from "@mantine/core";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useDisclosure } from "@mantine/hooks";
+import { modals } from "@mantine/modals";
+import ModalTouch from "../ModalTouch/modalTouch";
 
 const NavbarMain = () => {
   const path = usePathname();
@@ -23,6 +25,13 @@ const NavbarMain = () => {
     "Academy",
     "AboutUs",
   ];
+  const openModal = () =>
+    modals.open({
+      radius: "lg",
+      size: "lg",
+      title: <strong className={style.modalTitle}>Get in touch</strong>,
+      children: <ModalTouch />,
+    });
   const handleActiveNav = (index: number) => {
     setLoc(index);
   };
@@ -104,8 +113,10 @@ const NavbarMain = () => {
           ))}
         </ul>
         <Group className={style.btnGroup}>
-          <Button className={style.btnLogin}>Log in</Button>
-          <Button className={style.btnGet}>Get in Touch</Button>
+          {/* <Button className={style.btnLogin}>Log in</Button> */}
+          <Button className={style.btnGet} onClick={openModal}>
+            Get in Touch
+          </Button>
         </Group>
       </div>
     </div>
