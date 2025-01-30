@@ -28,7 +28,7 @@ const page = () => {
             <span>Gallery</span>
           </h2>
         </div>
-        <Container style={{ maxWidth: "1240px !important" }}>
+        <Container className={style.galleryBox}>
           <Grid>
             <Grid.Col span={{ base: 12, md: 4 }} h={{ md: 270, sm: 240 }}>
               <Image src={event1} alt="eventImage" className={style.img} />
