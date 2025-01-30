@@ -64,6 +64,7 @@
   }
   .navigationField {
     position: relative;
+    width: 470px;
     input {
       border-radius: 16px;
       width: 470px;
@@ -83,7 +84,7 @@
       gap: 1rem;
       position: absolute;
       top: 5px;
-      right: 105px;
+      right: 12px;
       font-weight: 400;
       color: #fff;
       padding: 0.75rem 1.5rem;
