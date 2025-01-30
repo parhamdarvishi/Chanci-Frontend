@@ -4,7 +4,6 @@ import UpComing from "./Slice/upcoming/UpComing";
 import { Container } from "@mantine/core";
 import Businesses from "./Slice/businesses/Businesses";
 import Comments from "./Slice/comments/Comments";
-import EventSlider from "@/shared/ui/EventSlider/eventSlider";
 import style from "./Slice/upcoming/UpComing.module.scss";
 
 const EventList = () => {
