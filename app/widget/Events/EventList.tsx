@@ -26,7 +26,8 @@ const EventList = () => {
           </h1>
         </div>
 
-        <EventSlider />
+        {/* <EventSlider /> */}
+
         <UpComing />
         <Businesses />
       </Container>
