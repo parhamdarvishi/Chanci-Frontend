@@ -83,7 +83,7 @@ const Navbar = () => {
                 {loc === index && <div className={style.liActive}></div>}
 
                 <Link
-                  href={item}
+                  href={`/${item}`}
                   className={
                     loc === index ? style.liSidebarActive : style.liSidebar
                   }
@@ -127,7 +127,7 @@ const Navbar = () => {
                 key={index}
                 className={loc === index ? style.activeLi : style.li}
               >
-                <Link href={item} onClick={() => handleActiveNav(index)}>
+                <Link href={`/${item}`} onClick={() => handleActiveNav(index)}>
                   {item}{" "}
                 </Link>
                 {loc === index && <div className={style.line}></div>}
@@ -154,10 +154,19 @@ const Navbar = () => {
         <div className={style.bubbleL}>
           <Image src={bubbleL} alt="bubbleR" />
         </div>
-        <Link className={style.btnChanci} href="/find-talent">
-          Take me to Chanci AI
-        </Link>
+        <div className={style.takeMeBtn}>
+          <div className={style.comingSoon}>
+            <span>Coming Soon!</span>
+          </div>
+          <Link className={style.btnChanci} href="/find-talent">
+            Take me to Chanci AI
+          </Link>
+        </div>
+
         <div className={style.inputBox}>
+          <div className={style.comingSoon}>
+            <span>Coming Soon!</span>
+          </div>
           <Input
             type="text"
             className={style.input}

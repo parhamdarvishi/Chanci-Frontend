@@ -105,7 +105,7 @@ const NavbarMain = () => {
               className={loc === index ? style.activeLi : style.navItems}
               key={index}
             >
-              <Link href={item} onClick={() => handleActiveNav(index)}>
+              <Link href={`/${item}`} onClick={() => handleActiveNav(index)}>
                 {item}{" "}
               </Link>
               {loc === index && <div className={style.line}></div>}

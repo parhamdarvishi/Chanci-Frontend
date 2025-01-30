@@ -145,6 +145,25 @@
         z-index: 0;
       }
     }
+    .takeMeBtn {
+      position: relative;
+      .comingSoon {
+        position: absolute;
+        right: -45px;
+        top: -23px;
+        border: 1px blue solid;
+        border-radius: 16px !important;
+        width: 105px;
+        background-color: #fff;
+        font-size: 12px !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 35px;
+        z-index: 1000;
+        color: #2026ce;
+      }
+    }
     .btnChanci {
       border-radius: 16px !important;
       display: flex;
@@ -162,7 +181,22 @@
     .inputBox {
       position: relative;
       margin: 2.2rem 0;
-
+      .comingSoon {
+        position: absolute;
+        left: -45px;
+        top: -23px;
+        border: 1px blue solid;
+        border-radius: 16px !important;
+        width: 105px;
+        background-color: #fff;
+        font-size: 12px !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 35px;
+        z-index: 1000;
+        color: #2026ce;
+      }
       .input {
         min-width: 1027px;
         height: 72px !important;
