@@ -158,9 +158,10 @@ const Navbar = () => {
           <div className={style.comingSoon}>
             <span>Coming Soon!</span>
           </div>
-          <Link className={style.btnChanci} href="/find-talent">
+          {/* <Link className={style.btnChanci} href="/find-talent">
             Take me to Chanci AI
-          </Link>
+          </Link> */}
+          <div className={style.btnChanci}>Take me to Chanci AI</div>
         </div>
 
         <div className={style.inputBox}>
