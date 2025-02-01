@@ -3,10 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import style from "./eventSlider.module.scss";
 import img1 from "@public/image/events/cardImg.png"; // Replace with your actual image paths
-
 import calendar from "@public/image/icons/calendar.svg";
 import clock from "@public/image/icons/clock.svg";
-
 import Link from "next/link";
 
 const EventSlider = () => {
