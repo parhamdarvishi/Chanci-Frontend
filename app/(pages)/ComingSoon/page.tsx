@@ -17,7 +17,7 @@ const Page = () => {
       <NavbarMain />
       <Container className={style.container}>
         <h1>Coming Soon !</h1>
-        <Image src={comingSoon} alt="comingSoon" />
+        <Image src={comingSoon} alt="comingSoon" loading="lazy" />
         <p>
           <strong>NGN</strong> Team are currently working hard building this
           page!
