@@ -22,7 +22,7 @@ import bubbleR from "@public/image/bubble/right.svg";
 import bubbleL from "@public/image/bubble/left.svg";
 import logoNav from "@public/image/icons/logoNav.svg";
 import { useDisclosure } from "@mantine/hooks";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { modals } from "@mantine/modals";
 import ModalTouch from "../ModalTouch/modalTouch";
 
@@ -30,6 +30,12 @@ const Navbar = () => {
   const [loc, setLoc] = useState(0);
   const [opened, { open, close }] = useDisclosure(false);
   const path = usePathname();
+
+  const router = useRouter();
+
+  const handleComingSoon = () => {
+    router.push("/ComingSoon");
+  };
 
   const findPath = path.split("/")[1];
   const links = [
@@ -155,25 +161,31 @@ const Navbar = () => {
           <Image src={bubbleL} alt="bubbleR" />
         </div>
         <div className={style.takeMeBtn}>
-          <div className={style.comingSoon}>
+          {/* <div className={style.comingSoon}>
             <span>Coming Soon!</span>
-          </div>
+          </div> */}
           {/* <Link className={style.btnChanci} href="/find-talent">
             Take me to Chanci AI
           </Link> */}
-          <div className={style.btnChanci}>Take me to Chanci AI</div>
+          <Link className={style.btnChanci} href={"/ComingSoon"}>
+            Take me to Chanci AI
+          </Link>
         </div>
 
         <div className={style.inputBox}>
-          <div className={style.comingSoon}>
+          {/* <div className={style.comingSoon}>
             <span>Coming Soon!</span>
-          </div>
+          </div> */}
           <Input
             type="text"
             className={style.input}
             placeholder="Search Jobs"
           />
-          <Button variant="outline" className={style.inputBtn}>
+          <Button
+            variant="outline"
+            className={style.inputBtn}
+            onClick={handleComingSoon}
+          >
             Advanced Search
           </Button>
           <Image

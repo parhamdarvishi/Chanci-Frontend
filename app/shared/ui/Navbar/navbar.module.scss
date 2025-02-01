@@ -363,6 +363,7 @@
       }
       .btnChanci {
         border-radius: 8px !important;
+        cursor: pointer !important;
         color: #fff;
         width: 206px;
         height: 34px;
@@ -375,6 +376,9 @@
           #3d9dd4,
           #31eec8
         );
+        span {
+          cursor: unset !important;
+        }
       }
       .inputBox {
         width: 100%;
