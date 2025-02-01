@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import event2 from "@public/image/events/event2.png";
 import Event1 from "@public/image/events/gallery/Event1.jpg";
 import Event3 from "@public/image/events/gallery/Event3.jpg";
-import Event4 from "@public/image/events/gallery/Event4.jpg";
+import Eventt from "@public/image/events/gallery/Eventt.jpg";
 import Event5 from "@public/image/events/gallery/Event5.jpg";
 import Event6 from "@public/image/events/gallery/Event6.jpg";
 import Event7 from "@public/image/events/gallery/Event7.jpg";
@@ -94,11 +94,11 @@ const Gallery = () => {
             </Grid.Col>
             <Grid.Col span={{ base: 12, md: 5 }} h={{ md: 270, sm: 240 }}>
               <Image
-                src={Event4}
+                src={Eventt}
                 alt="eventImage"
                 className={style.img}
                 loading="lazy"
-                onClick={() => handleImageClick(Event4.src)}
+                onClick={() => handleImageClick(Eventt.src)}
               />
             </Grid.Col>
           </Grid>
