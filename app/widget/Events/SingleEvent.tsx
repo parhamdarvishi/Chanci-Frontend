@@ -6,14 +6,16 @@ import Image from "next/image";
 import arrowRight from "@public/arrowRight.svg";
 import calendar from "@public/image/icons/calendar.svg";
 import clock from "@public/image/icons/clock.svg";
+import header from "@public/image/events/singleEvents/Poster1.jpg";
 
 const SingleEvent = () => {
   return (
     <div>
       <Container className={style.wrapper}>
-        <div className={style.header}>
+        {/* <div className={style.header}>
           <h4 className={style.headerTitle}>Get Ready for Booking an Event</h4>
-        </div>
+        </div> */}
+        <Image style={{ height: "710px" }} src={header} alt="sdsd" />
         <Card
           shadow="sm"
           padding="lg"
