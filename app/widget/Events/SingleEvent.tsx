@@ -56,7 +56,7 @@ const SingleEvent = () => {
           <div className={style.cardIc}>
             <div className={style.cardPart}>
               <Image src={calendar} alt="calendar" className={style.image} />
-              <p>Jan 13,2025</p>
+              <p>Feb 15,2025</p>
             </div>
             <div className={style.cardPart}>
               <Image src={clock} alt="clock" className={style.image} />

@@ -79,7 +79,7 @@ const EventSlider = () => {
               >
                 <Image src={calendar} alt="calendar" />
                 <p style={{ color: "#878787", fontSize: "14px" }}>
-                  Jan 13,2025
+                  Feb 15,2025
                 </p>
               </div>
               <div
