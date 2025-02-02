@@ -57,7 +57,10 @@ const SingleEvent = () => {
               <p>16:00-18:00</p>
             </div>
           </div>
-          <Link href="#" className={style.button}>
+          <Link
+            href="https://www.eventbrite.co.uk/e/learn-and-network-with-londons-top-founders-branding-storytelling-fund-tickets-1225368844199 "
+            className={style.button}
+          >
             Get a ticket
             <Image
               className={style.cardArrow}
