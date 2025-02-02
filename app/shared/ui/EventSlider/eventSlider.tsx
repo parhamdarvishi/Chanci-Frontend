@@ -6,6 +6,7 @@ import img1 from "@public/image/events/cardImg.png"; // Replace with your actual
 import calendar from "@public/image/icons/calendar.svg";
 import clock from "@public/image/icons/clock.svg";
 import Link from "next/link";
+import { sliderData } from "./data";
 
 const EventSlider = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -70,11 +71,8 @@ const EventSlider = () => {
         <div className={style.card}>
           <Image src={img1} alt="Event 1" className={style.imgCard} />
           <div className={style.desc}>
-            <h3>Next Event</h3>
-            <p>
-              From exclusive private events to dynamic job fairs, creative
-              co-founder matchmaking
-            </p>
+            <h3>{sliderData[0]?.title}</h3>
+            <p>{sliderData[0]?.desc}</p>
             <div className={style.cardIc}>
               <div
                 style={{ display: "flex", alignItems: "center", gap: ".3rem" }}
@@ -101,7 +99,7 @@ const EventSlider = () => {
               }}
             >
               <Link
-                href="/find-talent"
+                href="/Events/1"
                 className={style.button}
                 style={{
                   borderRadius: "16px",
@@ -130,7 +128,7 @@ const EventSlider = () => {
             </div>
           </div>
         </div>
-        <div className={style.card}>
+        {/* <div className={style.card}>
           <Image src={img1} alt="Event 1" className={style.imgCard} />
           <div className={style.desc}>
             <h3>Next Event</h3>
@@ -253,7 +251,7 @@ const EventSlider = () => {
               </Link>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
       {/* <button
         className={styles.scrollButton}
