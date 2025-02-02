@@ -5,6 +5,7 @@ import { Container } from "@mantine/core";
 import Businesses from "./Slice/businesses/Businesses";
 import Comments from "./Slice/comments/Comments";
 import style from "./Slice/upcoming/UpComing.module.scss";
+import EventSlider from "@/shared/ui/EventSlider/eventSlider";
 
 const EventList = () => {
   return (
@@ -25,7 +26,7 @@ const EventList = () => {
           </h1>
         </div>
 
-        {/* <EventSlider /> */}
+        <EventSlider />
 
         <UpComing />
         <Businesses />
