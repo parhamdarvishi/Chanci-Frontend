@@ -10,6 +10,8 @@
 
 .slider {
   display: flex;
+  justify-content: center;
+  align-items: center;
   overflow-x: auto; // Allow horizontal scrolling
   scroll-behavior: smooth;
   width: calc(100% - 60px); // Adjust width to account for buttons
@@ -57,7 +59,8 @@
     font-size: 24px;
   }
   p {
-    max-width: 283px;
+    // max-width: 283px;
+    max-width: 383px;
     font-size: 18px;
     line-height: 1.5;
     color: #0d131d;

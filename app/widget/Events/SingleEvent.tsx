@@ -22,15 +22,30 @@ const SingleEvent = () => {
           className={style.desc}
         >
           <h4>
-            <strong>We host, </strong>
-            we create connections, and we nurture collaboration!
+            {/* <strong>We host, </strong> */}
+            {/* we create connections, and we nurture collaboration! */}
+            Learn and Network with London&apos;s Top Founders: Branding,
+            Storytelling & Fundraising
           </h4>
           <p>
-            We focus on inclusivity, accessibility, creativity, and culture,
+            {/* We focus on inclusivity, accessibility, creativity, and culture,
             ensuring every event offers an opportunity to grow and thrive. No
             matter your skills, the network you’re part of will shape your
             future. We level up your capabilities and share our exceptional
-            network of professionals with you to unlock new possibilities.
+            network of professionals with you to unlock new possibilities. */}
+            An exclusive event featuring top founders and investors who know
+            exactly what it takes to succeed in the startup ecosystem. Join a
+            handpicked selection of professionals and distinguished guests in a
+            dynamic and inspiring setting. Expect award-winning speakers,
+            insightful discussions, and an experienced team of co-hosts ready to
+            facilitate meaningful connections. Looking for partners, investors,
+            or a breakthrough opportunity? This is the place to make it happen.
+            With limited invitations available, secure your spot now before they
+            disappear! About the Organisers New Generation Network is a
+            pioneering tech startup and community, collaborating with Oasis
+            London, a venture under Blue Lake VC. Founded by Lyubov Guk and
+            David Gilgur, Blue Lake VC is committed to backing international
+            founders and fostering diversity within the UK startup ecosystem.
           </p>
           <div className={style.cardIc}>
             <div className={style.cardPart}>
