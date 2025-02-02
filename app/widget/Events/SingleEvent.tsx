@@ -15,7 +15,11 @@ const SingleEvent = () => {
         {/* <div className={style.header}>
           <h4 className={style.headerTitle}>Get Ready for Booking an Event</h4>
         </div> */}
-        <Image style={{ height: "710px" }} src={header} alt="sdsd" />
+        <Image
+          style={{ height: "710px", borderRadius: "26px !important" }}
+          src={header}
+          alt="sdsd"
+        />
         <Card
           shadow="sm"
           padding="lg"
