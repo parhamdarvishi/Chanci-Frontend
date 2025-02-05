@@ -87,7 +87,7 @@ const EventSlider = () => {
               >
                 <Image src={clock} alt="clock" />
                 <p style={{ color: "#878787", fontSize: "14px" }}>
-                  16:00-18:00
+                  12:00-15:00
                 </p>
               </div>
             </div>
