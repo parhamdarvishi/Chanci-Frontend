@@ -1,7 +1,7 @@
 .wrapper {
   padding: 1rem 4rem;
   .header {
-    background: url("../../../public/image/events/singleEvents/Poster1.jpg")
+    background: url("../../../public/image/events/singleEvents/Poster.png")
       center center no-repeat;
     height: 530px;
     background-size: cover;
@@ -19,6 +19,10 @@
       font-size: 48px;
     }
   }
+  .headerImg {
+    height: 615px;
+    border-radius: 26px;
+  }
   .desc {
     display: flex;
     flex-direction: column;
@@ -35,6 +39,27 @@
     p {
       font-size: 24px;
     }
+    .cardExpect {
+      font-size: 30px;
+      font-weight: 400;
+      max-width: 1270px;
+      line-height: 1.4;
+      color: #721495;
+    }
+    ul {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-direction: column;
+      li {
+        font-size: 24px;
+        ::marker {
+          color: #8e15ba !important;
+          background-color: #8e15ba !important;
+        }
+      }
+    }
+
     .cardIc {
       display: flex;
       align-items: center;
@@ -86,13 +111,35 @@
         text-align: center;
       }
     }
+
+    .headerImg {
+      height: 490px;
+      border-radius: 26px;
+    }
     .desc {
       padding: 2rem;
+      gap: 1.3rem;
+      .cardExpect {
+        font-size: 24px;
+      }
       h4 {
         font-size: 24px;
       }
       p {
         font-size: 17px !important;
+      }
+      ul {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-direction: column;
+        li {
+          font-size: 17px !important;
+          ::marker {
+            color: #8e15ba !important;
+            background-color: #8e15ba !important;
+          }
+        }
       }
       .cardIc {
         .cardpart {
