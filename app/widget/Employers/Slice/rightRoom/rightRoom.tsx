@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import righRoom1 from "@public/image/file/righRoom.png";
-import righRoom2 from "@public/image/file/righRoom2.png";
+import righRoom1 from "@public/image/file/rightRoom.png";
+import righRoom2 from "@public/image/file/rightRoom2.png";
 import event from "@public/image/icons/event.svg";
 import eventBtn from "@public/image/icons/eventBtn.svg";
 import ellipse from "@public/image/EllipseBg.svg";
