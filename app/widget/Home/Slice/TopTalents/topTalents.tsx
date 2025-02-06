@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import Empowering from "@public/image/homeWalk.png";
+import Empowering from "@public/image/home.png";
 import style from "./topTalents.module.scss";
 
 const TopTalents = () => {

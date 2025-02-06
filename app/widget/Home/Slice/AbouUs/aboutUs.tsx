@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import style from "./aboutUs.module.scss";
-import candidateImage from "@public/image/homeTalking.png";
+import candidateImage from "@public/image/candiateImage.png";
 import employersImage from "@public/image/display.png";
 import EllipseCardL from "@public/image/widget/EllipseCardL.svg";
 import EllipseCardR from "@public/image/widget/EllipseCardR.svg";
