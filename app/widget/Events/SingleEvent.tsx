@@ -8,7 +8,7 @@ import arrowRight from "@public/arrowRight.svg";
 import calendar from "@public/image/icons/calendar.svg";
 import clock from "@public/image/icons/clock.svg";
 import header from "@public/image/events/singleEvents/poster.png";
-import headerRes from "@public/image/events/singleEvents/posterRes.png";
+import headerRes from "@public/image/events/singleEvents/eventRes.png";
 
 const SingleEvent = () => {
   const [isMobile, setIsMobile] = useState(false);
