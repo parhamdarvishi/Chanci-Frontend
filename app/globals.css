@@ -88,6 +88,10 @@ h6 {
   padding: 0 6rem !important;
   font-size: 1.3rem !important;
 }
+.bg {
+  background-color: #e5e7ebf2;
+  padding: 1rem;
+}
 
 .m_7485cace {
   --container-size-xs: calc(30.75rem * var(--mantine-scale));
