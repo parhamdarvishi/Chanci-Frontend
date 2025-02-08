@@ -4,8 +4,6 @@ import { Poppins } from "next/font/google";
 import { MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 import "./globals.css";
-import Header from "./shared/ui/Header/header";
-import Footer from "./shared/ui/Footer/footer";
 import { ModalsProvider } from "@mantine/modals";
 
 // const geistMono = Geist_Mono({
