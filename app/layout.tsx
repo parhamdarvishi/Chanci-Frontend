@@ -48,11 +48,7 @@ export default function RootLayout({
       </head>
       <body className={poppins.className}>
         <MantineProvider>
-          <ModalsProvider>
-            <Header />
-            {children}
-            <Footer />
-          </ModalsProvider>
+          <ModalsProvider>{children}</ModalsProvider>
         </MantineProvider>
       </body>
     </html>
