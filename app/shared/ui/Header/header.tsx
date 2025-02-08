@@ -12,6 +12,10 @@ const Header = () => {
     router.push("/Candidates#target-Ambassador");
   };
 
+  const goToEvent = () => {
+    router.push("/Events#sponser");
+  };
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -29,7 +33,9 @@ const Header = () => {
 
   return (
     <div className={style.wrapper}>
-      <h4 className={style.headerTitle}>Want to become an event sponsor?</h4>
+      <h4 className={style.headerTitle} onClick={goToEvent}>
+        Want to become an event sponsor?
+      </h4>
       <Button className={style.btn} onClick={goToTarget}>
         {isMobile
           ? "Become a student ambassador"

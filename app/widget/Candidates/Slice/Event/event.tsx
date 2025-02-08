@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import React from "react";
 import event from "@public/image/widget/event.svg";
@@ -8,8 +9,17 @@ import universitiesRes from "@public/image/responsive/universitiesRes.png";
 import style from "./event.module.scss";
 import Link from "next/link";
 import { Box, Card } from "@mantine/core";
+import ModalTouch from "@/shared/ui/ModalTouch/modalTouch";
+import { modals } from "@mantine/modals";
 
 const Event = () => {
+  const openModal = () =>
+    modals.open({
+      radius: "lg",
+      size: "lg",
+      title: <strong className={style.modalTitle}>Get in touch</strong>,
+      children: <ModalTouch />,
+    });
   return (
     <div className={style.wrapper}>
       <div className={style.wrapperBox}>
@@ -72,7 +82,7 @@ const Event = () => {
               university. Gain valuable work experience, enjoy exclusive perks,
               and attend unique events.
             </p>
-            <Link href="/find-talent" className={style.button}>
+            <div className={style.button} onClick={openModal}>
               Apply to Become an Ambassador
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -88,7 +98,7 @@ const Event = () => {
                 <path d="M5 12h14" />
                 <path d="m12 5 7 7-7 7" />
               </svg>
-            </Link>
+            </div>
           </div>
         </Card>
       </Box>

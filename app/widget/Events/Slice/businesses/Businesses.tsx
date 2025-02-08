@@ -34,7 +34,7 @@ const Businesses = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
   return (
-    <div className={styles.container}>
+    <div className={styles.container} id="sponser">
       <div className={styles.content}>
         <div className={styles.leftSection}>
           <Image src={ellipse} alt="ellipse" className={styles.ellipsBg} />
