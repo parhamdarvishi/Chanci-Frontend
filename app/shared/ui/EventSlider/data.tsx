@@ -1,4 +1,4 @@
-import brandingPoster from "@public/image/events/singleEvents/Poster.png";
+import brandingPoster from "@public/image/events/singleEvents/poster.png";
 export const sliderData = [
   {
     title: "Branding, Storytelling & Fundraising",
