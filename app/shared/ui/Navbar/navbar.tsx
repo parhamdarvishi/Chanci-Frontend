@@ -59,6 +59,10 @@ const Navbar = () => {
     });
 
   useEffect(() => {
+    if (findPath === "ComingSoon") {
+      setLoc(4);
+      return;
+    }
     links.forEach((element, index) => {
       if (element === findPath) {
         setLoc(index);
@@ -132,8 +136,9 @@ const Navbar = () => {
               <li
                 key={index}
                 className={loc === index ? style.activeLi : style.li}
+                onClick={() => handleActiveNav(index)}
               >
-                <Link href={`/${item}`} onClick={() => handleActiveNav(index)}>
+                <Link href={index === 4 ? "/ComingSoon" : `/${item}`}>
                   {item}{" "}
                 </Link>
                 {loc === index && <div className={style.line}></div>}
