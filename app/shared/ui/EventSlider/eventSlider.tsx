@@ -72,7 +72,11 @@ const EventSlider = () => {
           <Image src={img1} alt="Event 1" className={style.imgCard} />
           <div className={style.desc}>
             <h3>{sliderData[0]?.title}</h3>
-            <p>{sliderData[0]?.desc}</p>
+            <p>
+              {isMobile
+                ? "An exclusive event featuring top founders ..."
+                : sliderData[0]?.desc}
+            </p>
             <div className={style.cardIc}>
               <div
                 style={{ display: "flex", alignItems: "center", gap: ".3rem" }}
