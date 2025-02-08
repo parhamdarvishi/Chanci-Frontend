@@ -92,6 +92,12 @@ h6 {
   background-color: #e5e7ebf2;
   padding: 1rem;
 }
+.chanciSection {
+  height: 88vh;
+}
+.m_811560b9 {
+  gap: 1rem;
+}
 
 .m_7485cace {
   --container-size-xs: calc(30.75rem * var(--mantine-scale));
