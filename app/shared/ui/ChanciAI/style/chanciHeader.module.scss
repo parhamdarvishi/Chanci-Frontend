@@ -1,0 +1,55 @@
+.wrapper {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  .assessmentHeader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    .assessment {
+      height: 52px;
+      border-radius: 16px;
+      width: 304px;
+      padding: 1rem;
+      background-color: #e6effe;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      h4 {
+        font-weight: 400;
+        color: #0063f5;
+        font-size: 14px;
+      }
+    }
+    .HowItWorks {
+      height: 52px;
+      border-radius: 16px;
+      width: 304px;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      justify-content: space-between;
+      .HowItWorkL {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+    }
+  }
+  .assessmentNotif {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-right: 0.8rem;
+    .assessmentNotifBox {
+      cursor: pointer;
+      width: 46px;
+      height: 46px;
+      border-radius: 8px;
+      background-color: #ffffff;
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
