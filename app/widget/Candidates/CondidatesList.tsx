@@ -25,7 +25,7 @@ const CondidatesList = () => {
       id: 2,
       title: "Top Courses Gen Z Should Check Out for a Bright Career in 2025",
       description:
-        "Gen Z is stepping into a workplace full of change. To stay ahead, you need skills that match growing industries and new tech trends ...",
+        "Gen Z is stepping into a workplace full of change. To stay ahead, you need skills that match growing industries...",
       image: canBlogTopCourse,
     },
     {
