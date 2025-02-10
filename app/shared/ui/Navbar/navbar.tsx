@@ -93,7 +93,7 @@ const Navbar = () => {
                 {loc === index && <div className={style.liActive}></div>}
 
                 <Link
-                  href={`/${item}`}
+                  href={index === 4 ? "/ComingSoon" : `/${item}`}
                   className={
                     loc === index ? style.liSidebarActive : style.liSidebar
                   }
