@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import talk from "@public/image/slides/talk.png";
-import visa from "@public/image/slides/visa.png";
-import write from "@public/image/slides/write.png";
+import empBlogGenZ from "@public/image/blog/empBlogGenZ.png";
+import empBlogDei from "@public/image/blog/empBlogDei.png";
+import empBlogSolve from "@public/image/blog/empBlogSolve.png";
 import Slider from "@/shared/ui/Slider/slider";
 import { SlideData } from "@/widget/Candidates/model";
 import style from "../../../Candidates/Slice/Event/event.module.scss";
@@ -13,31 +13,25 @@ const ArticlesCards = () => {
   const slides: SlideData[] = [
     {
       id: 1,
-      title: "Increasing brand awareness | Study Permit",
+      title: "Gen Z at Work: 8 Changes Your Company Can’t Ignore",
       description:
-        "Increasing brand awareness and growing female engagement. Study permit services guide you through the application process.",
-      image: visa,
+        "Generation Z, born between the mid-1990s and early 2010s, now represents nearly a third of the global workforce...",
+      image: empBlogGenZ,
     },
     {
       id: 2,
-      title: "Discovering hard to reach talent | Work Permit",
+      title:
+        "The Role of Automation in Solving the UK’s 1.3 Million Job Market Gap",
       description:
-        "Discovering hard to reach talent - from awareness to successful hire, ensuring your documents are ready and deadlines met.",
-      image: write,
+        "The UK job market is facing a major challenge, with over 1.3 million job ... ",
+      image: empBlogSolve,
     },
     {
       id: 3,
-      title: "Permanent Residency to reach talent | PR Card",
+      title: "The Current State of DEI in the UK",
       description:
-        "Study permit services guide you through the application process, ensuring your documents are ready and deadlines met.",
-      image: talk,
-    },
-    {
-      id: 4,
-      title: "Permanent Residency to reach talent | PR Card",
-      description:
-        "Study permit services guide you through the application process, ensuring your documents are ready and deadlines met.",
-      image: write,
+        "Recent surveys show a noticeable shift in how UK businesses view DEI. A 2023 report found that 57% of companies ...",
+      image: empBlogDei,
     },
   ];
   return (
@@ -63,32 +57,34 @@ const ArticlesCards = () => {
           paddingBottom: "2rem",
         }}
       >
-        <Link
-          href="/find-talent"
-          className={style.button}
-          style={{
-            borderRadius: "16px",
-            height: "60px",
-            fontSize: "20px",
-            fontWeight: "400",
-          }}
-        >
-          See more
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+        {slides.length > 3 && (
+          <Link
+            href="/find-talent"
+            className={style.button}
+            style={{
+              borderRadius: "16px",
+              height: "60px",
+              fontSize: "20px",
+              fontWeight: "400",
+            }}
           >
-            <path d="M5 12h14" />
-            <path d="m12 5 7 7-7 7" />
-          </svg>
-        </Link>
+            See more
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </Link>
+        )}
       </div>
     </div>
   );

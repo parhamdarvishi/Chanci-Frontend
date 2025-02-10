@@ -4,7 +4,6 @@ import Event from "./Slice/Event/event";
 import canBlogTop from "@public/image/blog/canBlogTop.png";
 import canBlogTopCourse from "@public/image/blog/canBlogTopCourse.png";
 import canBlogSmart from "@public/image/blog/canBlogSmart.png";
-import write from "@public/image/slides/write.png";
 import Slider from "@/shared/ui/Slider/slider";
 import { SlideData } from "./model";
 import TopicSection from "../Employers/Slice/topicSection/topicSection";
