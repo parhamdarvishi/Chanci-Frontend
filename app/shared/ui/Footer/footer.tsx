@@ -52,7 +52,7 @@ const Footer = () => {
             </nav>
             <div className={style.navigationField}>
               <input type="text" placeholder="Enter your Email Address" />
-              <Link href="/find-talent" className={style.button}>
+              <Link href="/ComingSoon" className={style.button}>
                 Subscribe
                 <Image
                   className={style.cardArrow}
