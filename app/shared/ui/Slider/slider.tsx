@@ -14,7 +14,7 @@ const Slider = ({ slides, title }: props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const cardsToShow = 3;
-  const cardWidth = 350; // Width of each card
+  const cardWidth = 355; // Width of each card
   const cardGap = 32; // Gap between cards (2rem = 32px)
 
   const nextSlide = () => {
