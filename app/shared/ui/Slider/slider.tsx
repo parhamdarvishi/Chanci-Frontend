@@ -4,6 +4,7 @@ import Image from "next/image";
 import style from "./slider.module.scss";
 import { SlideData } from "@/widget/Candidates/model";
 import arrowSlide from "@public/image/icons/arrowSlide.svg";
+import Link from "next/link";
 
 interface props {
   slides: SlideData[];
@@ -65,7 +66,8 @@ const Slider = ({ slides, title }: props) => {
           }}
         >
           {slides.map((slide) => (
-            <div
+            <Link
+              href={`/blog/${slide?.id}`}
               key={slide.id}
               className={style.card}
               style={{ width: `${cardWidth}px` }}
@@ -83,13 +85,14 @@ const Slider = ({ slides, title }: props) => {
                 <div className={style.content}>
                   <h3>{slide.title}</h3>
                   <p>{slide.description}</p>
-                  <button className={style.readMore}>
+                  <Link href={`/blog/${slide?.id}`} className={style.readMore}>
+                    {" "}
                     Read More
                     <Image src={arrowSlide} alt="arrowSlide" />
-                  </button>
+                  </Link>
                 </div>
               )}
-            </div>
+            </Link>
           ))}
         </div>
       </div>
