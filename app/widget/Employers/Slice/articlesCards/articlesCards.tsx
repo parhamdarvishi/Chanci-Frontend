@@ -12,14 +12,14 @@ import Link from "next/link";
 const ArticlesCards = () => {
   const slides: SlideData[] = [
     {
-      id: 1,
+      id: 4,
       title: "Gen Z at Work: 8 Changes Your Company Can’t Ignore",
       description:
         "Generation Z, born between the mid-1990s and early 2010s, now represents nearly a third of the global workforce...",
       image: empBlogGenZ,
     },
     {
-      id: 2,
+      id: 5,
       title:
         "The Role of Automation in Solving the UK’s 1.3 Million Job Market Gap",
       description:
@@ -27,7 +27,7 @@ const ArticlesCards = () => {
       image: empBlogSolve,
     },
     {
-      id: 3,
+      id: 6,
       title: "The Current State of DEI in the UK",
       description:
         "Recent surveys show a noticeable shift in how UK businesses view DEI. A 2023 report found that 57% of companies ...",
