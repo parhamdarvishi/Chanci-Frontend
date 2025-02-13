@@ -54,7 +54,7 @@ const Login = () => {
             <div className={style.divider}></div>
           </Box>
           <Box className={style.form}>
-            <Box>
+            {/* <Box>
               <Input.Wrapper
                 classNames={{
                   root: style.root,
@@ -64,7 +64,7 @@ const Login = () => {
               >
                 <Input classNames={{ input: style.input }} />
               </Input.Wrapper>
-            </Box>
+            </Box> */}
             <Box>
               <Input.Wrapper
                 classNames={{
