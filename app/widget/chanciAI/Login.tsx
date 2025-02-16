@@ -16,12 +16,20 @@ import avatars from "@public/image/chanciAI/avatars.svg";
 import google from "@public/image/chanciAI/icon/google.svg";
 import style from "./login.module.scss";
 import { useRouter } from "next/navigation";
+// import { postRequest } from "@/shared/api";
+// import { authAddresses } from "@/shared/constants/relative-url/auth";
 
 const Login = () => {
   const router = useRouter();
   const handleChanci = () => {
     router.push("/ChanciAI");
   };
+
+  // const handleLogin = async () => {
+  //   const reqbody = {};
+  //   const res = await postRequest(authAddresses.login, reqbody, true);
+  // };
+
   return (
     <div>
       <Grid className={style.wrapper}>
@@ -118,7 +126,7 @@ const Login = () => {
               className={style.submitBtn}
               onClick={handleChanci}
             >
-              Sign up
+              Sign In
             </Button>
           </Box>
         </GridCol>
