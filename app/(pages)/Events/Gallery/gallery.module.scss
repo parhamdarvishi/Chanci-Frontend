@@ -21,6 +21,9 @@
   object-fit: cover;
   border-radius: 16px !important;
   cursor: pointer;
+  .galleryBox {
+    max-width: 1210px !important;
+  }
 }
 
 .selectedImageContainer {
