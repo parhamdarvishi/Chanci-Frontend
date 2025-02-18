@@ -1,5 +1,5 @@
-import {toast, ToastOptions} from "react-toastify";
-import {ToastAlertFunction} from "@shared/helpers/toast/model";
+import { toast, ToastOptions } from "react-toastify";
+import { ToastAlertFunction } from "@shared/helpers/toast/model";
 
 const defaultOptions: ToastOptions = {
   position: "top-right",
@@ -8,10 +8,10 @@ const defaultOptions: ToastOptions = {
   closeOnClick: true,
   pauseOnHover: true,
   draggable: true,
-  progress: undefined
+  progress: undefined,
 };
 
 const toastAlert: ToastAlertFunction = (message, kind = "info", options) =>
-  toast[kind](message, {...defaultOptions, ...options});
+  toast[kind](message, { ...defaultOptions, ...options });
 
 export default toastAlert;
