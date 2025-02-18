@@ -6,57 +6,75 @@ import {
   Grid,
   GridCol,
   Input,
+  Loader,
   //   PasswordInput,
 } from "@mantine/core";
-import React from "react";
+import React, { useState } from "react";
 import ChanciLogin from "@public/image/chanciAI/login.png";
 import Image from "next/image";
 import Title from "@public/image/widget/Frame.svg";
 import avatars from "@public/image/chanciAI/avatars.svg";
 import google from "@public/image/chanciAI/icon/google.svg";
 import style from "./login.module.scss";
-// import { useRouter } from "next/navigation";
-import axios from "axios";
-// import { API_BASE_URL } from "@/shared/config/env";
-// import { Cookie } from "next/font/google";
+import { useRouter } from "next/navigation";
+import { useForm } from "@mantine/form";
+import toastAlert from "@/shared/helpers/toast";
+import { postRequest } from "@/shared/api";
+import { authAddresses } from "@/shared/constants/relative-url/auth";
 
 const Register = () => {
-  //   const router = useRouter();
-  //   const handleChanci = () => {
-  //     router.push("/ChanciAI");
-  //   };
+  const { push } = useRouter();
+
+  const [loading, setLoading] = useState(false);
+
+  const fieldForm = useForm({
+    initialValues: {
+      password: "",
+      email: "",
+      fullName: "",
+      isAgreeToTermsAndPrivacy: false,
+      shareCVWithEmployers: false,
+      recieveInvitationsAndInsights: false,
+    },
+    validate: {
+      password: (value) => (value === "" ? "please field the password" : null),
+      email: (value) => (value === "" ? "please field the email" : null),
+      fullName: (value) => (value === "" ? "please field the email" : null),
+    },
+  });
+
+  console.log(fieldForm.values);
+
+  const handleChanci = () => {
+    push("/ChanciAI/login");
+  };
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const reqBody = {
-      fullName: "test",
-      password: "Test1234!",
-      email: "mojtabanik@gmail.com",
-      isAgreeToTermsAndPrivacy: "true",
-      shareCVWithEmployers: "true",
-      recieveInvitationsAndInsights: "true",
-    };
-
-    await axios.post(
-      `http://ngnapi-dev.eba-gzkrmdrt.eu-west-2.elasticbeanstalk.com/api/Authentication/Register`,
-      reqBody,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
+    if (fieldForm.validate().hasErrors) return;
+    setLoading(true);
+    const res = await postRequest(
+      authAddresses.register,
+      fieldForm.values,
+      false
     );
+
+    if (!res?.isSuccess) {
+      toastAlert(res?.message as string, "error");
+      setLoading(false);
+      return;
+    }
+    setLoading(false);
+    toastAlert(res?.message as string, "success");
+    handleChanci();
+
     // Cookie.setCookie(USER_TOKEN , undefined , )
   };
-
-  //   useEffect(() => {
-  //     handleRegister();
-  //   }, []);
 
   return (
     <form onSubmit={handleRegister}>
       <Grid className={style.wrapper}>
         <GridCol span={6} className={style.loginDesc}>
-          <Box className={style.loginHeader}>
+          <Box className={style.loginHeader} style={{ gap: "1rem !important" }}>
             <Image src={Title} alt="ChanciAI" width={250} loading="lazy" />
             <Image src={avatars} alt="ChanciAI" width={300} loading="lazy" />
             <Box>
@@ -83,18 +101,21 @@ const Register = () => {
             <span>or</span>
             <div className={style.divider}></div>
           </Box>
-          <Box className={style.form}>
-            {/* <Box>
+          <Box className={style.form} style={{ gap: ".7rem" }}>
+            <Box>
               <Input.Wrapper
                 classNames={{
                   root: style.root,
                   label: style.label,
                 }}
-                label="Name"
+                label="FullName"
               >
-                <Input classNames={{ input: style.input }} />
+                <Input
+                  classNames={{ input: style.input }}
+                  {...fieldForm.getInputProps("fullName")}
+                />
               </Input.Wrapper>
-            </Box> */}
+            </Box>
             <Box>
               <Input.Wrapper
                 classNames={{
@@ -106,6 +127,7 @@ const Register = () => {
                 <Input
                   classNames={{ input: style.input }}
                   placeholder="example@gmail.com"
+                  {...fieldForm.getInputProps("email")}
                 />
               </Input.Wrapper>
             </Box>
@@ -117,7 +139,10 @@ const Register = () => {
                 }}
                 label="Password"
               >
-                <Input classNames={{ input: style.input }} />
+                <Input
+                  classNames={{ input: style.input }}
+                  {...fieldForm.getInputProps("password")}
+                />
               </Input.Wrapper>
             </Box>
             <Box className={style.Checkbox}>
@@ -127,6 +152,7 @@ const Register = () => {
                   label: style.labelCheck,
                 }}
                 label="I agree to the Terms & Privacy"
+                {...fieldForm.getInputProps("isAgreeToTermsAndPrivacy")}
               />
               <Checkbox
                 classNames={{
@@ -134,6 +160,7 @@ const Register = () => {
                   label: style.labelCheck,
                 }}
                 label="Share my CV with employers"
+                {...fieldForm.getInputProps("shareCVWithEmployers")}
               />
               <Checkbox
                 classNames={{
@@ -141,15 +168,17 @@ const Register = () => {
                   label: style.labelCheck,
                 }}
                 label="I want to receive event invitations and job market insights"
+                {...fieldForm.getInputProps("recieveInvitationsAndInsights")}
               />
             </Box>
             <Button
               variant="filled"
-              className={style.submitBtn}
+              className={loading ? style.submitBtn : style.submitBtnActive}
               type="submit"
-              //   onClick={handleChanci}
+              disabled={loading}
+              style={{ margin: ".3rem !important" }}
             >
-              Sign up
+              {loading ? <Loader /> : "Sign up"}
             </Button>
           </Box>
         </GridCol>
