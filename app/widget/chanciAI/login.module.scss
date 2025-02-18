@@ -56,10 +56,10 @@
         width: 100%;
         border-color: #d2d1d2 !important;
         border-radius: 16px;
-        background-color: #0063f5;
-        height: 44px;
+        background-color: #e4e4e4;
+        height: 48px;
       }
-      .submitBtn2 {
+      .submitBtnActive {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -68,7 +68,7 @@
         border-color: #d2d1d2 !important;
         border-radius: 16px;
         background-color: #0063f5;
-        height: 44px;
+        height: 48px;
       }
     }
   }
@@ -104,7 +104,7 @@
   border-radius: 8px !important;
   padding: 0 1rem !important;
   font-size: 19px !important;
-  border-color: #c3bfc3cf;
+  border: 1px solid #c3bfc3cf !important;
   width: 100%;
   min-width: 515px;
 }
