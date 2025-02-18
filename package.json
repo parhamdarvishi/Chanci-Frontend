@@ -13,6 +13,7 @@
     "@mantine/form": "^7.15.2",
     "@mantine/hooks": "^7.15.2",
     "@mantine/modals": "^7.16.2",
+    "@tabler/icons-react": "^3.30.0",
     "@types/crypto-js": "^4.2.2",
     "axios": "^1.7.9",
     "crypto-js": "^4.2.0",
