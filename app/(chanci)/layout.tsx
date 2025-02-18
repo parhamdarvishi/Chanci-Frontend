@@ -4,6 +4,7 @@ import "../globals.css";
 import { Poppins } from "next/font/google";
 import ChanciHeader from "@/shared/ui/ChanciAI/ChanciHeader";
 import Sidebar from "@/shared/ui/ChanciAI/Sidebar";
+import { ToastContainer } from "react-toastify";
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
@@ -19,6 +20,7 @@ export default function ChanciRootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
+        <ToastContainer />
         <MantineProvider>
           <Grid
             gutter={{ md: 15 }}

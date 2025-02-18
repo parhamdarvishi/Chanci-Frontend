@@ -5,6 +5,7 @@ import { MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 import "./globals.css";
 import { ModalsProvider } from "@mantine/modals";
+import { ToastContainer } from "react-toastify";
 
 // const geistMono = Geist_Mono({
 //   variable: "--font-geist-mono",
@@ -45,6 +46,7 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className={poppins.className}>
+        <ToastContainer />
         <MantineProvider>
           <ModalsProvider>{children}</ModalsProvider>
         </MantineProvider>

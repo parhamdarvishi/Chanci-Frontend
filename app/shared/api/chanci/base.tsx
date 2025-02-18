@@ -1,10 +1,10 @@
 import axios, { AxiosInstance, CreateAxiosDefaults } from "axios";
-import config from "@shared/config";
 import toastAlert from "@shared/helpers/toast";
 import { log } from "@shared/helpers";
 import cookie from "@shared/helpers/cookie";
 import { USER_TOKEN } from "@shared/helpers/cookie/types";
 import { OptionsTypes } from "@shared/api/chanci/model";
+import { API_BASE_URL } from "@/shared/config/env";
 
 const base = (
   authorization: boolean = false,
@@ -18,7 +18,7 @@ const base = (
     Connection: "keep-alive",
   };
   const options: OptionsTypes = {
-    baseURL: config.ApiBaseUrl,
+    baseURL: API_BASE_URL,
     headers: headers,
   };
 
