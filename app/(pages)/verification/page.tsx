@@ -3,13 +3,13 @@
 import { Card } from "@mantine/core";
 import { useSearchParams } from "next/navigation";
 import { IconCircleCheck } from "@tabler/icons-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { getRequest } from "@/shared/api";
 import { authAddresses } from "@/shared/constants/relative-url/auth";
 
 const VerificationPage = () => {
   const searchParams = useSearchParams();
-  const TokenId = searchParams.get("token"); // Dependency array to run effect when token changes
+  const TokenId = searchParams.get("token");
 
   const [check, setCheck] = useState(false);
 
@@ -19,6 +19,7 @@ const VerificationPage = () => {
       setCheck(true);
     }
   };
+
   useEffect(() => {
     approveEmail();
   }, []);
@@ -69,4 +70,10 @@ const VerificationPage = () => {
   );
 };
 
-export default VerificationPage;
+const VerificationPageWrapper = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <VerificationPage />
+  </Suspense>
+);
+
+export default VerificationPageWrapper;
