@@ -1,3 +1,4 @@
+"use client";
 import { Card, Grid, GridCol, MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 import "../globals.css";
@@ -17,6 +18,7 @@ export default function ChanciRootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // const getChan
   return (
     <html lang="en">
       <body className={poppins.className}>
