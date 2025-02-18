@@ -172,7 +172,7 @@ const Navbar = () => {
           {/* <Link className={style.btnChanci} href="/find-talent">
             Take me to Chanci AI
           </Link> */}
-          <Link className={style.btnChanci} href={"/ChanciAI/login"}>
+          <Link className={style.btnChanci} href={"/ChanciAI/register"}>
             Take me to Chanci AI
           </Link>
         </div>
