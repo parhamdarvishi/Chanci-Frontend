@@ -48,10 +48,12 @@ const Register = () => {
   const handleChanci = () => {
     push("/ChanciAI/login");
   };
+
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (fieldForm.validate().hasErrors) return;
     setLoading(true);
+
     const res = await postRequest(
       authAddresses.register,
       fieldForm.values,
@@ -74,7 +76,10 @@ const Register = () => {
     <form onSubmit={handleRegister}>
       <Grid className={style.wrapper}>
         <GridCol span={6} className={style.loginDesc}>
-          <Box className={style.loginHeader} style={{ gap: "1rem !important" }}>
+          <Box
+            className={style.loginHeader}
+            style={{ gap: ".7rem !important" }}
+          >
             <Image src={Title} alt="ChanciAI" width={250} loading="lazy" />
             <Image src={avatars} alt="ChanciAI" width={300} loading="lazy" />
             <Box>
@@ -101,7 +106,7 @@ const Register = () => {
             <span>or</span>
             <div className={style.divider}></div>
           </Box>
-          <Box className={style.form} style={{ gap: ".7rem" }}>
+          <Box className={style.form} style={{ gap: ".6rem" }}>
             <Box>
               <Input.Wrapper
                 classNames={{
@@ -145,7 +150,7 @@ const Register = () => {
                 />
               </Input.Wrapper>
             </Box>
-            <Box className={style.Checkbox}>
+            <Box className={style.Checkbox} style={{ gap: ".5rem" }}>
               <Checkbox
                 classNames={{
                   root: style.root,
@@ -171,12 +176,26 @@ const Register = () => {
                 {...fieldForm.getInputProps("recieveInvitationsAndInsights")}
               />
             </Box>
+            <Box
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <p
+                style={{ color: "#0063f5", cursor: "pointer" }}
+                onClick={handleChanci}
+              >
+                Already Sign In?
+              </p>
+            </Box>
             <Button
               variant="filled"
               className={loading ? style.submitBtn : style.submitBtnActive}
               type="submit"
               disabled={loading}
-              style={{ margin: ".3rem !important" }}
+              style={{ margin: "0 !important" }}
             >
               {loading ? <Loader /> : "Sign up"}
             </Button>
