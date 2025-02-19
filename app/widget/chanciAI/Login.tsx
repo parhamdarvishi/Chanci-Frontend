@@ -75,7 +75,7 @@ const Login = () => {
     <form onSubmit={handleLogin}>
       <Grid className={style.wrapper}>
         <GridCol
-          span={6}
+          span={{ base: 12, md: 6 }}
           className={style.loginDesc}
           style={{ marginTop: "3rem" }}
         >
@@ -181,7 +181,7 @@ const Login = () => {
             </Button>
           </Box>
         </GridCol>
-        <GridCol span={6} className={style.imgBox}>
+        <GridCol span={{ base: 12, md: 6 }} className={style.imgBox}>
           <Image
             src={ChanciLogin}
             alt="ChanciAI"

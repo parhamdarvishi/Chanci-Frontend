@@ -43,8 +43,6 @@ const Register = () => {
     },
   });
 
-  console.log(fieldForm.values);
-
   const handleChanci = () => {
     push("/ChanciAI/login");
   };
@@ -75,7 +73,7 @@ const Register = () => {
   return (
     <form onSubmit={handleRegister}>
       <Grid className={style.wrapper}>
-        <GridCol span={6} className={style.loginDesc}>
+        <GridCol span={{ base: 12, md: 6 }} className={style.loginDesc}>
           <Box
             className={style.loginHeader}
             style={{ gap: ".7rem !important" }}
@@ -201,7 +199,7 @@ const Register = () => {
             </Button>
           </Box>
         </GridCol>
-        <GridCol span={6} className={style.imgBox}>
+        <GridCol span={{ base: 12, md: 6 }} className={style.imgBox}>
           <Image
             src={ChanciLogin}
             alt="ChanciAI"
