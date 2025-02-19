@@ -1,11 +1,55 @@
-import { Box, Input, Select, Textarea } from "@mantine/core";
-import React from "react";
+"use client";
+import { Box, Button, Input, Select, Textarea } from "@mantine/core";
+import React, { useState } from "react";
 import style from "./modalTouch.module.scss";
-import Link from "next/link";
+import { useForm } from "@mantine/form";
+import { postRequest } from "@/shared/api";
+import { getInTouchAddress } from "@/shared/constants/relative-url/getIntouch";
+import { modals } from "@mantine/modals";
+import toastAlert from "@/shared/helpers/toast";
 
 const ModalTouch = () => {
+  const [loading, setLoading] = useState(false);
+  const fieldForm = useForm({
+    initialValues: {
+      inquirySubject: "",
+      fullName: "",
+      email: "",
+      phoneNumber: "",
+      message: "",
+    },
+    validate: {
+      inquirySubject: (value) =>
+        value === "" ? "please field the inquirySubject" : null,
+      fullName: (value) => (value === "" ? "please field the fullName" : null),
+      email: (value) => (value === "" ? "please field the email" : null),
+      phoneNumber: (value) =>
+        value === "" ? "please field the phoneNumber" : null,
+      message: (value) => (value === "" ? "please field the message" : null),
+    },
+  });
+  console.log(fieldForm?.values);
+
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (fieldForm.validate().hasErrors) return;
+    setLoading(true);
+    const res = await postRequest(
+      getInTouchAddress.add,
+      fieldForm.values,
+      false
+    );
+    if (!res?.isSuccess) {
+      setLoading(false);
+      toastAlert("Something got wrong", "error");
+    }
+    toastAlert("success", "success");
+    modals.closeAll();
+    setLoading(false);
+  };
   return (
-    <div className={style.modalBox}>
+    <form onSubmit={handleLogin} className={style.modalBox}>
       <Box>
         <Select
           checkIconPosition="right"
@@ -28,6 +72,7 @@ const ModalTouch = () => {
           label="Inquiry Subject"
           placeholder="Pick value"
           defaultValue="React"
+          {...fieldForm.getInputProps("inquirySubject")}
         />
       </Box>
       <Box>
@@ -41,7 +86,10 @@ const ModalTouch = () => {
           label="Full name"
           description="Please enter your full name"
         >
-          <Input classNames={{ input: style.input }} />
+          <Input
+            classNames={{ input: style.input }}
+            {...fieldForm.getInputProps("fullName")}
+          />
         </Input.Wrapper>
       </Box>
       <Box>
@@ -58,6 +106,7 @@ const ModalTouch = () => {
           <Input
             placeholder="For e.g. example@gmail.com"
             classNames={{ input: style.input }}
+            {...fieldForm.getInputProps("email")}
           />
         </Input.Wrapper>
       </Box>
@@ -81,6 +130,7 @@ const ModalTouch = () => {
           <Input
             placeholder="For e.g. 44667788"
             classNames={{ input: style.input }}
+            {...fieldForm.getInputProps("phoneNumber")}
           />
         </Input.Wrapper>
       </Box>
@@ -96,12 +146,13 @@ const ModalTouch = () => {
           description="Please enter your message (Optional)"
           placeholder="Placeholder text"
           minRows={6}
+          {...fieldForm.getInputProps("message")}
         />
       </Box>
-      <Link href="/Employers" className={style.button}>
-        Submit
-      </Link>
-    </div>
+      <Button type="submit" className={style.button} disabled={loading}>
+        {loading ? "waiting ..." : "Submit"}
+      </Button>
+    </form>
   );
 };
 
