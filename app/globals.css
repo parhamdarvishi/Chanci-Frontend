@@ -110,7 +110,6 @@ h6 {
 }
 .m_dee7bd2f {
   background-color: #fff;
-  flex-direction: column-reverse !important;
 }
 .mantine-Select-input {
   height: 50px !important;
@@ -124,5 +123,8 @@ h6 {
     border-radius: 23px !important;
     padding: 0 2.7rem !important;
     font-size: 1rem !important;
+  }
+  .m_dee7bd2f {
+    flex-direction: column-reverse !important;
   }
 }
