@@ -185,7 +185,7 @@ const Register = () => {
                 style={{ color: "#0063f5", cursor: "pointer" }}
                 onClick={handleChanci}
               >
-                Already Sign In?
+                Already Sign Up
               </p>
             </Box>
             <Button
