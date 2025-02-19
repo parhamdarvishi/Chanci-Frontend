@@ -177,15 +177,16 @@ const Register = () => {
             <Box
               style={{
                 display: "flex",
-                justifyContent: "center",
                 alignItems: "center",
+                gap: ".3rem",
               }}
             >
+              <p>Already have an account ? </p>
               <p
                 style={{ color: "#0063f5", cursor: "pointer" }}
                 onClick={handleChanci}
               >
-                Already Sign Up
+                Log in
               </p>
             </Box>
             <Button
