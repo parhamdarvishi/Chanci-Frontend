@@ -110,6 +110,7 @@ h6 {
 }
 .m_dee7bd2f {
   background-color: #fff;
+  flex-direction: column-reverse !important;
 }
 .mantine-Select-input {
   height: 50px !important;
