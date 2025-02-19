@@ -7,7 +7,7 @@ import {
   GridCol,
   Input,
   Loader,
-  //   PasswordInput,
+  PasswordInput,
 } from "@mantine/core";
 import React, { useState } from "react";
 import ChanciLogin from "@public/image/chanciAI/login.png";
@@ -23,7 +23,7 @@ import { postRequest } from "@/shared/api";
 import { authAddresses } from "@/shared/constants/relative-url/auth";
 
 const Register = () => {
-  const { push } = useRouter();
+  const router = useRouter();
 
   const [loading, setLoading] = useState(false);
 
@@ -44,7 +44,7 @@ const Register = () => {
   });
 
   const handleChanci = () => {
-    push("/ChanciAI/login");
+    router.push("/ChanciAI/login");
   };
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -142,7 +142,7 @@ const Register = () => {
                 }}
                 label="Password"
               >
-                <Input
+                <PasswordInput
                   classNames={{ input: style.input }}
                   {...fieldForm.getInputProps("password")}
                 />

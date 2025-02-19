@@ -6,7 +6,7 @@ import {
   GridCol,
   Input,
   Loader,
-  //   PasswordInput,
+  PasswordInput,
 } from "@mantine/core";
 import React, { useState } from "react";
 import ChanciLogin from "@public/image/chanciAI/login.png";
@@ -25,7 +25,7 @@ import cookie from "@/shared/helpers/cookie";
 import { USER_TOKEN } from "@/shared/helpers/cookie/types";
 
 const Login = () => {
-  const { push } = useRouter();
+  const router = useRouter();
 
   const [loading, setLoading] = useState(false);
 
@@ -41,7 +41,7 @@ const Login = () => {
   });
 
   const handleChanci = () => {
-    push("/ChanciAI");
+    router.push("/ChanciAI");
   };
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -141,7 +141,7 @@ const Login = () => {
                 }}
                 label="Password"
               >
-                <Input
+                <PasswordInput
                   classNames={{ input: style.input }}
                   {...fieldForm.getInputProps("password")}
                 />
