@@ -95,6 +95,9 @@ h6 {
 .chanciSection {
   height: 88vh;
 }
+.panelSection {
+  height: 100%;
+}
 .m_811560b9 {
   gap: 1rem;
 }
