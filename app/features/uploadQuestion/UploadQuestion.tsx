@@ -5,8 +5,8 @@ import { Avatar, Box, Card } from "@mantine/core";
 import Image from "next/image";
 import chanciIc from "@public/image/chanciAI/icon/chanciCh.svg";
 import { IconPhotoDown } from "@tabler/icons-react";
-import { postRequest } from "@/shared/api";
-import { chanciAddresses } from "@/shared/constants/relative-url/chanci";
+// import { postRequest } from "@/shared/api";
+// import { chanciAddresses } from "@/shared/constants/relative-url/chanci";
 import { useChanci } from "@/shared/stateManagement/UseChanci/useChanci";
 
 const UploadQuestion = () => {
@@ -21,15 +21,15 @@ const UploadQuestion = () => {
     }
     const formData = new FormData();
     formData.append("File", file as File);
-    const { isSuccess } = await postRequest(
-      chanciAddresses.Add,
-      formData,
-      true,
-      true
-    );
-    if (isSuccess) {
-      updateQuestionIndex(questionIndex + 1);
-    }
+    // const { isSuccess } = await postRequest(
+    //   chanciAddresses.Add,
+    //   formData,
+    //   true,
+    //   true
+    // );
+    // if (isSuccess) {
+    updateQuestionIndex(questionIndex + 1);
+    // }
   };
 
   return (
