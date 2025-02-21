@@ -10,6 +10,7 @@ import { getRequest } from "@/shared/api";
 import { chanciAddresses } from "@/shared/constants/relative-url/chanci";
 import { useEffect } from "react";
 import { useChanci } from "@/shared/stateManagement/UseChanci/useChanci";
+import HeadRes from "@/features/headRes/HeadRes";
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
@@ -66,6 +67,7 @@ export default function ChanciRootLayout({
               <Sidebar />
             </GridCol>
             <GridCol span={{ base: 12, md: 9 }}>
+              <HeadRes />
               <ChanciHeader />
               <Card
                 shadow="sm"

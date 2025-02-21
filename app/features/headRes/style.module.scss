@@ -1,0 +1,20 @@
+.wrapper {
+  display: none;
+}
+@media (max-width: 768px) {
+  .wrapper {
+    display: flex !important;
+    align-items: center;
+    background-color: #f7f7f7;
+    min-height: 50px;
+    padding: 0.7rem 0;
+  }
+  .wrapperCard {
+    width: 45px;
+    height: 40px;
+    padding: 0 !important;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+  }
+}
