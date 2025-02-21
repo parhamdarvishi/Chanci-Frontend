@@ -17,57 +17,57 @@ const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
   const { updateQuestionIndex, updateAnswers, questionIndex } = useChanci();
 
   const trackRef = useRef<HTMLDivElement>(null);
-  const isDragging = useRef(false);
-  const canMove = useRef(true);
-  const startX = useRef<number>(0);
+  // const isDragging = useRef(false);
+  // const canMove = useRef(true);
+  // const startX = useRef<number>(0);
 
   const steps = [0, 25, 50, 75, 100];
   const labels = ["Strongly Disagree", "Neutral", "Strongly Agree"];
 
-  const handleMouseDown = (e: React.MouseEvent) => {
-    isDragging.current = true;
-    startX.current = e.clientX;
-    canMove.current = true;
-  };
+  // const handleMouseDown = (e: React.MouseEvent) => {
+  //   isDragging.current = true;
+  //   startX.current = e.clientX;
+  //   canMove.current = true;
+  // };
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging.current || !canMove.current) return;
+  // const handleMouseMove = (e: React.MouseEvent) => {
+  //   if (!isDragging.current || !canMove.current) return;
 
-    const diff = e.clientX - startX.current;
-    const threshold = 5; // Small threshold for sensitive movement
+  //   const diff = e.clientX - startX.current;
+  //   const threshold = 5; // Small threshold for sensitive movement
 
-    if (Math.abs(diff) > threshold) {
-      if (diff > 0 && currentStep < steps.length - 1) {
-        setCurrentStep((prev) => prev + 1);
-        canMove.current = false; // Prevent further movement until mouse up
+  //   if (Math.abs(diff) > threshold) {
+  //     if (diff > 0 && currentStep < steps.length - 1) {
+  //       setCurrentStep((prev) => prev + 1);
+  //       canMove.current = false; // Prevent further movement until mouse up
 
-        const answer = {
-          questionId: question?.answers[currentStep + 1]?.questionId,
-          answerId: question?.answers[currentStep + 1]?.id,
-        };
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        updateAnswers(answer as any);
-        updateQuestionIndex(questionIndex + 1);
-      } else if (diff < 0 && currentStep > 0) {
-        setCurrentStep((prev) => prev - 1);
-        canMove.current = false;
-        const answer = {
-          questionId: question?.answers[currentStep + 1]?.questionId,
-          answerId: question?.answers[currentStep + 1]?.id,
-        };
+  //       const answer = {
+  //         questionId: question?.answers[currentStep + 1]?.questionId,
+  //         answerId: question?.answers[currentStep + 1]?.id,
+  //       };
+  //       // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //       updateAnswers(answer as any);
+  //       updateQuestionIndex(questionIndex + 1);
+  //     } else if (diff < 0 && currentStep > 0) {
+  //       setCurrentStep((prev) => prev - 1);
+  //       canMove.current = false;
+  //       const answer = {
+  //         questionId: question?.answers[currentStep + 1]?.questionId,
+  //         answerId: question?.answers[currentStep + 1]?.id,
+  //       };
 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        updateAnswers(answer as any);
-        setCurrentStep(2);
-        updateQuestionIndex(questionIndex + 1);
-      }
-    }
-  };
+  //       // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //       updateAnswers(answer as any);
+  //       setCurrentStep(2);
+  //       updateQuestionIndex(questionIndex + 1);
+  //     }
+  //   }
+  // };
 
-  const handleMouseUp = () => {
-    isDragging.current = false;
-    canMove.current = true;
-  };
+  // const handleMouseUp = () => {
+  //   isDragging.current = false;
+  //   canMove.current = true;
+  // };
 
   const handleClick = (e: React.MouseEvent) => {
     if (!trackRef.current) return;
@@ -140,10 +140,10 @@ const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
                 ref={trackRef}
                 className={styles.track}
                 onClick={handleClick}
-                onMouseDown={handleMouseDown}
-                onMouseMove={handleMouseMove}
-                onMouseUp={handleMouseUp}
-                onMouseLeave={handleMouseUp}
+                // onMouseDown={handleMouseDown}
+                // onMouseMove={handleMouseMove}
+                // onMouseUp={handleMouseUp}
+                // onMouseLeave={handleMouseUp}
               >
                 <div
                   className={styles.progress}
