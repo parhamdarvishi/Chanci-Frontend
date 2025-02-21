@@ -53,3 +53,22 @@
     }
   }
 }
+@media (max-width: 768px) {
+  .HowItWorks {
+    display: none !important;
+    .HowItWorkL {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+  }
+  .assessmentNotif {
+    display: none !important;
+  }
+  .assessmentHeader {
+    width: 100%;
+    .assessment {
+      width: 100% !important;
+    }
+  }
+}
