@@ -1,0 +1,174 @@
+// app/features/uploadQuestion/style.module.scss
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 3.8rem;
+  transform: translateY(-25px);
+  .userBox {
+    display: flex;
+    align-items: center;
+    width: 800px;
+    gap: 1rem;
+    .questionTitle {
+      border: 1px solid #eef1ff;
+      border-radius: 16px;
+      background-color: #eef1ff;
+      min-width: 310px;
+      min-height: 45px;
+      padding: 1rem;
+
+      p {
+        color: #585858;
+        max-width: 395px;
+      }
+    }
+  }
+  .questionPart {
+    display: flex;
+    gap: 1rem;
+    position: relative;
+    .questionBox {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      .questionCard {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        padding: 1.2rem 0;
+        text-align: center;
+        min-width: 440px;
+
+        p {
+          color: #585858;
+        }
+      }
+      .questionNum {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        color: blue;
+        background-color: #4752f325;
+      }
+    }
+    .questionImg {
+      position: absolute;
+      right: -70px;
+      top: -30px;
+    }
+  }
+}
+.progressBar {
+  padding: 2rem 1rem;
+  position: relative;
+  width: 600px;
+}
+
+.labels {
+  width: 100%;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.label {
+  position: absolute;
+  transform-origin: center;
+  font-size: 0.875rem;
+  color: #6b7280;
+  white-space: nowrap;
+}
+
+.track {
+  width: 100%;
+  height: 8px;
+  background-color: #e5e7eb;
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+}
+
+.progress {
+  height: 100%;
+  border-radius: 4px;
+  position: absolute;
+  left: 0;
+  transition: all 0.2s ease;
+}
+
+.dot {
+  position: absolute;
+  border: 2px solid white;
+  border-radius: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  transition: all 0.2s ease;
+
+  &.active {
+    background-color: #60a5fa;
+  }
+}
+
+.indicator {
+  position: absolute;
+  border: 3px solid white;
+  border-radius: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: grab;
+  z-index: 2;
+  transition: all 0.2s ease;
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.uploader {
+  min-height: 220px;
+  min-width: 380px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px dashed #007bff; // Blue dashed border
+  border-radius: 16px; // Rounded corners
+  padding: 20px; // Padding inside the box
+  text-align: center; // Center the text
+  background-color: #415bec2a; // Light background color
+  color: #6c757d; // Text color
+  max-width: 400px; // Max width of the uploader
+  margin: 0 auto; // Center the uploader
+  gap: 1rem;
+  .uploaderImg {
+    color: #0063f5;
+    width: 48px;
+    height: 48px;
+  }
+}
+
+.uploadIcon {
+  font-size: 40px; // Icon size
+}
+
+.browseButton {
+  display: block;
+  width: 100%;
+  background-color: #0063f5; // Button color
+  color: white; // Button text color
+  border: none; // No border
+  border-radius: 16px; // Rounded corners for button
+  padding: 10px 20px; // Button padding
+  cursor: pointer; // Pointer cursor on hover
+  margin-top: 10px; // Space above the button
+}
