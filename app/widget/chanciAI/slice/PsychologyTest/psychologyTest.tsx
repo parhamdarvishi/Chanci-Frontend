@@ -3,6 +3,8 @@ import OptionQuestion from "@/features/optionsQuestions/OptionQuestion";
 import ProgressQuestion from "@/features/progressQuestion/ProgressQuestion";
 import TextQuestion from "@/features/textQuestion/TextQuestion";
 import UploadQuestion from "@/features/uploadQuestion/UploadQuestion";
+import { postRequest } from "@/shared/api";
+import { userAddresses } from "@/shared/constants/relative-url/user";
 import { useChanci } from "@/shared/stateManagement/UseChanci/useChanci";
 import React, { useEffect } from "react";
 
@@ -17,14 +19,30 @@ interface PsychologyTestProps {
 }
 
 const PsychologyTest: React.FC<PsychologyTestProps> = ({ question }) => {
-  const { questionIndex, updateQuestionIndex, answers, UpdateSidebarPostion } =
-    useChanci();
+  const {
+    questionIndex,
+    updateQuestionIndex,
+    answers,
+    UpdateSidebarPostion,
+    data,
+  } = useChanci();
 
   console.log({ questionIndex });
-  console.log({ question });
-  console.log({ answers });
+  console.log(data?.length);
+
+  const sendAnswers = async () => {
+    debugger;
+    const reqbody = {
+      answers: answers,
+    };
+    const res = await postRequest(userAddresses.userAnswers, reqbody, true);
+    console.log({ res });
+  };
 
   useEffect(() => {
+    if (data?.length > 0 && data?.length === questionIndex - 1) {
+      sendAnswers();
+    }
     if (question?.inputType === 0) {
       updateQuestionIndex(questionIndex + 1);
     }
@@ -56,6 +74,7 @@ const PsychologyTest: React.FC<PsychologyTestProps> = ({ question }) => {
       {question?.inputType === 3 && <DropDownQuestion question={question} />}
       {question?.inputType === 4 && <UploadQuestion />}
       {question?.inputType === 5 && <OptionQuestion question={question} />}
+      {data?.length === questionIndex - 1 && <p>Done</p>}
     </div>
   );
 };
