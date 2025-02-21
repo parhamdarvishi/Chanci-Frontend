@@ -4,12 +4,33 @@ import React, { useEffect, useState } from "react";
 import style from "./style/sidebar.module.scss";
 import Title from "@public/image/widget/Frame.svg";
 import Image from "next/image";
+import { useChanci } from "@/shared/stateManagement/UseChanci/useChanci";
 
 const Sidebar = () => {
   const [progress, setProgress] = useState(0);
+  const [sidebarLoc, setSidebarLoc] = useState([1]);
+
+  const { sidebarPostion } = useChanci();
+
+  const checkSidebarPostion = () => {
+    if (sidebarPostion === 2) {
+      setSidebarLoc([1, 2]);
+    }
+    if (sidebarPostion === 3) {
+      setSidebarLoc([1, 2, 3]);
+    }
+    if (sidebarPostion === 4) {
+      setSidebarLoc([1, 2, 3, 4]);
+    }
+    if (sidebarPostion === 5) {
+      setSidebarLoc([1, 2, 3, 4, 5]);
+    }
+  };
+
   useEffect(() => {
     setProgress(0);
-  }, []);
+    checkSidebarPostion();
+  }, [sidebarPostion]);
 
   return (
     <Card shadow="sm" padding="lg" className={style.wrapper}>
@@ -36,19 +57,57 @@ const Sidebar = () => {
           </ul>
         </Box>
         <Box className={style.progressPart}>
-          <div className={style.progressPartBox}>
+          <div
+            className={
+              sidebarLoc.includes(1) && sidebarLoc.includes(2)
+                ? style.progressPartDone
+                : sidebarLoc.includes(1)
+                ? style.progressPartActive
+                : style.progressPartBox
+            }
+          >
             <span>Psychology test (20 questions)</span>
           </div>
-          <div className={style.progressPartBox}>
+          <div
+            className={
+              sidebarLoc.includes(2) && sidebarLoc.includes(3)
+                ? style.progressPartDone
+                : sidebarLoc.includes(2)
+                ? style.progressPartActive
+                : style.progressPartBox
+            }
+          >
             <span>Career Preference (6 Questions) </span>
           </div>
-          <div className={style.progressPartBox}>
+          <div
+            className={
+              sidebarLoc.includes(3) && sidebarLoc.includes(4)
+                ? style.progressPartDone
+                : sidebarLoc.includes(3)
+                ? style.progressPartActive
+                : style.progressPartBox
+            }
+          >
             <span>Nationality & Visa (3 Questions)</span>
           </div>
-          <div className={style.progressPartBox}>
+          <div
+            className={
+              sidebarLoc.includes(4) && sidebarLoc.includes(5)
+                ? style.progressPartDone
+                : sidebarLoc.includes(4)
+                ? style.progressPartActive
+                : style.progressPartBox
+            }
+          >
             <span>CV Section ( 1 Question)</span>
           </div>
-          <div className={style.progressPartBox}>
+          <div
+            className={
+              sidebarLoc.includes(5)
+                ? style.progressPartActive
+                : style.progressPartBox
+            }
+          >
             <span>Skills & Certificate ( 2 Questions)</span>
           </div>
         </Box>

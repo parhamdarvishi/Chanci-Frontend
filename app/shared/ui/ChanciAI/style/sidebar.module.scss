@@ -28,5 +28,30 @@
       display: flex;
       align-items: center;
     }
+    .progressPartActive {
+      cursor: pointer;
+      border-radius: 12px;
+      padding: 0.5rem 1rem;
+      border: 1px solid #4752f3;
+      font-size: 14px;
+      color: #585858;
+      font-weight: 400;
+      height: 44px;
+      display: flex;
+      align-items: center;
+    }
+    .progressPartDone {
+      cursor: pointer;
+      background: linear-gradient(to right, #31eec8, #0db492);
+      border-radius: 12px;
+      padding: 0.5rem 1rem;
+      border: 1px solid #d2cfcf;
+      font-size: 14px;
+      color: #585858;
+      font-weight: 400;
+      height: 44px;
+      display: flex;
+      align-items: center;
+    }
   }
 }
