@@ -27,7 +27,7 @@ export const useChanci = create<ChanciState>()(
     (set) => ({
       data: [],
       answers: [],
-      questionIndex: 0,
+      questionIndex: 1,
       sidebarPostion: 1,
       updateData: (data) => {
         set({ data });
