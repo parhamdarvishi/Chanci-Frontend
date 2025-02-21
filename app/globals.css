@@ -101,6 +101,10 @@ h6 {
 .m_811560b9 {
   gap: 1rem;
 }
+.m_4e7aa4f3,
+.m_4e7aa4ef {
+  text-align: center;
+}
 
 .m_7485cace {
   --container-size-xs: calc(30.75rem * var(--mantine-scale));
