@@ -10,20 +10,27 @@ const Sidebar = () => {
   const [progress, setProgress] = useState(0);
   const [sidebarLoc, setSidebarLoc] = useState([1]);
 
-  const { sidebarPostion } = useChanci();
+  const { sidebarPostion, questionIndex, data } = useChanci();
 
   const checkSidebarPostion = () => {
     if (sidebarPostion === 2) {
       setSidebarLoc([1, 2]);
+      setProgress(40);
     }
     if (sidebarPostion === 3) {
       setSidebarLoc([1, 2, 3]);
+      setProgress(70);
     }
     if (sidebarPostion === 4) {
       setSidebarLoc([1, 2, 3, 4]);
+      setProgress(85);
     }
     if (sidebarPostion === 5) {
       setSidebarLoc([1, 2, 3, 4, 5]);
+      setProgress(95);
+    }
+    if (data?.length > 0 && data?.length === questionIndex - 1) {
+      setProgress(100);
     }
   };
 
