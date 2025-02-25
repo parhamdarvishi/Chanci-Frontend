@@ -30,7 +30,6 @@ const PsychologyTest: React.FC<PsychologyTestProps> = ({ question }) => {
   } = useChanci();
 
   const sendAnswers = async () => {
-    debugger;
     const reqbody = {
       answers: answers,
     };
