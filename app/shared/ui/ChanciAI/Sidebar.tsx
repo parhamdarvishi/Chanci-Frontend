@@ -3,6 +3,7 @@ import { Box, Card, Divider, Progress } from "@mantine/core";
 import React, { useEffect, useState } from "react";
 import style from "./style/sidebar.module.scss";
 import Title from "@public/image/widget/Frame.svg";
+import done from "@public/image/chanciAI/icon/Done.svg";
 import Image from "next/image";
 import { useChanci } from "@/shared/stateManagement/UseChanci/useChanci";
 
@@ -29,7 +30,8 @@ const Sidebar = () => {
       setSidebarLoc([1, 2, 3, 4, 5]);
       setProgress(95);
     }
-    if (data?.length > 0 && data?.length === questionIndex - 1) {
+    if (sidebarPostion === 6) {
+      setSidebarLoc([1, 2, 3, 4, 5, 6]);
       setProgress(100);
     }
   };
@@ -45,9 +47,35 @@ const Sidebar = () => {
         <Image src={Title} alt="ChanciAi" loading="lazy" width={115} />
       </Box>
       <Divider color="#D5D5D7" style={{ margin: "1.8rem 0" }} />
+      {data?.length === questionIndex && (
+        <Card
+          shadow="sm"
+          padding="lg"
+          radius="md"
+          withBorder
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            gap: ".5rem",
+          }}
+        >
+          <Image src={done} alt="done" />
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: ".1rem" }}
+          >
+            <p style={{ fontSize: "19px" }}>Congratulations!</p>
+            <span>Your result is ready</span>
+          </div>
+        </Card>
+      )}
       <Box>
         <h4
-          style={{ marginBottom: ".8rem", fontWeight: "400", color: "#9F9F9F" }}
+          style={{
+            marginBottom: ".8rem",
+            fontWeight: "400",
+            color: "#9F9F9F",
+            margin: ".6rem 0",
+          }}
         >
           Total Progress
         </h4>
@@ -56,13 +84,22 @@ const Sidebar = () => {
           color={progress < 100 ? "#0063F5" : "#08CD6A"}
           transitionDuration={200}
         />
-        <Box>
-          <ul className={style.progressAction}>
-            <li style={{ color: "#74727B" }}>Not Started</li>
-            <li style={{ color: "#0063F5" }}>In Progress</li>
-            <li style={{ color: "#08CD6A" }}>Done</li>
-          </ul>
-        </Box>
+        {data?.length === questionIndex ? (
+          <div style={{ color: "#08CD6A" }}>
+            Click on each section to expand the results
+          </div>
+        ) : (
+          <>
+            <Box>
+              <ul className={style.progressAction}>
+                <li style={{ color: "#74727B" }}>Not Started</li>
+                <li style={{ color: "#0063F5" }}>In Progress</li>
+                <li style={{ color: "#08CD6A" }}>Done</li>
+              </ul>
+            </Box>
+          </>
+        )}
+
         <Box className={style.progressPart}>
           <div
             className={
@@ -110,7 +147,9 @@ const Sidebar = () => {
           </div>
           <div
             className={
-              sidebarLoc.includes(5)
+              sidebarLoc.includes(5) && sidebarLoc.includes(6)
+                ? style.progressPartDone
+                : sidebarLoc.includes(5)
                 ? style.progressPartActive
                 : style.progressPartBox
             }
