@@ -61,7 +61,8 @@ const Login = () => {
 
     if (res?.data?.isSuccess) {
       // toastAlert(res?.data?.message as string, "success");
-      cookie.setCookie(USER_TOKEN, JSON.stringify(res?.data?.data?.Token));
+      debugger;
+      cookie.setCookie(USER_TOKEN, JSON.stringify(res?.data?.token));
       setLoading(false);
       handleChanci();
     } else {
