@@ -17,7 +17,6 @@ const TextQuestion: React.FC<TextQuestionProps> = ({ question }) => {
   const { updateQuestionIndex, updateAnswers, questionIndex } = useChanci();
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key === "Enter") {
-      console.log(value);
       const answer = {
         questionId: question?.id,
         answerId: 0,

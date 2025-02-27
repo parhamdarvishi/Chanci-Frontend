@@ -28,7 +28,6 @@ const ModalTouch = () => {
       message: (value) => (value === "" ? "please field the message" : null),
     },
   });
-  console.log(fieldForm?.values);
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

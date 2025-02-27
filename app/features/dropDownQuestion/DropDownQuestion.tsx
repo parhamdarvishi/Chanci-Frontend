@@ -15,7 +15,6 @@ const DropDownQuestion = ({ question }: DropDownQuestionProps) => {
   const { updateQuestionIndex, updateAnswers, questionIndex } = useChanci();
   const [dropD, setDropD] = useState([]);
   const [val, setVal] = useState<string>("");
-  console.log(dropD);
 
   const fun = () => {
     if (question?.answers?.length > 0) {
