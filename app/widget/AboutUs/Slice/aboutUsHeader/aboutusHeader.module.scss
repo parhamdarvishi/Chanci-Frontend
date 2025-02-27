@@ -130,6 +130,7 @@
       justify-content: space-evenly;
       align-items: center;
       .button {
+        cursor: pointer;
         display: flex;
         align-items: center;
         gap: 0.8rem;
@@ -150,6 +151,10 @@
       }
     }
   }
+}
+.modalTitle {
+  font-size: 30px;
+  margin: 1rem 0 !important;
 }
 @media (max-width: 768px) {
   .aboutDesc {
