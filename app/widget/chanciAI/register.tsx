@@ -104,7 +104,7 @@ const Register = () => {
             <span>or</span>
             <div className={style.divider}></div>
           </Box>
-          <Box className={style.form} style={{ gap: ".6rem" }}>
+          <Box className={style.form} style={{ gap: ".4rem" }}>
             <Box>
               <Input.Wrapper
                 classNames={{
