@@ -13,8 +13,17 @@ import value5 from "@public/image/widget/aboutUs/icons/value5.svg";
 import value6 from "@public/image/widget/aboutUs/icons/value6.svg";
 import value7 from "@public/image/widget/aboutUs/icons/value7.svg";
 import Link from "next/link";
+import { modals } from "@mantine/modals";
+import ModalTouch from "@/shared/ui/ModalTouch/modalTouch";
 
 const AboutUsList = () => {
+  const openModal = () =>
+    modals.open({
+      radius: "lg",
+      size: "lg",
+      title: <strong className={style.modalTitle}>Get in touch</strong>,
+      children: <ModalTouch />,
+    });
   return (
     <div>
       <AboutUsHeader />
@@ -230,8 +239,8 @@ const AboutUsList = () => {
                   paddingBottom: "2rem",
                 }}
               >
-                <Link
-                  href="/find-talent"
+                <div
+                  onClick={openModal}
                   className={style.button}
                   style={{
                     borderRadius: "16px",
@@ -255,7 +264,7 @@ const AboutUsList = () => {
                     <path d="M5 12h14" />
                     <path d="m12 5 7 7-7 7" />
                   </svg>
-                </Link>
+                </div>
               </div>
               <div
                 style={{
