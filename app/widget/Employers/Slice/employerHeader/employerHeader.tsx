@@ -1,10 +1,20 @@
+"use client";
 import React from "react";
 import style from "./employerHeader.module.scss";
 import { Button } from "@mantine/core";
 import Image from "next/image";
 import arrowRight from "@public/arrowRight.svg";
+import { modals } from "@mantine/modals";
+import ModalTouch from "@/shared/ui/ModalTouch/modalTouch";
 
 const EmployerHeader = () => {
+  const openModal = () =>
+    modals.open({
+      radius: "lg",
+      size: "lg",
+      title: <strong className={style.modalTitle}>Get in touch</strong>,
+      children: <ModalTouch />,
+    });
   return (
     <>
       <div className={style.imageWrapper}>
@@ -16,6 +26,7 @@ const EmployerHeader = () => {
             variant="gradient"
             gradient={{ from: "grape", to: "indigo", deg: 90 }}
             className={style.btn}
+            onClick={openModal}
           >
             Post a job with us
             <Image
