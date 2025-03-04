@@ -1,8 +1,9 @@
+import { Event } from "@/shared/types/events/event";
 import brandingPoster from "@public/image/events/singleEvents/poster.png";
-export const sliderData = [
+export const sliderData : Event[] = [
   {
     title: "Branding, Storytelling & Fundraising",
     desc: "An exclusive event featuring top founders and investors who know exactly what it takes to succeed in the startup ecosystem",
-    poster: brandingPoster,
+    //poster: brandingPoster,
   },
 ];
