@@ -9,11 +9,30 @@ import calendar from "@public/image/icons/calendar.svg";
 import clock from "@public/image/icons/clock.svg";
 import header from "@public/image/events/singleEvents/poster.png";
 import headerRes from "@public/image/events/singleEvents/eventRes.png";
-
-const SingleEvent = () => {
+import { Event, EventsResponse } from "@/shared/types/events/event";
+import { getRequest } from "@/shared/api";
+import { eventAddresses } from "@/shared/constants/relative-url/event";
+const SingleEvent : React.FC<{eventId : number}> = ({eventId}) => {
   const [isMobile, setIsMobile] = useState(false);
-
+  const [event, setEvent] = useState<Event>();
+    const singleEventFetch = async () => {
+      const reqBody = {
+        Id: eventId,
+        Skip: 0,
+        Take: 1,
+      };
+      const res: EventsResponse = await getRequest(
+        eventAddresses.GetbyId,
+        reqBody,
+        false
+      );
+      if (res?.isSuccess) {
+        setEvent(res.data?.items[0]);
+      }
+      return [];
+    };
   useEffect(() => {
+    singleEventFetch();
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
     };
@@ -45,72 +64,17 @@ const SingleEvent = () => {
           withBorder
           className={style.desc}
         >
-          <h4>
-            {/* <strong>We host, </strong> */}
-            {/* we create connections, and we nurture collaboration! */}
-            Learn and Network with London&apos;s Top Founders: Branding,
-            Storytelling & Fundraising
-          </h4>
-          <p>
-            {/* We focus on inclusivity, accessibility, creativity, and culture,
-            ensuring every event offers an opportunity to grow and thrive. No
-            matter your skills, the network you’re part of will shape your
-            future. We level up your capabilities and share our exceptional
-            network of professionals with you to unlock new possibilities. */}
-            An exclusive event featuring top founders and investors who know
-            exactly what it takes to succeed in the startup ecosystem. Join a
-            handpicked selection of professionals and distinguished guests in a
-            dynamic and inspiring setting. Expect award-winning speakers,
-            insightful discussions, and an experienced team of co-hosts ready to
-            facilitate meaningful connections. Looking for partners, investors,
-            or a breakthrough opportunity? This is the place to make it happen.
-            With limited invitations available, secure your spot now before they
-            disappear! About the Organisers New Generation Network is a
-            pioneering tech startup and community, collaborating with Oasis
-            London, a venture under Blue Lake VC. Founded by Lyubov Guk and
-            David Gilgur, Blue Lake VC is committed to backing international
-            founders and fostering diversity within the UK startup ecosystem.
-          </p>
-          {/* <h5 className={style.cardExpect}> What to Expect</h5> */}
+          <h4>{event?.longTitle}</h4>
+          <p>{event?.description}</p>
           <h6 className={style.cardExpect}> Panel of Speakers</h6>
           <ul>
-            <li>
-              <strong>Jasmine Sayyari</strong>– A four-time founder and the CEO
-              of New Generation Network, a London-based tech startup helping Gen
-              Z navigate the fast-changing job market with AI tools. With a
-              strong background in business development management, she has
-              experience leading both tech and non-tech teams with diverse
-              backgrounds. Holding dual degrees in business and medicine, she is
-              an advocate for career switching and community building.
-            </li>
-            <li>
-              <strong>Zareen Ali</strong> – CEO and co-founder of Cogs, a
-              startup transforming healthcare for the neurodivergent community.
-              Her journey began in 2017 while juggling her role as a product
-              manager for an AI medtech startup with volunteering and mentoring
-              neurodivergent children. Frustrated by systemic gaps, she launched
-              Cog AI, a pioneering platform now featured in the Startups 100
-              Index for 2025, a prestigious ranking that has previously
-              highlighted high-growth disruptors such as Monzo, Deliveroo, and
-              HelloFresh.
-            </li>
-            <li>
-              <strong>Ahana Banerjee</strong> – Founder of Clear and a Forbes 30
-              Under 30 Technology Honouree, Ahana Banerjee is an industry leader
-              revolutionising skincare through technology. She was also featured
-              on the Sunday Times Young Power List 2024. Her startup, Clear (YC
-              W21), is a free mobile app offering personalised, data-driven
-              skincare recommendations. Recently, she secured £1 million in seed
-              funding, further accelerating Clear’s growth and impact.
-            </li>
-            <li>
-              <strong>Theresa Dellagiacoma-Fitz</strong> – Panel Moderator. With
-              a strong background in people management, marketing, and
-              innovation, Theresa has guided numerous startups in scaling their
-              operations. She has worked with both tech and non-tech
-              international startups, leading strategic sales initiatives and
-              fostering business growth.
-            </li>
+            {event?.speakers.map((speaker, index)=> {
+              return(
+                <li key={index}>
+                  <strong>{speaker.fullName}</strong>- {speaker.description}
+                </li>
+              )
+            })}
           </ul>
           <h6 className={style.cardExpect}> Fast & Smart Networking</h6>
           <p>

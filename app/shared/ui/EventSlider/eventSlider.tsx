@@ -55,12 +55,6 @@ const EventSlider : React.FC<Events > = ({data=sliderData}) => {
 
   return (
     <div className={style.sliderContainer}>
-      {/* <button
-        className={styles.scrollButton}
-        onClick={() => handleScroll("left")}
-      >
-        &lt;
-      </button> */}
       <div
         className={style.slider}
         ref={sliderRef}
@@ -71,14 +65,14 @@ const EventSlider : React.FC<Events > = ({data=sliderData}) => {
       >
         {data.map((event, index) => {
           return(
-            <div className={style.card}>
+            <div key={index} className={style.card}>
             <Image src={img1} alt="Event 1" className={style.imgCard} />
             <div className={style.desc}>
-              <h3>{event?.title}</h3>
+              <h3>{event?.longTitle}</h3>
               <p>
                 {isMobile
                   ? "An exclusive event featuring top founders ..."
-                  : event?.desc}
+                  : event?.description}
               </p>
               <div className={style.cardIc}>
                 <div
@@ -106,7 +100,7 @@ const EventSlider : React.FC<Events > = ({data=sliderData}) => {
                 }}
               >
                 <Link
-                  href="/Events/1"
+                  href={`/Events/${event?.id}`}
                   className={style.button}
                   style={{
                     borderRadius: "16px",

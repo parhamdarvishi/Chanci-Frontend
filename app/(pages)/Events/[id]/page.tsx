@@ -4,15 +4,18 @@ import NavbarMain from "@/shared/ui/NavbarMain/navbarMain";
 import SingleEvent from "@/widget/Events/SingleEvent";
 import React from "react";
 
-const Event = () => {
+export default async function Event({
+  params,
+}: {
+  params: Promise<{ id: number }>
+}) {
+  const {id} = await params;
   return (
     <div>
       <Header />
       <NavbarMain />
-      <SingleEvent />
+      <SingleEvent eventId={id} />
       <Footer />
     </div>
   );
 };
-
-export default Event;
