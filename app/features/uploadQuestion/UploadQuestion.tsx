@@ -2,8 +2,6 @@
 import React, { useState } from "react";
 import style from "./style.module.scss";
 import { Avatar, Box, Card } from "@mantine/core";
-import Image from "next/image";
-import chanciIc from "@public/image/chanciAI/icon/chanciCh.svg";
 import { IconPhotoDown } from "@tabler/icons-react";
 // import { postRequest } from "@/shared/api";
 // import { chanciAddresses } from "@/shared/constants/relative-url/chanci";
@@ -77,9 +75,15 @@ const UploadQuestion = () => {
               </label>
             </div>
           </Card>
-          <Image
+          {/* <Image
             src={chanciIc}
             alt="chanciIcon"
+            className={style.questionImg}
+          /> */}
+          <Avatar
+            src="image/chanciAI/chanci.svg"
+            alt="it's me"
+            size={55}
             className={style.questionImg}
           />
         </Box>

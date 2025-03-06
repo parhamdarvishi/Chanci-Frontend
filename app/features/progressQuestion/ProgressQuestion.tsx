@@ -1,9 +1,8 @@
 "use client";
 import React, { useRef, useState } from "react";
 import styles from "./style.module.scss";
-import { Avatar, Box, Card } from "@mantine/core";
-import Image from "next/image";
-import chanciIc from "@public/image/chanciAI/icon/chanciCh.svg";
+import { Avatar, Box, Button, Card } from "@mantine/core";
+import { IconArrowNarrowLeft } from "@tabler/icons-react";
 import { useChanci } from "@/shared/stateManagement/UseChanci/useChanci";
 
 interface ProgressQuestionProps {
@@ -14,7 +13,8 @@ interface ProgressQuestionProps {
 const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
   const [currentStep, setCurrentStep] = useState(2);
 
-  const { updateQuestionIndex, updateAnswers, questionIndex } = useChanci();
+  const { updateQuestionIndex, updateAnswers, questionIndex, answers } =
+    useChanci();
 
   const trackRef = useRef<HTMLDivElement>(null);
   // const isDragging = useRef(false);
@@ -23,6 +23,17 @@ const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
 
   const steps = [0, 25, 50, 75, 100];
   const labels = ["Strongly Disagree", "Neutral", "Strongly Agree"];
+
+  const handleQustionIndex = () => {
+    updateQuestionIndex(questionIndex - 1);
+  };
+
+  // useEffect(() => {
+
+  //   if (answers[questionIndex - 1]) {
+  //     debugger;
+  //   }
+  // }, [questionIndex]);
 
   // const handleMouseDown = (e: React.MouseEvent) => {
   //   isDragging.current = true;
@@ -83,18 +94,21 @@ const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
 
     const newStep = steps.indexOf(closest);
     setCurrentStep(newStep);
-    const answer = {
-      questionId: question?.answers[newStep]?.questionId,
-      answerId: question?.answers[newStep]?.id,
-    };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    updateAnswers(answer as any);
-    updateQuestionIndex(questionIndex + 1);
   };
 
   const getHeightMultiplier = (index: number) => {
     if (index > currentStep) return 1;
     return 1 + (index / 4) * 0.5;
+  };
+
+  const handleAnswer = () => {
+    const answer = {
+      questionId: question?.answers[currentStep]?.questionId,
+      answerId: question?.answers[currentStep]?.id,
+    };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    updateAnswers(answer as any);
+    updateQuestionIndex(questionIndex + 1);
   };
 
   return (
@@ -132,7 +146,7 @@ const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
                           : "none",
                     }}
                   >
-                    {label}
+                    <div>{label}</div>
                   </span>
                 ))}
               </div>
@@ -188,13 +202,35 @@ const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
               </div>
             </div>
           </Card>
-          <Image
+          {/* <Image
             src={chanciIc}
             alt="chanciIcon"
             className={styles.questionImg}
+          /> */}
+          <Avatar
+            src="image/chanciAI/chanci.svg"
+            alt="it's me"
+            size={55}
+            className={styles.questionImg}
           />
         </Box>
+        <Box style={{ display: "flex", justifyContent: "end" }}>
+          <div className={styles.btnChanci} onClick={handleAnswer}>
+            submit
+          </div>
+        </Box>
       </Box>
+      {questionIndex > 1 && (
+        <Box style={{ width: "100%", padding: "0 3rem" }}>
+          <Button
+            variant="light"
+            style={{ padding: "0.7rem" }}
+            onClick={handleQustionIndex}
+          >
+            <IconArrowNarrowLeft size={30} />
+          </Button>
+        </Box>
+      )}
     </div>
   );
 };

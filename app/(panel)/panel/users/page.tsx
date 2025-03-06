@@ -15,7 +15,8 @@ const Page = () => {
       Skip: 0,
       Take: 1000,
     };
-    const res = await getRequest(userAddresses.GetAll, query, true);
+    const res = await getRequest(userAddresses.GetAll, query, false);
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { items } = res?.data as any;
     setUsers(items);
@@ -35,7 +36,7 @@ const Page = () => {
       {" "}
       <Table highlightOnHover verticalSpacing="md" withRowBorders={false}>
         <Table.Thead>
-          <Table.Tr>
+          <Table.Tr style={{ backgroundColor: "#02063a12" }}>
             <Table.Th style={{ color: "#151e98" }}>index</Table.Th>
             <Table.Th style={{ color: "#151e98" }}>Email</Table.Th>
           </Table.Tr>

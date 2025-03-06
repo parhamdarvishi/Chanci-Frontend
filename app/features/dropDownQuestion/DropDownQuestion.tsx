@@ -2,8 +2,6 @@
 import React, { useEffect, useState } from "react";
 import style from "./style.module.scss";
 import { Avatar, Box, Card, Select } from "@mantine/core";
-import chanciIc from "@public/image/chanciAI/icon/chanciCh.svg";
-import Image from "next/image";
 import { useChanci } from "@/shared/stateManagement/UseChanci/useChanci";
 
 interface DropDownQuestionProps {
@@ -75,9 +73,15 @@ const DropDownQuestion = ({ question }: DropDownQuestionProps) => {
               value={val}
             />
           </Card>
-          <Image
+          {/* <Image
             src={chanciIc}
             alt="chanciIcon"
+            className={style.questionImg}
+          /> */}
+          <Avatar
+            src="image/chanciAI/chanci.svg"
+            alt="it's me"
+            size={55}
             className={style.questionImg}
           />
         </Box>
