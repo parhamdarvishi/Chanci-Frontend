@@ -6,6 +6,7 @@ import style from "./singleEventHeader.module.scss";
 import { Event } from "@/shared/types/events/event";
 import { useEffect, useState } from "react";
 import { Speaker } from "@/shared/types/speakers/speaker";
+import { formatDate } from "@/shared/helpers/util";
 const SingleEventHeader: React.FC<{event: Event}> = ({event}) => {
     const [moderator, setModerator] = useState<Speaker>();
     useEffect(() => {
@@ -15,15 +16,15 @@ const SingleEventHeader: React.FC<{event: Event}> = ({event}) => {
     return (
         <div className={style.header_container}>
             <div className={style.desc_section}>
-                <h1>Branding, Storytelling & Fundraising</h1>
+                <h1>{event.shortTitle}</h1>
                 <div>
-                    <Image src={logoNav} alt="header" width={32} height={32} /> <h4>{event.hostedBy}</h4>
+                    <Image src={logoNav} alt="header" width={32} height={32} /> <h4>Hosted by {event.hostedBy}</h4>
                 </div>
                 <div>
-                    <Image src={logoOasis} alt="header" width={32} height={32} /> <h4>{event.supportedBy}</h4>
+                    <Image src={logoOasis} alt="header" width={32} height={32} /> <h4>Supported By {event.supportedBy}</h4>
                 </div>
                 <hr className="divider"></hr>
-                <h3>15th of February 2025 - {event.address}</h3>
+                <h3>{formatDate(event.hostDate)} - {event.address}</h3>
             </div>
             <div className={style.speakers_section}>
 

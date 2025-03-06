@@ -8,6 +8,7 @@ import clock from "@public/image/icons/clock.svg";
 import Link from "next/link";
 import { Events } from "@/shared/types/events/event";
 import UpComing from "@/widget/Events/Slice/upcoming/UpComing";
+import { formatDate } from "@/shared/helpers/util";
 
 const EventSlider : React.FC<Events > = ({data}) => {
   const [isMobile, setIsMobile] = useState(false);
@@ -106,7 +107,7 @@ const EventSlider : React.FC<Events > = ({data}) => {
                 >
                   <Image src={calendar} alt="calendar" />
                   <p style={{ color: "#878787", fontSize: "14px" }}>
-                    Feb 15,2025
+                    {event?.hostDate && formatDate(event.hostDate)}
                   </p>
                 </div>
                 <div

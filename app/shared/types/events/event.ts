@@ -17,6 +17,7 @@ export type Event = {
   mobileImagePath: string;
   content: string;
   bannerImagePath: string | null;
+  hostDate: string;
 }
 export type Events = {
     data: Event[]
