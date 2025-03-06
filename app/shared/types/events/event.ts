@@ -1,12 +1,13 @@
-import { speaker } from "../speakers/speaker";
+import { Speaker } from "../speakers/speaker";
 
 export type Event = {
   id: number;
+  address: string;
   shortTitle: string;
   longTitle: string;
   description: string;
   isShowable: boolean;
-  speakers: speaker[];
+  speakers: Speaker[];
   supportedBy: string;
   hostedBy: string;
   redirectUrl: string;

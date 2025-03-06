@@ -56,9 +56,13 @@ const SingleEvent : React.FC<{eventId : number}> = ({eventId}) => {
         <Image
           className={style.headerImg}
           src={event?.bannerImagePath? ( isMobile ? headerRes : event.bannerImagePath) : header}
+          width={0}
+          height={0}
+          style={{ width: '100%', height: 'auto' }}
+          unoptimized
           alt={event?.shortTitle || "Image Event"}
         />
-        <SingleEventHeader />
+        {event && <SingleEventHeader event={event} />}
         <Card
           shadow="sm"
           padding="lg"

@@ -1,4 +1,4 @@
-export type speaker  = {
+export type Speaker  = {
     id: number;
     eventId: number;
     fullName: string;

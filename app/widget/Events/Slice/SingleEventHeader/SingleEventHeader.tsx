@@ -1,38 +1,46 @@
 import Image from "next/image";
 import logoNav from "@public/image/icons/logoNav.svg";
+import logoOasis from "@public/image/icons/OasisLogo3x.png";
 import SingleSpeakerCard from "@/widget/Speakers/SingleSpeakerCard";
 import style from "./singleEventHeader.module.scss";
-import cardImage from "@public/image/events/cardImg.png";
-const SingleEventHeader: React.FC = () => {
+import { Event } from "@/shared/types/events/event";
+import { useEffect, useState } from "react";
+import { Speaker } from "@/shared/types/speakers/speaker";
+const SingleEventHeader: React.FC<{event: Event}> = ({event}) => {
+    const [moderator, setModerator] = useState<Speaker>();
+    useEffect(() => {
+        const foundModerator = event.speakers.find(speaker => speaker.jobTitle === "Moderator");
+        if (foundModerator) setModerator(foundModerator);
+    }, [event.speakers]);
     return (
         <div className={style.header_container}>
             <div className={style.desc_section}>
                 <h1>Branding, Storytelling & Fundraising</h1>
                 <div>
-                    <Image src={logoNav} alt="header" width={32} height={32} /> <h4>Hosted by New Generation Network</h4>
+                    <Image src={logoNav} alt="header" width={32} height={32} /> <h4>{event.hostedBy}</h4>
                 </div>
                 <div>
-                    <Image src={logoNav} alt="header" width={32} height={32} /> <h4>Supported by Oasis</h4>
+                    <Image src={logoOasis} alt="header" width={32} height={32} /> <h4>{event.supportedBy}</h4>
                 </div>
                 <hr className="divider"></hr>
-                <h3>15th of February 2025 - London-UK</h3>
+                <h3>15th of February 2025 - {event.address}</h3>
             </div>
             <div className={style.speakers_section}>
 
                 <h3>Speakers: </h3>
                 <div className={style.speakers}>
                     <div className={style.speakers_list}>
-                        <SingleSpeakerCard />
-                        <SingleSpeakerCard />
-                        <SingleSpeakerCard />
+                        {event.speakers.filter(sp=> sp.jobTitle !== "Moderator").map((speaker, index)=>{
+                            return <SingleSpeakerCard key={index} speaker={speaker}  />
+                        })}
                     </div>
-                    <div className={style.moderator}>
-                        <Image src={cardImage} alt="header" width={72} height={72} />
+                    {moderator && <div className={style.moderator}>
+                        <Image src={moderator.imagePath} alt="header" width={72} height={72} />
                         <div>
-                            <h5>Moderator</h5>
-                            <p>Description Description Description</p>
+                            <h5>{moderator.fullName}</h5>
+                            <p>{moderator.jobTitle}</p>
                         </div>
-                    </div>
+                    </div>}
                 </div>
             </div>
             <div>
