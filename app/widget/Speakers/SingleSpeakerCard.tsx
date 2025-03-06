@@ -1,5 +1,4 @@
 import Image from "next/image";
-import cardImage from "@public/image/events/cardImg.png";
 import style from './style.module.scss';
 import { Speaker } from "@/shared/types/speakers/speaker";
 const SingleSpeakerCard: React.FC<{speaker: Speaker}> = ({speaker}) => {

@@ -60,7 +60,7 @@ const PsychologyTest: React.FC<PsychologyTestProps> = ({ question }) => {
     if (question?.type === 5) {
       UpdateSidebarPostion(5);
     }
-  }, [question]);
+  }, [question]);// eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div style={{ height: "100%" }}>

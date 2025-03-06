@@ -22,7 +22,7 @@ const VerificationPage = () => {
 
   useEffect(() => {
     approveEmail();
-  }, []);
+  }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div

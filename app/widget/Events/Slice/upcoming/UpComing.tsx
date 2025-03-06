@@ -8,7 +8,7 @@ import event3 from "@public/image/events/event3.png";
 import Link from "next/link";
 import Image from "next/image";
 
-const UpComing = ({content}: {content:String}) => {
+const UpComing = ({content}: {content:string}) => {
   // const slides: SlideData[] = [
   //   {
   //     id: 1,

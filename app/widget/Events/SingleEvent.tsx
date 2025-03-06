@@ -13,6 +13,7 @@ import { Event, EventsResponse } from "@/shared/types/events/event";
 import { getRequest } from "@/shared/api";
 import { eventAddresses } from "@/shared/constants/relative-url/event";
 import SingleEventHeader from "./Slice/SingleEventHeader/SingleEventHeader";
+import { formatDate } from "@/shared/helpers/util";
 const SingleEvent : React.FC<{eventId : number}> = ({eventId}) => {
   const [isMobile, setIsMobile] = useState(false);
   const [event, setEvent] = useState<Event>();
@@ -46,7 +47,7 @@ const SingleEvent : React.FC<{eventId : number}> = ({eventId}) => {
 
     // Cleanup
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, []);// eslint-disable-line react-hooks/exhaustive-deps
   return (
     <div>
       <Container className={style.wrapper}>
@@ -86,7 +87,7 @@ const SingleEvent : React.FC<{eventId : number}> = ({eventId}) => {
           <div className={style.cardIc}>
             <div className={style.cardPart}>
               <Image src={calendar} alt="calendar" className={style.image} />
-              <p>Feb 15,2025</p>
+              <p>{event?.hostDate && formatDate(event?.hostDate)}</p>
             </div>
             <div className={style.cardPart}>
               <Image src={clock} alt="clock" className={style.image} />
