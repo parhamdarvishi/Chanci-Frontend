@@ -39,8 +39,9 @@ export default function ChanciRootLayout({
     const res: ChanciResponse = await getRequest(
       chanciAddresses.GetAll,
       reqBody,
-      true
+      false
     );
+
     if (res?.isSuccess) {
       updateData(res?.data?.items);
     }
