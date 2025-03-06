@@ -37,9 +37,11 @@
       line-height: 1.4;
     }
     p {
+      margin-top: 10px;
+      margin-bottom: 5px;
       font-size: 24px;
     }
-    .cardExpect {
+    h6 {
       font-size: 30px;
       font-weight: 400;
       max-width: 1270px;
@@ -50,6 +52,7 @@
       display: flex;
       //align-items: center;
       gap: 1rem;
+      margin-top: 10px;
       flex-direction: column;
       li {
         //left: 0;

@@ -1,0 +1,149 @@
+.header_container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 30px;
+
+    h1 {
+        width: 80%;
+    }
+}
+
+.desc_section {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    justify-content: space-between;
+
+    >* {
+        padding-left: 25px;
+    }
+
+    hr {
+        padding: 0px;
+        margin-left: 20px;
+        width: 75%;
+        height: 5px;
+        background-color: black;
+    }
+
+
+    h3 {
+        font-weight: 300;
+    }
+
+    div {
+        display: flex;
+        flex-direction: row;
+
+        h4 {
+            font-weight: 300;
+            padding-left: 5px;
+        }
+    }
+
+}
+
+.speakers_section {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+
+    h3 {
+        align-items: center;
+        margin-top: 10%;
+        padding-right: 20px;
+        font-weight: 200;
+
+    }
+}
+
+.speakers {
+    display: flex;
+    flex-direction: column;
+}
+
+.speakers_list {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex_row {
+    direction: flex;
+    flex-direction: row;
+}
+
+.divider {
+    padding: 40px;
+}
+
+.moderator {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+
+    p {
+        display: -webkit-box;
+        -webkit-line-clamp: 2; // Limits text to 3 lines
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-height: 4.5em; // Adjust based on font-size
+    }
+
+    div {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding-left: 5px;
+        /* Push content to the bottom */
+    }
+}
+@media (max-width: 768px) {
+    .header_container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 0px;
+        padding-top: 5px;
+        
+        h1{
+            width: 100%;
+            font-size: 18px;
+        }
+        > * {
+            gap: 0.8rem;
+        }
+    }
+    .desc_section {
+        width: 100%;
+        > * {
+            padding-left: 10px;
+        }
+        hr {
+            padding: 0px;
+            margin-left: 0px;
+            width: 95%;
+            height: 3px;
+            background-color: black;
+        }
+        h3 {
+            font-weight: 200;
+            width: 50%;
+        }
+    }
+    .speakers_section {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    
+        h3 {
+            align-items: center;
+            margin-top: 10%;
+            padding-right: 20px;
+            font-weight: 200;
+    
+        }
+    }
+
+}

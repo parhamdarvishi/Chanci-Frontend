@@ -4,5 +4,6 @@ export type speaker  = {
     fullName: string;
     jobTitle: string;
     description: string;
+    imagePath: string;
     isDeleted: boolean;
 }

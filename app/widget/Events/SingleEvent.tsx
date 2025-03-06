@@ -12,6 +12,7 @@ import headerRes from "@public/image/events/singleEvents/eventRes.png";
 import { Event, EventsResponse } from "@/shared/types/events/event";
 import { getRequest } from "@/shared/api";
 import { eventAddresses } from "@/shared/constants/relative-url/event";
+import SingleEventHeader from "./Slice/SingleEventHeader/SingleEventHeader";
 const SingleEvent : React.FC<{eventId : number}> = ({eventId}) => {
   const [isMobile, setIsMobile] = useState(false);
   const [event, setEvent] = useState<Event>();
@@ -54,9 +55,10 @@ const SingleEvent : React.FC<{eventId : number}> = ({eventId}) => {
         </div> */}
         <Image
           className={style.headerImg}
-          src={isMobile ? headerRes : header}
-          alt="sdsd"
+          src={event?.bannerImagePath? ( isMobile ? headerRes : event.bannerImagePath) : header}
+          alt={event?.shortTitle || "Image Event"}
         />
+        <SingleEventHeader />
         <Card
           shadow="sm"
           padding="lg"
@@ -76,43 +78,7 @@ const SingleEvent : React.FC<{eventId : number}> = ({eventId}) => {
               )
             })}
           </ul>
-          <h6 className={style.cardExpect}> Fast & Smart Networking</h6>
-          <p>
-            This event features a unique, structured networking format. With
-            assistance from co-hosts, attendees will have the opportunity to
-            introduce themselves, move around the room, and connect with
-            co-founders, investors, or potential employers/employees.
-          </p>
-          <h6 className={style.cardExpect}>Important Information</h6>
-          <ul>
-            <li>
-              <strong>Event Reminders : </strong>
-              You will receive reminder emails a day before and on the day of
-              the event, including the event location.
-            </li>
-            <li>
-              <strong>Photography & Media : </strong>
-              Photos and videos may be taken during the event for promotional
-              purposes on New Generation Network Ltd’s website and social media.
-              By attending, you consent to your image being used.
-            </li>
-            <li>
-              <strong>LinkedIn QR Code : </strong>
-              Bring your LinkedIn profile QR code for smarter networking.
-            </li>
-            <li>
-              <strong>Refund Policy : </strong>
-              Ticket refunds are available up to seven days before the event. No
-              refunds will be issued for cancellations after this period.
-            </li>
-            <li>
-              <strong>Accessibility : </strong>
-              If you require any reasonable adjustments, please contact us by
-              responding to this email, and we will do our best to accommodate
-              your needs.
-            </li>
-          </ul>
-
+          <div dangerouslySetInnerHTML={{ __html: event?.content || "" }} />
           <div className={style.cardIc}>
             <div className={style.cardPart}>
               <Image src={calendar} alt="calendar" className={style.image} />
@@ -120,11 +86,11 @@ const SingleEvent : React.FC<{eventId : number}> = ({eventId}) => {
             </div>
             <div className={style.cardPart}>
               <Image src={clock} alt="clock" className={style.image} />
-              <p>12:00-15:00</p>
+              <p>{(event?.start && event?.end) && `${event.start}-${event.end}`}</p>
             </div>
           </div>
           <Link
-            href="https://www.eventbrite.co.uk/e/learn-and-network-with-londons-top-founders-branding-storytelling-fund-tickets-1225368844199 "
+            href={(event?.redirectUrl && event?.redirectUrl !== "empty") ? event?.redirectUrl : `/payment`}
             className={style.button}
           >
             Get a ticket

@@ -49,9 +49,7 @@ const EventList = () => {
           </h1>
         </div>
 
-        <EventSlider data={events} />
-
-        <UpComing />
+        <EventSlider data={events.filter((e)=> e.isShowable)} />
         <Businesses />
       </Container>
       <Comments />

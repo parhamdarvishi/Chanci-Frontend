@@ -8,7 +8,7 @@ import event3 from "@public/image/events/event3.png";
 import Link from "next/link";
 import Image from "next/image";
 
-const UpComing = () => {
+const UpComing = ({content}: {content:String}) => {
   // const slides: SlideData[] = [
   //   {
   //     id: 1,
@@ -42,14 +42,7 @@ const UpComing = () => {
   return (
     <div className={style.wrapper}>
       <Box className={style.detailDesc}>
-        <strong>NGN</strong>
-        hosts a variety of engaging events, including professional business
-        networking sessions, startup-focused gatherings, founder matchmaking,
-        graduate and university-focused events, job fairs, and more. Each event
-        is designed to bring together top talent and industry leaders, featuring
-        a diverse range of expert speakers who share valuable insights. Sign up
-        here to be among the first to receive invitations. We&apos;ll take care
-        of the planning so you can focus on building valuable connections!
+      <div dangerouslySetInnerHTML={{ __html: content || "" }} />
       </Box>
       <div className={style.sliderBox}>
         {/* <Slider title={false} slides={slides} /> */}

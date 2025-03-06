@@ -5,7 +5,17 @@ export type Event = {
   shortTitle: string;
   longTitle: string;
   description: string;
-  speakers: speaker[]
+  isShowable: boolean;
+  speakers: speaker[];
+  supportedBy: string;
+  hostedBy: string;
+  redirectUrl: string;
+  start: string;
+  end: string;
+  cardImagePath: string;
+  mobileImagePath: string;
+  content: string;
+  bannerImagePath: string | null;
 }
 export type Events = {
     data: Event[]

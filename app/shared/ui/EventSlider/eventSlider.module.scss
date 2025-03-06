@@ -3,23 +3,28 @@
   align-items: center;
   position: relative;
   overflow: hidden; // Hide overflow to show only part of the third card
-  max-width: 1500px;
-  justify-content: center;
+  //max-width: 1500px;
+  width: 100%;
+  //justify-content: center;
   cursor: grabbing;
+  overflow: hidden;
+  scroll-snap-type: x mandatory;
 }
 
 .slider {
   display: flex;
-  justify-content: center;
+  //justify-content: center;
   align-items: center;
-  overflow-x: auto; // Allow horizontal scrolling
+  overflow-x: scroll; // Allow horizontal scrolling
   scroll-behavior: smooth;
-  width: calc(100% - 60px); // Adjust width to account for buttons
+  //width: calc(100% - 60px); // Adjust width to account for buttons
   padding: 2rem 0;
+  -webkit-overflow-scrolling: touch; /* for smooth scrolling on iOS */
 
   &::-webkit-scrollbar {
     display: none; // Hide scrollbar
   }
+
 }
 
 .button {
@@ -42,8 +47,8 @@
 }
 
 .card {
-  min-width: 580px; // Adjust card width
-  max-width: 612px;;
+  min-width: 50px; // Adjust card width
+  max-width: 812px;
   margin: 0 10px; // Space between cards
   background: white;
   border-radius: 10px;
@@ -51,7 +56,18 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   flex-shrink: 0; // Prevent cards from shrinking
   display: flex;
-
+  scroll-snap-align: start;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  box-sizing: border-box;
+  .active {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transform: scale(1.03);
+  }
+  .indicator {
+    margin-top: 10px;
+    text-align: center;
+    font-weight: bold;
+  }
   .cardIc {
     display: flex;
     gap: 1rem;
