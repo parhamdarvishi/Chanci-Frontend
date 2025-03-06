@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState , FC } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import style from "./eventSlider.module.scss";
 import img1 from "@public/image/events/cardImg.png"; // Replace with your actual image paths

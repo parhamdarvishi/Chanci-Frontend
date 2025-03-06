@@ -47,7 +47,7 @@ const SingleEvent : React.FC<{eventId : number}> = ({eventId}) => {
 
     // Cleanup
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, []);// eslint-disable-line react-hooks/exhaustive-deps
   return (
     <div>
       <Container className={style.wrapper}>
