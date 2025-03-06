@@ -1,17 +1,15 @@
 .speaker_container{
     display: flex;
     flex-direction: column;
+    flex: 1;
     padding: 5px;
     h5{
         padding-top: 5px;
     }
     p {
         display: -webkit-box;
-        -webkit-line-clamp: 2; // Limits text to 3 lines
         -webkit-box-orient: vertical;
         overflow: hidden;
-        text-overflow: ellipsis;
-        max-height: 4.5em; // Adjust based on font-size
-        font-size: 13px;
+        font-size: 12px;
       }
 }
