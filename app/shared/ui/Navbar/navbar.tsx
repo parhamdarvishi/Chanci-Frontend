@@ -25,15 +25,22 @@ import { useDisclosure } from "@mantine/hooks";
 import { usePathname, useRouter } from "next/navigation";
 import { modals } from "@mantine/modals";
 import ModalTouch from "../ModalTouch/modalTouch";
+import { USER_TOKEN } from "@/shared/helpers/cookie/types";
+import cookie from "@shared/helpers/cookie";
 
 const Navbar = () => {
   const [loc, setLoc] = useState(0);
+  const [access, setAccess] = useState(false);
   const [opened, { open, close }] = useDisclosure(false);
   const path = usePathname();
 
   const router = useRouter();
 
   const handleLogin = () => {
+    if (Token) {
+      router.push("/ChanciAI/panel");
+      return;
+    }
     router.push("/ChanciAI/register");
   };
 
@@ -51,6 +58,9 @@ const Navbar = () => {
     "AboutUs",
   ];
 
+  //checkUserToken
+  const Token = cookie?.getCookie(USER_TOKEN);
+
   const handleActiveNav = (index: number) => {
     setLoc(index);
   };
@@ -62,7 +72,19 @@ const Navbar = () => {
       children: <ModalTouch />,
     });
 
+  const handleChanci = () => {
+    if (Token) {
+      router.push("/ChanciAI/panel");
+      return;
+    }
+    router.push("/ChanciAI/register");
+  };
+
+  //UseEffect
   useEffect(() => {
+    if (Token) {
+      setAccess(true);
+    }
     if (findPath === "ComingSoon") {
       setLoc(4);
       return;
@@ -152,7 +174,7 @@ const Navbar = () => {
         </div>
         <Group className={style.btnGroup}>
           <Button className={style.btnLogin} onClick={handleLogin}>
-            Log in
+            {access ? "Panel" : "Log in"}
           </Button>
           <Button className={style.btnGet} onClick={openModal}>
             Get in Touch
@@ -178,7 +200,11 @@ const Navbar = () => {
           {/* <Link className={style.btnChanci} href="/find-talent">
             Take me to Chanci AI
           </Link> */}
-          <Link className={style.btnChanci} href={"/ChanciAI/register"}>
+          <Link
+            className={style.btnChanci}
+            href={"/ChanciAI/register"}
+            onClick={handleChanci}
+          >
             Take me to Chanci AI
           </Link>
         </div>
