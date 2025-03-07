@@ -34,7 +34,7 @@ export default function ChanciRootLayout({
   const getChanciData = async () => {
     const reqBody = {
       Skip: 0,
-      Take: 1000,
+      Take: 100,
     };
     const res: ChanciResponse = await getRequest(
       chanciAddresses.GetAll,
