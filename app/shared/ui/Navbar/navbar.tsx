@@ -33,6 +33,10 @@ const Navbar = () => {
 
   const router = useRouter();
 
+  const handleLogin = () => {
+    router.push("/ChanciAI/register");
+  };
+
   const handleComingSoon = () => {
     router.push("/ComingSoon");
   };
@@ -147,7 +151,9 @@ const Navbar = () => {
           </ul>
         </div>
         <Group className={style.btnGroup}>
-          {/* <Button className={style.btnLogin}>Log in</Button> */}
+          <Button className={style.btnLogin} onClick={handleLogin}>
+            Log in
+          </Button>
           <Button className={style.btnGet} onClick={openModal}>
             Get in Touch
           </Button>
