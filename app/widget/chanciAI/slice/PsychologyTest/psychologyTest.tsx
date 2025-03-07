@@ -8,6 +8,7 @@ import { userAddresses } from "@/shared/constants/relative-url/user";
 import { useChanci } from "@/shared/stateManagement/UseChanci/useChanci";
 import { Card } from "@mantine/core";
 import React, { useEffect } from "react";
+
 import style from "../style.module.scss";
 
 // Define the type for the question prop
@@ -31,10 +32,12 @@ const PsychologyTest: React.FC<PsychologyTestProps> = ({ question }) => {
 
   const sendAnswers = async () => {
     const reqbody = {
-      answers: answers,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      answers: answers.map(({ step, ...rest }) => rest),
     };
-    await postRequest(userAddresses.userAnswers, reqbody, true);
+    await postRequest(userAddresses.userAnswers, reqbody, false);
   };
+  console.log({ answers });
 
   useEffect(() => {
     if (data?.length > 0 && data?.length === questionIndex) {
@@ -69,7 +72,9 @@ const PsychologyTest: React.FC<PsychologyTestProps> = ({ question }) => {
         // <div>Text Question Component</div>
       )}
       {question?.inputType === 2 && <ProgressQuestion question={question} />}
-      {question?.inputType === 3 && <DropDownQuestion question={question} />}
+      {question?.inputType === 3 && (
+        <DropDownQuestion question={question} answers={answers} />
+      )}
       {question?.inputType === 4 && <UploadQuestion />}
       {question?.inputType === 5 && <OptionQuestion question={question} />}
       {data?.length === questionIndex && (
@@ -85,8 +90,8 @@ const PsychologyTest: React.FC<PsychologyTestProps> = ({ question }) => {
           >
             <h3>Thank you for completing the test! 🎉</h3>
             <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-              Based on your responses, we’ve prepared a detailed analysis of
-              your personality traits, career preferences, and strengths.
+              Based on your responses, we&apos;ve prepared a detailed analysis
+              of your personality traits, career preferences, and strengths.
             </p>
             <p style={{ maxWidth: "700px" }}>
               This report is designed to help you gain deeper insights into your
@@ -94,7 +99,7 @@ const PsychologyTest: React.FC<PsychologyTestProps> = ({ question }) => {
               for your personal and professional growth.
             </p>
             <span style={{ fontSize: "17px", fontWeight: "600" }}>
-              Here’s what you can expect in your results:
+              Here&apos;s what you can expect in your results:
             </span>
           </Card>
           <Card
