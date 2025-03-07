@@ -5,7 +5,8 @@ import { persist } from "zustand/middleware";
 
 interface AnsweriItem {
   questionId: string;
-  answerId: string;
+  answerId: number;
+  step: number;
 }
 
 // Define the type for the store state
@@ -27,14 +28,13 @@ export const useChanci = create<ChanciState>()(
     (set) => ({
       data: [],
       answers: [],
-      questionIndex: 1,
+      questionIndex: 0,
       sidebarPostion: 1,
       updateData: (data) => {
         set({ data });
       },
       updateAnswers: (data: AnsweriItem[]) => {
-        // @ts-expect-error: Ignoring TypeScript error due to array spread
-        set((state) => ({ answers: [...state.answers, data] }));
+        set(() => ({ answers: data }));
       },
       updateQuestionIndex: (questionIndex: number) => {
         set({ questionIndex });
