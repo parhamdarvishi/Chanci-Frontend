@@ -1,9 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./style.module.scss";
-import { Avatar, Box, Card, Textarea } from "@mantine/core";
+import { Avatar, Box, Button, Card, Textarea } from "@mantine/core";
 import { useChanci } from "@/shared/stateManagement/UseChanci/useChanci";
-
+import chanciIc from "@public/image/chanciAI/icon/chanciCh.svg";
+import Image from "next/image";
+import { IconArrowNarrowLeft, IconArrowNarrowRight } from "@tabler/icons-react";
 interface TextQuestionProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   question: any;
@@ -12,26 +14,73 @@ interface TextQuestionProps {
 const TextQuestion: React.FC<TextQuestionProps> = ({ question }) => {
   const [value, setValue] = useState("");
 
-  const { updateQuestionIndex, updateAnswers, questionIndex } = useChanci();
+  const { updateQuestionIndex, updateAnswers, questionIndex, answers } =
+    useChanci();
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key === "Enter") {
+      if (answers[questionIndex]) {
+        const answerIndex = answers.findIndex(
+          (item) => item?.questionId === answers[questionIndex]?.questionId
+        );
+
+        const filterAnswer = answers; // Create a copy of the array
+        if (answerIndex !== -1) {
+          // Remove the item at answerIndex and insert the new answer
+
+          filterAnswer.splice(answerIndex, 1, {
+            questionId: question?.id,
+            answerId: Number(value),
+            step: Number(value),
+            // @ts-expect-error: Ignoring TypeScript error due to array spread
+            text: value,
+          });
+        }
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        updateAnswers(filterAnswer as any);
+        updateQuestionIndex(questionIndex + 1);
+        return;
+      }
       const answer = {
         questionId: question?.id,
         answerId: 0,
+        step: 0,
         text: value,
       };
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      updateAnswers(answer as any);
+      const allAnswer = answers; // Create a copy of the array
+      allAnswer.push(answer);
+      updateAnswers(allAnswer);
       updateQuestionIndex(questionIndex + 1);
       // You can add additional logic here
       event.preventDefault();
     }
   };
+  const handleQustionIndex = () => {
+    updateQuestionIndex(questionIndex - 1);
+  };
+  const handleQustionNext = () => {
+    updateQuestionIndex(questionIndex + 1);
+  };
+  useEffect(() => {
+    // @ts-expect-error: Ignoring TypeScript error due to array spread
+    if (answers[questionIndex]?.text) {
+      // @ts-expect-error: Ignoring TypeScript error due to array spread
+      setValue(answers[questionIndex]?.text);
+      return;
+    }
+    setValue("");
+  }, [questionIndex]);
   return (
     <div className={style.wrapper}>
       <Box className={style.userBox}>
-        <Avatar radius="xl" size={"lg"} />
+        <Avatar
+          src="image/chanciAI/chanci.svg"
+          alt="it's me"
+          size={55}
+          className={style.questionImg}
+        />
         <Box className={style.questionTitle}>
           <p>{question?.text}</p>
         </Box>
@@ -56,17 +105,66 @@ const TextQuestion: React.FC<TextQuestionProps> = ({ question }) => {
               onKeyDown={handleKeyDown}
             />
           </Card>
-          {/* <Image
+          <Image
             src={chanciIc}
             alt="chanciIcon"
             className={style.questionImg}
-          /> */}
-          <Avatar
-            src="image/chanciAI/chanci.svg"
-            alt="it's me"
-            size={55}
-            className={style.questionImg}
           />
+        </Box>
+      </Box>
+      <Box style={{ display: "flex", width: "100%" }}>
+        <Box
+          style={{
+            padding: "0 3rem",
+            opacity: questionIndex > 0 ? 1 : 0,
+            transform:
+              questionIndex > 0 ? "translateX(0)" : "translateX(-20px)",
+            transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+            visibility: questionIndex > 0 ? "visible" : "hidden",
+          }}
+        >
+          <Button
+            variant="light"
+            style={{
+              padding: "0.7rem",
+              transition: "transform 0.2s ease",
+              transform: "scale(1)",
+              ":hover": {
+                transform: "scale(1.05)",
+              },
+            }}
+            onClick={handleQustionIndex}
+          >
+            <IconArrowNarrowLeft size={30} />
+          </Button>
+        </Box>
+        <Box
+          style={{
+            // @ts-expect-error: Ignoring TypeScript error due to array spread
+            opacity: answers[questionIndex]?.text ? 1 : 0,
+            // @ts-expect-error: Ignoring TypeScript error due to array spread
+            transform: answers[questionIndex]?.text
+              ? "translateX(0)"
+              : "translateX(20px)",
+            transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+            // @ts-expect-error: Ignoring TypeScript error due to array spread
+            visibility: answers[questionIndex]?.text ? "visible" : "hidden",
+          }}
+        >
+          <Button
+            variant="light"
+            style={{
+              padding: "0.7rem",
+              transition: "transform 0.2s ease",
+              transform: "scale(1)",
+              ":hover": {
+                transform: "scale(1.05)",
+              },
+            }}
+            onClick={handleQustionNext}
+          >
+            <IconArrowNarrowRight size={30} />
+          </Button>
         </Box>
       </Box>
     </div>

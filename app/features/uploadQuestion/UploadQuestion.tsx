@@ -1,11 +1,13 @@
 "use client";
 import React, { useState } from "react";
 import style from "./style.module.scss";
-import { Avatar, Box, Card } from "@mantine/core";
-import { IconPhotoDown } from "@tabler/icons-react";
+import { Avatar, Box, Button, Card } from "@mantine/core";
+import { IconArrowNarrowLeft, IconPhotoDown } from "@tabler/icons-react";
 // import { postRequest } from "@/shared/api";
 // import { chanciAddresses } from "@/shared/constants/relative-url/chanci";
 import { useChanci } from "@/shared/stateManagement/UseChanci/useChanci";
+import chanciIcon from "@public/image/chanciAI/icon/chanciCh.svg";
+import Image from "next/image";
 
 const UploadQuestion = () => {
   const [fileName, setFileName] = useState<string | null>(null);
@@ -29,11 +31,21 @@ const UploadQuestion = () => {
     updateQuestionIndex(questionIndex + 1);
     // }
   };
-
+  const handleQustionIndex = () => {
+    updateQuestionIndex(questionIndex - 1);
+  };
+  // const handleQustionNext = () => {
+  //   updateQuestionIndex(questionIndex + 1);
+  // };
   return (
     <div className={style.wrapper}>
       <Box className={style.userBox}>
-        <Avatar radius="xl" size={"lg"} />
+        <Avatar
+          src="image/chanciAI/chanci.svg"
+          alt="it's me"
+          size={55}
+          className={style.questionImg}
+        />
         <Box className={style.questionTitle}>
           {/* <p>{question?.text}</p> */}
           <p>Please upload your CV for review.</p>
@@ -75,18 +87,69 @@ const UploadQuestion = () => {
               </label>
             </div>
           </Card>
-          {/* <Image
-            src={chanciIc}
+          <Image
+            src={chanciIcon}
             alt="chanciIcon"
-            className={style.questionImg}
-          /> */}
-          <Avatar
-            src="image/chanciAI/chanci.svg"
-            alt="it's me"
-            size={55}
             className={style.questionImg}
           />
         </Box>
+      </Box>
+      <Box style={{ display: "flex", width: "100%" }}>
+        <Box
+          style={{
+            padding: "0 3rem",
+            opacity: questionIndex > 0 ? 1 : 0,
+            transform:
+              questionIndex > 0 ? "translateX(0)" : "translateX(-20px)",
+            transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+            visibility: questionIndex > 0 ? "visible" : "hidden",
+          }}
+        >
+          <Button
+            variant="light"
+            style={{
+              padding: "0.7rem",
+              transition: "transform 0.2s ease",
+              transform: "scale(1)",
+              ":hover": {
+                transform: "scale(1.05)",
+              },
+            }}
+            onClick={handleQustionIndex}
+          >
+            <IconArrowNarrowLeft size={30} />
+          </Button>
+        </Box>
+        {/* <Box
+          style={{
+            opacity:
+              steps[currentStep] === answers[questionIndex]?.step ? 1 : 0,
+            transform:
+              steps[currentStep] === answers[questionIndex]?.step
+                ? "translateX(0)"
+                : "translateX(20px)",
+            transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+            visibility:
+              steps[currentStep] === answers[questionIndex]?.step
+                ? "visible"
+                : "hidden",
+          }}
+        >
+          <Button
+            variant="light"
+            style={{
+              padding: "0.7rem",
+              transition: "transform 0.2s ease",
+              transform: "scale(1)",
+              ":hover": {
+                transform: "scale(1.05)",
+              },
+            }}
+            onClick={handleQustionNext}
+          >
+            <IconArrowNarrowRight size={30} />
+          </Button>
+        </Box> */}
       </Box>
     </div>
   );
