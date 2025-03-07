@@ -275,7 +275,7 @@ const AboutUsList = () => {
                 }}
               >
                 <Link
-                  href="/Condidates"
+                  href="/Candidates"
                   className={style.button}
                   style={{
                     borderRadius: "16px",
@@ -310,7 +310,7 @@ const AboutUsList = () => {
                 }}
               >
                 <Link
-                  href="/Condidates"
+                  href="/Employers"
                   className={style.button}
                   style={{
                     borderRadius: "16px",
