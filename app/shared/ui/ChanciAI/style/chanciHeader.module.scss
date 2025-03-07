@@ -50,9 +50,16 @@
       background-color: #ffffff;
       display: flex;
       justify-content: center;
+      .assessmentNotifImg {
+        width: 30px;
+      }
     }
   }
 }
+// .avatarImg {
+//   transform: translateY(10px) !important;
+
+// }
 @media (max-width: 768px) {
   .HowItWorks {
     display: none !important;
