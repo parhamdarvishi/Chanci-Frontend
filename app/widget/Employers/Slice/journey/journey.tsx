@@ -6,8 +6,18 @@ import journey from "@public/image/file/imageCard.png";
 import tickCircle from "@public/image/icons/tickCircle.svg";
 import bookBtn from "@public/image/icons/bookBtn.svg";
 import arrowL from "@public/image/icons/arrowL.svg";
+import ModalTouch from "@/shared/ui/ModalTouch/modalTouch";
+import { modals } from "@mantine/modals";
 
 const Journey = () => {
+  const openModal = () =>
+    modals.open({
+      radius: "lg",
+      size: "lg",
+      title: <strong className={styles.modalTitle}>Get in touch</strong>,
+      children: <ModalTouch />,
+    });
+
   return (
     <div className={styles.journeySection}>
       <div className={styles.imageWrapper}>
@@ -46,6 +56,7 @@ const Journey = () => {
           alt="bookBtn"
           style={{ cursor: "pointer" }}
           className={styles.bookBtn}
+          onClick={openModal}
         />
       </div>
     </div>
