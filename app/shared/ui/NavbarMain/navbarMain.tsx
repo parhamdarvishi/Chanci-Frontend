@@ -6,7 +6,7 @@ import Image from "next/image";
 import style from "./navbarMain.module.scss";
 import { Button, Group, Drawer, Divider, Card, Box } from "@mantine/core";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useDisclosure } from "@mantine/hooks";
 import { modals } from "@mantine/modals";
 import ModalTouch from "../ModalTouch/modalTouch";
@@ -15,7 +15,7 @@ const NavbarMain = () => {
   const path = usePathname();
   const [opened, { open, close }] = useDisclosure(false);
   const findPath = path.split("/")[1];
-
+  const router = useRouter();
   const [loc, setLoc] = useState(1);
   const links = [
     "Home",
@@ -35,7 +35,9 @@ const NavbarMain = () => {
   const handleActiveNav = (index: number) => {
     setLoc(index);
   };
-
+  const handleLogin = () => {
+    router.push("/ChanciAI/register");
+  };
   useEffect(() => {
     if (findPath === "ComingSoon") {
       setLoc(4);
@@ -118,7 +120,9 @@ const NavbarMain = () => {
           ))}
         </ul>
         <Group className={style.btnGroup}>
-          {/* <Button className={style.btnLogin}>Log in</Button> */}
+          <Button className={style.btnLogin} onClick={handleLogin}>
+            Log in
+          </Button>
           <Button className={style.btnGet} onClick={openModal}>
             Get in Touch
           </Button>
