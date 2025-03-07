@@ -5,6 +5,7 @@ import condidatesRes from "@public/image/responsive/condidatesRes.png";
 import balanceRes from "@public/image/responsive/balanceRes.png";
 import styles from "./topicSection.module.scss";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface TopicSectionProps {
   image: StaticImageData | string;
@@ -38,8 +39,14 @@ const TopicSection = ({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const router = useRouter();
+
   const displayImage =
     windowWidth > 768 ? image : condidates ? condidatesRes : balanceRes;
+
+  const handleChanci = () => {
+    router.push("/ChanciAI/register");
+  };
 
   return (
     <div className={styles.topicSection}>
@@ -62,6 +69,7 @@ const TopicSection = ({
           variant="gradient"
           gradient={{ from: "grape", to: "indigo", deg: 90 }}
           className={condidates ? styles.btnCanDidate : styles.btn}
+          onClick={handleChanci}
         >
           {condidates && windowWidth < 600
             ? "Take the Free Assessment"
