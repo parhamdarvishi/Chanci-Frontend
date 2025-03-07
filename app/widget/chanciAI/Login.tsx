@@ -13,7 +13,6 @@ import ChanciLogin from "@public/image/chanciAI/login.png";
 import Image from "next/image";
 import Title from "@public/image/widget/Frame.svg";
 import avatars from "@public/image/chanciAI/avatars.svg";
-import google from "@public/image/chanciAI/icon/google.svg";
 import style from "./login.module.scss";
 import { useRouter } from "next/navigation";
 import axios from "axios";
@@ -79,9 +78,18 @@ const Login = () => {
         <GridCol
           span={{ base: 12, md: 6 }}
           className={style.loginDesc}
-          style={{ marginTop: "3rem" }}
+          style={{
+            marginTop: "3rem",
+            gap: "2rem",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
         >
-          <Box className={style.loginHeader}>
+          <Box
+            className={style.loginHeader}
+            style={{ gap: "1.1rem !important" }}
+          >
             <Image src={Title} alt="ChanciAI" width={250} loading="lazy" />
             <Image src={avatars} alt="ChanciAI" width={300} loading="lazy" />
             <Box>
@@ -95,12 +103,12 @@ const Login = () => {
               >
                 Join for free and see your result
               </h2>
-              <Button variant="default" className={style.googleBtn}>
+              {/* <Button variant="default" className={style.googleBtn}>
                 <Image src={google} alt="ChanciAI" width={25} />
                 <span style={{ fontWeight: "400", color: "#585858" }}>
                   Continue with Google
                 </span>
-              </Button>
+              </Button> */}
             </Box>
           </Box>
           <Box className={style.dividerBox}>
