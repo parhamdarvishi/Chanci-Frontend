@@ -27,10 +27,11 @@ const base = (
   }
 
   if (authorization) {
-    options.headers["Authorization"] =
-      "Bearer " + cookie?.getCookie(USER_TOKEN);
+    const userToken = cookie?.getCookie(USER_TOKEN);
+    if (userToken) {
+      options.headers["Authorization"] = "Bearer " + JSON.parse(userToken);
+    }
   }
-
   const instance = axios.create(options as CreateAxiosDefaults<OptionsTypes>);
 
   instance.interceptors.request.use(
