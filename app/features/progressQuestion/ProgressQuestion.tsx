@@ -13,7 +13,7 @@ interface ProgressQuestionProps {
 }
 
 const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
-  const [currentStep, setCurrentStep] = useState(2);
+  const [currentStep, setCurrentStep] = useState(0);
   const [answerLabelStep, setAnswerLabelStep] = useState(10);
 
   const { updateQuestionIndex, updateAnswers, questionIndex, answers, data } =
@@ -136,7 +136,7 @@ const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
         });
       }
       console.log({ filterAnswer });
-
+      setCurrentStep(0);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       updateAnswers(filterAnswer as any);
       updateQuestionIndex(questionIndex + 1);
@@ -149,6 +149,7 @@ const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
     };
     const allAnswer = answers; // Create a copy of the array
     allAnswer.push(answer);
+    setCurrentStep(0);
     updateAnswers(allAnswer);
     updateQuestionIndex(questionIndex + 1);
   };
