@@ -16,30 +16,38 @@ const Sidebar = () => {
   const checkSidebarPostion = () => {
     if (sidebarPostion === 2) {
       setSidebarLoc([1, 2]);
-      setProgress(40);
     }
     if (sidebarPostion === 3) {
       setSidebarLoc([1, 2, 3]);
-      setProgress(70);
     }
     if (sidebarPostion === 4) {
       setSidebarLoc([1, 2, 3, 4]);
-      setProgress(85);
     }
     if (sidebarPostion === 5) {
       setSidebarLoc([1, 2, 3, 4, 5]);
-      setProgress(95);
     }
+
     if (sidebarPostion === 6) {
       setSidebarLoc([1, 2, 3, 4, 5, 6]);
       setProgress(100);
     }
   };
 
+  const checkSidebarPostionByQuestion = () => {
+    if (sidebarPostion === 6) {
+      setSidebarLoc([1, 2, 3, 4, 5, 6]);
+      setProgress(100);
+      return;
+    }
+    setProgress((10 * questionIndex) / 5);
+  };
+
   useEffect(() => {
-    setProgress(0);
     checkSidebarPostion();
   }, [sidebarPostion]);
+  useEffect(() => {
+    checkSidebarPostionByQuestion();
+  }, [questionIndex]);
 
   return (
     <Card shadow="sm" padding="lg" className={style.wrapper}>
