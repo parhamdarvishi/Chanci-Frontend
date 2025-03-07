@@ -131,6 +131,9 @@
   &.active {
     background-color: #60a5fa;
   }
+  &.alreadyAnswer {
+    background-color: #0db492 !important;
+  }
 }
 
 .indicator {
