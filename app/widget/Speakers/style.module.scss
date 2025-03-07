@@ -1,0 +1,15 @@
+.speaker_container{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 5px;
+    h5{
+        padding-top: 5px;
+    }
+    p {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        font-size: 12px;
+      }
+}
