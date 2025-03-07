@@ -58,11 +58,13 @@ const Login = () => {
         },
       }
     );
-
+    console.log({ res });
+    console.log(res?.data?.data?.token);
     if (res?.data?.isSuccess) {
       // toastAlert(res?.data?.message as string, "success");
-      cookie.setCookie(USER_TOKEN, JSON.stringify(res?.data?.token));
+      cookie.setCookie(USER_TOKEN, JSON.stringify(res?.data?.data?.token));
       setLoading(false);
+      console.log(res?.data?.token);
       handleChanci();
     } else {
       toastAlert(res?.data?.message as string, "error");
