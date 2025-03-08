@@ -6,19 +6,40 @@ import Title from "@public/image/widget/Frame.svg";
 import done from "@public/image/chanciAI/icon/Done.svg";
 import Image from "next/image";
 import { useChanci } from "@/shared/stateManagement/UseChanci/useChanci";
+import StepModal from "@/widget/chanciAI/slice/stepModal/stepModal";
+import { modals } from "@mantine/modals";
 
 const Sidebar = () => {
   const [progress, setProgress] = useState(0);
   const [sidebarLoc, setSidebarLoc] = useState([1]);
 
   const { sidebarPostion, questionIndex, data } = useChanci();
-
+  const openCareerModal = () => {
+    const desc =
+      "well done with the last part, now we collect your career preferences here";
+    modals.open({
+      radius: "30px",
+      size: "lg",
+      children: <StepModal desc={desc} />,
+    });
+  };
+  const openNationalityModal = () => {
+    const desc =
+      "well done with the last section, now let's talk about your visa status ";
+    modals.open({
+      radius: "30px",
+      size: "lg",
+      children: <StepModal desc={desc} />,
+    });
+  };
   const checkSidebarPostion = () => {
     if (sidebarPostion === 2) {
       setSidebarLoc([1, 2]);
+      openCareerModal();
     }
     if (sidebarPostion === 3) {
       setSidebarLoc([1, 2, 3]);
+      openNationalityModal();
     }
     if (sidebarPostion === 4) {
       setSidebarLoc([1, 2, 3, 4]);
@@ -55,7 +76,7 @@ const Sidebar = () => {
         <Image src={Title} alt="ChanciAi" loading="lazy" width={115} />
       </Box>
       <Divider color="#D5D5D7" style={{ margin: "1.8rem 0" }} />
-      {data?.length === questionIndex && (
+      {sidebarPostion === 6 && data?.length === questionIndex && (
         <Card
           shadow="sm"
           padding="lg"
@@ -92,7 +113,7 @@ const Sidebar = () => {
           color={progress < 100 ? "#0063F5" : "#08CD6A"}
           transitionDuration={200}
         />
-        {data?.length === questionIndex ? (
+        {sidebarPostion === 6 && data?.length === questionIndex ? (
           <div style={{ color: "#08CD6A" }}>
             Click on each section to expand the results
           </div>
