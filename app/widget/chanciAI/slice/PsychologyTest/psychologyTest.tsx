@@ -8,8 +8,9 @@ import { userAddresses } from "@/shared/constants/relative-url/user";
 import { useChanci } from "@/shared/stateManagement/UseChanci/useChanci";
 import { Card } from "@mantine/core";
 import React, { useEffect } from "react";
-
 import style from "../style.module.scss";
+import { modals } from "@mantine/modals";
+import StepModal from "../stepModal/stepModal";
 
 // Define the type for the question prop
 interface Question {
@@ -27,8 +28,11 @@ const PsychologyTest: React.FC<PsychologyTestProps> = ({ question }) => {
     updateQuestionIndex,
     answers,
     UpdateSidebarPostion,
+    sidebarPostion,
     data,
   } = useChanci();
+  console.log({ data });
+  console.log({ questionIndex });
 
   const sendAnswers = async () => {
     const reqbody = {
@@ -37,7 +41,19 @@ const PsychologyTest: React.FC<PsychologyTestProps> = ({ question }) => {
     };
     await postRequest(userAddresses.userAnswers, reqbody, false);
   };
-  console.log({ answers });
+  const openModal = () => {
+    const desc =
+      "Please read the statement and express if you agree or disagree";
+    modals.open({
+      radius: "30px",
+      size: "lg",
+      children: <StepModal desc={desc} />,
+    });
+  };
+
+  useEffect(() => {
+    openModal();
+  }, []);
 
   useEffect(() => {
     if (data?.length > 0 && data?.length === questionIndex) {
@@ -63,7 +79,7 @@ const PsychologyTest: React.FC<PsychologyTestProps> = ({ question }) => {
     if (question?.type === 5) {
       UpdateSidebarPostion(5);
     }
-  }, [question]);// eslint-disable-line react-hooks/exhaustive-deps
+  }, [question]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div style={{ height: "100%" }}>
@@ -77,7 +93,7 @@ const PsychologyTest: React.FC<PsychologyTestProps> = ({ question }) => {
       )}
       {question?.inputType === 4 && <UploadQuestion />}
       {question?.inputType === 5 && <OptionQuestion question={question} />}
-      {data?.length === questionIndex && (
+      {sidebarPostion === 6 && data?.length === questionIndex && (
         <div
           style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
         >
