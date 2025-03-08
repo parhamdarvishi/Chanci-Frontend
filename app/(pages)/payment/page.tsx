@@ -77,6 +77,7 @@ const Payment: React.FC = () => {
         return;
       }
     } catch (_error) {
+      console.log(_error);
       toastAlert("Network Error", "error");
     } finally {
       setLoading(false);

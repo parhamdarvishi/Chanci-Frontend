@@ -1,5 +1,4 @@
 "use client";
-/* eslint-disable no-unused-expressions */
 import NavbarMain from "@/shared/ui/NavbarMain/navbarMain"
 import { Card } from "@mantine/core"
 import style from "./style.module.scss";
@@ -33,6 +32,7 @@ const PaymentVerify: React.FC = () => {
             }
             setMsg(res?.data?.message);
         } catch (_error) {
+            console.log(_error);
             toastAlert("Network Error", "error");
             setMsg("Payment was not successful.");
         }
