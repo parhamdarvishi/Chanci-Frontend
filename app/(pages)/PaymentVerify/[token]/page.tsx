@@ -31,7 +31,7 @@ const PaymentVerify: React.FC = () => {
                 toastAlert("Payment was Unsuccessful", "error");
             }
             setMsg(res?.data?.message);
-        } catch (error) { // eslint-disable-line no-unused-vars
+        } catch (_error) {
             toastAlert("Network Error", "error");
             setMsg("Payment was not successful.");
         }

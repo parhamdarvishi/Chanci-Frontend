@@ -75,7 +75,7 @@ const Payment: React.FC = () => {
         toastAlert(res?.data?.message as string, "error");
         return;
       }
-    } catch (error: any) {// eslint-disable-line no-unused-vars
+    } catch (_error) {
       toastAlert("Network Error", "error");
     } finally {
       setLoading(false);
