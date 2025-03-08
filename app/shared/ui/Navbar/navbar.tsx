@@ -73,10 +73,10 @@ const Navbar = () => {
     });
 
   const handleChanci = () => {
-    if (Token) {
-      router.push("/ChanciAI/panel");
-      return;
-    }
+    // if (Token) {
+    //   router.push("/ChanciAI/panel");
+    //   return;
+    // }
     router.push("/ChanciAI/register");
   };
 
@@ -200,13 +200,11 @@ const Navbar = () => {
           {/* <Link className={style.btnChanci} href="/find-talent">
             Take me to Chanci AI
           </Link> */}
-          <Link
-            className={style.btnChanci}
-            href={"/ChanciAI/register"}
-            onClick={handleChanci}
-          >
-            Take me to Chanci AI
-          </Link>
+          <Box className={style.btnChanci} onClick={handleChanci}>
+            <p style={{ cursor: "pointer", fontSize: "19px" }}>
+              Take me to Chanci AI
+            </p>
+          </Box>
         </div>
 
         <div className={style.inputBox}>
