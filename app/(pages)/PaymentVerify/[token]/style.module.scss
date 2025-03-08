@@ -1,0 +1,11 @@
+.paymentWrapper {
+    padding: 2rem;
+    background-color: #ffffffbf;
+    height: 110vh;
+    .paymentCard {
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.2rem;
+    }
+}

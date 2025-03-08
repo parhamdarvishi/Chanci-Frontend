@@ -95,7 +95,7 @@ const SingleEvent : React.FC<{eventId : number}> = ({eventId}) => {
             </div>
           </div>
           <Link
-            href={(event?.redirectUrl && event?.redirectUrl !== "empty") ? event?.redirectUrl : `/payment`}
+            href={(event?.redirectUrl && event?.redirectUrl !== "empty") ? event?.redirectUrl : `/payment?eventid=${eventId}`}
             className={style.button}
           >
             Get a ticket
