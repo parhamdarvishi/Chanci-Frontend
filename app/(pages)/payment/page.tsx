@@ -1,5 +1,5 @@
 "use client";
-
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 import React, { useState, FormEvent, ChangeEvent } from "react";
 import { Box, Card, Input, Button, Text } from "@mantine/core";
 import style from "./payment.module.scss";
@@ -69,14 +69,13 @@ const Payment: React.FC = () => {
       );
       if (res?.data?.isSuccess && res?.data?.statusCode === 200) {
         const finalRes = res?.data?.data?.data;
-        const token = finalRes.token;
         const paymenturl = finalRes.checkout_Url;
         window.location.href = paymenturl;
       } else {
         toastAlert(res?.data?.message as string, "error");
         return;
       }
-    } catch (error: any) {
+    } catch (error: any) {// eslint-disable-line no-unused-vars
       toastAlert("Network Error", "error");
     } finally {
       setLoading(false);
