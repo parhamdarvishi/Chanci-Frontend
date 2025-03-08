@@ -1,5 +1,5 @@
 "use client";
- // eslint-disable-line @typescript-eslint/no-unused-vars
+/* eslint-disable no-unused-expressions */
 import NavbarMain from "@/shared/ui/NavbarMain/navbarMain"
 import { Card } from "@mantine/core"
 import style from "./style.module.scss";

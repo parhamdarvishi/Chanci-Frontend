@@ -1,6 +1,6 @@
 "use client";
 /* eslint-disable  @typescript-eslint/no-explicit-any */
- // eslint-disable-line @typescript-eslint/no-unused-vars
+/* eslint-disable no-unused-expressions */
 import React, { useState, FormEvent, ChangeEvent } from "react";
 import { Box, Card, Input, Button, Text } from "@mantine/core";
 import style from "./payment.module.scss";
