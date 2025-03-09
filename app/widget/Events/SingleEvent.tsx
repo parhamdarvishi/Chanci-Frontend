@@ -73,16 +73,16 @@ const SingleEvent: React.FC<{ eventId: number }> = ({ eventId }) => {
         >
           <h4>{event?.longTitle}</h4>
           <p>{event?.description}</p>
-          <h6 className={style.cardExpect}> Panel of Speakers</h6>
-          <ul>
-            {event?.speakers.map((speaker, index) => {
-              return (
-                <li key={index}>
-                  <strong>{speaker.fullName}</strong>- {speaker.description}
-                </li>
-              )
-            })}
-          </ul>
+          {event?.speakers && event?.speakers?.length > 0 && <><h6 className={style.cardExpect}> Panel of Speakers</h6>
+            <ul>
+              {event.speakers.map((speaker, index) => {
+                return (
+                  <li key={index}>
+                    <strong>{speaker.fullName}</strong>- {speaker.description}
+                  </li>
+                )
+              })}
+            </ul></>}
           <div dangerouslySetInnerHTML={{ __html: event?.content || "" }} />
           <div className={style.cardIc}>
             <div className={style.cardPart}>

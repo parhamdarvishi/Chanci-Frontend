@@ -93,7 +93,7 @@ const EventSlider : React.FC<Events > = ({data}) => {
           return(
             <div key={index} className={`${style.card} ${activeIndex === index ? style.active : ''}`}
             onClick={() => {scrollToSlide(index)}}>
-            <Image src={event.cardImagePath ? event.cardImagePath : img1} alt={`Event ${index}`} className={style.imgCard} />
+            <Image src={event.cardImagePath ? event.cardImagePath : img1} width={280} height={256} alt={`Event ${index}`} className={style.imgCard} />
             <div className={style.desc}>
               <h3>{event?.longTitle}</h3>
               <p>
