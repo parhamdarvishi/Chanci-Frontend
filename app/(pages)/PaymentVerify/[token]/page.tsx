@@ -1,3 +1,4 @@
+"use client";
 import PaymentVerify from "@/widget/Payment/PaymentVerify";
 import { Suspense } from "react";
 

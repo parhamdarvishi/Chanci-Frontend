@@ -1,3 +1,4 @@
+"use client";
 import Payment from "@/widget/Payment/Payment";
 import { Suspense } from "react";
 
