@@ -1,5 +1,5 @@
 "use client";
-import { Card, Container } from "@mantine/core";
+import { Card, Container, Skeleton } from "@mantine/core";
 import React, { useEffect, useState } from "react";
 import style from "./singleEvent.module.scss";
 import Link from "next/link";
@@ -7,32 +7,31 @@ import Image from "next/image";
 import arrowRight from "@public/arrowRight.svg";
 import calendar from "@public/image/icons/calendar.svg";
 import clock from "@public/image/icons/clock.svg";
-import header from "@public/image/events/singleEvents/poster.png";
 import headerRes from "@public/image/events/singleEvents/eventRes.png";
 import { Event, EventsResponse } from "@/shared/types/events/event";
 import { getRequest } from "@/shared/api";
 import { eventAddresses } from "@/shared/constants/relative-url/event";
 import SingleEventHeader from "./Slice/SingleEventHeader/SingleEventHeader";
 import { formatDate } from "@/shared/helpers/util";
-const SingleEvent : React.FC<{eventId : number}> = ({eventId}) => {
+const SingleEvent: React.FC<{ eventId: number }> = ({ eventId }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [event, setEvent] = useState<Event>();
-    const singleEventFetch = async () => {
-      const reqBody = {
-        Id: eventId,
-        Skip: 0,
-        Take: 1,
-      };
-      const res: EventsResponse = await getRequest(
-        eventAddresses.GetbyId,
-        reqBody,
-        false
-      );
-      if (res?.isSuccess) {
-        setEvent(res.data?.items[0]);
-      }
-      return [];
+  const singleEventFetch = async () => {
+    const reqBody = {
+      Id: eventId,
+      Skip: 0,
+      Take: 1,
     };
+    const res: EventsResponse = await getRequest(
+      eventAddresses.GetbyId,
+      reqBody,
+      false
+    );
+    if (res?.isSuccess) {
+      setEvent(res.data?.items[0]);
+    }
+    return [];
+  };
   useEffect(() => {
     singleEventFetch();
     const handleResize = () => {
@@ -54,15 +53,16 @@ const SingleEvent : React.FC<{eventId : number}> = ({eventId}) => {
         {/* <div className={style.header}>
           <h4 className={style.headerTitle}>Get Ready for Booking an Event</h4>
         </div> */}
-        <Image
-          className={style.headerImg}
-          src={event?.bannerImagePath? ( isMobile ? headerRes : event.bannerImagePath) : header}
-          width={0}
-          height={0}
-          style={{ width: '100%', height: 'auto' }}
-          unoptimized
-          alt={event?.shortTitle || "Image Event"}
-        />
+        {event ?
+          <Image
+            className={style.headerImg}
+            src={isMobile ? headerRes : event.bannerImagePath as string}
+            width={0}
+            height={0}
+            style={{ width: '100%', height: 'auto' }}
+            unoptimized
+            alt={event?.shortTitle || "Image Event"}
+          /> : <Skeleton height={400} radius="md" width="full" />}
         {event && <SingleEventHeader event={event} />}
         <Card
           shadow="sm"
@@ -75,8 +75,8 @@ const SingleEvent : React.FC<{eventId : number}> = ({eventId}) => {
           <p>{event?.description}</p>
           <h6 className={style.cardExpect}> Panel of Speakers</h6>
           <ul>
-            {event?.speakers.map((speaker, index)=> {
-              return(
+            {event?.speakers.map((speaker, index) => {
+              return (
                 <li key={index}>
                   <strong>{speaker.fullName}</strong>- {speaker.description}
                 </li>

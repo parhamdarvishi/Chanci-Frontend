@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import EventHeader from "./Slice/eventHeader/eventHeader";
-import { Container } from "@mantine/core";
+import { Container, Loader } from "@mantine/core";
 import Businesses from "./Slice/businesses/Businesses";
 import Comments from "./Slice/comments/Comments";
 import style from "./Slice/upcoming/UpComing.module.scss";
@@ -47,8 +47,7 @@ const EventList = () => {
             <span> Events</span>
           </h1>
         </div>
-
-        <EventSlider data={events.filter((e)=> e.isShowable)} />
+        {events.length > 0 ? <EventSlider data={events.filter((e) => e.isShowable)} /> : <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}><Loader size={80} /> </div>}
         <Businesses />
       </Container>
       <Comments />
