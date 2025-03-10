@@ -14,10 +14,12 @@ interface ChanciState {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any;
   answers: AnsweriItem[];
+  multiAnswer: string[];
   sidebarPostion: number;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   updateData: (data: any) => void;
   updateAnswers: (data: AnsweriItem[]) => void;
+  updateMultiAnswers: (data: string[]) => void;
   updateQuestionIndex: (data: number) => void;
   UpdateSidebarPostion: (data: number) => void;
   questionIndex: number;
@@ -28,6 +30,7 @@ export const useChanci = create<ChanciState>()(
     (set) => ({
       data: [],
       answers: [],
+      multiAnswer: [],
       questionIndex: 0,
       sidebarPostion: 1,
       updateData: (data) => {
@@ -35,6 +38,9 @@ export const useChanci = create<ChanciState>()(
       },
       updateAnswers: (data: AnsweriItem[]) => {
         set(() => ({ answers: data }));
+      },
+      updateMultiAnswers: (data: string[]) => {
+        set(() => ({ multiAnswer: data }));
       },
       updateQuestionIndex: (questionIndex: number) => {
         set({ questionIndex });
