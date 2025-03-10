@@ -23,6 +23,13 @@ const DropDownQuestion = ({ question }: DropDownQuestionProps) => {
   const [val, setVal] = useState<string>("");
   console.log({ val });
   const handleQustionIndex = () => {
+    if (
+      answers[questionIndex]?.questionId ===
+      answers[questionIndex - 1]?.questionId
+    ) {
+      updateQuestionIndex(questionIndex - 3);
+      return;
+    }
     updateQuestionIndex(questionIndex - 1);
   };
   const handleQustionNext = () => {
