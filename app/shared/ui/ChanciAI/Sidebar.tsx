@@ -13,7 +13,7 @@ const Sidebar = () => {
   const [progress, setProgress] = useState(0);
   const [sidebarLoc, setSidebarLoc] = useState([1]);
 
-  const { sidebarPostion, questionIndex, data } = useChanci();
+  const { sidebarPostion, questionIndex, data, answers } = useChanci();
   const openCareerModal = () => {
     const desc =
       "well done with the last part, now we collect your career preferences here";
@@ -35,11 +35,15 @@ const Sidebar = () => {
   const checkSidebarPostion = () => {
     if (sidebarPostion === 2) {
       setSidebarLoc([1, 2]);
-      openCareerModal();
+      if (!answers[questionIndex]?.step) {
+        openCareerModal();
+      }
     }
     if (sidebarPostion === 3) {
       setSidebarLoc([1, 2, 3]);
-      openNationalityModal();
+      if (!answers[questionIndex]?.step) {
+        openNationalityModal();
+      }
     }
     if (sidebarPostion === 4) {
       setSidebarLoc([1, 2, 3, 4]);
