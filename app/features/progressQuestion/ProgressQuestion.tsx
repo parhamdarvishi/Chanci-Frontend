@@ -14,7 +14,7 @@ interface ProgressQuestionProps {
 
 const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
   const [currentStep, setCurrentStep] = useState(0);
-  const [answerLabelStep, setAnswerLabelStep] = useState(10);
+  const [answerLabelStep, setAnswerLabelStep] = useState(0);
 
   const { updateQuestionIndex, updateAnswers, questionIndex, answers, data } =
     useChanci();
