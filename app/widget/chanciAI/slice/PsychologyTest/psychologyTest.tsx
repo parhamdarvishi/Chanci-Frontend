@@ -1,5 +1,5 @@
 import DropDownQuestion from "@/features/dropDownQuestion/DropDownQuestion";
-import OptionQuestion from "@/features/optionsQuestions/OptionQuestion";
+// import OptionQuestion from "@/features/optionsQuestions/OptionQuestion";
 import ProgressQuestion from "@/features/progressQuestion/ProgressQuestion";
 import TextQuestion from "@/features/textQuestion/TextQuestion";
 import UploadQuestion from "@/features/uploadQuestion/UploadQuestion";
@@ -11,6 +11,7 @@ import React, { useEffect } from "react";
 import style from "../style.module.scss";
 import { modals } from "@mantine/modals";
 import StepModal from "../stepModal/stepModal";
+import MultiSelectBox from "@/features/multiSelect/MultiSelect";
 
 // Define the type for the question prop
 interface Question {
@@ -92,7 +93,7 @@ const PsychologyTest: React.FC<PsychologyTestProps> = ({ question }) => {
         <DropDownQuestion question={question} answers={answers} />
       )}
       {question?.inputType === 4 && <UploadQuestion />}
-      {question?.inputType === 5 && <OptionQuestion question={question} />}
+      {question?.inputType === 5 && <MultiSelectBox question={question} />}
       {sidebarPostion === 6 && data?.length === questionIndex && (
         <div
           style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
