@@ -56,7 +56,7 @@ const SingleEvent: React.FC<{ eventId: number }> = ({ eventId }) => {
         {event ?
           <Image
             className={style.headerImg}
-            src={isMobile ? headerRes : event.bannerImagePath as string}
+            src={isMobile ? (event.mobileImagePath? event.mobileImagePath : headerRes) : event.bannerImagePath as string}
             width={0}
             height={0}
             style={{ width: '100%', height: 'auto' }}
