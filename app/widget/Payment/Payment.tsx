@@ -1,67 +1,62 @@
 "use client";
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 /* eslint-disable no-unused-expressions */
-import React, { useState, FormEvent, ChangeEvent } from "react";
-import { Box, Card, Input, Button, Text } from "@mantine/core";
+import React, { useState, FormEvent, useEffect } from "react";
+import { Box, Card, Input, Button, Select } from "@mantine/core";
 import style from "./payment.module.scss";
 import NavbarMain from "@/shared/ui/NavbarMain/navbarMain";
 import Image from "next/image";
 import arrowRight from "@public/arrowRight.svg";
 import axios from "axios";
-import * as yup from "yup";
 import { useSearchParams } from "next/navigation";
 import { API_BASE_URL } from "@/shared/config/env";
 import toastAlert from "@/shared/helpers/toast";
+import { useForm } from "@mantine/form";
 
-// Define the form data type
-interface FormData {
-  fullName: string;
-  email: string;
-}
-
-// Create a Yup schema for validation
-const schema = yup.object({
-  fullName: yup.string().min(3, "Full name must be at least 3 characters").required("Full name is required"),
-  email: yup.string().email("Invalid email format").required("Email is required"),
-});
-
+import { Event, EventsResponse } from "@/shared/types/events/event";
+import { getRequest } from "@/shared/api";
+import { eventAddresses } from "@/shared/constants/relative-url/event";
+const formatCurrency = (amount: number) : string => {
+  return new Intl.NumberFormat('en-GB', {
+    style: 'currency',
+    currency: 'GBP',
+    minimumFractionDigits: 0, // Omit fractional digits
+    maximumFractionDigits: 0, // Omit fractional digits
+  }).format(amount / 100); // Divide by 100 here
+};
 const Payment: React.FC = () => {
   const searchParams = useSearchParams()
   const eventId = searchParams.get('eventid')
-  const [formData, setFormData] = useState<FormData>({ fullName: "", email: "" });
-  const [errors, setErrors] = useState<{ fullName?: string; email?: string }>({});
+  const [event, setEvent] = useState<Event>();
   const [loading, setLoading] = useState<boolean>(false);
-
-  // Update form data state on input change
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const fieldForm = useForm({
+    initialValues: {
+      fullName: "",
+      email: "",
+      eventPaymentTypeId: null as number | null
+    },
+    validate: {
+      fullName: (value) => (value === "" ? "Please field the fullName" : null),
+      email: (value) => (value === "" ? "Please field the email" : null),
+      eventPaymentTypeId: (value) => (value === null ? "Please choose an option" : null),
+    },
+    transformValues: (values) => ({
+      eventPaymentTypeId: values.eventPaymentTypeId ? Number(values.eventPaymentTypeId) : null
+    })
+  });
 
   // Validate using Yup
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setErrors({});
-
-    try {
-      // Validate the form data; abortEarly: false collects all errors
-      await schema.validate(formData, { abortEarly: false });
-    } catch (err: any) {
-      if (err.inner) {
-        const validationErrors: { [key: string]: string } = {};
-        err.inner.forEach((error: any) => {
-          if (error.path) validationErrors[error.path] = error.message;
-        });
-        setErrors(validationErrors);
-      }
-      return;
-    }
-
+    if (fieldForm.validate().hasErrors) return;
     // Submit form data via Axios if validation passes
     setLoading(true);
     try {
+      console.log(fieldForm.values);
+      fieldForm.values.eventPaymentTypeId = Number(fieldForm.values.eventPaymentTypeId);
       const res = await axios.post(
         `${API_BASE_URL}/api/event/pay`,
-        {...formData, id: Number(eventId)},
+        { ...fieldForm.values, id: Number(eventId)   },
         {
           headers: {
             "Content-Type": "application/json",
@@ -83,7 +78,25 @@ const Payment: React.FC = () => {
       setLoading(false);
     }
   };
-
+  const eventFetch = async () => {
+    const reqBody = {
+      Id: eventId,
+      Skip: 0,
+      Take: 1,
+    };
+    const res: EventsResponse = await getRequest(
+      eventAddresses.GetbyId,
+      reqBody,
+      false
+    );
+    if (res?.isSuccess) {
+      setEvent(res.data?.items[0]);
+    }
+    return [];
+  };
+  useEffect(() => {
+    eventFetch();
+  }, []);
   return (
     <>
       <NavbarMain />
@@ -106,16 +119,11 @@ const Payment: React.FC = () => {
                 description="Please enter your full name"
               >
                 <Input
-                  name="fullName"
                   classNames={{ input: style.input }}
-                  value={formData.fullName}
-                  onChange={handleChange}
+                  placeholder="For e.g. example@gmail.com"
+                  {...fieldForm.getInputProps("fullName")}
                 />
-                {errors.fullName && <Text className={style.description} color="red" size="xs">{errors.fullName}</Text>}
               </Input.Wrapper>
-            </Box>
-
-            <Box mt="md">
               <Input.Wrapper
                 classNames={{
                   root: style.root,
@@ -124,16 +132,37 @@ const Payment: React.FC = () => {
                 }}
                 withAsterisk
                 label="Email"
-                description="Please enter your email"
               >
                 <Input
-                  name="email"
                   classNames={{ input: style.input }}
-                  value={formData.email}
-                  onChange={handleChange}
                   placeholder="For e.g. example@gmail.com"
+                  {...fieldForm.getInputProps("email")}
                 />
-                {errors.email && <Text className={style.description} color="red" size="sm">{errors.email}</Text>}
+              </Input.Wrapper>
+              <Input.Wrapper
+                classNames={{
+                  root: style.root,
+                  label: style.label,
+                  description: style.description,
+                }}
+                label="Type"
+              >
+
+                <Select
+                  checkIconPosition="right"
+                  data={event?.eventPaymentTypes.map((paymentType) => ({
+                    value: paymentType.id.toString(),
+                    label: `${paymentType.title} - ${paymentType.currency === "GBP" ? `${formatCurrency(paymentType.amount)}` : paymentType.amount}`
+                  }))}
+                  classNames={{
+                    input: style.input,
+                    label: style.label,
+                    error: style.errorMessages,
+                  }}
+                  //   dropdownOpened
+                  placeholder="Choose a payment type"
+                  {...fieldForm.getInputProps("eventPaymentTypeId")}
+                />
               </Input.Wrapper>
             </Box>
 
