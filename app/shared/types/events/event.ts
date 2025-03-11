@@ -18,6 +18,7 @@ export type Event = {
   content: string;
   bannerImagePath: string | null;
   hostDate: string;
+  eventPaymentTypes: PaymentTypes[];
 }
 export type Events = {
     data: Event[]
@@ -30,3 +31,12 @@ export interface EventsResponse {
       items: Event[]; // Adjust the type as necessary
     };
   }
+export type PaymentTypes = {
+  id: number,
+  title: string;
+  amount: number,
+  currency: string;
+  eventId: number,
+  event: null,
+  isDeleted: boolean;
+}
