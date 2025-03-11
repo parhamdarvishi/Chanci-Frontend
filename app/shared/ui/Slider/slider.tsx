@@ -12,6 +12,8 @@ interface props {
 }
 
 const Slider = ({ slides, title }: props) => {
+  console.log({ slides });
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const cardsToShow = 3;
@@ -81,17 +83,16 @@ const Slider = ({ slides, title }: props) => {
                   className={style.image}
                 />
               </div>
-              {title && (
-                <div className={style.content}>
-                  <h3>{slide.title}</h3>
-                  <p>{slide.description}</p>
-                  <Link href={`/blog/${slide?.id}`} className={style.readMore}>
-                    {" "}
-                    Read More
-                    <Image src={arrowSlide} alt="arrowSlide" />
-                  </Link>
-                </div>
-              )}
+
+              <div className={style.content}>
+                <h3>{slide.title}</h3>
+                <p>{slide.description}</p>
+                <Link href={`/blog/${slide?.id}`} className={style.readMore}>
+                  {" "}
+                  Read More
+                  <Image src={arrowSlide} alt="arrowSlide" />
+                </Link>
+              </div>
             </Link>
           ))}
         </div>
