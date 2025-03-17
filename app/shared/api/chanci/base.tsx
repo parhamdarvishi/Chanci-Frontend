@@ -5,18 +5,20 @@ import cookie from "@shared/helpers/cookie";
 import { USER_TOKEN } from "@shared/helpers/cookie/types";
 import { OptionsTypes } from "@shared/api/chanci/model";
 import { API_BASE_URL } from "@/shared/config/env";
-
+let instance: AxiosInstance | null = null;
 const base = (
   authorization: boolean = false,
   excel?: boolean,
   upload?: boolean
 ): AxiosInstance => {
+  if (instance) return instance;
   const headers = {
     "Content-Type": upload
       ? ("multipart/form-data" as const)
       : ("application/json" as const),
     Connection: "keep-alive",
   };
+  //const router = useRouter();
   const options: OptionsTypes = {
     baseURL: API_BASE_URL,
     headers: headers,
@@ -25,15 +27,13 @@ const base = (
   if (excel) {
     options["responseType"] = "blob";
   }
-
   if (authorization) {
     const userToken = cookie?.getCookie(USER_TOKEN);
     if (userToken) {
       options.headers["Authorization"] = "Bearer " + JSON.parse(userToken);
     }
   }
-  const instance = axios.create(options as CreateAxiosDefaults<OptionsTypes>);
-
+  instance = axios.create(options as CreateAxiosDefaults<OptionsTypes>);
   instance.interceptors.request.use(
     function (config) {
       // Do something before the request is sent
@@ -45,20 +45,22 @@ const base = (
     }
   );
 
-  const responseInterceptor = instance.interceptors.response.use(
+  instance.interceptors.response.use(
     function (response) {
       return response;
     },
     function (error) {
       if (error.response) {
         if (error.response.status === 401) {
-          // todo: delete user from storage
-          window.location.href = "/login";
-          return;
+          // todo: delete user from storage - Update: User token deleted from cookie
+          cookie.deleteCookie(USER_TOKEN); // Clear token
+          window.location.href = "/ChanciAI/login";
+          //router.push('/login')
+          //return;
         }
         if (error.response.status >= 500 && error.response.status < 600) {
           if (error.response.headers.expires == "-1") {
-            return;
+            //return;
           }
           toastAlert(
             error.response.data?.message ?? error.response.statusText,
@@ -81,18 +83,15 @@ const base = (
         log(error.response.status);
         log(error.response.statusText);
         log(error.response.headers);
-      } /*else if (error.request) {
-    // The request was made but no response was received
-    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-    // http.ClientRequest in node.js
- 
-  }*/ else {
+
+      } else {
         toastAlert(error.message, "error");
         log("Error:", error.message);
       }
+      return Promise.reject(error); // Always reject
     }
   );
-  instance.interceptors.response.eject(responseInterceptor);
+  //instance.interceptors.response.eject(responseInterceptor); // I commented this line because it terminated the instance and used new one
   return instance;
 };
 
