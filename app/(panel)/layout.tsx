@@ -1,16 +1,9 @@
 "use client";
-import { Card, Grid, GridCol, MantineProvider } from "@mantine/core";
+import { Card, Grid, GridCol } from "@mantine/core";
 import "@mantine/core/styles.css";
 import "../globals.css";
-import { Poppins } from "next/font/google";
-import { ToastContainer } from "react-toastify";
 import PanelSidebar from "@/shared/ui/panel/PanelSidebar";
 
-const poppins = Poppins({
-  weight: ["400", "500", "600", "700"],
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export default function ChanciRootLayout({
   children,

@@ -35,7 +35,7 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
         }
     }
     const getData = async () => {
-        let query = {
+        const query = {
             Skip: activePage - 1,
             Take: rowsPerPage,
         };
