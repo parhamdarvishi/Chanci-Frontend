@@ -1,11 +1,16 @@
 .inpMultiSelect {
-  min-height: 60px !important;
+  min-height: 90px !important;
   width: 100% !important;
   height: 100% !important;
   border-radius: 8px !important;
   padding: 1rem 0.6rem !important;
   display: flex;
   align-items: center;
+}
+.labelMultiSelect {
+  width: 100% !important;
+  text-align: start !important;
+  padding-left: 0.5rem !important;
 }
 .wrapper {
   display: flex;
