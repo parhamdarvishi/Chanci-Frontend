@@ -48,25 +48,24 @@ const Login = () => {
 
     if (fieldForm.validate().hasErrors) return;
     setLoading(true);
-    const res = await axios.post(
-      `${API_BASE_URL}${authAddresses.login}`,
-      fieldForm.values,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    console.log({ res });
-    console.log(res?.data?.data?.token);
-    if (res?.data?.isSuccess) {
-      // toastAlert(res?.data?.message as string, "success");
+
+    try {
+      const res = await axios.post(
+        `${API_BASE_URL}${authAddresses.login}`,
+        fieldForm.values,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       cookie.setCookie(USER_TOKEN, JSON.stringify(res?.data?.data?.token));
       setLoading(false);
-      console.log(res?.data?.token);
       handleChanci();
-    } else {
-      toastAlert(res?.data?.message as string, "error");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      const message = error?.response?.data?.message;
+      toastAlert(message as string, "error");
       setLoading(false);
       return;
     }
