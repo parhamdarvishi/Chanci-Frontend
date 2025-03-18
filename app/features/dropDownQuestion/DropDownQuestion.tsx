@@ -135,7 +135,6 @@ const DropDownQuestion = ({ question }: DropDownQuestionProps) => {
               defaultValue={val !== "" ? val : ""}
               value={val}
               comboboxProps={{
-                position: "top",
                 middlewares: { flip: false, shift: false },
               }}
             />
