@@ -73,11 +73,12 @@ const Navbar = () => {
     });
 
   const handleChanci = () => {
-    // if (Token) {
-    //   router.push("/ChanciAI/panel");
-    //   return;
-    // }
-    router.push("/ChanciAI/register");
+    if (Token) {
+      router.push("/ChanciAI/panel");
+      return;
+    } else {
+      router.push("/ChanciAI/register");
+    }
   };
 
   //UseEffect
