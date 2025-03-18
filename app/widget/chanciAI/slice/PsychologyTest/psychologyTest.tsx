@@ -40,7 +40,7 @@ const PsychologyTest: React.FC<PsychologyTestProps> = ({ question }) => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       answers: answers.map(({ step, ...rest }) => rest),
     };
-    await postRequest(userAddresses.userAnswers, reqbody, false);
+    await postRequest(userAddresses.userAnswers, reqbody, true);
   };
   const openModal = () => {
     const desc =
