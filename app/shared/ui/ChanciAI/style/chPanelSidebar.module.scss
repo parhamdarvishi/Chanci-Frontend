@@ -16,12 +16,25 @@
   .progressPart {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.1rem;
     margin-top: 0.5rem;
     .progressPartBox {
       cursor: pointer;
       border-radius: 12px;
-      padding: 0.5rem 1rem;
+      padding: 1.5rem 1rem;
+      gap: 0.5rem;
+      font-size: 16px;
+      color: #fff;
+      font-weight: 400;
+      height: 40px;
+      display: flex;
+      align-items: center;
+    }
+    .progressPartBoxActive {
+      cursor: default !important;
+      background-color: rgba(128, 128, 128, 0.345);
+      border-radius: 12px;
+      padding: 1.5rem 1rem;
       gap: 0.5rem;
       font-size: 16px;
       color: #fff;
