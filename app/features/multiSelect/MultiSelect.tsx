@@ -55,7 +55,7 @@ const MultiSelectBox = ({ question }: DropDownQuestionProps) => {
     } else {
       setHasChanges(false);
     }
-    // debugger;
+
     // if (answers[questionIndex]) {
     //   const answerIndex = answers.findIndex(
     //     (item) => item?.answerId === answers[questionIndex]?.answerId
@@ -140,7 +140,6 @@ const MultiSelectBox = ({ question }: DropDownQuestionProps) => {
     checkSubBtn();
     // setVal("");
   }, [question]);
-
   return (
     <div className={style.wrapper}>
       <Box className={style.userBox}>
