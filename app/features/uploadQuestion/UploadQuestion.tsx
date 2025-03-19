@@ -8,6 +8,8 @@ import { IconArrowNarrowLeft, IconPhotoDown } from "@tabler/icons-react";
 import { useChanci } from "@/shared/stateManagement/UseChanci/useChanci";
 import chanciIcon from "@public/image/chanciAI/icon/chanciCh.svg";
 import Image from "next/image";
+import { postRequest } from "@/shared/api";
+import { chanciAddresses } from "@/shared/constants/relative-url/chanci";
 
 const UploadQuestion = () => {
   const [fileName, setFileName] = useState<string | null>(null);
@@ -21,15 +23,15 @@ const UploadQuestion = () => {
     }
     const formData = new FormData();
     formData.append("File", file as File);
-    // const { isSuccess } = await postRequest(
-    //   chanciAddresses.Add,
-    //   formData,
-    //   true,
-    //   true
-    // );
-    // if (isSuccess) {
-    updateQuestionIndex(questionIndex + 1);
-    // }
+    const { isSuccess } = await postRequest(
+      chanciAddresses.Add,
+      formData,
+      true,
+      true
+    );
+    if (isSuccess) {
+      updateQuestionIndex(questionIndex + 1);
+    }
   };
   const handleQustionIndex = () => {
     updateQuestionIndex(questionIndex - 1);
