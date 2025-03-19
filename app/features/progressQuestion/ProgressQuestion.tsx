@@ -26,7 +26,6 @@ const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
 
   const steps = [0, 25, 50, 75, 100];
   const labels = ["Strongly Disagree", "Neutral", "Strongly Agree"];
-  console.log(steps[currentStep]);
   const handleQustionIndex = () => {
     updateQuestionIndex(questionIndex - 1);
   };
@@ -135,7 +134,6 @@ const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
           step: answerLabelStep,
         });
       }
-      console.log({ filterAnswer });
       setCurrentStep(0);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       updateAnswers(filterAnswer as any);

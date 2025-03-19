@@ -32,8 +32,6 @@ const PsychologyTest: React.FC<PsychologyTestProps> = ({ question }) => {
     sidebarPostion,
     data,
   } = useChanci();
-  console.log({ data });
-  console.log({ questionIndex });
 
   const sendAnswers = async () => {
     const reqbody = {

@@ -16,33 +16,36 @@ import { useForm } from "@mantine/form";
 import { Event, EventsResponse } from "@/shared/types/events/event";
 import { getRequest } from "@/shared/api";
 import { eventAddresses } from "@/shared/constants/relative-url/event";
-const formatCurrency = (amount: number) : string => {
-  return new Intl.NumberFormat('en-GB', {
-    style: 'currency',
-    currency: 'GBP',
+const formatCurrency = (amount: number): string => {
+  return new Intl.NumberFormat("en-GB", {
+    style: "currency",
+    currency: "GBP",
     minimumFractionDigits: 0, // Omit fractional digits
     maximumFractionDigits: 0, // Omit fractional digits
   }).format(amount / 100); // Divide by 100 here
 };
 const Payment: React.FC = () => {
-  const searchParams = useSearchParams()
-  const eventId = searchParams.get('eventid')
+  const searchParams = useSearchParams();
+  const eventId = searchParams.get("eventid");
   const [event, setEvent] = useState<Event>();
   const [loading, setLoading] = useState<boolean>(false);
   const fieldForm = useForm({
     initialValues: {
       fullName: "",
       email: "",
-      eventPaymentTypeId: null as number | null
+      eventPaymentTypeId: null as number | null,
     },
     validate: {
       fullName: (value) => (value === "" ? "Please field the fullName" : null),
       email: (value) => (value === "" ? "Please field the email" : null),
-      eventPaymentTypeId: (value) => (value === null ? "Please choose an option" : null),
+      eventPaymentTypeId: (value) =>
+        value === null ? "Please choose an option" : null,
     },
     transformValues: (values) => ({
-      eventPaymentTypeId: values.eventPaymentTypeId ? Number(values.eventPaymentTypeId) : null
-    })
+      eventPaymentTypeId: values.eventPaymentTypeId
+        ? Number(values.eventPaymentTypeId)
+        : null,
+    }),
   });
 
   // Validate using Yup
@@ -52,11 +55,12 @@ const Payment: React.FC = () => {
     // Submit form data via Axios if validation passes
     setLoading(true);
     try {
-      console.log(fieldForm.values);
-      fieldForm.values.eventPaymentTypeId = Number(fieldForm.values.eventPaymentTypeId);
+      fieldForm.values.eventPaymentTypeId = Number(
+        fieldForm.values.eventPaymentTypeId
+      );
       const res = await axios.post(
         `${API_BASE_URL}/api/event/pay`,
-        { ...fieldForm.values, id: Number(eventId)   },
+        { ...fieldForm.values, id: Number(eventId) },
         {
           headers: {
             "Content-Type": "application/json",
@@ -101,10 +105,17 @@ const Payment: React.FC = () => {
     <>
       <NavbarMain />
       <div className={style.paymentWrapper}>
-        <Card shadow="sm" padding="lg" radius="md" withBorder className={style.paymentCard}>
+        <Card
+          shadow="sm"
+          padding="lg"
+          radius="md"
+          withBorder
+          className={style.paymentCard}
+        >
           <p>
-            Please enter your full name and email address and click the button to proceed
-            with your payment and complete the booking process for participating in the event.
+            Please enter your full name and email address and click the button
+            to proceed with your payment and complete the booking process for
+            participating in the event.
           </p>
           <form onSubmit={handleSubmit}>
             <Box>
@@ -147,12 +158,15 @@ const Payment: React.FC = () => {
                 }}
                 label="Type"
               >
-
                 <Select
                   checkIconPosition="right"
                   data={event?.eventPaymentTypes.map((paymentType) => ({
                     value: paymentType.id.toString(),
-                    label: `${paymentType.title} - ${paymentType.currency === "GBP" ? `${formatCurrency(paymentType.amount)}` : paymentType.amount}`
+                    label: `${paymentType.title} - ${
+                      paymentType.currency === "GBP"
+                        ? `${formatCurrency(paymentType.amount)}`
+                        : paymentType.amount
+                    }`,
                   }))}
                   classNames={{
                     input: style.input,
@@ -166,10 +180,21 @@ const Payment: React.FC = () => {
               </Input.Wrapper>
             </Box>
 
-            <Button type="submit" className={style.button} mt="lg" loading={loading} disabled={!eventId}>
+            <Button
+              type="submit"
+              className={style.button}
+              mt="lg"
+              loading={loading}
+              disabled={!eventId}
+            >
               Pay Now
               {!loading && (
-                <Image className={style.cardArrow} src={arrowRight} alt="arrowRight" width={22} />
+                <Image
+                  className={style.cardArrow}
+                  src={arrowRight}
+                  alt="arrowRight"
+                  width={22}
+                />
               )}
             </Button>
           </form>
