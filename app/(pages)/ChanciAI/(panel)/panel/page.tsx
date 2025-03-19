@@ -13,9 +13,7 @@ const Page = () => {
   const [userData, setUserData] = useState<userDataType>();
   const getuserProfile = async () => {
     const res = await getRequest(chanciAddresses.profile, null, true);
-    console.log({ res });
     if (res?.isSuccess) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       setUserData(res?.data as userDataType);
     }
   };
