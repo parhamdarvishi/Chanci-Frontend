@@ -24,7 +24,6 @@ const MultiSelectBox = ({ question }: DropDownQuestionProps) => {
     updateMultiAnswers,
   } = useChanci();
   const [value, setValue] = useState<string[]>(multiAnswer);
-  console.log({ answers });
   const handleQustionIndex = () => {
     updateQuestionIndex(questionIndex - 1);
   };
@@ -167,7 +166,10 @@ const MultiSelectBox = ({ question }: DropDownQuestionProps) => {
               nothingFoundMessage="Nothing found..."
               checkIconPosition="right"
               style={{ width: "100%" }}
-              classNames={{ input: style.inpMultiSelect }}
+              classNames={{
+                input: style.inpMultiSelect,
+                label: style.labelMultiSelect,
+              }}
               label="Select up to 3 Industries"
               data={dropD}
               value={value}

@@ -17,11 +17,9 @@ interface DropDownQuestionProps {
 const DropDownQuestion = ({ question }: DropDownQuestionProps) => {
   const { answers, updateQuestionIndex, updateAnswers, questionIndex, data } =
     useChanci();
-  console.log(answers);
 
   const [dropD, setDropD] = useState([]);
   const [val, setVal] = useState<string>("");
-  console.log({ val });
   const handleQustionIndex = () => {
     if (
       answers[questionIndex]?.questionId ===
@@ -93,7 +91,6 @@ const DropDownQuestion = ({ question }: DropDownQuestionProps) => {
     if (answers[questionIndex]?.step) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       data[questionIndex]?.answers.forEach((element: any) => {
-        console.log({ element });
         if (element?.id === answers[questionIndex]?.step) {
           setVal(element?.text);
         }
