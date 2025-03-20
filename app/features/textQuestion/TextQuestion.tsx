@@ -16,6 +16,7 @@ const TextQuestion: React.FC<TextQuestionProps> = ({ question }) => {
 
   const { updateQuestionIndex, updateAnswers, questionIndex, answers } =
     useChanci();
+
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key === "Enter") {
       if (answers[questionIndex]) {
@@ -31,7 +32,6 @@ const TextQuestion: React.FC<TextQuestionProps> = ({ question }) => {
             questionId: question?.id,
             answerId: Number(value),
             step: Number(value),
-            // @ts-expect-error: Ignoring TypeScript error due to array spread
             text: value,
           });
         }
@@ -63,11 +63,46 @@ const TextQuestion: React.FC<TextQuestionProps> = ({ question }) => {
   const handleQustionNext = () => {
     updateQuestionIndex(questionIndex + 1);
   };
+  const handleAnswer = (event: React.SyntheticEvent) => {
+    if (answers[questionIndex]) {
+      const answerIndex = answers.findIndex(
+        (item) => item?.questionId === answers[questionIndex]?.questionId
+      );
+
+      const filterAnswer = answers; // Create a copy of the array
+      if (answerIndex !== -1) {
+        // Remove the item at answerIndex and insert the new answer
+
+        filterAnswer.splice(answerIndex, 1, {
+          questionId: question?.id,
+          answerId: Number(value),
+          step: Number(value),
+          text: value,
+        });
+      }
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      updateAnswers(filterAnswer as any);
+      updateQuestionIndex(questionIndex + 1);
+      return;
+    }
+    const answer = {
+      questionId: question?.id,
+      answerId: 0,
+      step: 0,
+      text: value,
+    };
+
+    const allAnswer = answers;
+    allAnswer.push(answer);
+    updateAnswers(allAnswer);
+    updateQuestionIndex(questionIndex + 1);
+    event.preventDefault();
+  };
   useEffect(() => {
-    // @ts-expect-error: Ignoring TypeScript error due to array spread
-    if (answers[questionIndex]?.text) {
+    if (answers[questionIndex - 1]?.text) {
       // @ts-expect-error: Ignoring TypeScript error due to array spread
-      setValue(answers[questionIndex]?.text);
+      setValue(answers[questionIndex - 1]?.text);
       return;
     }
     setValue("");
@@ -111,6 +146,13 @@ const TextQuestion: React.FC<TextQuestionProps> = ({ question }) => {
             className={style.questionImg}
           />
         </Box>
+        {answers[questionIndex - 1]?.text !== value && (
+          <Box style={{ display: "flex", justifyContent: "end" }}>
+            <div className={style.btnChanci} onClick={handleAnswer}>
+              submit
+            </div>
+          </Box>
+        )}
       </Box>
       <Box style={{ display: "flex", width: "100%" }}>
         <Box
@@ -138,16 +180,14 @@ const TextQuestion: React.FC<TextQuestionProps> = ({ question }) => {
             <IconArrowNarrowLeft size={30} />
           </Button>
         </Box>
+
         <Box
           style={{
-            // @ts-expect-error: Ignoring TypeScript error due to array spread
             opacity: answers[questionIndex]?.text ? 1 : 0,
-            // @ts-expect-error: Ignoring TypeScript error due to array spread
             transform: answers[questionIndex]?.text
               ? "translateX(0)"
               : "translateX(20px)",
             transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-            // @ts-expect-error: Ignoring TypeScript error due to array spread
             visibility: answers[questionIndex]?.text ? "visible" : "hidden",
           }}
         >
