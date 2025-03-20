@@ -7,12 +7,14 @@ interface AnsweriItem {
   questionId: string;
   answerId: number;
   step: number;
+  text?: string;
 }
 
 // Define the type for the store state
 interface ChanciState {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any;
+  fileName: string;
   answers: AnsweriItem[];
   multiAnswer: string[];
   sidebarPostion: number;
@@ -22,6 +24,7 @@ interface ChanciState {
   updateMultiAnswers: (data: string[]) => void;
   updateQuestionIndex: (data: number) => void;
   UpdateSidebarPostion: (data: number) => void;
+  updateFileName: (data: string) => void;
   questionIndex: number;
 }
 
@@ -31,6 +34,7 @@ export const useChanci = create<ChanciState>()(
       data: [],
       answers: [],
       multiAnswer: [],
+      fileName: "",
       questionIndex: 0,
       sidebarPostion: 1,
       updateData: (data) => {
@@ -47,6 +51,9 @@ export const useChanci = create<ChanciState>()(
       },
       UpdateSidebarPostion: (sidebarPostion: number) => {
         set({ sidebarPostion });
+      },
+      updateFileName: (fileName: string) => {
+        set(() => ({ fileName }));
       },
     }),
     {
