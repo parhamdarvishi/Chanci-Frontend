@@ -1,8 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import style from "./style.module.scss";
 import { Avatar, Box, Button, Card } from "@mantine/core";
-import { IconArrowNarrowLeft, IconPhotoDown } from "@tabler/icons-react";
+import {
+  IconArrowNarrowLeft,
+  IconArrowNarrowRight,
+  IconPhotoDown,
+} from "@tabler/icons-react";
 // import { postRequest } from "@/shared/api";
 // import { chanciAddresses } from "@/shared/constants/relative-url/chanci";
 import { useChanci } from "@/shared/stateManagement/UseChanci/useChanci";
@@ -12,15 +16,16 @@ import { postRequest } from "@/shared/api";
 import { chanciAddresses } from "@/shared/constants/relative-url/chanci";
 
 const UploadQuestion = () => {
-  const [fileName, setFileName] = useState<string | null>(null);
-  const { updateQuestionIndex, questionIndex } = useChanci();
+  const { updateQuestionIndex, questionIndex, updateFileName, fileName } =
+    useChanci();
+
   const handleFileChange = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const file = event.target.files?.[0];
-    if (file) {
-      setFileName(file.name); // Set the file name in state
-    }
+    // if (file) {
+    //   setUploadFileName(file.name); // Set the file name in state
+    // }
     const formData = new FormData();
     formData.append("File", file as File);
     const { isSuccess } = await postRequest(
@@ -30,15 +35,18 @@ const UploadQuestion = () => {
       true
     );
     if (isSuccess) {
+      updateFileName(file?.name || "");
       updateQuestionIndex(questionIndex + 1);
     }
   };
+
   const handleQustionIndex = () => {
     updateQuestionIndex(questionIndex - 1);
   };
-  // const handleQustionNext = () => {
-  //   updateQuestionIndex(questionIndex + 1);
-  // };
+
+  const handleQustionNext = () => {
+    updateQuestionIndex(questionIndex + 1);
+  };
   return (
     <div className={style.wrapper}>
       <Box className={style.userBox}>
@@ -66,7 +74,7 @@ const UploadQuestion = () => {
               style={{ display: "flex", gap: ".3rem", flexDirection: "column" }}
             >
               <strong>Upload your File </strong>
-              <p style={{ color: "#2E2E2E" }}>File should be JPG, PNG, PDF</p>
+              <p style={{ color: "#2E2E2E" }}>File should be doc , docx</p>
             </div>
 
             <div className={style.uploader}>
@@ -79,7 +87,7 @@ const UploadQuestion = () => {
 
               <input
                 type="file"
-                accept=".pdf,.doc,.docx"
+                accept=".doc,.docx"
                 onChange={handleFileChange}
                 style={{ display: "none" }} // Hide the default file input
                 id="file-upload"
@@ -122,19 +130,13 @@ const UploadQuestion = () => {
             <IconArrowNarrowLeft size={30} />
           </Button>
         </Box>
-        {/* <Box
+        <Box
           style={{
-            opacity:
-              steps[currentStep] === answers[questionIndex]?.step ? 1 : 0,
-            transform:
-              steps[currentStep] === answers[questionIndex]?.step
-                ? "translateX(0)"
-                : "translateX(20px)",
+            opacity: fileName !== "" ? 1 : 0,
+
+            transform: fileName !== "" ? "translateX(0)" : "translateX(20px)",
             transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-            visibility:
-              steps[currentStep] === answers[questionIndex]?.step
-                ? "visible"
-                : "hidden",
+            visibility: fileName !== "" ? "visible" : "hidden",
           }}
         >
           <Button
@@ -151,7 +153,7 @@ const UploadQuestion = () => {
           >
             <IconArrowNarrowRight size={30} />
           </Button>
-        </Box> */}
+        </Box>
       </Box>
     </div>
   );
