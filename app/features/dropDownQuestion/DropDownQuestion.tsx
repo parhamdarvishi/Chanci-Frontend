@@ -19,21 +19,47 @@ const DropDownQuestion = ({ question }: DropDownQuestionProps) => {
     useChanci();
 
   const [dropD, setDropD] = useState([]);
-  const [val, setVal] = useState<string>("");
-  const handleQustionIndex = () => {
-    if (
-      answers[questionIndex]?.questionId ===
-      answers[questionIndex - 1]?.questionId
-    ) {
-      updateQuestionIndex(questionIndex - 3);
+  const [val, setVal] = useState<string | null>("");
+
+  const handleQustionIndex = (): void => {
+    // Check if we can potentially go back 3 questions
+    if (questionIndex < 3) {
+      // Not enough previous questions to check, go back 1
+      updateQuestionIndex(questionIndex - 1);
       return;
     }
-    updateQuestionIndex(questionIndex - 1);
+
+    // Get references to the three previous answers
+    const previousAnswers = [
+      answers[questionIndex - 1],
+      answers[questionIndex - 2],
+      answers[questionIndex - 3],
+    ];
+
+    // Ensure all three previous answers exist
+    if (previousAnswers.some((answer) => !answer)) {
+      updateQuestionIndex(questionIndex - 1);
+      return;
+    }
+
+    // Check if all three previous answers have the same questionId
+    const allSameQuestionId = previousAnswers.every(
+      (answer) => answer.questionId === previousAnswers[0].questionId
+    );
+
+    // Navigate based on the pattern detected
+    if (allSameQuestionId) {
+      updateQuestionIndex(questionIndex - 3);
+    } else {
+      updateQuestionIndex(questionIndex - 1);
+    }
   };
+
   const handleQustionNext = () => {
     updateQuestionIndex(questionIndex + 1);
   };
-  const fun = () => {
+
+  const dropDownData = () => {
     if (question?.answers?.length > 0) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const drop: any = [];
@@ -83,21 +109,22 @@ const DropDownQuestion = ({ question }: DropDownQuestionProps) => {
   };
 
   useEffect(() => {
-    fun();
-    // setVal("");
+    dropDownData();
   }, [question]);
 
   useEffect(() => {
+    // if()
     if (answers[questionIndex]?.step) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       data[questionIndex]?.answers.forEach((element: any) => {
         if (element?.id === answers[questionIndex]?.step) {
-          setVal(element?.text);
+          const answer = JSON.stringify(element?.id);
+          setVal(answer);
         }
       });
       return;
     }
-    setVal("");
+    setVal(null);
   }, [questionIndex]);
 
   return (
@@ -195,19 +222,6 @@ const DropDownQuestion = ({ question }: DropDownQuestionProps) => {
             <IconArrowNarrowRight size={30} />
           </Button>
         </Box>
-        {val !== "" && (
-          <Box
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "1rem",
-              marginLeft: "400px",
-            }}
-          >
-            <div style={{ color: "#0063F5" }}>your Answer : </div>
-            <div> {val !== "" ? val : ""}</div>
-          </Box>
-        )}
       </Box>
     </div>
   );
