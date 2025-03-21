@@ -1,6 +1,6 @@
 "use client";
 import { Box, Card, Divider } from "@mantine/core";
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import style from "./style/panelSidebar.module.scss";
 import Title from "@public/image/widget/Frame.svg";
 import Image from "next/image";
@@ -11,11 +11,13 @@ import { useRouter } from "next/navigation";
 import { UserMenu } from "@/shared/types/users/user";
 const LogoutButton = () => {
   const router = useRouter();
-  const handleSubmit = () => {
-    cookie.deleteCookie("USER_TOKEN");
-    localStorage.removeItem("userMenu");
-    router.push('/');
-  }
+  const handleSubmit = useCallback(() => {
+    if (typeof window !== "undefined") {
+      cookie.deleteCookie("USER_TOKEN");
+      localStorage.removeItem("userMenu"); // Remove localStorage item
+    }
+    router.push("/");
+  }, [router]);
   return (
     <div onClick={() => handleSubmit()} className={style.progressPartBox}>
       <IconLogout />
@@ -25,7 +27,12 @@ const LogoutButton = () => {
 }
 
 const PanelSidebar = () => {
-  const userMenu: Array<UserMenu> = JSON.parse(localStorage.getItem("userMenu") || "[]");
+  const [userMenu, setUserMenu] = useState<Array<UserMenu>>([]);
+  useEffect(()=>{
+    if(typeof window !== 'undefined'){
+      setUserMenu(JSON.parse(localStorage.getItem("userMenu") || "[]"));
+    }
+  }, []);
   return (
     <Card shadow="sm" padding="lg" className={style.wrapper}>
       <Box>
