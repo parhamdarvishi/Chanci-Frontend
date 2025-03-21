@@ -1,4 +1,4 @@
-type UserMenu = {
+export type UserMenu = {
     id: number;
     parentId: number;
     title: string;
