@@ -71,7 +71,7 @@ const baseUpload = (authorization: boolean = false): AxiosInstance => {
         if (error.response.status === 401) {
           cookie.deleteCookie(USER_TOKEN);
           authorizedInstance = null;
-          window.location.href = "/ChanciAI/login";
+          window.location.href = "/user/login";
           return Promise.reject(error);
         }
 

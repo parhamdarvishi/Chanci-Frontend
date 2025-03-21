@@ -41,7 +41,7 @@ const Navbar = () => {
       router.push("/user/profile");
       return;
     }
-    router.push("/ChanciAI/register");
+    router.push("/user/register");
   };
 
   const handleComingSoon = () => {
@@ -78,7 +78,7 @@ const Navbar = () => {
       router.push("/user/profile");
       return;
     } else {
-      router.push("/ChanciAI/register");
+      router.push("/user/register");
     }
   };
 

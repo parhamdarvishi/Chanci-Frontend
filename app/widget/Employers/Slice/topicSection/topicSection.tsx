@@ -45,7 +45,7 @@ const TopicSection = ({
     windowWidth > 768 ? image : condidates ? condidatesRes : balanceRes;
 
   const handleChanci = () => {
-    router.push("/ChanciAI/register");
+    router.push("/user/register");
   };
 
   return (

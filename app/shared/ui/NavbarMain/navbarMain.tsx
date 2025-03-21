@@ -36,7 +36,7 @@ const NavbarMain = () => {
     setLoc(index);
   };
   const handleLogin = () => {
-    router.push("/ChanciAI/register");
+    router.push("/user/register");
   };
   useEffect(() => {
     if (findPath === "ComingSoon") {

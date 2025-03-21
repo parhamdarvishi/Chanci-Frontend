@@ -43,7 +43,7 @@ const Register = () => {
   });
 
   const handleChanci = () => {
-    router.push("/ChanciAI/login");
+    router.push("/user/login");
   };
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
