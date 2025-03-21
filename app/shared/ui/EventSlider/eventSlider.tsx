@@ -10,7 +10,7 @@ import { Events } from "@/shared/types/events/event";
 import UpComing from "@/widget/Events/Slice/upcoming/UpComing";
 import { formatDate } from "@/shared/helpers/util";
 
-const EventSlider : React.FC<Events > = ({data}) => {
+const EventSlider: React.FC<Events> = ({ data }) => {
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     const handleResize = () => {
@@ -50,7 +50,7 @@ const EventSlider : React.FC<Events > = ({data}) => {
     e.preventDefault();
     const x = e.pageX - (sliderRef.current?.offsetLeft || 0);
     const walk = (x - startX) * 2; // Adjust scroll speed
-    if(sliderRef.current){
+    if (sliderRef.current) {
       sliderRef.current!.scrollLeft = scrollLeft - walk;
     }
   };
@@ -58,7 +58,7 @@ const EventSlider : React.FC<Events > = ({data}) => {
     if (sliderRef.current) {
       sliderRef.current.scrollTo({
         left: sliderRef.current.offsetWidth * index,
-        behavior: 'smooth',
+        behavior: "smooth",
       });
       setActiveIndex(index);
     }
@@ -71,93 +71,113 @@ const EventSlider : React.FC<Events > = ({data}) => {
       // Assuming each slide is full width (equal to slider container width)
       const slideWidth = slider.offsetWidth;
       const index = Math.round(slider.scrollLeft / slideWidth);
-      console.log(index);
       setActiveIndex(index);
     };
 
-    slider.addEventListener('scroll', handleScroll);
-    return () => slider.removeEventListener('scroll', handleScroll);
+    slider.addEventListener("scroll", handleScroll);
+    return () => slider.removeEventListener("scroll", handleScroll);
   }, []);
   return (
     <>
-    <div className={style.sliderContainer}>
-      <div
-        className={style.slider}
-        ref={sliderRef}
-        onMouseDown={handleMouseDown}
-        onMouseLeave={handleMouseLeave}
-        onMouseUp={handleMouseUp}
-        onMouseMove={handleMouseMove}
-      >
-        {data.map((event, index) => {
-          return(
-            <div key={index} className={`${style.card} ${activeIndex === index ? style.active : ''}`}
-            onClick={() => {scrollToSlide(index)}}>
-            <Image src={event.cardImagePath ? event.cardImagePath : img1} width={280} height={256} alt={`Event ${index}`} className={style.imgCard} />
-            <div className={style.desc}>
-              <h3>{event?.longTitle}</h3>
-              <p>
-                {isMobile
-                  ? "An exclusive event featuring top founders ..."
-                  : event?.description}
-              </p>
-              <div className={style.cardIc}>
-                <div
-                  style={{ display: "flex", alignItems: "center", gap: ".3rem" }}
-                >
-                  <Image src={calendar} alt="calendar" />
-                  <p style={{ color: "#878787", fontSize: "14px" }}>
-                    {event?.hostDate && formatDate(event.hostDate)}
-                  </p>
-                </div>
-                <div
-                  style={{ display: "flex", alignItems: "center", gap: ".3rem" }}
-                >
-                  <Image src={clock} alt="clock" />
-                  <p style={{ color: "#878787", fontSize: "14px" }}>
-                    {`${event.start}-${event.end}`}
-                  </p>
-                </div>
-              </div>
+      <div className={style.sliderContainer}>
+        <div
+          className={style.slider}
+          ref={sliderRef}
+          onMouseDown={handleMouseDown}
+          onMouseLeave={handleMouseLeave}
+          onMouseUp={handleMouseUp}
+          onMouseMove={handleMouseMove}
+        >
+          {data.map((event, index) => {
+            return (
               <div
-                style={{
-                  display: "flex",
-                  paddingTop: "0rem",
-                  paddingBottom: ".5rem",
+                key={index}
+                className={`${style.card} ${
+                  activeIndex === index ? style.active : ""
+                }`}
+                onClick={() => {
+                  scrollToSlide(index);
                 }}
               >
-                <Link
-                  href={`/Events/${event?.id}`}
-                  className={style.button}
-                  style={{
-                    borderRadius: "16px",
-                    fontSize: "16px",
-                    height: "46px",
-                    fontWeight: "400",
-                  }}
-                >
-                  {isMobile ? "Register" : "Register the Event"}
-  
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+                <Image
+                  src={event.cardImagePath ? event.cardImagePath : img1}
+                  width={280}
+                  height={256}
+                  alt={`Event ${index}`}
+                  className={style.imgCard}
+                />
+                <div className={style.desc}>
+                  <h3>{event?.longTitle}</h3>
+                  <p>
+                    {isMobile
+                      ? "An exclusive event featuring top founders ..."
+                      : event?.description}
+                  </p>
+                  <div className={style.cardIc}>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: ".3rem",
+                      }}
+                    >
+                      <Image src={calendar} alt="calendar" />
+                      <p style={{ color: "#878787", fontSize: "14px" }}>
+                        {event?.hostDate && formatDate(event.hostDate)}
+                      </p>
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: ".3rem",
+                      }}
+                    >
+                      <Image src={clock} alt="clock" />
+                      <p style={{ color: "#878787", fontSize: "14px" }}>
+                        {`${event.start}-${event.end}`}
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      paddingTop: "0rem",
+                      paddingBottom: ".5rem",
+                    }}
                   >
-                    <path d="M5 12h14" />
-                    <path d="m12 5 7 7-7 7" />
-                  </svg>
-                </Link>
+                    <Link
+                      href={`/Events/${event?.id}`}
+                      className={style.button}
+                      style={{
+                        borderRadius: "16px",
+                        fontSize: "16px",
+                        height: "46px",
+                        fontWeight: "400",
+                      }}
+                    >
+                      {isMobile ? "Register" : "Register the Event"}
+
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M5 12h14" />
+                        <path d="m12 5 7 7-7 7" />
+                      </svg>
+                    </Link>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        )
-        })}
+            );
+          })}
         </div>
         {/* <button
           className={styles.scrollButton}
@@ -165,8 +185,8 @@ const EventSlider : React.FC<Events > = ({data}) => {
         >
           &gt;
         </button> */}
-    </div>
-    <UpComing content={data[activeIndex]?.content}/>
+      </div>
+      <UpComing content={data[activeIndex]?.content} />
     </>
   );
 };
