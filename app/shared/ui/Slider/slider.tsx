@@ -12,8 +12,6 @@ interface props {
 }
 
 const Slider = ({ slides, title }: props) => {
-  console.log({ slides });
-
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const cardsToShow = 3;
