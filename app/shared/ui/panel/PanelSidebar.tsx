@@ -7,6 +7,7 @@ import { IconLogout } from "@tabler/icons-react";
 import Link from "next/link";
 import cookie from "@/shared/helpers/cookie";
 import { useRouter } from "next/navigation";
+import { UserMenu } from "@/shared/types/users/user";
 const LogoutButton = () => {
   const router = useRouter();
   const handleSubmit = () => {
