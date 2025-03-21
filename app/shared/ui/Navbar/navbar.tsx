@@ -38,7 +38,7 @@ const Navbar = () => {
 
   const handleLogin = () => {
     if (Token) {
-      router.push("/ChanciAI/panel");
+      router.push("/user/profile");
       return;
     }
     router.push("/ChanciAI/register");
@@ -74,7 +74,8 @@ const Navbar = () => {
 
   const handleChanci = () => {
     if (Token) {
-      router.push("/ChanciAI/panel");
+      // router.push("/ChanciAI/panel");
+      router.push("/user/profile");
       return;
     } else {
       router.push("/ChanciAI/register");
