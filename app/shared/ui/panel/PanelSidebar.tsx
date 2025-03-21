@@ -1,3 +1,4 @@
+"use client";
 import { Box, Card, Divider } from "@mantine/core";
 import React from "react";
 import style from "./style/panelSidebar.module.scss";
