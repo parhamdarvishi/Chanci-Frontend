@@ -64,3 +64,24 @@
     }
   }
 }
+@media (max-width: 820px) {
+  .userBox {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+    .questionTitle {
+      border: 1px solid #eef1ff;
+      border-radius: 16px;
+      background-color: #eef1ff;
+      min-width: 310px;
+      min-height: 45px;
+      padding: 1rem;
+
+      p {
+        color: #585858;
+        max-width: 395px;
+      }
+    }
+  }
+}
