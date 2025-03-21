@@ -10,11 +10,7 @@ import { API_BASE_URL } from "@/shared/config/env";
 let authorizedInstance: AxiosInstance | null = null;
 let unauthorizedInstance: AxiosInstance | null = null;
 
-const base = (
-  authorization: boolean = false,
-  excel?: boolean,
-  upload?: boolean
-): AxiosInstance => {
+const base = (authorization: boolean = false): AxiosInstance => {
   // Choose the appropriate instance based on authorization
   const currentInstance = authorization
     ? authorizedInstance
@@ -22,20 +18,13 @@ const base = (
   if (currentInstance) return currentInstance;
 
   const headers = {
-    "Content-Type": upload
-      ? ("multipart/form-data" as const)
-      : ("application/json" as const),
-    Connection: "keep-alive",
+    "Content-Type": "application/json",
   };
 
   const options: OptionsTypes = {
     baseURL: API_BASE_URL,
     headers: headers,
   };
-
-  if (excel) {
-    options["responseType"] = "blob";
-  }
 
   if (authorization) {
     const userToken = cookie?.getCookie(USER_TOKEN);
@@ -54,7 +43,6 @@ const base = (
   // Request interceptor
   instance.interceptors.request.use(
     (config) => {
-      // Refresh authorization header on each request if needed
       if (authorization) {
         const userToken = cookie?.getCookie(USER_TOKEN);
         if (userToken) {
@@ -81,16 +69,12 @@ const base = (
     (error) => {
       if (error.response) {
         if (error.response.status === 401) {
-          // Handle unauthorized access
           cookie.deleteCookie(USER_TOKEN);
-          // Reset the authorized instance
           authorizedInstance = null;
-          // Redirect to login page
           window.location.href = "/ChanciAI/login";
           return Promise.reject(error);
         }
 
-        // Server errors (500-599)
         if (error.response.status >= 500 && error.response.status < 600) {
           if (error.response.headers.expires !== "-1") {
             toastAlert(
@@ -100,7 +84,6 @@ const base = (
           }
         }
 
-        // Client errors (400-499)
         if (error.response.status >= 400 && error.response.status < 500) {
           toastAlert(
             error.response.data?.Errors?.[0]?.Message ??
@@ -109,7 +92,6 @@ const base = (
           );
         }
 
-        // Redirect responses (300-399)
         if (error.response.status >= 300 && error.response.status < 400) {
           toastAlert(
             error.response.data?.message ?? error.response.statusText,
@@ -117,14 +99,12 @@ const base = (
           );
         }
 
-        // Log error details
         log({ errorResponse: error.response });
         log({ errorData: error.response.data });
         log(error.response.status);
         log(error.response.statusText);
         log(error.response.headers);
       } else {
-        // Network errors or other issues
         toastAlert(error.message, "error");
         log("Error:", error.message);
       }
@@ -132,7 +112,6 @@ const base = (
     }
   );
 
-  // Store the instance in the appropriate cache
   if (authorization) {
     authorizedInstance = instance;
   } else {
@@ -143,3 +122,9 @@ const base = (
 };
 
 export default base;
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const postRequest = async (url: string, data: any, auth: boolean) => {
+  const instance = base(auth);
+  return await instance.post(url, data);
+};
