@@ -1,5 +1,6 @@
 import { AxiosResponse } from "axios";
 import api from "@shared/api/chanci/base";
+import apiUpload from "@shared/api/chanci/baseUpload";
 import {
   DeleteRequestFunction,
   GetRequestFunction,
@@ -11,13 +12,12 @@ import {
 export const getRequest: GetRequestFunction = async (
   url,
   params,
-  authorization,
-  excel?
+  authorization
 ): Promise<ResponseData> => {
-  const response: AxiosResponse<ResponseData> = await api(
-    authorization,
-    excel
-  ).get(url, { params });
+  const response: AxiosResponse<ResponseData> = await api(authorization).get(
+    url,
+    { params }
+  );
   return (
     response?.data ?? {
       isSuccess: false,
@@ -29,13 +29,26 @@ export const getRequest: GetRequestFunction = async (
 export const postRequest: PostRequestFunction = async (
   url,
   data,
-  authorization,
-  upload?
+  authorization
 ): Promise<ResponseData> => {
-  const response: AxiosResponse<ResponseData> = await api(
-    authorization,
-    false,
-    upload
+  const response: AxiosResponse<ResponseData> = await api(authorization).post(
+    url,
+    data
+  );
+  return (
+    response?.data ?? {
+      isSuccess: false,
+      message: "خطا ناشناخته",
+    }
+  );
+};
+export const postUploadRequest: PostRequestFunction = async (
+  url,
+  data,
+  authorization
+): Promise<ResponseData> => {
+  const response: AxiosResponse<ResponseData> = await apiUpload(
+    authorization
   ).post(url, data);
   return (
     response?.data ?? {
