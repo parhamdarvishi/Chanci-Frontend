@@ -5,7 +5,7 @@ export interface ResponseData {
 export interface OptionsTypes {
   baseURL: string | undefined;
   headers: {
-    "Content-Type": "application/json" | "multipart/form-data";
+    "Content-Type": string;
     Connection?: string;
     Authorization?: string;
   };
@@ -23,7 +23,7 @@ export type PostRequestFunction = <T>(
   url: string,
   data: T,
   authorization?: boolean,
-  upload?: boolean
+  formData?: boolean
 ) => Promise<ResponseData>;
 export type PutRequestFunction = <T>(
   url: string,
