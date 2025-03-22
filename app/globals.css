@@ -101,6 +101,9 @@ h6 {
 .m_811560b9 {
   gap: 1rem;
 }
+.m_5df29311 {
+  padding: 0 !important;
+}
 .m_4e7aa4f3,
 .m_4e7aa4ef {
   text-align: center;
@@ -133,5 +136,10 @@ h6 {
   }
   .m_dee7bd2f {
     flex-direction: column-reverse !important;
+  }
+}
+@media screen and (max-width: 600px) {
+  .m_1e0e6180 {
+    max-width: 190px !important;
   }
 }
