@@ -183,7 +183,7 @@ const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
                     style={{
                       left: index === 0 ? "0%" : index === 1 ? "50%" : "100%",
                       fontWeight: "600",
-                      fontSize: "14px",
+
                       transform:
                         index === 1
                           ? "translateX(-50%)"
@@ -279,8 +279,8 @@ const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
       </Box>
       <Box style={{ display: "flex", width: "100%" }}>
         <Box
+          className={styles.btnBox}
           style={{
-            padding: "0 3rem",
             opacity: questionIndex > 0 ? 1 : 0,
             transform:
               questionIndex > 0 ? "translateX(0)" : "translateX(-20px)",
