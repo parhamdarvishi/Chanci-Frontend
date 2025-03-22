@@ -55,8 +55,16 @@
     }
   }
 }
-@media (max-width: 768px) {
+
+@media (max-width: 980px) {
   .wrapper {
-    display: none !important;
+    span {
+      font-size: 15px;
+    }
+    .progressPartBox,
+    .progressPartActive,
+    .progressPartDone {
+      padding: 0.5rem;
+    }
   }
 }
