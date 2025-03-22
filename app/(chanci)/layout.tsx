@@ -1,7 +1,15 @@
 "use client";
-import { Card, Grid, GridCol, MantineProvider } from "@mantine/core";
+import {
+  Card,
+  Divider,
+  Drawer,
+  Grid,
+  GridCol,
+  MantineProvider,
+} from "@mantine/core";
 import "@mantine/core/styles.css";
 import "../globals.css";
+import Title from "@public/image/widget/Frame.svg";
 import { Poppins } from "next/font/google";
 import ChanciHeader from "@/shared/ui/ChanciAI/ChanciHeader";
 import Sidebar from "@/shared/ui/ChanciAI/Sidebar";
@@ -11,6 +19,9 @@ import { chanciAddresses } from "@/shared/constants/relative-url/chanci";
 import { useEffect } from "react";
 import { useChanci } from "@/shared/stateManagement/UseChanci/useChanci";
 import HeadRes from "@/features/headRes/HeadRes";
+import Image from "next/image";
+import style from "./style.module.scss";
+import { useDisclosure } from "@mantine/hooks";
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
@@ -24,6 +35,7 @@ export default function ChanciRootLayout({
   children: React.ReactNode;
 }) {
   const { updateData } = useChanci();
+  const [opened, { open, close }] = useDisclosure(false);
   interface ChanciResponse {
     isSuccess?: boolean;
     data?: {
@@ -64,11 +76,54 @@ export default function ChanciRootLayout({
               height: "100vh",
             }}
           >
-            <GridCol span={{ base: 12, md: 3 }}>
-              <Sidebar />
+            <Drawer.Root
+              opened={opened}
+              onClose={close}
+              radius={8}
+              size={"310px"}
+            >
+              <Drawer.Overlay />
+              <Drawer.Content>
+                <Drawer.Header style={{ marginBottom: ".6rem" }}>
+                  <Drawer.Title>
+                    {" "}
+                    <Image src={Title} alt="header" width={115} height={80} />
+                  </Drawer.Title>
+                  <Drawer.CloseButton size={42} color="#585858" />
+                </Drawer.Header>
+                <Drawer.Body>
+                  <Divider />
+                  <Sidebar drawer={true} />
+                  {/* {links.map((item, index) => (
+                  <Box
+                    style={{ position: "relative" }}
+                    key={index}
+                    onClick={() => handleActiveNav(index)}
+                  >
+                    {loc === index && <div className={style.liActive}></div>}
+
+                    <Link
+                      href={index === 4 ? "/ComingSoon" : `/${item}`}
+                      className={
+                        loc === index ? style.liSidebarActive : style.liSidebar
+                      }
+                    >
+                      <p>{item}</p>
+                    </Link>
+                    <Divider />
+                  </Box>
+                ))} */}
+                </Drawer.Body>
+              </Drawer.Content>
+            </Drawer.Root>
+            <GridCol span={{ base: 12, md: 3 }} className={style.sidebar}>
+              <Sidebar drawer={false} />
             </GridCol>
             <GridCol span={{ base: 12, md: 9 }}>
-              <HeadRes />
+              <div onClick={open}>
+                <HeadRes />
+              </div>
+
               <ChanciHeader />
               <Card
                 shadow="sm"
