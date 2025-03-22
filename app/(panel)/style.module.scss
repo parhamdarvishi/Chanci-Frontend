@@ -1,0 +1,11 @@
+.sidebarResponsive {
+  display: none;
+}
+@media screen and (max-width: 1050px) {
+  .sidebarBox {
+    display: none;
+  }
+  .sidebarResponsive {
+    display: block;
+  }
+}
