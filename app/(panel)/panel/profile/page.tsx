@@ -27,6 +27,7 @@ const Page = () => {
         style={{
           padding: "1rem",
           display: "flex",
+          flexWrap: "wrap",
           gap: "3rem",
         }}
       >
@@ -45,7 +46,14 @@ const Page = () => {
             <div> {userData?.userName}</div>
           </Box>
         </Box>
-        <Box style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+        <Box
+          style={{
+            display: "flex",
+
+            alignItems: "center",
+            gap: "1rem",
+          }}
+        >
           <Avatar color="indigo" size={60}>
             <IconMail size={40} />
           </Avatar>
