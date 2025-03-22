@@ -26,3 +26,8 @@
     height: 1.25rem;
   }
 }
+@media (max-width: 900px) {
+  .cardDone {
+    width: 100% !important;
+  }
+}

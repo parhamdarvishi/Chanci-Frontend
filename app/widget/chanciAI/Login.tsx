@@ -60,7 +60,10 @@ const Login = () => {
         }
       );
       cookie.setCookie(USER_TOKEN, JSON.stringify(res?.data?.data?.token));
-      localStorage.setItem("userMenu", JSON.stringify( res?.data?.data?.menus) || "[]");
+      localStorage.setItem(
+        "userMenu",
+        JSON.stringify(res?.data?.data?.menus) || "[]"
+      );
       setLoading(false);
       handleChanci();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
