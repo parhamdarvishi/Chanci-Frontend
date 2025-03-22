@@ -9,7 +9,7 @@ import { useChanci } from "@/shared/stateManagement/UseChanci/useChanci";
 import StepModal from "@/widget/chanciAI/slice/stepModal/stepModal";
 import { modals } from "@mantine/modals";
 
-const Sidebar = () => {
+const Sidebar = ({ drawer }: { drawer: boolean }) => {
   const [progress, setProgress] = useState(0);
   const [sidebarLoc, setSidebarLoc] = useState([1]);
 
@@ -76,10 +76,15 @@ const Sidebar = () => {
 
   return (
     <Card shadow="sm" padding="lg" className={style.wrapper}>
-      <Box>
-        <Image src={Title} alt="ChanciAi" loading="lazy" width={115} />
-      </Box>
-      <Divider color="#D5D5D7" style={{ margin: "1.8rem 0" }} />
+      {!drawer && (
+        <>
+          <Box>
+            <Image src={Title} alt="ChanciAi" loading="lazy" width={115} />
+          </Box>
+          <Divider color="#D5D5D7" style={{ margin: "1.8rem 0" }} />
+        </>
+      )}
+
       {sidebarPostion === 6 && data?.length === questionIndex && (
         <Card
           shadow="sm"
