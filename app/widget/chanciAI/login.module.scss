@@ -1,7 +1,9 @@
 .wrapper {
   padding: 1.1rem;
+
   .loginDesc {
     place-items: center;
+    padding: 0 10;
     .loginHeader {
       display: flex;
       flex-direction: column;
@@ -42,6 +44,7 @@
       display: flex;
       flex-direction: column;
       gap: 0.8rem;
+      /* width: 100%; */
       .Checkbox {
         margin: 0.1rem 0;
         display: flex;
@@ -127,5 +130,14 @@
         object-fit: cover;
       }
     }
+    .loginDesc{
+      .form{
+        width: 100%;
+      }
+    }
+  }
+  .input {
+    min-width: auto;
+    width: 100%;
   }
 }

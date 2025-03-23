@@ -1,5 +1,5 @@
 import { getRequest } from "@/shared/api";
-import { Loader, Pagination, Table } from "@mantine/core";
+import { Center, Loader, Pagination, Table } from "@mantine/core";
 import { JSX, useEffect, useState } from "react";
 import style from "./style.module.scss"
 export type TableColumns<T> = {
@@ -68,9 +68,8 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
     const total = Math.ceil(totalPages / rowsPerPage); // Ensure integer
     return (
         <div className={style.tableContainer}>
-            {data ?
-                <>
-                    <Table highlightOnHover verticalSpacing="md" withRowBorders={false}>
+            {data ?                 <div style={{overflowX: 'auto'}}>
+                    <Table highlightOnHover striped verticalSpacing="md" withRowBorders={false}>
                         <Table.Thead>
                             <Table.Tr style={{ backgroundColor: "#02063a12" }}>
                                 {columns.map((column, i: number) => {
@@ -80,8 +79,7 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
                         </Table.Thead>
                         <Table.Tbody>{rows}</Table.Tbody>
                     </Table>
-                </>
-                : <Loader color="blue" />}
+                </div> : <Center style={{}}> <Loader color="blue" /> </Center>}
             {totalPages > 0 && <Pagination className={style.tablePagination} value={activePage} onChange={setPage} total={total} />}
         </div>)
 }

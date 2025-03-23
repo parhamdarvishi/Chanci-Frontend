@@ -22,10 +22,11 @@ import { authAddresses } from "@/shared/constants/relative-url/auth";
 import toastAlert from "@/shared/helpers/toast";
 import cookie from "@/shared/helpers/cookie";
 import { USER_TOKEN } from "@/shared/helpers/cookie/types";
+import useIsMobile from "@/shared/hooks";
 
 const Login = () => {
   const router = useRouter();
-
+  const isMobile = useIsMobile();
   const [loading, setLoading] = useState(false);
 
   const fieldForm = useForm({
@@ -194,14 +195,14 @@ const Login = () => {
             </Button>
           </Box>
         </GridCol>
-        <GridCol span={{ base: 12, md: 6 }} className={style.imgBox}>
+        {isMobile !== true && <GridCol span={{ base: 12, md: 6 }} className={style.imgBox}>
           <Image
             src={ChanciLogin}
             alt="ChanciAI"
             className={style.img}
             loading="lazy"
           />
-        </GridCol>
+        </GridCol>}
       </Grid>
     </form>
   );

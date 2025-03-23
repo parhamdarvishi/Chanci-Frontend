@@ -20,10 +20,11 @@ import { useForm } from "@mantine/form";
 import toastAlert from "@/shared/helpers/toast";
 import { postRequest } from "@/shared/api";
 import { authAddresses } from "@/shared/constants/relative-url/auth";
+import useIsMobile from "@/shared/hooks";
 
 const Register = () => {
   const router = useRouter();
-
+  const isMobile = useIsMobile();
   const [loading, setLoading] = useState(false);
 
   const fieldForm = useForm({
@@ -77,6 +78,7 @@ const Register = () => {
             className={style.loginHeader}
             style={{ gap: "1.1rem !important" }}
           >
+
             <Image src={Title} alt="ChanciAI" width={250} loading="lazy" />
             <Image src={avatars} alt="ChanciAI" width={300} loading="lazy" />
             <Box>
@@ -199,14 +201,16 @@ const Register = () => {
             </Button>
           </Box>
         </GridCol>
-        <GridCol span={{ base: 12, md: 6 }} className={style.imgBox}>
-          <Image
-            src={ChanciLogin}
-            alt="ChanciAI"
-            className={style.img}
-            loading="lazy"
-          />
-        </GridCol>
+        {isMobile !== true &&
+          <GridCol span={{ base: 12, md: 6 }} className={style.imgBox}>
+            <Image
+              src={ChanciLogin}
+              alt="ChanciAI"
+              className={style.img}
+              loading="lazy"
+            />
+          </GridCol>
+        }
       </Grid>
     </form>
   );
