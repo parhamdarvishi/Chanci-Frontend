@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import style from "./style.module.scss";
 import { Avatar, Box, Button, Card } from "@mantine/core";
 import {
@@ -18,16 +18,21 @@ import { chanciAddresses } from "@/shared/constants/relative-url/chanci";
 const UploadQuestion = () => {
   const { updateQuestionIndex, questionIndex, updateFileName, fileName } =
     useChanci();
-
-  const handleFileChange = async (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const [fileCh, setFileCh] = useState<File | null>(null);
+  const handleFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
+    if (file) {
+      setFileCh(file);
+      updateFileName(file?.name || "");
+    }
+  };
+  const handleFileChange = async () => {
+    // const file = event.target.files?.[0];
     // if (file) {
     //   setUploadFileName(file.name); // Set the file name in state
     // }
     const formData = new FormData();
-    formData.append("File", file as File);
+    formData.append("File", fileCh as File);
     const { isSuccess } = await postUploadRequest(
       chanciAddresses.Add,
       formData,
@@ -35,7 +40,7 @@ const UploadQuestion = () => {
       true
     );
     if (isSuccess) {
-      updateFileName(file?.name || "");
+      updateFileName(fileCh?.name || "");
       updateQuestionIndex(questionIndex + 1);
     }
   };
@@ -74,7 +79,9 @@ const UploadQuestion = () => {
               style={{ display: "flex", gap: ".3rem", flexDirection: "column" }}
             >
               <strong>Upload your File </strong>
-              <p style={{ color: "#2E2E2E" }}>File should be doc , docx</p>
+              <p style={{ color: "#2E2E2E" }}>
+                File should be doc , docx , pdf
+              </p>
             </div>
 
             <div className={style.uploader}>
@@ -87,8 +94,8 @@ const UploadQuestion = () => {
 
               <input
                 type="file"
-                accept=".doc,.docx"
-                onChange={handleFileChange}
+                accept=".doc,.docx,.pdf"
+                onChange={handleFile}
                 style={{ display: "none" }} // Hide the default file input
                 id="file-upload"
               />
@@ -103,6 +110,13 @@ const UploadQuestion = () => {
             className={style.questionImg}
           />
         </Box>
+        {fileCh && (
+          <Box style={{ display: "flex", justifyContent: "end" }}>
+            <div className={style.btnChanci} onClick={handleFileChange}>
+              submit
+            </div>
+          </Box>
+        )}
       </Box>
       <Box style={{ display: "flex", width: "100%" }}>
         <Box
