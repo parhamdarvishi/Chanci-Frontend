@@ -75,7 +75,11 @@ const DropDownQuestion = ({ question }: DropDownQuestionProps) => {
     }
   };
 
-  const handleDropDown = (value: string) => {
+  const handleUserValue = (value: string) => {
+    setVal(value);
+  };
+
+  const handleDropDown = () => {
     if (answers[questionIndex]) {
       const answerIndex = answers.findIndex(
         (item) => item?.answerId === answers[questionIndex]?.answerId
@@ -86,8 +90,8 @@ const DropDownQuestion = ({ question }: DropDownQuestionProps) => {
         // Remove the item at answerIndex and insert the new answer
         filterAnswer.splice(answerIndex, 1, {
           questionId: question?.id,
-          answerId: Number(value),
-          step: Number(value),
+          answerId: Number(val),
+          step: Number(val),
         });
       }
 
@@ -98,8 +102,8 @@ const DropDownQuestion = ({ question }: DropDownQuestionProps) => {
     }
     const answer = {
       questionId: question?.id,
-      answerId: Number(value),
-      step: Number(value),
+      answerId: Number(val),
+      step: Number(val),
     };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const allAnswer = answers; // Create a copy of the array
@@ -155,7 +159,7 @@ const DropDownQuestion = ({ question }: DropDownQuestionProps) => {
               checkIconPosition="right"
               style={{ marginTop: ".4rem", transform: "translateY(-6px)" }}
               data={dropD}
-              onChange={(value) => handleDropDown(value ? value : "")}
+              onChange={(value) => handleUserValue(value ? value : "")}
               defaultValue={val !== "" ? val : ""}
               value={val}
               comboboxProps={{
@@ -169,6 +173,15 @@ const DropDownQuestion = ({ question }: DropDownQuestionProps) => {
             className={style.questionImg}
           />
         </Box>
+        {val !== "" &&
+          val !== null &&
+          answers[questionIndex]?.step !== Number(val) && (
+            <Box style={{ display: "flex", justifyContent: "end" }}>
+              <div className={style.btnChanci} onClick={handleDropDown}>
+                submit
+              </div>
+            </Box>
+          )}
       </Box>
       <Box style={{ display: "flex", width: "100%" }}>
         <Box></Box>
