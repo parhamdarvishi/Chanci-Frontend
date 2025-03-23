@@ -5,6 +5,7 @@ import { Avatar, Box, Button, Card } from "@mantine/core";
 import {
   IconArrowNarrowLeft,
   IconArrowNarrowRight,
+  IconArrowRight,
   IconPhotoDown,
 } from "@tabler/icons-react";
 // import { postRequest } from "@/shared/api";
@@ -110,13 +111,14 @@ const UploadQuestion = () => {
             className={style.questionImg}
           />
         </Box>
-        {fileCh && (
-          <Box style={{ display: "flex", justifyContent: "end" }}>
-            <div className={style.btnChanci} onClick={handleFileChange}>
-              submit
-            </div>
-          </Box>
-        )}
+        <Box style={{ display: "flex", justifyContent: "end" }}>
+          <div 
+            className={`${style.btnChanci} ${fileCh ? '' : style.disabled}`} 
+            onClick={fileCh ? handleFileChange : undefined}
+          >
+            Next <IconArrowRight /> 
+          </div>
+        </Box>
       </Box>
       <Box style={{ display: "flex", width: "100%" }}>
         <Box

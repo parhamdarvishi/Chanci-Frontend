@@ -5,7 +5,7 @@ import { Avatar, Box, Button, Card, Select } from "@mantine/core";
 import { useChanci } from "@/shared/stateManagement/UseChanci/useChanci";
 import chanciIc from "@public/image/chanciAI/icon/chanciCh.svg";
 import Image from "next/image";
-import { IconArrowNarrowLeft, IconArrowNarrowRight } from "@tabler/icons-react";
+import { IconArrowNarrowLeft, IconArrowNarrowRight, IconArrowRight } from "@tabler/icons-react";
 
 interface DropDownQuestionProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -155,6 +155,7 @@ const DropDownQuestion = ({ question }: DropDownQuestionProps) => {
           >
             <Select
               searchable
+              placeholder="Choose an option"
               nothingFoundMessage="Nothing found..."
               checkIconPosition="right"
               style={{ marginTop: ".4rem", transform: "translateY(-6px)" }}
@@ -173,15 +174,14 @@ const DropDownQuestion = ({ question }: DropDownQuestionProps) => {
             className={style.questionImg}
           />
         </Box>
-        {val !== "" &&
-          val !== null &&
-          answers[questionIndex]?.step !== Number(val) && (
-            <Box style={{ display: "flex", justifyContent: "end" }}>
-              <div className={style.btnChanci} onClick={handleDropDown}>
-                submit
-              </div>
-            </Box>
-          )}
+        <Box style={{ display: "flex", justifyContent: "end" }}>
+          <div 
+            className={`${style.btnChanci} ${val !== "" && val !== null && answers[questionIndex]?.step !== Number(val)  ? '' : style.disabled}`} 
+            onClick={(val !== "" && val !== null && answers[questionIndex]?.step !== Number(val) ) ? handleDropDown : undefined}
+          >
+            Next <IconArrowRight /> 
+          </div>
+        </Box>
       </Box>
       <Box style={{ display: "flex", width: "100%" }}>
         <Box></Box>

@@ -3,7 +3,7 @@ import chanciIc from "@public/image/chanciAI/icon/chanciCh.svg";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import style from "./style.module.scss";
-import { IconArrowNarrowLeft, IconArrowNarrowRight } from "@tabler/icons-react";
+import { IconArrowNarrowLeft, IconArrowNarrowRight, IconArrowRight } from "@tabler/icons-react";
 import { useChanci } from "@/shared/stateManagement/UseChanci/useChanci";
 
 interface DropDownQuestionProps {
@@ -163,6 +163,7 @@ const MultiSelectBox = ({ question }: DropDownQuestionProps) => {
           >
             <MultiSelect
               searchable
+              placeholder={value.length > 0 ? "" : "Select here too choose..."}
               nothingFoundMessage="Nothing found..."
               checkIconPosition="right"
               style={{ width: "100%" }}
@@ -184,13 +185,14 @@ const MultiSelectBox = ({ question }: DropDownQuestionProps) => {
             className={style.questionImg}
           />
         </Box>
-        {hasChanges && (
-          <Box style={{ display: "flex", justifyContent: "end" }}>
-            <div className={style.btnChanci} onClick={handleMulti}>
-              submit
-            </div>
-          </Box>
-        )}
+        <Box style={{ display: "flex", justifyContent: "end" }}>
+          <div 
+            className={`${style.btnChanci} ${hasChanges ? '' : style.disabled}`} 
+            onClick={hasChanges ? handleMulti : undefined}
+          >
+            Next <IconArrowRight /> 
+          </div>
+        </Box>
       </Box>
       <Box style={{ display: "flex", width: "100%" }}>
         <Box
