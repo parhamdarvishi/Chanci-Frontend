@@ -13,10 +13,9 @@ import { modals } from "@mantine/modals";
 import StepModal from "../stepModal/stepModal";
 import MultiSelectBox from "@/features/multiSelect/MultiSelect";
 
-// Define the type for the question prop
 interface Question {
   inputType?: number;
-  // Add other properties as needed
+  type?: number;
 }
 
 interface PsychologyTestProps {
@@ -62,19 +61,16 @@ const PsychologyTest: React.FC<PsychologyTestProps> = ({ question }) => {
     if (question?.inputType === 0) {
       updateQuestionIndex(questionIndex + 1);
     }
-    // @ts-expect-error: Ignoring TypeScript error due to array spread
+
     if (question?.type === 2) {
       UpdateSidebarPostion(2);
     }
-    // @ts-expect-error: Ignoring TypeScript error due to array spread
     if (question?.type === 3) {
       UpdateSidebarPostion(3);
     }
-    // @ts-expect-error: Ignoring TypeScript error due to array spread
     if (question?.type === 4) {
       UpdateSidebarPostion(4);
     }
-    // @ts-expect-error: Ignoring TypeScript error due to array spread
     if (question?.type === 5) {
       UpdateSidebarPostion(5);
     }
@@ -82,10 +78,7 @@ const PsychologyTest: React.FC<PsychologyTestProps> = ({ question }) => {
 
   return (
     <div style={{ height: "100%" }}>
-      {question?.inputType === 1 && (
-        <TextQuestion question={question} />
-        // <div>Text Question Component</div>
-      )}
+      {question?.inputType === 1 && <TextQuestion question={question} />}
       {question?.inputType === 2 && <ProgressQuestion question={question} />}
       {question?.inputType === 3 && (
         <DropDownQuestion question={question} answers={answers} />
