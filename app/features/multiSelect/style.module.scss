@@ -44,23 +44,23 @@
     flex-direction: column;
     gap: 1rem;
     position: relative;
-    .btnChanci {
-      border-radius: 8px !important;
-      cursor: pointer !important;
-      color: #fff;
-      width: 160px;
-      height: 36px;
-      text-align: center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 16px;
-      font-weight: 400;
-      background: linear-gradient(to right, #8e15ba, #6154fd, #3d9dd4, #31eec8);
-      span {
-        cursor: unset !important;
-      }
-    }
+    @import '../shared/styles.module.scss';
+
+.inpMultiSelect {
+  min-height: 90px !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 8px !important;
+  padding: 1rem 0.6rem !important;
+  display: flex;
+  align-items: center;
+}
+
+.labelMultiSelect {
+  width: 100% !important;
+  text-align: start !important;
+  padding-left: 0.5rem !important;
+}
     .questionBox {
       display: flex;
       flex-direction: column;
@@ -95,6 +95,16 @@
       right: -70px;
       top: -30px;
     }
+  }
+}
+@keyframes enableButton {
+  0% {
+    background: #b0b0b0;
+    opacity: 0.6;
+  }
+  100% {
+    background: linear-gradient(to right, #8e15ba, #6154fd, #3d9dd4, #31eec8);
+    opacity: 1;
   }
 }
 @media (max-width: 860px) {

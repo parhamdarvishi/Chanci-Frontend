@@ -5,7 +5,7 @@ import { Avatar, Box, Button, Card, Textarea } from "@mantine/core";
 import { useChanci } from "@/shared/stateManagement/UseChanci/useChanci";
 import chanciIc from "@public/image/chanciAI/icon/chanciCh.svg";
 import Image from "next/image";
-import { IconArrowNarrowLeft, IconArrowNarrowRight } from "@tabler/icons-react";
+import { IconArrowNarrowLeft, IconArrowNarrowRight, IconArrowRight } from "@tabler/icons-react";
 interface TextQuestionProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   question: any;
@@ -146,13 +146,13 @@ const TextQuestion: React.FC<TextQuestionProps> = ({ question }) => {
             className={style.questionImg}
           />
         </Box>
-        {answers[questionIndex - 1]?.text !== value && (
-          <Box style={{ display: "flex", justifyContent: "end" }}>
-            <div className={style.btnChanci} onClick={handleAnswer}>
-              submit
-            </div>
-          </Box>
-        )}
+        <Box style={{ display: "flex", justifyContent: "end" }}>
+          <div
+            className={`${style.btnChanci} ${answers[questionIndex - 1]?.text !== value ? '' : style.disabled}`}
+            onClick={answers[questionIndex - 1]?.text !== value ? handleAnswer : undefined} >
+            {question.id === 35 ? (`Submit`) : (<>Next <IconArrowRight /></>)}
+          </div>
+        </Box>
       </Box>
       <Box style={{ display: "flex", width: "100%" }}>
         <Box

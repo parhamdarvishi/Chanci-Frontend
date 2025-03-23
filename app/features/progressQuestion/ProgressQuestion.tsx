@@ -2,7 +2,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import styles from "./style.module.scss";
 import { Avatar, Box, Button, Card } from "@mantine/core";
-import { IconArrowNarrowLeft, IconArrowNarrowRight } from "@tabler/icons-react";
+import { IconArrowNarrowLeft, IconArrowNarrowRight, IconArrowRight } from "@tabler/icons-react";
 import { useChanci } from "@/shared/stateManagement/UseChanci/useChanci";
 import Image from "next/image";
 import chanciIc from "@public/image/chanciAI/icon/chanciCh.svg";
@@ -272,7 +272,7 @@ const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
         {steps[currentStep] !== answers[questionIndex]?.step && (
           <Box style={{ display: "flex", justifyContent: "end" }}>
             <div className={styles.btnChanci} onClick={handleAnswer}>
-              submit
+              Next <IconArrowRight />
             </div>
           </Box>
         )}
