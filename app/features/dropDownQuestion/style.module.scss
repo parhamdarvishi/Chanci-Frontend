@@ -1,4 +1,4 @@
-@import '../shared/styles.module.scss';
+@import "../shared/styles.module.scss";
 
 .questionCard {
   transform: translateY(-6px);
@@ -45,9 +45,9 @@
 }
 @media (max-width: 690px) {
   .progressBar {
-    padding: 2rem 1rem;
+    padding: 2rem 0.5rem;
     position: relative;
-    width: 360px;
+    width: 345px;
   }
   .questionImg {
     display: none !important;
