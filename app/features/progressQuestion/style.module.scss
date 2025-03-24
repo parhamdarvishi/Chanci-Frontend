@@ -1,4 +1,4 @@
-@import '../shared/styles.module.scss';
+@import "../shared/styles.module.scss";
 
 .progressBar {
   padding: 2rem 1rem;
@@ -27,15 +27,11 @@
   .progressBar {
     width: 470px;
   }
-  
-  .questionImg {
-    left: -54px !important;
-  }
-  
+
   .btnBox {
     padding: 0 2rem;
   }
-  
+
   .label {
     font-size: 12px !important;
   }
@@ -45,11 +41,11 @@
   .progressBar {
     width: 360px;
   }
-  
+
   .questionImg {
     display: none !important;
   }
-  
+
   .btnBox {
     padding: 0 0.5rem;
   }
@@ -171,7 +167,8 @@
     position: relative;
     width: 360px;
   }
-  .questionImg {
+  .questionImg,
+  .questionImgChanci {
     display: none !important;
   }
   .btnBox {
