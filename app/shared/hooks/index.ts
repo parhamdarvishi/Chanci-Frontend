@@ -4,6 +4,7 @@ const useIsMobile = (breakpoint: number = 768): boolean | undefined  =>{
     const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < breakpoint);
 
   useEffect(() => {
+    if (typeof window === "undefined") return; // Prevent SSR issues
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
     };
