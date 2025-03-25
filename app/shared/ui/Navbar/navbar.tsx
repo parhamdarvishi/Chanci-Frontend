@@ -73,12 +73,13 @@ const Navbar = () => {
     });
 
   const handleChanci = () => {
-    if (Token) {
-      router.push("/ChanciAI");
-      return;
-    } else {
-      router.push("/user/register");
-    }
+    handleComingSoon();
+    // if (Token) {
+    //   router.push("/ChanciAI");
+    //   return;
+    // } else {
+    //   router.push("/user/register");
+    // }
   };
 
   //UseEffect
