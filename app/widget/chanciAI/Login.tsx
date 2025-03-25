@@ -41,7 +41,8 @@ const Login = () => {
   });
 
   const handleChanci = () => {
-    router.push("/ChanciAI");
+    // router.push("/ChanciAI");
+    router.push("/panel/profile");
   };
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -67,7 +68,6 @@ const Login = () => {
       );
       setLoading(false);
       handleChanci();
-       
     } catch (error: any) {
       const message = error?.response?.data?.message;
       toastAlert(message as string, "error");
@@ -195,14 +195,16 @@ const Login = () => {
             </Button>
           </Box>
         </GridCol>
-        {isMobile === false && <GridCol span={{ base: 12, md: 6 }} className={style.imgBox}>
-          <Image
-            src={ChanciLogin}
-            alt="ChanciAI"
-            className={style.img}
-            loading="lazy"
-          />
-        </GridCol>}
+        {isMobile === false && (
+          <GridCol span={{ base: 12, md: 6 }} className={style.imgBox}>
+            <Image
+              src={ChanciLogin}
+              alt="ChanciAI"
+              className={style.img}
+              loading="lazy"
+            />
+          </GridCol>
+        )}
       </Grid>
     </form>
   );
