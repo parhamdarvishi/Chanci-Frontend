@@ -2,13 +2,17 @@
 import React, { useRef, useState, useEffect } from "react";
 import styles from "./style.module.scss";
 import { Avatar, Box, Button, Card } from "@mantine/core";
-import { IconArrowNarrowLeft, IconArrowNarrowRight, IconArrowRight } from "@tabler/icons-react";
+import {
+  IconArrowNarrowLeft,
+  IconArrowNarrowRight,
+  IconArrowRight,
+} from "@tabler/icons-react";
 import { useChanci } from "@/shared/stateManagement/UseChanci/useChanci";
 import Image from "next/image";
 import chanciIc from "@public/image/chanciAI/icon/chanciCh.svg";
 
 interface ProgressQuestionProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   
   question: any;
 }
 
@@ -135,7 +139,7 @@ const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
         });
       }
       setCurrentStep(0);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+       
       updateAnswers(filterAnswer as any);
       updateQuestionIndex(questionIndex + 1);
       return;
@@ -159,7 +163,7 @@ const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
           src="image/chanciAI/chanci.svg"
           alt="it's me"
           size={55}
-          className={styles.questionImg}
+          className={styles.questionImgChanci}
         />
         <Box className={styles.questionTitle}>
           <p>{question?.text}</p>
