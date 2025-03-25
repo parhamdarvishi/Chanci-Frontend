@@ -1,5 +1,5 @@
-import Land from "@/widget/Home/Land";
+import Home from "./(pages)/Home/page";
 
 export default function Page() {
-  return <Land />;
+  return <Home />;
 }
