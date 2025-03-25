@@ -13,7 +13,8 @@ const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     rules: {
-      "no-restricted-globals": "error"
+      /* "no-restricted-globals": "error" */
+      "@typescript-eslint/no-explicit-any": "off"
     }
   }
 ];

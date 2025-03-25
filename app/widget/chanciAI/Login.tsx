@@ -67,7 +67,7 @@ const Login = () => {
       );
       setLoading(false);
       handleChanci();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+       
     } catch (error: any) {
       const message = error?.response?.data?.message;
       toastAlert(message as string, "error");
@@ -195,7 +195,7 @@ const Login = () => {
             </Button>
           </Box>
         </GridCol>
-        {isMobile !== true && <GridCol span={{ base: 12, md: 6 }} className={style.imgBox}>
+        {isMobile === false && <GridCol span={{ base: 12, md: 6 }} className={style.imgBox}>
           <Image
             src={ChanciLogin}
             alt="ChanciAI"

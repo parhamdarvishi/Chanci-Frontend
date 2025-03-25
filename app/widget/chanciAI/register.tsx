@@ -201,7 +201,7 @@ const Register = () => {
             </Button>
           </Box>
         </GridCol>
-        {isMobile !== true &&
+        {isMobile === false &&
           <GridCol span={{ base: 12, md: 6 }} className={style.imgBox}>
             <Image
               src={ChanciLogin}
