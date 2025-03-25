@@ -8,10 +8,16 @@ import Image from "next/image";
 import { useChanci } from "@/shared/stateManagement/UseChanci/useChanci";
 import StepModal from "@/widget/chanciAI/slice/stepModal/stepModal";
 import { modals } from "@mantine/modals";
+import { useParams, usePathname, useRouter } from "next/navigation";
 
 const Sidebar = ({ drawer }: { drawer: boolean }) => {
   const [progress, setProgress] = useState(0);
   const [sidebarLoc, setSidebarLoc] = useState([1]);
+  const router = useRouter();
+  const pathname = usePathname();
+  const { id } = useParams();
+
+  const isResult = pathname.includes("result");
 
   const { sidebarPostion, questionIndex, data, answers } = useChanci();
   const openCareerModal = () => {
@@ -23,6 +29,7 @@ const Sidebar = ({ drawer }: { drawer: boolean }) => {
       children: <StepModal desc={desc} />,
     });
   };
+
   const openNationalityModal = () => {
     const desc =
       "well done with the last section, now let's talk about your visa status ";
@@ -32,6 +39,7 @@ const Sidebar = ({ drawer }: { drawer: boolean }) => {
       children: <StepModal desc={desc} />,
     });
   };
+
   const checkSidebarPostion = () => {
     if (sidebarPostion === 2) {
       setSidebarLoc([1, 2]);
@@ -58,6 +66,12 @@ const Sidebar = ({ drawer }: { drawer: boolean }) => {
     }
   };
 
+  const handleResultShow = (type: string) => {
+    if (isResult) {
+      router.push(`/ChanciAI/result/${id}/${type}`);
+    }
+  };
+
   const checkSidebarPostionByQuestion = () => {
     if (sidebarPostion === 6) {
       setSidebarLoc([1, 2, 3, 4, 5, 6]);
@@ -73,6 +87,12 @@ const Sidebar = ({ drawer }: { drawer: boolean }) => {
   useEffect(() => {
     checkSidebarPostionByQuestion();
   }, [questionIndex]);
+  useEffect(() => {
+    if (isResult) {
+      setSidebarLoc([1, 2, 3, 4, 5, 6]);
+      setProgress(100);
+    }
+  }, [isResult]);
 
   return (
     <Card shadow="sm" padding="lg" className={style.wrapper}>
@@ -148,7 +168,9 @@ const Sidebar = ({ drawer }: { drawer: boolean }) => {
                 : style.progressPartBox
             }
           >
-            <span>Psychology test (20 questions)</span>
+            <span onClick={() => handleResultShow("Psychology")}>
+              Psychology test (20 questions)
+            </span>
           </div>
           <div
             className={
