@@ -76,8 +76,7 @@ const PanelSidebar = ({
             </Link>
           );
         })}
-        <Link href={`/ChanciAI`} className={style.progressPartBox}>
-          {/* <IconUser /> */}
+        <Link href={`/ComingSoon`} className={style.progressPartBox}>
           <span style={{ transform: "translateY(3px)" }}>Chanci AI</span>
         </Link>
         <LogoutButton />
