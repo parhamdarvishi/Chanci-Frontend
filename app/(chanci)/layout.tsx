@@ -39,7 +39,7 @@ export default function ChanciRootLayout({
   interface ChanciResponse {
     isSuccess?: boolean;
     data?: {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+       
       items?: any[]; // Adjust the type as necessary
     };
   }
@@ -130,6 +130,7 @@ export default function ChanciRootLayout({
                 padding="lg"
                 radius="md"
                 className="chanciSection"
+                style={{ overflow: "auto" }}
               >
                 {children}
               </Card>
