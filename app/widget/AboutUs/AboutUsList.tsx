@@ -17,6 +17,7 @@ import { modals } from "@mantine/modals";
 import ModalTouch from "@/shared/ui/ModalTouch/modalTouch";
 
 const AboutUsList = () => {
+  
   const openModal = () =>
     modals.open({
       radius: "lg",
