@@ -15,7 +15,7 @@ const columns: TableColumns<TMyExams>[] = [
   { head: 'Date', key: 'createAt' }
 ];
 const actionButtons: ActionButtons[] = [
-  { name: "Show Detail", key: 1 , externalLink: '/ChanciAI/result/'}
+  { name: "Show Detail", externalLink: '/ChanciAI/result/'}
 ];
 const Page = () => {
     return (

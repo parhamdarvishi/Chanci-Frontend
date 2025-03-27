@@ -4,7 +4,6 @@ import { JSX, useEffect, useState } from "react";
 import style from "./style.module.scss"
 
 export type ActionButtons = {
-    key: number;
     name: string;
     externalLink: string;
 }
@@ -69,7 +68,6 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
             })}
             {
                 actionButtons && actionButtons.length > 0 && actionButtons.map((btn, i: number) => {
-                    const key = btn.key as keyof T;
                     return (<Table.Td key={i} style={{ fontSize: "15px" }}>
                         <a style={{ cursor: 'pointer' }} href={btn.externalLink + ttd.id}>{btn.name}</a>
                     </Table.Td>)
@@ -95,7 +93,6 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
                                 })}
                                 {
                                     actionButtons && actionButtons.length > 0 && actionButtons.map((btn, i: number) => {
-                                        const key = btn.key as keyof T;
                                         return (<Table.Th key={i} style={{ color: "#151e98" }}>Actions</Table.Th>)
                                     })
                                 }
