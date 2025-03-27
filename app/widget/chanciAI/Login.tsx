@@ -21,13 +21,14 @@ import { useForm } from "@mantine/form";
 import { authAddresses } from "@/shared/constants/relative-url/auth";
 import toastAlert from "@/shared/helpers/toast";
 import cookie from "@/shared/helpers/cookie";
-import { USER_TOKEN } from "@/shared/helpers/cookie/types";
+import { USER_TOKEN, VOLUNTEER } from "@/shared/helpers/cookie/types";
 import useIsMobile from "@/shared/hooks";
 
 const Login = () => {
   const router = useRouter();
   const isMobile = useIsMobile();
   const [loading, setLoading] = useState(false);
+  const [isVolunteer, setIsVolunteer] = useState(false);
 
   const fieldForm = useForm({
     initialValues: {
@@ -41,8 +42,11 @@ const Login = () => {
   });
 
   const handleChanci = () => {
-    // router.push("/ChanciAI");
-    router.push("/panel/profile");
+    if (isVolunteer) {
+      router.push("/ChanciAI");
+    } else {
+      router.push("/panel/profile");
+    }
   };
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -62,6 +66,10 @@ const Login = () => {
         }
       );
       cookie.setCookie(USER_TOKEN, JSON.stringify(res?.data?.data?.token));
+      // TODO: for testing ChanciAI
+      cookie.setCookie(VOLUNTEER, JSON.stringify(res?.data?.data?.isVolunteer));
+      setIsVolunteer(res?.data?.data?.isVolunteer);
+
       localStorage.setItem(
         "userMenu",
         JSON.stringify(res?.data?.data?.menus) || "[]"
