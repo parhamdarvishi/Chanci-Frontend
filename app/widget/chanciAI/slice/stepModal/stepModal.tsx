@@ -7,32 +7,23 @@ import { modals } from "@mantine/modals";
 
 type props = {
   desc: string;
+  ctaText?: string;
 };
 
-const StepModal = ({ desc }: props) => {
+const StepModal = ({ desc, ctaText }: props) => {
   const handleCloseModal = () => {
     modals.closeAll();
   };
   return (
     <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "2rem",
-      }}
+    className={style.container}
     >
       <Box
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
+        className={style.chanciImgBox}
       >
         <Image src={Title} alt="ChanciAi" loading="lazy" width={115} />
       </Box>
-      <p style={{ textAlign: "center", maxWidth: "400px", fontSize: "17px" }}>
+      <p className={style.desc}>
         {desc}
       </p>
       <Box
@@ -44,7 +35,7 @@ const StepModal = ({ desc }: props) => {
         }}
       >
         <div className={style.button} onClick={handleCloseModal}>
-          <p style={{ cursor: "pointer" }}>let&apos;s go</p>
+          <span style={{ cursor: "pointer" }}>{ctaText? ctaText : `Let's go`}</span>
         </div>
       </Box>
     </div>
