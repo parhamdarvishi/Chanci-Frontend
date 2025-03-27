@@ -39,7 +39,6 @@ export default function ChanciRootLayout({
   interface ChanciResponse {
     isSuccess?: boolean;
     data?: {
-       
       items?: any[]; // Adjust the type as necessary
     };
   }
@@ -130,7 +129,7 @@ export default function ChanciRootLayout({
                 padding="lg"
                 radius="md"
                 className="chanciSection"
-                style={{ overflow: "auto" }}
+                style={{ overflowY: "auto" }}
               >
                 {children}
               </Card>
