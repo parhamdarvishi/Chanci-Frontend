@@ -1,22 +1,23 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import style from "./slider.module.scss";
 import { SlideData } from "@/widget/Candidates/model";
 import arrowSlide from "@public/image/icons/arrowSlide.svg";
 import Link from "next/link";
+import useIsMobile from "@/shared/hooks";
 
 interface props {
   slides: SlideData[];
-  title: boolean;
 }
 
-const Slider = ({ slides, title }: props) => {
+const Slider = ({ slides }: props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const isMobile = useIsMobile();
   const cardsToShow = 3;
-  const cardWidth = 355; // Width of each card
-  const cardGap = 32; // Gap between cards (2rem = 32px)
+  const [cardWidth, setCardWidth] = useState<number>(355); // Width of each card
+  const [cardGap, setCardGap] =  useState<number>(32); // Gap between cards (2rem = 32px)
 
   const nextSlide = () => {
     if (isAnimating || currentIndex >= slides.length - cardsToShow) return;
@@ -35,63 +36,47 @@ const Slider = ({ slides, title }: props) => {
   // const visibleCards = slides.slice(currentIndex, currentIndex + cardsToShow);
   const hasMoreCards = currentIndex < slides.length - cardsToShow;
   const hasPrevCards = currentIndex > 0;
-
+  useEffect(()=>{
+    if(isMobile){
+      setCardGap(10);
+      setCardWidth(180);
+    }
+  }, [isMobile])
   return (
     <div className={style.wrapper}>
-      <div className={style.header}>
-        {title && (
-          <h1 style={{ fontWeight: "500", fontSize: "40px" }}>
-            <span
-              style={{
-                borderBottom: "4px solid #5E62FC",
-                borderRadius: "4px",
-                fontWeight: "500",
-              }}
-            >
-              A
-            </span>
-            rticles
-          </h1>
-        )}
-      </div>
       <div className={style.slider}>
         <div
-          className={`${style.cardsContainer} ${
-            isAnimating ? style.animating : ""
-          }`}
+          className={`${style.cardsContainer} ${isAnimating ? style.animating : ""
+            }`}
           style={{
-            transform: `translateX(calc(-${
-              currentIndex * (cardWidth + cardGap)
-            }px))`,
+            transform: `translateX(calc(-${currentIndex * (cardWidth + cardGap)
+              }px))`,
           }}
         >
           {slides.map((slide) => (
-            <Link
-              href={`/blog/${slide?.id}`}
+            <div
+              onClick={() => window.open(slide.link, "_blank", "noopener,noreferrer")}
               key={slide.id}
               className={style.card}
               style={{ width: `${cardWidth}px` }}
             >
               <div className={style.imageWrapper}>
                 <Image
-                  src={slide.image}
+                  src={slide.bannerImagePath}
                   alt={slide.title}
-                  width={400}
+                  width={1000}
                   height={300}
                   className={style.image}
                 />
               </div>
+              <Link href={slide.link} target="_blank"
+                rel="noopener noreferrer" className={style.readMore}>
+                {" "}
+                Read More
+                <Image src={arrowSlide} alt="arrowSlide" />
+              </Link>
 
-              <div className={style.content}>
-                <h3>{slide.title}</h3>
-                <p>{slide.description}</p>
-                <Link href={`/blog/${slide?.id}`} className={style.readMore}>
-                  {" "}
-                  Read More
-                  <Image src={arrowSlide} alt="arrowSlide" />
-                </Link>
-              </div>
-            </Link>
+            </div>
           ))}
         </div>
       </div>
