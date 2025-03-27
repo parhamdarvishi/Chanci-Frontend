@@ -7,7 +7,7 @@ import { SlideData } from "@/widget/Candidates/model";
 import empBlogGenZ from "@public/image/blog/empBlogGenZ.png";
 import empBlogDei from "@public/image/blog/empBlogDei.png";
 import empBlogSolve from "@public/image/blog/empBlogSolve.png";
-import React, { useState } from "react";
+import React from "react";
 
 const page = () => {
   const slides: SlideData[] = [
