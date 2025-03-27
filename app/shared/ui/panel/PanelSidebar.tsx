@@ -9,6 +9,7 @@ import Link from "next/link";
 import cookie from "@/shared/helpers/cookie";
 import { useRouter } from "next/navigation";
 import { UserMenu } from "@/shared/types/users/user";
+import { VOLUNTEER } from "@/shared/helpers/cookie/types";
 const LogoutButton = () => {
   const router = useRouter();
   const handleSubmit = useCallback(() => {
@@ -35,6 +36,7 @@ const PanelSidebar = ({
 }) => {
   const [userMenu, setUserMenu] = useState<Array<UserMenu>>([]);
   const [menuIndex, setMenuIndex] = useState(0);
+  const volunteer = cookie?.getCookie(VOLUNTEER);
 
   const handleSideItem = (index: number) => {
     setMenuIndex(index);
@@ -76,7 +78,10 @@ const PanelSidebar = ({
             </Link>
           );
         })}
-        <Link href={`/ComingSoon`} className={style.progressPartBox}>
+        <Link
+          href={volunteer ? `/ChanciAI` : `/ComingSoon`}
+          className={style.progressPartBox}
+        >
           <span style={{ transform: "translateY(3px)" }}>Chanci AI</span>
         </Link>
         <LogoutButton />
