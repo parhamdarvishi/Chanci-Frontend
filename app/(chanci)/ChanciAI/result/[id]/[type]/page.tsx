@@ -31,17 +31,6 @@ const Page = () => {
   const { id } = useParams();
   const [answerData, setAnswerData] = useState<AnswerData | null>(null);
 
-  // const getData = async () => {
-  //   const query = {
-  //     UserAnswerHeaderId: id,
-  //   };
-  //   const { data } = await getRequest(
-  //     userAddresses.ConvertAnswersToPromptCommand,
-  //     query
-  //   );
-  //   setAnswerData(data as AnswerData);
-  // };
-
   const getAllAnswers = async () => {
     const query = {
       UserAnswerHeaderId: id,
