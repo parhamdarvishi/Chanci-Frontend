@@ -3,6 +3,6 @@ export interface SlideData {
   title: string;
   description: string;
   image?: any;//this line stays for static images on project
-  bannerImagePath: string;
-  link: string;
+  bannerImagePath?: string;
+  link?: string;
 }

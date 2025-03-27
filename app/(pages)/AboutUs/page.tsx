@@ -5,7 +5,7 @@ import { ExternalReferenceResponse } from "@/shared/types/other/other";
 import Footer from "@/shared/ui/Footer/footer";
 import Header from "@/shared/ui/Header/header";
 import NavbarMain from "@/shared/ui/NavbarMain/navbarMain";
-import Slider from "@/shared/ui/Slider/slider";
+import { AboutUsSlider } from "@/shared/ui/Slider/slider";
 import AboutUsList from "@/widget/AboutUs/AboutUsList";
 import { SlideData } from "@/widget/Candidates/model";
 import React, { useEffect, useState } from "react";
@@ -35,7 +35,7 @@ const AboutUs = () => {
       <Header />
       <NavbarMain />
       <AboutUsList />
-      <Slider slides={slides}/>
+      <AboutUsSlider slides={slides}/>
       <Footer />
     </div>
   );

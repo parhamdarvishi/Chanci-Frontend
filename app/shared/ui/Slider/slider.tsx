@@ -9,9 +9,10 @@ import useIsMobile from "@/shared/hooks";
 
 interface props {
   slides: SlideData[];
+  title?: boolean;
 }
 
-const Slider = ({ slides }: props) => {
+export const AboutUsSlider = ({ slides }: props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const isMobile = useIsMobile();
@@ -62,20 +63,151 @@ const Slider = ({ slides }: props) => {
             >
               <div className={style.imageWrapper}>
                 <Image
-                  src={slide.bannerImagePath}
+                  src={slide?.bannerImagePath || ""}
                   alt={slide.title}
                   width={1000}
                   height={300}
                   className={style.image}
                 />
               </div>
-              <Link href={slide.link} target="_blank"
+              <Link href={slide?.link || "#"} target="_blank"
                 rel="noopener noreferrer" className={style.readMore}>
                 {" "}
                 Read More
                 <Image src={arrowSlide} alt="arrowSlide" />
               </Link>
 
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {hasPrevCards && (
+        <button
+          className={`${style.arrow} ${style.prev}`}
+          onClick={prevSlide}
+          disabled={isAnimating}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+      )}
+
+      {hasMoreCards && (
+        <button
+          className={`${style.arrow} ${style.next}`}
+          onClick={nextSlide}
+          disabled={isAnimating}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </button>
+      )}
+    </div>
+  );
+};
+const Slider = ({ slides, title }: props) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const cardsToShow = 3;
+  const cardWidth = 355; // Width of each card
+  const cardGap = 32; // Gap between cards (2rem = 32px)
+
+  const nextSlide = () => {
+    if (isAnimating || currentIndex >= slides.length - cardsToShow) return;
+    setIsAnimating(true);
+    setCurrentIndex((prev) => prev + 1);
+    setTimeout(() => setIsAnimating(false), 500);
+  };
+
+  const prevSlide = () => {
+    if (isAnimating || currentIndex === 0) return;
+    setIsAnimating(true);
+    setCurrentIndex((prev) => prev - 1);
+    setTimeout(() => setIsAnimating(false), 500);
+  };
+
+  // const visibleCards = slides.slice(currentIndex, currentIndex + cardsToShow);
+  const hasMoreCards = currentIndex < slides.length - cardsToShow;
+  const hasPrevCards = currentIndex > 0;
+
+  return (
+    <div className={style.wrapper}>
+      <div className={style.header}>
+        {title && (
+          <h1 style={{ fontWeight: "500", fontSize: "40px" }}>
+            <span
+              style={{
+                borderBottom: "4px solid #5E62FC",
+                borderRadius: "4px",
+                fontWeight: "500",
+              }}
+            >
+              A
+            </span>
+            rticles
+          </h1>
+        )}
+      </div>
+      <div className={style.slider}>
+        <div
+          className={`${style.cardsContainer} ${
+            isAnimating ? style.animating : ""
+          }`}
+          style={{
+            transform: `translateX(calc(-${
+              currentIndex * (cardWidth + cardGap)
+            }px))`,
+          }}
+        >
+          {slides.map((slide) => (
+            <div
+              onClick={()=> window.open(`/blog/${slide?.id}`,"_blank", "noopener,noreferrer" )}
+              key={slide.id}
+              className={style.card}
+              style={{ width: `${cardWidth}px` }}
+            >
+              <div className={style.imageWrapper}>
+                <Image
+                  src={slide.image}
+                  alt={slide.title}
+                  width={400}
+                  height={300}
+                  className={style.image}
+                />
+              </div>
+
+              <div className={style.content}>
+                <h3>{slide.title}</h3>
+                <p>{slide.description}</p>
+                <Link href={`/blog/${slide?.id}`} className={style.readMore}>
+                  {" "}
+                  Read More
+                  <Image src={arrowSlide} alt="arrowSlide" />
+                </Link>
+              </div>
             </div>
           ))}
         </div>
