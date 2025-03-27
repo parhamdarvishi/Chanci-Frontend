@@ -25,13 +25,14 @@ import { useDisclosure } from "@mantine/hooks";
 import { usePathname, useRouter } from "next/navigation";
 import { modals } from "@mantine/modals";
 import ModalTouch from "../ModalTouch/modalTouch";
-import { USER_TOKEN } from "@/shared/helpers/cookie/types";
+import { USER_TOKEN, VOLUNTEER } from "@/shared/helpers/cookie/types";
 import cookie from "@shared/helpers/cookie";
 
 const Navbar = () => {
   const [loc, setLoc] = useState(0);
   const [access, setAccess] = useState(false);
   const [opened, { open, close }] = useDisclosure(false);
+  const volunteer = cookie?.getCookie(VOLUNTEER);
   const path = usePathname();
 
   const router = useRouter();
@@ -73,13 +74,16 @@ const Navbar = () => {
     });
 
   const handleChanci = () => {
-    handleComingSoon();
-    // if (Token) {
-    //   router.push("/ChanciAI");
-    //   return;
-    // } else {
-    //   router.push("/user/register");
-    // }
+    if (volunteer) {
+      if (Token) {
+        router.push("/ChanciAI");
+        return;
+      } else {
+        router.push("/user/register");
+      }
+    } else {
+      handleComingSoon();
+    }
   };
 
   //UseEffect
