@@ -63,7 +63,7 @@ export const AboutUsSlider = ({ slides }: props) => {
             >
               <div className={style.imageWrapper}>
                 <Image
-                  src={slide?.bannerImagePath || ""}
+                  src={isMobile? slide?.mobileBannerImagePath || "" : slide?.bannerImagePath || ""}
                   alt={slide.title}
                   width={1000}
                   height={300}
