@@ -108,10 +108,10 @@ const Page = () => {
             <div style={{ maxWidth: "800px" }}>
               <span style={{ color: "#08CD6A" }}>Why:</span> {item.why}
             </div>
-            <div>
+            {/* <div>
               <span style={{ color: "#08CD6A" }}>Percentage:</span>{" "}
               {item.percentage}
-            </div>
+            </div> */}
             <div>
               <span style={{ color: "#08CD6A" }}>JobTitles:</span>
               <div>
