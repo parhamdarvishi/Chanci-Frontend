@@ -74,7 +74,6 @@ const Navbar = () => {
     });
 
   const handleChanci = () => {
-    debugger;
     if (volunteer) {
       if (Token) {
         router.push("/ChanciAI");
