@@ -62,11 +62,9 @@
 // }
 @media (max-width: 768px) {
   .HowItWorks {
-    display: none !important;
+    width: 60px!important;
     .HowItWorkL {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
+      width: 100%;
     }
   }
   .assessmentNotif {
