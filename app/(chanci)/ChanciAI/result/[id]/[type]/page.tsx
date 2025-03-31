@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { getRequest } from "@/shared/api/chanci";
 import { userAddresses } from "@/shared/constants/relative-url/user";
-import { Divider } from "@mantine/core";
+import { Divider, Table } from "@mantine/core";
 
 // Define interfaces for the data structure
 interface IndustryRecommendation {
@@ -27,9 +27,20 @@ interface AnswerData {
   strengths: string[];
 }
 
+interface IndustryScore {
+  order: number;
+  name: string;
+  score: number;
+}
+
+interface ConvertAnswersToPromptResponse{
+  jobRecommendation: AnswerData;
+  industryScores: IndustryScore[];
+}
+
 const Page = () => {
   const { id } = useParams();
-  const [answerData, setAnswerData] = useState<AnswerData | null>(null);
+  const [answersToPrompt, setAnswersToPrompt] = useState<ConvertAnswersToPromptResponse | null>(null);
 
   const getAllAnswers = async () => {
     const query = {
@@ -39,56 +50,52 @@ const Page = () => {
       userAddresses.ConvertAnswersToPromptCommand,
       query
     );
-    setAnswerData(data as AnswerData);
+    setAnswersToPrompt(data as ConvertAnswersToPromptResponse);
   };
 
   useEffect(() => {
     getAllAnswers();
   }, []);
 
-  if (!answerData) return null;
+  if (!answersToPrompt) return null;
 
   return (
     <div style={{ display: "flex", gap: "1rem", flexDirection: "column" }}>
-      <div>
-        <h4>cvScore</h4>
-        <div>{answerData.cvScore}</div>
-      </div>
 
       <div style={{ maxWidth: "800px" }}>
         <h4>personality</h4>
-        <div>{answerData.personality}</div>
+        <div>{answersToPrompt.jobRecommendation.personality}</div>
       </div>
 
       <div>
         <h4>highestScoringPersonality</h4>
-        <div>{answerData.highestScoringPersonality}</div>
+        <div>{answersToPrompt.jobRecommendation.highestScoringPersonality}</div>
       </div>
 
       <div>
         <h4>certificateSuggestions</h4>
-        {answerData.certificateSuggestions?.map((item, index) => (
+        {answersToPrompt.jobRecommendation.certificateSuggestions?.map((item, index) => (
           <div key={index}>{item}</div>
         ))}
       </div>
 
       <div>
         <h4>courseSuggestions</h4>
-        {answerData.courseSuggestions?.map((item, index) => (
+        {answersToPrompt.jobRecommendation.courseSuggestions?.map((item, index) => (
           <div key={index}>{item}</div>
         ))}
       </div>
 
       <div>
         <h4>hardSkillPotentialGaps</h4>
-        {answerData.hardSkillPotentialGaps?.map((item, index) => (
+        {answersToPrompt.jobRecommendation.hardSkillPotentialGaps?.map((item, index) => (
           <div key={index}>{item}</div>
         ))}
       </div>
 
       <div>
-        <h4>industryRecommendations</h4>
-        {answerData.industryRecommendations?.map((item, index) => (
+        <h4>The industries that you select</h4>
+        {answersToPrompt.jobRecommendation.industryRecommendations?.map((item, index) => (
           <div key={index} style={{ padding: ".5rem" }}>
             <div>
               <span style={{ color: "#08CD6A" }}>Name:</span>{" "}
@@ -101,10 +108,10 @@ const Page = () => {
             <div style={{ maxWidth: "800px" }}>
               <span style={{ color: "#08CD6A" }}>Why:</span> {item.why}
             </div>
-            <div>
+            {/* <div>
               <span style={{ color: "#08CD6A" }}>Percentage:</span>{" "}
               {item.percentage}
-            </div>
+            </div> */}
             <div>
               <span style={{ color: "#08CD6A" }}>JobTitles:</span>
               <div>
@@ -121,7 +128,7 @@ const Page = () => {
       <div style={{ padding: ".5rem 0" }}>
         <h4>networkingOpportunitiesSuggestions:</h4>
         <div>
-          {answerData.networkingOpportunitiesSuggestions?.map((item, index) => (
+          {answersToPrompt.jobRecommendation.networkingOpportunitiesSuggestions?.map((item, index) => (
             <div key={index}>{item}</div>
           ))}
         </div>
@@ -130,7 +137,7 @@ const Page = () => {
       <div style={{ padding: ".5rem 0" }}>
         <h4>softSkillPotentialGaps:</h4>
         <div>
-          {answerData.softSkillPotentialGaps?.map((item, index) => (
+          {answersToPrompt.jobRecommendation.softSkillPotentialGaps?.map((item, index) => (
             <div key={index}>{item}</div>
           ))}
         </div>
@@ -139,10 +146,32 @@ const Page = () => {
       <div style={{ padding: ".5rem 0" }}>
         <h4>strengths:</h4>
         <div>
-          {answerData.strengths?.map((item, index) => (
+          {answersToPrompt.jobRecommendation.strengths?.map((item, index) => (
             <div key={index}>{item}</div>
           ))}
         </div>
+      </div>
+
+      <div style={{ padding: ".5rem 0" }}>
+        <h4>Industry Scores:</h4>
+        <Table striped highlightOnHover withColumnBorders>
+          <Table.Thead>
+            <Table.Tr>
+              <Table.Th>Index</Table.Th>
+              <Table.Th>Industry</Table.Th>
+              <Table.Th>Score</Table.Th>
+            </Table.Tr>
+          </Table.Thead>
+          <Table.Tbody>
+            {answersToPrompt.industryScores?.map((item, index) => (
+              <Table.Tr key={index}>
+                <Table.Td>{index + 1}</Table.Td>
+                <Table.Td>{item.name}</Table.Td>
+                <Table.Td>{item.score}</Table.Td>
+              </Table.Tr>
+            ))}
+          </Table.Tbody>
+        </Table>
       </div>
     </div>
   );

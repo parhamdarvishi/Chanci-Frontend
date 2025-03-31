@@ -28,14 +28,12 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
     const [activePage, setPage] = useState(1);
     const getDataCount = async () => {
         try {
-            debugger;
             const res = await getRequest(url, {
                 Skip: 0,
                 Take: 1000
             }, true);
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const { totalCount } = res?.data as any;
-            debugger;
             //const items = res?.data as T[];
             setTotalPages(totalCount);
 
@@ -52,7 +50,6 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
             const res = await getRequest(url, query, true);
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const { items } = res?.data as any;
-            debugger;
             //const items = res?.data as T[];
             setData(items);
 
