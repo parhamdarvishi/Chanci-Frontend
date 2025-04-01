@@ -1,0 +1,89 @@
+.modalBox {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  height: fit-content;
+  padding: 1.5rem;
+}
+
+.root {
+  width: 100%;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px !important;
+  font-size: 22px !important;
+  gap: 0.5rem;
+  font-weight: 400;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  width: 100%;
+  height: auto;
+  transition: background-color 0.3s ease;
+  background: linear-gradient(to right, #8e15ba, #5175f0);
+}
+
+.labelSelect,
+.label {
+  font-size: 18px !important;
+}
+
+.description {
+  font-size: 16px !important;
+}
+
+.input {
+  margin: 0.5rem 0;
+  height: 40px !important;
+  border-radius: 8px !important;
+  padding: 0 1rem !important;
+  font-size: 19px !important;
+  background-color: #f1f3f5;
+  border-color: #f1f3f5;
+}
+
+.inputTextArea {
+  border-radius: 8px !important;
+  padding: 0.2rem 1rem !important;
+  font-size: 19px !important;
+  min-height: 100px;
+}
+
+.inputSelect {
+  font-size: 19px !important;
+  border-radius: 8px !important;
+  padding: 0 1rem !important;
+  height: 40px !important;
+}
+
+@media (max-width: 768px) {
+  .labelSelect,
+  .label {
+    font-size: 16px !important;
+  }
+  .description {
+    font-size: 15px !important;
+  }
+  .input {
+    height: 45px !important;
+  }
+  .inputSelect {
+    height: 45px !important;
+    font-size: 19px !important;
+    border-radius: 8px !important;
+    padding: 0 1rem !important;
+  }
+  .inputTextArea {
+    border-radius: 8px !important;
+    padding: 0.2rem 1rem !important;
+    font-size: 19px !important;
+    min-height: 100px;
+  }
+  .button {
+    height: 50px;
+  }
+}

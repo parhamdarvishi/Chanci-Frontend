@@ -1,0 +1,15 @@
+.header {
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+}
+
+.addButton {
+  background: linear-gradient(to right, #8e15ba, #5175f0);
+  color: white;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+  
+  &:hover {
+    opacity: 0.9;
+  }
+}

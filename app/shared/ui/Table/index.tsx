@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { getRequest } from "@/shared/api";
 import { Center, Loader, Pagination, Table } from "@mantine/core";
 import { JSX, useEffect, useState } from "react";
@@ -10,6 +11,7 @@ export type ActionButtons = {
 export type TableColumns<T> = {
     head: string;
     key: keyof T;
+    render?: (value: T[keyof T]) => string;
 }
 export interface TableOnRequestProps<T> {
     rowsPerPage: number;
@@ -32,7 +34,7 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
                 Skip: 0,
                 Take: 1000
             }, true);
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+             
             const { totalCount } = res?.data as any;
             //const items = res?.data as T[];
             setTotalPages(totalCount);
@@ -48,7 +50,7 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
         };
         try {
             const res = await getRequest(url, query, true);
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+             
             const { items } = res?.data as any;
             //const items = res?.data as T[];
             setData(items);
@@ -61,7 +63,7 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
         <Table.Tr key={index}>
             {columns.map((column, i: number) => {
                 const key = column.key as keyof T;
-                return (<Table.Td key={i} style={{ fontSize: "15px" }}>{column.key !== 'index'? String(ttd[key]) : index + 1}</Table.Td>)
+                return (<Table.Td key={i} style={{ fontSize: "15px" }}>{column.key !== 'index' ? column.render ? column.render(ttd[key]) : String(ttd[key]) : index + 1}</Table.Td>)
             })}
             {
                 actionButtons && actionButtons.length > 0 && actionButtons.map((btn, i: number) => {
