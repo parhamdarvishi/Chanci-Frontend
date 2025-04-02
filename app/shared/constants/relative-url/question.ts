@@ -1,8 +1,8 @@
-export const questionAddresses = {
+export const questionApiAddresses = {
   GetAll: "/api/Questions/GetAll",
-  Add: "/api/Questions/Add"
+  Add: "/api/Questions/Add",
+  Delete: "/api/Questions/Delete",
 };
-
 export const QuestionType = {
   NONE: 0,
   PSYCHOLOGY_TEST: 1,

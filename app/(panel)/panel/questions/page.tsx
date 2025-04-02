@@ -7,7 +7,7 @@ import QuestionModal from "@/shared/ui/QuestionModal/questionModal";
 import { useState, useRef } from "react";
 import { QuestionType, InputType, CategoryType } from "@/shared/constants/relative-url/question";
 import { Question } from "@/shared/types/questions";
-import { questionAddresses } from "../../../shared/constants/relative-url/question";
+import { questionApiAddresses } from "../../../shared/constants/relative-url/question";
 
 const getQuestionType = (type: number | undefined): string => {
   if (type === undefined) return "NONE";
@@ -74,8 +74,14 @@ const Page = () => {
       <TableOnRequest<Question>
         key={tableKey}
         rowsPerPage={10}
-        url={questionAddresses.GetAll}
+        url={questionApiAddresses.GetAll}
         columns={columns}
+        actionButtons={[
+          {
+            name: "View Details",
+            externalLink: "/panel/questions/"
+          }
+        ]}
       />
     </div>
   );

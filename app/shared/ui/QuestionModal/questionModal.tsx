@@ -6,7 +6,7 @@ import { useForm } from "@mantine/form";
 import { postRequest } from "@/shared/api";
 import { modals } from "@mantine/modals";
 import toastAlert from "@/shared/helpers/toast";
-import { CategoryType, QuestionType, InputType, questionAddresses } from "@/shared/constants/relative-url/question";
+import { CategoryType, QuestionType, InputType, questionApiAddresses } from "@/shared/constants/relative-url/question";
 
 const QuestionModal = ({ onSuccess }: { onSuccess?: () => void }) => {
   const [loading, setLoading] = useState(false);
@@ -37,7 +37,7 @@ const QuestionModal = ({ onSuccess }: { onSuccess?: () => void }) => {
     };
     
     const res = await postRequest(
-      questionAddresses.Add,
+      questionApiAddresses.Add,
       formValues,
       true
     );

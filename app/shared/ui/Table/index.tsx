@@ -45,7 +45,7 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
     }
     const getData = async () => {
         const query = {
-            Skip: activePage - 1,
+            Skip: (activePage - 1) * rowsPerPage,
             Take: rowsPerPage,
         };
         try {
@@ -68,7 +68,7 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
             {
                 actionButtons && actionButtons.length > 0 && actionButtons.map((btn, i: number) => {
                     return (<Table.Td key={i} style={{ fontSize: "15px" }}>
-                        <a style={{ cursor: 'pointer' }} href={btn.externalLink + ttd.id}>{btn.name}</a>
+                        <a style={{ cursor: 'pointer' }} href={`${btn.externalLink + ttd.id}/detail`}>{btn.name}</a>
                     </Table.Td>)
                 })
             }
