@@ -37,7 +37,7 @@ const PanelSidebar = ({
   const [userMenu, setUserMenu] = useState<Array<UserMenu>>([]);
   const [menuIndex, setMenuIndex] = useState(0);
   const volunteer = cookie?.getCookie(VOLUNTEER);
-
+  const router = useRouter();
   const handleSideItem = (index: number) => {
     setMenuIndex(index);
     setTimeout(() => {
@@ -79,8 +79,15 @@ const PanelSidebar = ({
           );
         })}
         <Link
-          href={volunteer ? `/ChanciAI` : `/ComingSoon`}
+          href="/ComingSoon"
           className={style.progressPartBox}
+          onClick={(e) => {
+            //avoid hydration fail error in this way
+            if (volunteer) {
+              e.preventDefault();
+              router.push('/ChanciAI');
+            }
+          }}
         >
           <span style={{ transform: "translateY(3px)" }}>Chanci AI</span>
         </Link>
