@@ -1,5 +1,5 @@
 export const relativePaths = {
     panel: {
-        questionList: '/panel/Questions' 
+        questionList: '/panel/questions' 
     }
 }
