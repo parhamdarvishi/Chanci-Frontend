@@ -4,7 +4,8 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getRequest } from "@/shared/api";
 import { Accordion, Box, Card, Center, Group, Loader, Text, Title } from "@mantine/core";
-import ReactJson from "react-json-view";
+import { JsonView, darkStyles } from "react-json-view-lite";
+import "react-json-view-lite/dist/index.css";
 
 interface GeneratedPrompt {
   id: number;
@@ -156,11 +157,9 @@ const UserHeaderDetailPage = () => {
                 </Accordion.Control>
                 <Accordion.Panel>
                   <Box style={{ maxHeight: "500px", overflow: "auto" }}>
-                    <ReactJson 
-                      src={typeof prompt.generatedPrompt === 'string' ? JSON.parse(prompt.generatedPrompt) : (prompt.generatedPrompt || {})} 
-                      theme="monokai" 
-                      displayDataTypes={false} 
-                      collapsed={1}
+                    <JsonView 
+                      data={typeof prompt.generatedPrompt === 'string' ? JSON.parse(prompt.generatedPrompt) : (prompt.generatedPrompt || {})} 
+                      style={darkStyles}
                     />
                   </Box>
                 </Accordion.Panel>
@@ -172,11 +171,9 @@ const UserHeaderDetailPage = () => {
                 </Accordion.Control>
                 <Accordion.Panel>
                   <Box style={{ maxHeight: "500px", overflow: "auto" }}>
-                    <ReactJson 
-                      src={typeof prompt.result === 'string' ? JSON.parse(prompt.result) : (prompt.result || {})} 
-                      theme="monokai" 
-                      displayDataTypes={false} 
-                      collapsed={1}
+                    <JsonView 
+                      data={typeof prompt.result === 'string' ? JSON.parse(prompt.result) : (prompt.result || {})} 
+                      style={darkStyles}
                     />
                   </Box>
                 </Accordion.Panel>

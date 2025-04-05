@@ -35,67 +35,46 @@ interface IndustryScore {
 
 interface ConvertAnswersToPromptResponse{
   jobRecommendation: AnswerData;
-  industryScores: IndustryScore[];
+  industryScores?: IndustryScore[];
 }
-
-const Page = () => {
-  const { id } = useParams();
-  const [answersToPrompt, setAnswersToPrompt] = useState<ConvertAnswersToPromptResponse | null>(null);
-
-  const getAllAnswers = async () => {
-    const query = {
-      UserAnswerHeaderId: id,
-    };
-    const { data } = await getRequest(
-      userAddresses.ConvertAnswersToPromptCommand,
-      query
-    );
-    setAnswersToPrompt(data as ConvertAnswersToPromptResponse);
-  };
-
-  useEffect(() => {
-    getAllAnswers();
-  }, []);
-
-  if (!answersToPrompt) return null;
-
-  return (
+export const AnswerToPrompts = ({answerPrompt = null} : {answerPrompt : ConvertAnswersToPromptResponse | null  })=> {
+  return(
     <div style={{ display: "flex", gap: "1rem", flexDirection: "column" }}>
 
       <div style={{ maxWidth: "800px" }}>
         <h4>personality</h4>
-        <div>{answersToPrompt.jobRecommendation.personality}</div>
+        <div>{answerPrompt?.jobRecommendation.personality}</div>
       </div>
 
       <div>
         <h4>highestScoringPersonality</h4>
-        <div>{answersToPrompt.jobRecommendation.highestScoringPersonality}</div>
+        <div>{answerPrompt?.jobRecommendation.highestScoringPersonality}</div>
       </div>
 
       <div>
         <h4>certificateSuggestions</h4>
-        {answersToPrompt.jobRecommendation.certificateSuggestions?.map((item, index) => (
+        {answerPrompt?.jobRecommendation.certificateSuggestions?.map((item, index) => (
           <div key={index}>{item}</div>
         ))}
       </div>
 
       <div>
         <h4>courseSuggestions</h4>
-        {answersToPrompt.jobRecommendation.courseSuggestions?.map((item, index) => (
+        {answerPrompt?.jobRecommendation.courseSuggestions?.map((item, index) => (
           <div key={index}>{item}</div>
         ))}
       </div>
 
       <div>
         <h4>hardSkillPotentialGaps</h4>
-        {answersToPrompt.jobRecommendation.hardSkillPotentialGaps?.map((item, index) => (
+        {answerPrompt?.jobRecommendation.hardSkillPotentialGaps?.map((item, index) => (
           <div key={index}>{item}</div>
         ))}
       </div>
 
       <div>
         <h4>The industries that you select</h4>
-        {answersToPrompt.jobRecommendation.industryRecommendations?.map((item, index) => (
+        {answerPrompt?.jobRecommendation.industryRecommendations?.map((item, index) => (
           <div key={index} style={{ padding: ".5rem" }}>
             <div>
               <span style={{ color: "#08CD6A" }}>Name:</span>{" "}
@@ -128,7 +107,7 @@ const Page = () => {
       <div style={{ padding: ".5rem 0" }}>
         <h4>networkingOpportunitiesSuggestions:</h4>
         <div>
-          {answersToPrompt.jobRecommendation.networkingOpportunitiesSuggestions?.map((item, index) => (
+          {answerPrompt?.jobRecommendation.networkingOpportunitiesSuggestions?.map((item, index) => (
             <div key={index}>{item}</div>
           ))}
         </div>
@@ -137,7 +116,7 @@ const Page = () => {
       <div style={{ padding: ".5rem 0" }}>
         <h4>softSkillPotentialGaps:</h4>
         <div>
-          {answersToPrompt.jobRecommendation.softSkillPotentialGaps?.map((item, index) => (
+          {answerPrompt?.jobRecommendation.softSkillPotentialGaps?.map((item, index) => (
             <div key={index}>{item}</div>
           ))}
         </div>
@@ -146,7 +125,7 @@ const Page = () => {
       <div style={{ padding: ".5rem 0" }}>
         <h4>strengths:</h4>
         <div>
-          {answersToPrompt.jobRecommendation.strengths?.map((item, index) => (
+          {answerPrompt?.jobRecommendation.strengths?.map((item, index) => (
             <div key={index}>{item}</div>
           ))}
         </div>
@@ -163,7 +142,7 @@ const Page = () => {
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody>
-            {answersToPrompt.industryScores?.map((item, index) => (
+            {answerPrompt?.industryScores?.map((item, index) => (
               <Table.Tr key={index}>
                 <Table.Td>{index + 1}</Table.Td>
                 <Table.Td>{item.name}</Table.Td>
@@ -174,6 +153,31 @@ const Page = () => {
         </Table>
       </div>
     </div>
+  )
+}
+const Page = () => {
+  const { id } = useParams();
+  const [answersToPrompt, setAnswersToPrompt] = useState<ConvertAnswersToPromptResponse | null>(null);
+
+  const getAllAnswers = async () => {
+    const query = {
+      UserAnswerHeaderId: id,
+    };
+    const { data } = await getRequest(
+      userAddresses.ConvertAnswersToPromptCommand,
+      query
+    );
+    setAnswersToPrompt(data as ConvertAnswersToPromptResponse);
+  };
+
+  useEffect(() => {
+    getAllAnswers();
+  }, []);
+
+  if (!answersToPrompt) return null;
+
+  return (
+    <AnswerToPrompts answerPrompt={answersToPrompt} /> 
   );
 };
 
