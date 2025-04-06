@@ -3,7 +3,7 @@
  
 import React, { useState, FormEvent } from "react";
 import { Box, Card, Input, Button, Text } from "@mantine/core";
-import style from "./wishlist.module.scss";
+import style from "./waitlist.module.scss";
 import NavbarMain from "@/shared/ui/NavbarMain/navbarMain";
 import Image from "next/image";
 import arrowRight from "@public/arrowRight.svg";
@@ -29,7 +29,7 @@ interface SuccessResponse {
   };
 }
 
-const Wishlist: React.FC = () => {
+const Waitlist: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [successResponse, setSuccessResponse] = useState<SuccessResponse | null>(null);
@@ -110,9 +110,20 @@ const Wishlist: React.FC = () => {
             withBorder
             className={style.wishlistCard}
           >
-            <p>
-              Please enter your the details to add your role to our wishlist.
-            </p>
+            <Box mb="md">
+              <Text component="span">
+                <Text component="span" fw={700}>Found it hard to level up your career game? We&apos;ll do it for you.</Text>
+                {" "}
+                Be among the first{" "}
+                <Text component="span" fw={700}>10,000 users to get a free pass to Chanci AI (Already 7,000 signed up)</Text>
+                —a one-of-a-kind platform designed to give you personalised career insights and your exclusive{" "}
+                <Text component="span" fw={700}>Employability Score</Text>
+                {" "}for the job market. Discover tailored recommendations, skill growth tips, and the perfect roles for your unique journey.
+              </Text>
+              <Text mt="xs">
+                Ready to take the next step? Fill out the form, and we will get in touch with you!
+              </Text>
+            </Box>
             <form onSubmit={handleSubmit}>
             <Box>
               <Input.Wrapper
@@ -155,7 +166,7 @@ const Wishlist: React.FC = () => {
                 }}
                 withAsterisk
                 label="University Name"
-                description="Please enter your university name"
+                description="Please enter your current or last university's name"
               >
                 <Input
                   classNames={{ input: style.input }}
@@ -189,4 +200,4 @@ const Wishlist: React.FC = () => {
   );
 };
 
-export default Wishlist;
+export default Waitlist;

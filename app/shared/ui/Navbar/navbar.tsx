@@ -84,7 +84,7 @@ const Navbar = () => {
       }
     } else {
       //handleComingSoon();
-      router.push("/wishlist");
+      router.push("/waitlist");
     }
   };
 

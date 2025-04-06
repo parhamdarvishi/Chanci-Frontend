@@ -1,13 +1,13 @@
 "use client";
-import Wishlist from "@/widget/Wishlist/Wishlist";
+import Waitlist from "@/widget/WaitList/Waitlist";
 import { Suspense } from "react";
 
-const WishlistPage = () => {
+const WaitlistPage = () => {
   return (
     <Suspense fallback={<div></div>}>
-      <Wishlist />
+      <Waitlist />
     </Suspense>
   );
 };
 
-export default WishlistPage;
+export default WaitlistPage;
