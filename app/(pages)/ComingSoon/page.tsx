@@ -29,6 +29,7 @@ const Page = () => {
             height: "60px",
             fontSize: "20px",
             fontWeight: "400",
+            cursor: "pointer"
           }}
           onClick={redirectHome}
         >

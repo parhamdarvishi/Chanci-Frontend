@@ -25,14 +25,15 @@ import { useDisclosure } from "@mantine/hooks";
 import { usePathname, useRouter } from "next/navigation";
 import { modals } from "@mantine/modals";
 import ModalTouch from "../ModalTouch/modalTouch";
-import { USER_TOKEN, VOLUNTEER } from "@/shared/helpers/cookie/types";
+import { USER_TOKEN } from "@/shared/helpers/cookie/types";
 import cookie from "@shared/helpers/cookie";
+import { getUserIsVolunteer } from "@shared/helpers/cookie/user";
 
 const Navbar = () => {
   const [loc, setLoc] = useState(0);
   const [access, setAccess] = useState(false);
   const [opened, { open, close }] = useDisclosure(false);
-  const volunteer = cookie?.getCookie(VOLUNTEER);
+  const volunteer = getUserIsVolunteer();
   const path = usePathname();
 
   const router = useRouter();
@@ -82,7 +83,8 @@ const Navbar = () => {
         router.push("/user/register");
       }
     } else {
-      handleComingSoon();
+      //handleComingSoon();
+      router.push("/wishlist");
     }
   };
 

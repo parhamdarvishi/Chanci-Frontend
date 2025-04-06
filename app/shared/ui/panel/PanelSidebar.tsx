@@ -9,12 +9,14 @@ import Link from "next/link";
 import cookie from "@/shared/helpers/cookie";
 import { useRouter } from "next/navigation";
 import { UserMenu } from "@/shared/types/users/user";
-import { VOLUNTEER } from "@/shared/helpers/cookie/types";
+import { getUserIsVolunteer } from "@/shared/helpers/cookie/user";
+import { USER_TOKEN, VOLUNTEER } from "@/shared/helpers/cookie/types";
 const LogoutButton = () => {
   const router = useRouter();
   const handleSubmit = useCallback(() => {
     if (typeof window !== "undefined") {
-      cookie.deleteCookie("USER_TOKEN");
+      cookie.deleteCookie(USER_TOKEN);
+      cookie.deleteCookie(VOLUNTEER);
       localStorage.removeItem("userMenu"); // Remove localStorage item
     }
     router.push("/");
@@ -36,7 +38,7 @@ const PanelSidebar = ({
 }) => {
   const [userMenu, setUserMenu] = useState<Array<UserMenu>>([]);
   const [menuIndex, setMenuIndex] = useState(0);
-  const volunteer = cookie?.getCookie(VOLUNTEER);
+  const volunteer = getUserIsVolunteer();
   const router = useRouter();
   const handleSideItem = (index: number) => {
     setMenuIndex(index);
