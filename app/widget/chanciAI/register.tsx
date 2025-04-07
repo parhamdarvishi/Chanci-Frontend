@@ -184,7 +184,7 @@ const Register = () => {
             >
               <p>Already have an account ? </p>
               <p
-                style={{ color: "#0063f5", cursor: "pointer" }}
+                style={{ color: "#0063f5", cursor: "pointer", userSelect: "none" }}
                 onClick={handleChanci}
               >
                 Log in
