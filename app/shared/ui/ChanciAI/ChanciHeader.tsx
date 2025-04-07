@@ -44,7 +44,7 @@ const ChanciHeader = () => {
       radius: "30px",
       size: "lg",
       styles: isMobile ? mobileStyleConfig : undefined,
-      children: <StepModal desc={desc} ctaText="Ok" />,
+      children: <StepModal paragraphWidth="480px" desc={desc} ctaText="Ok" />,
     });
   }
   return (
@@ -54,8 +54,8 @@ const ChanciHeader = () => {
           <Image src={add} alt="add" />
           <h4>New Assessment</h4>
         </Box> */}
-        <Card shadow="sm" padding="lg" className={style.HowItWorks}>
-          <div className={style.HowItWorkL} style={{ cursor: 'pointer' }} onClick={howItWorksModal}>
+        <Card shadow="sm" padding="lg" onClick={howItWorksModal} style={{ cursor: 'pointer' }} className={style.HowItWorks}>
+          <div className={style.HowItWorkL}>
             <Image src={QuestionSquare} alt="QuestionSquare" />
             {!isMobile && <span>How it works?</span>}
           </div>

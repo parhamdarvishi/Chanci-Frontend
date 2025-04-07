@@ -7,7 +7,9 @@ import { chanciAddresses } from "@/shared/constants/relative-url/chanci";
 
 const columns: TableColumns<UserHeaders>[] = [
   { head: "Index", key: "index" },
-  { head: "User Id", key: "userId" }
+  { head: "User Id", key: "userId" },
+  { head: "Full Name", key: "fullName" },
+  { head: "Email", key: "email" }
 ];
 
 const Page = () => {

@@ -12,6 +12,9 @@ export interface ExternalReferenceResponse {
     index: number;
     userId: string;
     createAt: string;//"2025-03-27T11:07:54.416183",
+    fullName: string;
+    email: string;
+    
     //userAnswers: null,
     isDeleted: boolean;
   }

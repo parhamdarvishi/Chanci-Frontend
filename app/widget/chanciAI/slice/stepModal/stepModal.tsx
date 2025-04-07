@@ -7,23 +7,24 @@ import { modals } from "@mantine/modals";
 
 type props = {
   desc: string;
+  paragraphWidth?: string;
   ctaText?: string;
 };
 
-const StepModal = ({ desc, ctaText }: props) => {
+const StepModal = ({ desc, paragraphWidth, ctaText }: props) => {
   const handleCloseModal = () => {
     modals.closeAll();
   };
   return (
     <div
-    className={style.container}
+      className={style.container}
     >
       <Box
         className={style.chanciImgBox}
       >
         <Image src={Title} alt="ChanciAi" loading="lazy" width={115} />
       </Box>
-      <p className={style.desc}>
+      <p className={style.desc} {...(paragraphWidth && { style: { maxWidth: paragraphWidth } })} >
         {desc}
       </p>
       <Box
@@ -35,7 +36,7 @@ const StepModal = ({ desc, ctaText }: props) => {
         }}
       >
         <div className={style.button} onClick={handleCloseModal}>
-          <span style={{ cursor: "pointer" }}>{ctaText? ctaText : `Let's go`}</span>
+          <span style={{ cursor: "pointer" }}>{ctaText ? ctaText : `Let's go`}</span>
         </div>
       </Box>
     </div>

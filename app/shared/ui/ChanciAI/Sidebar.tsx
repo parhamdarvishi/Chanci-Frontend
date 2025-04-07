@@ -9,6 +9,7 @@ import { useChanci } from "@/shared/stateManagement/UseChanci/useChanci";
 import StepModal from "@/widget/chanciAI/slice/stepModal/stepModal";
 import { modals } from "@mantine/modals";
 import { useParams, usePathname, useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Sidebar = ({ drawer }: { drawer: boolean }) => {
   const [progress, setProgress] = useState(0);
@@ -98,8 +99,10 @@ const Sidebar = ({ drawer }: { drawer: boolean }) => {
     <Card shadow="sm" padding="lg" className={style.wrapper}>
       {!drawer && (
         <>
-          <Box>
-            <Image src={Title} alt="ChanciAi" loading="lazy" width={115} />
+          <Box style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <Link href="/Home">
+              <Image src={Title} alt="ChanciAi" loading="lazy" width={115} />
+            </Link>
           </Box>
           <Divider color="#D5D5D7" style={{ margin: "1.8rem 0" }} />
         </>
@@ -164,8 +167,8 @@ const Sidebar = ({ drawer }: { drawer: boolean }) => {
               sidebarLoc.includes(1) && sidebarLoc.includes(2)
                 ? style.progressPartDone
                 : sidebarLoc.includes(1)
-                ? style.progressPartActive
-                : style.progressPartBox
+                  ? style.progressPartActive
+                  : style.progressPartBox
             }
           >
             <span onClick={() => handleResultShow("Psychology")}>
@@ -177,8 +180,8 @@ const Sidebar = ({ drawer }: { drawer: boolean }) => {
               sidebarLoc.includes(2) && sidebarLoc.includes(3)
                 ? style.progressPartDone
                 : sidebarLoc.includes(2)
-                ? style.progressPartActive
-                : style.progressPartBox
+                  ? style.progressPartActive
+                  : style.progressPartBox
             }
           >
             <span>Career Preference (6 Questions) </span>
@@ -188,8 +191,8 @@ const Sidebar = ({ drawer }: { drawer: boolean }) => {
               sidebarLoc.includes(3) && sidebarLoc.includes(4)
                 ? style.progressPartDone
                 : sidebarLoc.includes(3)
-                ? style.progressPartActive
-                : style.progressPartBox
+                  ? style.progressPartActive
+                  : style.progressPartBox
             }
           >
             <span>Nationality & Visa (3 Questions)</span>
@@ -199,8 +202,8 @@ const Sidebar = ({ drawer }: { drawer: boolean }) => {
               sidebarLoc.includes(4) && sidebarLoc.includes(5)
                 ? style.progressPartDone
                 : sidebarLoc.includes(4)
-                ? style.progressPartActive
-                : style.progressPartBox
+                  ? style.progressPartActive
+                  : style.progressPartBox
             }
           >
             <span>CV Section ( 1 Question)</span>
@@ -210,8 +213,8 @@ const Sidebar = ({ drawer }: { drawer: boolean }) => {
               sidebarLoc.includes(5) && sidebarLoc.includes(6)
                 ? style.progressPartDone
                 : sidebarLoc.includes(5)
-                ? style.progressPartActive
-                : style.progressPartBox
+                  ? style.progressPartActive
+                  : style.progressPartBox
             }
           >
             <span>Skills & Certificate ( 2 Questions)</span>

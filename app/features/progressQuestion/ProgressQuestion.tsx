@@ -274,7 +274,7 @@ const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
           />
         </Box>
         {steps[currentStep] !== answers[questionIndex]?.step && (
-          <Box style={{ display: "flex", justifyContent: "end" }}>
+          <Box style={{ display: "flex", justifyContent: "end", userSelect: 'none' }}>
             <div className={styles.btnChanci} onClick={handleAnswer}>
               Next <IconArrowRight />
             </div>

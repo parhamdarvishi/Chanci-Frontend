@@ -2,7 +2,7 @@
 import { Box, Card, Divider } from "@mantine/core";
 import React, { useCallback, useEffect, useState } from "react";
 import style from "./style/panelSidebar.module.scss";
-import Title from "@public/image/widget/Frame.svg";
+import logoNav from "@public/image/icons/logoNav.svg";
 import Image from "next/image";
 import { IconLogout } from "@tabler/icons-react";
 import Link from "next/link";
@@ -56,7 +56,7 @@ const PanelSidebar = ({
       {!drawer && (
         <>
           <Box>
-            <Image src={Title} alt="ChanciAi" loading="lazy" width={115} />
+            <Image src={logoNav} alt="ChanciAi" loading="lazy" width={115} />
           </Box>
           <Divider color="#D5D5D7" style={{ margin: "1.6rem 0" }} />
         </>

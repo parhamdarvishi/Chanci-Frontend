@@ -32,7 +32,7 @@ const PsychologyTest: React.FC<PsychologyTestProps> = ({ question }) => {
   const router = useRouter();
   const sendAnswers = async () => {
     const reqbody = {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+       
       answers: answers.map(({ step, ...rest }) => rest),
     };
     const { data } = await postRequest(
@@ -48,7 +48,7 @@ const PsychologyTest: React.FC<PsychologyTestProps> = ({ question }) => {
     modals.open({
       radius: "30px",
       size: "lg",
-      children: <StepModal desc={desc} />,
+      children: <StepModal paragraphWidth="480px" desc={desc} />,
     });
   };
 
@@ -77,7 +77,7 @@ const PsychologyTest: React.FC<PsychologyTestProps> = ({ question }) => {
     if (question?.type === 5) {
       UpdateSidebarPostion(5);
     }
-  }, [question]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [question]);  
 
   return (
     <div style={{ height: "100%" }}>
