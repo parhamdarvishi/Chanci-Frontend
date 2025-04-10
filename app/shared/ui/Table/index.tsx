@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+ 
 import { getRequest } from "@/shared/api";
 import { Center, Loader, Pagination, Table } from "@mantine/core";
 import { JSX, useEffect, useState } from "react";
@@ -17,13 +17,17 @@ export interface TableOnRequestProps<T> {
     rowsPerPage: number;
     url: string;
     columns: TableColumns<T>[];
-    actionButtons?: ActionButtons[]
+    actionButtons?: ActionButtons[];
+    sortBy?: string;
+    sortDirection?: 'asc' | 'desc';
 }
 export const TableOnRequest = <T extends Record<string, unknown>>({
     rowsPerPage,
     url,
     columns,
-    actionButtons
+    actionButtons,
+    sortBy,
+    sortDirection
 }: TableOnRequestProps<T>): JSX.Element => {
     const [data, setData] = useState<T[]>();
     const [totalPages, setTotalPages] = useState(0);
@@ -44,10 +48,17 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
         }
     }
     const getData = async () => {
-        const query = {
+        const query: Record<string, any> = {
             Skip: (activePage - 1) * rowsPerPage,
             Take: rowsPerPage,
         };
+        
+        // Add sorting parameters if provided
+        if (sortBy) {
+            query.SortBy = sortBy;
+            query.SortDirection = sortDirection || 'asc';
+        }
+        
         try {
             const res = await getRequest(url, query, true);
              
@@ -60,7 +71,9 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
         }
     };
     const rows = data?.map((ttd: T, index: number) => (
-        <Table.Tr key={index}>
+        <Table.Tr 
+            key={index}
+        >
             {columns.map((column, i: number) => {
                 const key = column.key as keyof T;
                 return (<Table.Td key={i} style={{ fontSize: "15px" }}>{column.key !== 'index' ? column.render ? column.render(ttd[key]) : String(ttd[key]) : index + 1}</Table.Td>)
@@ -68,7 +81,13 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
             {
                 actionButtons && actionButtons.length > 0 && actionButtons.map((btn, i: number) => {
                     return (<Table.Td key={i} style={{ fontSize: "15px" }}>
-                        <a style={{ cursor: 'pointer' }} href={`${btn.externalLink + ttd.id}/detail`}>{btn.name}</a>
+                        <a 
+                            style={{ cursor: 'pointer' }} 
+                            href={`${btn.externalLink + ttd.id}/detail`}
+                            onClick={(e) => e.stopPropagation()} // Prevent row click when clicking on action button
+                        >
+                            {btn.name}
+                        </a>
                     </Table.Td>)
                 })
             }
