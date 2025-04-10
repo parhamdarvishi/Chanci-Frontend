@@ -45,7 +45,7 @@ const PanelSidebar = ({
       close();
     }, 1000);
   };
-  const usermenus : UserMenu[] = typeof window !== 'undefined' && JSON.parse(localStorage.getItem("userMenu") || "[]");
+  const usermenus : UserMenu[] = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("userMenu") || "[]") : [];
   return (
     <Card shadow="sm" className={style.wrapper}>
       {!drawer && (
