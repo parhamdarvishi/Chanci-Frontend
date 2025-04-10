@@ -2,10 +2,11 @@
 
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getRequest } from "@/shared/api";
-import { Accordion, Box, Card, Center, Group, Loader, Text, Title } from "@mantine/core";
+import { getRequest, postRequest, deleteRequest } from "@/shared/api/chanci";
+import { Accordion, Box, Card, Center, Group, Loader, Text, Title, Button } from "@mantine/core";
 import { JsonView, darkStyles } from "react-json-view-lite";
 import "react-json-view-lite/dist/index.css";
+import toastAlert from "@/shared/helpers/toast";
 
 interface GeneratedPrompt {
   id: number;
@@ -35,40 +36,101 @@ const UserHeaderDetailPage = () => {
   const params = useParams();
   const [generatedPrompts, setGeneratedPrompts] = useState<GeneratedPrompt[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
+  const [isRegenerating, setIsRegenerating] = useState<boolean>(false);
+
+  const fetchGeneratedPrompts = async () => {
+    setLoading(true);
+    try {
+      // Fetch all data without filtering
+      const reqBody = {
+        Skip: 0,
+        Take: 1000 // Increased to get more data
+      };
+      const res: ApiResponse = await getRequest(
+        "/api/GeneratedPrompts/GetAll",
+        reqBody,
+        true
+      );
+      
+      if (res?.isSuccess && res?.data?.items) {
+        // Filter items with matching userAnswerHeaderId on client side
+        const filteredPrompts = res.data.items.filter(
+          (item) => item.userAnswerHeaderId === Number(params.id)
+        );
+        setGeneratedPrompts(filteredPrompts);
+      }
+    } catch (error) {
+      console.error("Error fetching generated prompts:", error);
+      toastAlert("Error fetching generated prompts", "error");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchGeneratedPrompts = async () => {
-      setLoading(true);
-      try {
-        // Fetch all data without filtering
-        const reqBody = {
-          Skip: 0,
-          Take: 1000 // Increased to get more data
-        };
-        const res: ApiResponse = await getRequest(
-          "/api/GeneratedPrompts/GetAll",
-          reqBody,
-          true
-        );
-        
-        if (res?.isSuccess && res?.data?.items) {
-          // Filter items with matching userAnswerHeaderId on client side
-          const filteredPrompts = res.data.items.filter(
-            (item) => item.userAnswerHeaderId === Number(params.id)
-          );
-          setGeneratedPrompts(filteredPrompts);
-        }
-      } catch (error) {
-        console.error("Error fetching generated prompts:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     if (params.id) {
       fetchGeneratedPrompts();
     }
   }, [params.id]);
+
+  const handleDelete = async () => {
+    if (!params.id) return;
+    
+    setIsDeleting(true);
+    try {
+      const reqBody = {
+        UserAnswerHeaderId: Number(params.id)
+      };
+      const res = await deleteRequest(
+        "/api/GeneratedPrompts/Delete",
+        reqBody,
+        true
+      );
+      
+      if (res?.isSuccess) {
+        toastAlert("Result deleted successfully", "success");
+        // Refresh the data
+        await fetchGeneratedPrompts();
+      } else {
+        toastAlert(res?.message || "Failed to delete result", "error");
+      }
+    } catch (error) {
+      console.error("Error deleting result:", error);
+      toastAlert("Error deleting result", "error");
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
+  const handleRegenerate = async () => {
+    if (!params.id) return;
+    
+    setIsRegenerating(true);
+    try {
+      const reqBody = {
+        UserAnswerHeaderId: Number(params.id)
+      };
+      const res = await getRequest(
+        "/api/UserAnswers/ConvertAnswersToPromptCommand",
+        reqBody,
+        true
+      );
+      
+      if (res?.isSuccess) {
+        toastAlert("Result regenerated successfully", "success");
+        // Refresh the data
+        await fetchGeneratedPrompts();
+      } else {
+        toastAlert(res?.message as string || "Failed to regenerate result", "error");
+      }
+    } catch (error) {
+      console.error("Error regenerating result:", error);
+      toastAlert("Error regenerating result", "error");
+    } finally {
+      setIsRegenerating(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -80,10 +142,34 @@ const UserHeaderDetailPage = () => {
 
   return (
     <div style={{ padding: "20px" }}>
-      <Title order={2} mb="xl">User Header Details</Title>
+      <Group justify="space-between" mb="xl">
+        <Title order={2}>User Header Details</Title>
+        <Group justify="flex-end">
+        <Button 
+            color="blue" 
+            onClick={handleRegenerate} 
+            loading={isRegenerating}
+            disabled={generatedPrompts.length > 0}
+          >
+            Regenerate Result
+          </Button>
+          <Button 
+            color="red" 
+            onClick={handleDelete} 
+            loading={isDeleting}
+            disabled={generatedPrompts.length === 0}
+          >
+            Delete Current Result
+          </Button>
+        </Group>
+      </Group>
       <Text mb="md">User Answer Header ID: {params.id}</Text>
       
-      {generatedPrompts.length === 0 ? (
+      {isDeleting || isRegenerating ? (
+        <Center style={{ height: "50vh" }}>
+          <Loader color="blue" size="lg" />
+        </Center>
+      ) : generatedPrompts.length === 0 ? (
         <Card shadow="sm" p="lg" radius="md" withBorder>
           <Text>No generated prompts found for this user header.</Text>
         </Card>
