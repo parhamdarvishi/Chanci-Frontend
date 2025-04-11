@@ -1,6 +1,7 @@
 "use client";
 import { myExamAddress } from "@/shared/constants/relative-url/exam";
-import { ActionButtons, TableColumns, TableOnRequest } from "@/shared/ui/Table";
+import { TableOnRequest } from "@/shared/ui/Table";
+import { ActionButtons, TableColumns } from "@/shared/ui/Table/model";
 import React from "react";
 
 type TMyExams = {
@@ -9,22 +10,23 @@ type TMyExams = {
   userId?: string;
   createAt: string;
   isDeleted: boolean;
-}
+};
 const columns: TableColumns<TMyExams>[] = [
-  { head: "Index", key: "index"},
-  { head: 'Date', key: 'createAt' }
+  { head: "Index", key: "index" },
+  { head: "Date", key: "createAt" },
 ];
 const actionButtons: ActionButtons[] = [
-  { name: "Show Detail", externalLink: '/ChanciAI/result/'}
+  { name: "Show Detail", externalLink: "/ChanciAI/result/" },
 ];
 const Page = () => {
-    return (
-      <TableOnRequest<TMyExams>
-        rowsPerPage={10}
-        url={myExamAddress.myExam}
-        columns={columns}
-        actionButtons={actionButtons}
-      />);
+  return (
+    <TableOnRequest<TMyExams>
+      rowsPerPage={10}
+      url={myExamAddress.myExam}
+      columns={columns}
+      actionButtons={actionButtons}
+    />
+  );
 };
 
 export default Page;
