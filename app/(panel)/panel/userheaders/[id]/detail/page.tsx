@@ -1,72 +1,22 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getRequest, postRequest, deleteRequest } from "@/shared/api/chanci";
+import { postRequest, deleteRequest, getRequest } from "@/shared/api/chanci";
 import { Accordion, Box, Card, Center, Group, Loader, Text, Title, Button } from "@mantine/core";
 import { JsonView, darkStyles } from "react-json-view-lite";
 import "react-json-view-lite/dist/index.css";
 import toastAlert from "@/shared/helpers/toast";
+import useGeneratedPrompts from "@/shared/hooks/useGeneratedPrompts";
 
-interface GeneratedPrompt {
-  id: number;
-  userAnswerHeaderId: number;
-  generatedPrompt: any;
-  result: any;
-  promptTokens: number;
-  completionTokens: number;
-  totalTokens: number;
-  cachedTokens: number;
-  audioTokens: number;
-  reasoningTokensCompletion: number;
-  audioTokensCompletion: number;
-  acceptedPredictionTokensCompletion: number;
-  rejectedPredictionTokensCompletion: number;
-  isDeleted: boolean;
-}
-
-interface ApiResponse {
-  isSuccess?: boolean;
-  data?: {
-    items?: GeneratedPrompt[];
-  };
-}
+// Using the interfaces from the useGeneratedPrompts hook
 
 const UserHeaderDetailPage = () => {
   const params = useParams();
-  const [generatedPrompts, setGeneratedPrompts] = useState<GeneratedPrompt[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const router = useRouter();
+  const { generatedPrompt, loading, fetchGeneratedPrompts } = useGeneratedPrompts(Number(params.id));
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const [isRegenerating, setIsRegenerating] = useState<boolean>(false);
-
-  const fetchGeneratedPrompts = async () => {
-    setLoading(true);
-    try {
-      // Fetch all data without filtering
-      const reqBody = {
-        Skip: 0,
-        Take: 1000 // Increased to get more data
-      };
-      const res: ApiResponse = await getRequest(
-        "/api/GeneratedPrompts/GetAll",
-        reqBody,
-        true
-      );
-      
-      if (res?.isSuccess && res?.data?.items) {
-        // Filter items with matching userAnswerHeaderId on client side
-        const filteredPrompts = res.data.items.filter(
-          (item) => item.userAnswerHeaderId === Number(params.id)
-        );
-        setGeneratedPrompts(filteredPrompts);
-      }
-    } catch (error) {
-      console.error("Error fetching generated prompts:", error);
-      toastAlert("Error fetching generated prompts", "error");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   useEffect(() => {
     if (params.id) {
@@ -145,11 +95,11 @@ const UserHeaderDetailPage = () => {
       <Group justify="space-between" mb="xl">
         <Title order={2}>User Header Details</Title>
         <Group justify="flex-end">
-        <Button 
+          <Button 
             color="blue" 
             onClick={handleRegenerate} 
             loading={isRegenerating}
-            disabled={generatedPrompts.length > 0}
+            disabled={generatedPrompt !== undefined}
           >
             Regenerate Result
           </Button>
@@ -157,9 +107,16 @@ const UserHeaderDetailPage = () => {
             color="red" 
             onClick={handleDelete} 
             loading={isDeleting}
-            disabled={generatedPrompts.length === 0}
+            disabled={generatedPrompt === undefined}
           >
             Delete Current Result
+          </Button>
+          <Button 
+            color="teal" 
+            onClick={() => router.push(`/ChanciAI/result/${params.id}/detail`)}
+            disabled={generatedPrompt === undefined}
+          >
+            View Result in Chanci
           </Button>
         </Group>
       </Group>
@@ -169,14 +126,13 @@ const UserHeaderDetailPage = () => {
         <Center style={{ height: "50vh" }}>
           <Loader color="blue" size="lg" />
         </Center>
-      ) : generatedPrompts.length === 0 ? (
+      ) : generatedPrompt === undefined ? (
         <Card shadow="sm" p="lg" radius="md" withBorder>
           <Text>No generated prompts found for this user header.</Text>
         </Card>
       ) : (
-        generatedPrompts.map((prompt, index) => (
-          <Card key={prompt.id} shadow="sm" p="lg" radius="md" withBorder mb="md">
-            <Title order={3} mb="md">Generated Prompt {index + 1}</Title>
+          <Card key={generatedPrompt.id} shadow="sm" p="lg" radius="md" withBorder mb="md">
+            <Title order={3} mb="md">Generated Prompt</Title>
             
             <Accordion defaultValue="metadata">
               <Accordion.Item value="metadata">
@@ -187,51 +143,51 @@ const UserHeaderDetailPage = () => {
                   <Box>
                     <Group>
                       <Text fw={500}>ID:</Text>
-                      <Text>{prompt.id}</Text>
+                      <Text>{generatedPrompt.id}</Text>
                     </Group>
                     <Group>
                       <Text fw={500}>User Answer Header ID:</Text>
-                      <Text>{prompt.userAnswerHeaderId}</Text>
+                      <Text>{generatedPrompt.userAnswerHeaderId}</Text>
                     </Group>
                     <Group>
                       <Text fw={500}>Prompt Tokens:</Text>
-                      <Text>{prompt.promptTokens}</Text>
+                      <Text>{generatedPrompt.promptTokens}</Text>
                     </Group>
                     <Group>
                       <Text fw={500}>Completion Tokens:</Text>
-                      <Text>{prompt.completionTokens}</Text>
+                      <Text>{generatedPrompt.completionTokens}</Text>
                     </Group>
                     <Group>
                       <Text fw={500}>Total Tokens:</Text>
-                      <Text>{prompt.totalTokens}</Text>
+                      <Text>{generatedPrompt.totalTokens}</Text>
                     </Group>
                     <Group>
                       <Text fw={500}>Cached Tokens:</Text>
-                      <Text>{prompt.cachedTokens}</Text>
+                      <Text>{generatedPrompt.cachedTokens}</Text>
                     </Group>
                     <Group>
                       <Text fw={500}>Audio Tokens:</Text>
-                      <Text>{prompt.audioTokens}</Text>
+                      <Text>{generatedPrompt.audioTokens}</Text>
                     </Group>
                     <Group>
                       <Text fw={500}>Reasoning Tokens Completion:</Text>
-                      <Text>{prompt.reasoningTokensCompletion}</Text>
+                      <Text>{generatedPrompt.reasoningTokensCompletion}</Text>
                     </Group>
                     <Group>
                       <Text fw={500}>Audio Tokens Completion:</Text>
-                      <Text>{prompt.audioTokensCompletion}</Text>
+                      <Text>{generatedPrompt.audioTokensCompletion}</Text>
                     </Group>
                     <Group>
                       <Text fw={500}>Accepted Prediction Tokens Completion:</Text>
-                      <Text>{prompt.acceptedPredictionTokensCompletion}</Text>
+                      <Text>{generatedPrompt.acceptedPredictionTokensCompletion}</Text>
                     </Group>
                     <Group>
                       <Text fw={500}>Rejected Prediction Tokens Completion:</Text>
-                      <Text>{prompt.rejectedPredictionTokensCompletion}</Text>
+                      <Text>{generatedPrompt.rejectedPredictionTokensCompletion}</Text>
                     </Group>
                     <Group>
                       <Text fw={500}>Is Deleted:</Text>
-                      <Text>{prompt.isDeleted ? "Yes" : "No"}</Text>
+                      <Text>{generatedPrompt.isDeleted ? "Yes" : "No"}</Text>
                     </Group>
                   </Box>
                 </Accordion.Panel>
@@ -244,7 +200,7 @@ const UserHeaderDetailPage = () => {
                 <Accordion.Panel>
                   <Box style={{ maxHeight: "500px", overflow: "auto" }}>
                     <JsonView 
-                      data={typeof prompt.generatedPrompt === 'string' ? JSON.parse(prompt.generatedPrompt) : (prompt.generatedPrompt || {})} 
+                      data={typeof generatedPrompt.generatedPrompt === 'string' ? JSON.parse(generatedPrompt.generatedPrompt) : (generatedPrompt.generatedPrompt || {})} 
                       style={darkStyles}
                     />
                   </Box>
@@ -258,7 +214,7 @@ const UserHeaderDetailPage = () => {
                 <Accordion.Panel>
                   <Box style={{ maxHeight: "500px", overflow: "auto" }}>
                     <JsonView 
-                      data={typeof prompt.result === 'string' ? JSON.parse(prompt.result) : (prompt.result || {})} 
+                      data={typeof generatedPrompt.result === 'string' ? JSON.parse(generatedPrompt.result) : (generatedPrompt.result || {})} 
                       style={darkStyles}
                     />
                   </Box>
@@ -266,7 +222,6 @@ const UserHeaderDetailPage = () => {
               </Accordion.Item>
             </Accordion>
           </Card>
-        ))
       )}
     </div>
   );
