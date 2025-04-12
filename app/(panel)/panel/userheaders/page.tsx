@@ -1,15 +1,15 @@
 "use client";
- 
-import { TableColumns, TableOnRequest } from "@/shared/ui/Table";
+
+import { TableOnRequest } from "@/shared/ui/Table";
 import { UserHeaders } from "@/shared/types/other/other";
 import { chanciAddresses } from "@/shared/constants/relative-url/chanci";
-
+import { TableColumns } from "@/shared/ui/Table/model";
 
 const columns: TableColumns<UserHeaders>[] = [
   { head: "Index", key: "index" },
   { head: "User Id", key: "userId" },
   { head: "Full Name", key: "fullName" },
-  { head: "Email", key: "email" }
+  { head: "Email", key: "email" },
 ];
 
 const Page = () => {
@@ -23,8 +23,8 @@ const Page = () => {
         actionButtons={[
           {
             name: "View Details",
-            externalLink: "/panel/userheaders/"
-          }
+            externalLink: "/panel/userheaders/",
+          },
         ]}
       />
     </div>

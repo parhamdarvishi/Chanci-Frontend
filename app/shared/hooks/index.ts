@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import useGeneratedPrompts from "./useGeneratedPrompts";
 
 export const getWindow = (): Window | null => {
   return typeof window !== 'undefined' ? window : null;
@@ -30,4 +31,5 @@ const useIsMobile = (breakpoint: number = 768): boolean | undefined  =>{
   return isMobile;
 };
 
+export { useGeneratedPrompts };
 export default useIsMobile;

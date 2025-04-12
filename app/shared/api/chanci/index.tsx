@@ -7,6 +7,7 @@ import {
   PostRequestFunction,
   PutRequestFunction,
   ResponseData,
+  ResponseError,
 } from "@shared/api/chanci/model";
 
 export const getRequest: GetRequestFunction = async (
@@ -79,8 +80,8 @@ export const deleteRequest: DeleteRequestFunction = async (
   url,
   data,
   authorization
-): Promise<ResponseData> => {
-  const response: AxiosResponse<ResponseData> = await api(authorization).delete(
+): Promise<ResponseError> => {
+  const response: AxiosResponse<ResponseError> = await api(authorization).delete(
     url,
     { data }
   );

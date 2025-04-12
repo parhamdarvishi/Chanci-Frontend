@@ -7,7 +7,7 @@ import Image from "next/image";
 import { IconLogout } from "@tabler/icons-react";
 import Link from "next/link";
 import cookie from "@/shared/helpers/cookie";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { UserMenu } from "@/shared/types/users/user";
 import { getUserIsVolunteer } from "@/shared/helpers/cookie/user";
 import { USER_TOKEN, VOLUNTEER } from "@/shared/helpers/cookie/types";
@@ -36,41 +36,38 @@ const PanelSidebar = ({
   drawer: boolean;
   close: () => void;
 }) => {
-  const [userMenu, setUserMenu] = useState<Array<UserMenu>>([]);
-  const [menuIndex, setMenuIndex] = useState(0);
   const volunteer = getUserIsVolunteer();
   const router = useRouter();
-  const handleSideItem = (index: number) => {
-    setMenuIndex(index);
+  const pathname = usePathname();
+  
+  const handleSideItem = () => {
     setTimeout(() => {
       close();
     }, 1000);
   };
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setUserMenu(JSON.parse(localStorage.getItem("userMenu") || "[]"));
-    }
-  }, []);
+  const usermenus : UserMenu[] = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("userMenu") || "[]") : [];
   return (
     <Card shadow="sm" className={style.wrapper}>
       {!drawer && (
         <>
           <Box>
-            <Image src={logoNav} alt="ChanciAi" loading="lazy" width={115} />
+            <Link href="/">
+              <Image src={logoNav} alt="ChanciAi" loading="lazy" width={115} />
+            </Link>
           </Box>
           <Divider color="#D5D5D7" style={{ margin: "1.6rem 0" }} />
         </>
       )}
 
       <Box className={style.progressPart}>
-        {userMenu?.map((menu, index) => {
+        {usermenus?.map((menu, index) => {
           return (
             <Link
               key={`menu-${index}`}
               href={`${menu.link}`}
-              onClick={() => handleSideItem(index)}
+              onClick={() => handleSideItem()}
               className={
-                menuIndex === index
+                pathname === menu.link || pathname.startsWith(`${menu.link}/`)
                   ? style.progressPartBoxActive
                   : style.progressPartBox
               }

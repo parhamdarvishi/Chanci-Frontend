@@ -42,7 +42,11 @@ const Page = () => {
     try {
       const res: ApiResponse = await getRequest(
         paymentAddresses.GetAllPayments,
-        { Id: params.id },
+        { Skip: 0,
+          Take: 1,
+          "Filters[0].PropertyName": "id",
+          "Filters[0].Value": params.id,
+         },
         true
       );
       if (res?.isSuccess && res?.data?.items && res?.data?.items?.length > 0) {

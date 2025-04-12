@@ -29,3 +29,19 @@ export interface ConvertAnswersToPromptResponse {
     jobRecommendation: AnswerData;
     industryScores?: IndustryScore[];
 }
+export interface GeneratedPrompt {
+  id: number;
+  userAnswerHeaderId: number;
+  generatedPrompt: any;
+  result: any;
+  promptTokens: number;
+  completionTokens: number;
+  totalTokens: number;
+  cachedTokens: number;
+  audioTokens: number;
+  reasoningTokensCompletion: number;
+  audioTokensCompletion: number;
+  acceptedPredictionTokensCompletion: number;
+  rejectedPredictionTokensCompletion: number;
+  isDeleted: boolean;
+}

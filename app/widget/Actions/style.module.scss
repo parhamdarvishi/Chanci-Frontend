@@ -1,0 +1,18 @@
+.roleManagementContainer {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.roleShow {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  .roleShowBox {
+    padding: 0 0.6rem;
+  }
+  .roleShowInput {
+    font-size: 1rem !important;
+  }
+}
