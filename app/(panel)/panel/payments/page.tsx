@@ -1,8 +1,8 @@
 "use client";
 import { paymentAddresses } from "@/shared/constants/relative-url/payment";
 import { TableOnRequest } from "@/shared/ui/Table";
-import React, { useState } from "react";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import React, { Suspense } from "react";
+import {  useSearchParams } from "next/navigation";
 import { TableColumns } from "@/shared/ui/Table/model";
 
 type TPayment = {
@@ -11,16 +11,13 @@ type TPayment = {
   currency: string;
   paiedSuccessfull: boolean;
 };
-
-const Page = () => {
+const Payments = () => {
   const userid = useSearchParams().get("userId");
   const filters =  {
     "Filters[0].PropertyName": "userId",
     "Filters[0].operation": 0,
     "Filters[0].value": userid
   }
-  console.log(filters);
-  console.log(userid);
   const columns: TableColumns<TPayment>[] = [
     { head: "ID", key: "id" },
     { head: "Price", key: "price" },
@@ -44,6 +41,13 @@ const Page = () => {
       {... (userid && {filters : filters})}
     />
   );
+}
+const Page = () => {
+  return(
+    <Suspense fallback={<div></div>}>
+      <Payments />
+    </Suspense>
+  )
 };
 
 export default Page;
