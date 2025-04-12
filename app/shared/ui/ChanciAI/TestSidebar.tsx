@@ -6,15 +6,16 @@ import Sidebar from "./Sidebar";
 import { useDisclosure } from "@mantine/hooks";
 import style from "./../../../(chanci)/style.module.scss";
 import Title from "@public/image/widget/Frame.svg";
+import HomeIcon from "@public/image/chanciAI/icon/home.svg";
 import Image from "next/image";
-import useIsMobile from "@/shared/hooks";
 const TestSidebar = ({
     children,
+    resultPage
 }: {
     children: React.ReactNode;
+    resultPage?: boolean;
 }) => {
     const [opened, { open, close }] = useDisclosure(false);
-    const isMobile = useIsMobile();
     return (
         <Grid
             gutter={{ md: 15 }}
@@ -32,17 +33,15 @@ const TestSidebar = ({
             >
                 <Drawer.Overlay />
                 <Drawer.Content>
-                    {isMobile && <Drawer.Header style={{ marginBottom: ".6rem" }}>
+                    <Drawer.Header style={{ marginBottom: ".6rem" }}>
                         <Drawer.Title>
-                            <Link href="/Home">
-                                <Image src={Title} alt="ChanciAi" loading="lazy" width={115} />
-                            </Link>
+                            <Image src={Title} alt="ChanciAi" loading="lazy" width={115} />
                         </Drawer.Title>
                         <Drawer.CloseButton size={42} color="#585858" />
-                    </Drawer.Header>}
+                    </Drawer.Header>
                     <Drawer.Body>
                         <Divider />
-                        <Sidebar drawer={Boolean(isMobile)} />
+                        <Sidebar drawer={false} />
                         {/* {links.map((item, index) => (
                   <Box
                     style={{ position: "relative" }}
@@ -66,7 +65,7 @@ const TestSidebar = ({
                 </Drawer.Content>
             </Drawer.Root>
             <GridCol span={{ base: 12, md: 3 }} className={style.sidebar}>
-
+                
                 <Sidebar drawer={false} />
             </GridCol>
             <GridCol span={{ base: 12, md: 9 }}>

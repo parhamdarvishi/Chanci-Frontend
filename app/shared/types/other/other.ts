@@ -18,3 +18,10 @@ export interface ExternalReferenceResponse {
     //userAnswers: null,
     isDeleted: boolean;
   }
+  export interface ApiResponse<T>{
+    isSuccess?: boolean;
+    data?: {
+      items?: T[];
+    };
+    message?: string;
+  }

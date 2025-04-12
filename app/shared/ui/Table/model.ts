@@ -2,7 +2,8 @@ import { JSX } from "react";
 
 export type ActionButtons = {
   name: string;
-  externalLink: string;
+  externalLink?: string;
+  url?: (id:any)=> string;
 };
 export type ActionModal = {
   title: string;
@@ -20,4 +21,5 @@ export interface TableOnRequestProps<T> {
   columns: TableColumns<T>[];
   actionButtons?: ActionButtons[];
   actionModal?: ActionModal;
+  filters?: any
 }

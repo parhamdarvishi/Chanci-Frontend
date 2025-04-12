@@ -29,6 +29,12 @@ const Page = () => {
       url={userAddresses.GetAll}
       columns={columns}
       actionModal={actionModal}
+      actionButtons={[
+        {
+          name: "User Payments",
+          url : (id: any)=> `/panel/payments?userId=${id}`,
+        },
+      ]}
     />
   );
 };

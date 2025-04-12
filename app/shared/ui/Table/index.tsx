@@ -12,16 +12,19 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
   columns,
   actionButtons,
   actionModal,
+  filters = {}
 }: TableOnRequestProps<T>): JSX.Element => {
   const [data, setData] = useState<T[]>();
   const [totalPages, setTotalPages] = useState(0);
   const [activePage, setPage] = useState(1);
-
   const getDataCount = async () => {
     try {
       const res = await getRequest(
         url,
         {
+          ...filters,
+          "Sorts[0].PropertyName": "id",
+          "Sorts[0].isAscending": false,
           Skip: 0,
           Take: 1000,
         },
@@ -38,6 +41,8 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
 
   const getData = async () => {
     const query = {
+      "Sorts[0].PropertyName": "id",
+      "Sorts[0].isAscending": false,
       Skip: (activePage - 1) * rowsPerPage,
       Take: rowsPerPage,
     };
@@ -91,7 +96,7 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
             <Table.Td key={i} style={{ fontSize: "15px" }}>
               <a
                 style={{ cursor: "pointer" }}
-                href={`${btn.externalLink + ttd?.id}/detail`}
+                href={btn.externalLink? `${btn.externalLink + ttd?.id}/detail`: btn.url ? btn.url(ttd?.id as string): '#'}
               >
                 {btn.name}
               </a>
