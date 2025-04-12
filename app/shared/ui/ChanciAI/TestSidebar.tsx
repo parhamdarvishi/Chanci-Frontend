@@ -33,12 +33,6 @@ const TestSidebar = ({
             >
                 <Drawer.Overlay />
                 <Drawer.Content>
-                    <Drawer.Header style={{ marginBottom: ".6rem" }}>
-                        <Drawer.Title>
-                            <Image src={Title} alt="ChanciAi" loading="lazy" width={115} />
-                        </Drawer.Title>
-                        <Drawer.CloseButton size={42} color="#585858" />
-                    </Drawer.Header>
                     <Drawer.Body>
                         <Divider />
                         <Sidebar drawer={false} />

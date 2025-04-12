@@ -18,6 +18,13 @@ export interface ExternalReferenceResponse {
     //userAnswers: null,
     isDeleted: boolean;
   }
+  export type TPrompt = {
+    id: number;
+    content: string;
+    role: number;
+    parameters: any[];
+    isActive: boolean;
+  };
   export interface ApiResponse<T>{
     isSuccess?: boolean;
     data?: {

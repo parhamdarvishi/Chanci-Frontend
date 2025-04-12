@@ -1,6 +1,6 @@
  
 import { getRequest } from "@/shared/api";
-import { Center, Loader, Pagination, Table } from "@mantine/core";
+import { Center, Loader, Pagination, Table, Text } from "@mantine/core";
 import React, { JSX, useEffect, useState } from "react";
 import style from "./style.module.scss";
 import { TableOnRequestProps } from "./model";
@@ -41,6 +41,7 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
 
   const getData = async () => {
     const query = {
+      ...filters,
       "Sorts[0].PropertyName": "id",
       "Sorts[0].isAscending": false,
       Skip: (activePage - 1) * rowsPerPage,
@@ -125,39 +126,47 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
   return (
     <div className={style.tableContainer}>
       {data ? (
-        <div style={{ overflowX: "auto" }}>
-          <Table
-            highlightOnHover
-            striped
-            verticalSpacing="md"
-            withRowBorders={false}
-          >
-            <Table.Thead>
-              <Table.Tr style={{ backgroundColor: "#02063a12" }}>
-                {columns.map((column, i: number) => {
-                  return (
-                    <Table.Th key={i} style={{ color: "#151e98" }}>
-                      {column.head}
-                    </Table.Th>
-                  );
-                })}
-                {actionButtons &&
-                  actionButtons.length > 0 &&
-                  actionButtons.map((btn, i: number) => {
+        data.length > 0 ? (
+          <div style={{ overflowX: "auto" }}>
+            <Table
+              highlightOnHover
+              striped
+              verticalSpacing="md"
+              withRowBorders={false}
+            >
+              <Table.Thead>
+                <Table.Tr style={{ backgroundColor: "#02063a12" }}>
+                  {columns.map((column, i: number) => {
                     return (
                       <Table.Th key={i} style={{ color: "#151e98" }}>
-                        Details
+                        {column.head}
                       </Table.Th>
                     );
                   })}
-                {actionModal && (
-                  <Table.Th style={{ color: "#151e98" }}>Action</Table.Th>
-                )}
-              </Table.Tr>
-            </Table.Thead>
-            <Table.Tbody>{rows}</Table.Tbody>
-          </Table>
-        </div>
+                  {actionButtons &&
+                    actionButtons.length > 0 &&
+                    actionButtons.map((btn, i: number) => {
+                      return (
+                        <Table.Th key={i} style={{ color: "#151e98" }}>
+                          Details
+                        </Table.Th>
+                      );
+                    })}
+                  {actionModal && (
+                    <Table.Th style={{ color: "#151e98" }}>Action</Table.Th>
+                  )}
+                </Table.Tr>
+              </Table.Thead>
+              <Table.Tbody>{rows}</Table.Tbody>
+            </Table>
+          </div>
+        ) : (
+          <Center style={{ padding: "30px" }}>
+            <Text size="lg" fw={500} c="dimmed">
+              No records found
+            </Text>
+          </Center>
+        )
       ) : (
         <Center style={{}}>
           {" "}
