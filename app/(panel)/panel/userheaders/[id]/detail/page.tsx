@@ -29,12 +29,8 @@ const UserHeaderDetailPage = () => {
     
     setIsDeleting(true);
     try {
-      const reqBody = {
-        UserAnswerHeaderId: Number(params.id)
-      };
       const res = await deleteRequest(
-        "/api/GeneratedPrompts/Delete",
-        reqBody,
+        `/api/GeneratedPrompts/Delete?UserAnswerHeaderId=${ params.id}`, {},
         true
       );
       

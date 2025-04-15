@@ -10,6 +10,7 @@ const columns: TableColumns<UserHeaders>[] = [
   { head: "User Id", key: "userId" },
   { head: "Full Name", key: "fullName" },
   { head: "Email", key: "email" },
+  { head: "Created At", key: "createAt" },
 ];
 
 const Page = () => {

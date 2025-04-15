@@ -5,6 +5,7 @@ import React, { JSX, useEffect, useState } from "react";
 import style from "./style.module.scss";
 import { TableOnRequestProps } from "./model";
 import { modals } from "@mantine/modals";
+import { formatDateString } from "@/shared/helpers";
 
 export const TableOnRequest = <T extends Record<string, unknown>>({
   rowsPerPage,
@@ -17,7 +18,7 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
   const [data, setData] = useState<T[]>();
   const [totalPages, setTotalPages] = useState(0);
   const [activePage, setPage] = useState(1);
-  const getDataCount = async () => {
+  /* const getDataCount = async () => {
     try {
       const res = await getRequest(
         url,
@@ -37,7 +38,9 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
     } catch (error) {
       console.error(error);
     }
-  };
+  }; //Commented out because the beloew function if Taken as 10 or 1, but returns the total Count data, so no need for this extra api call. 
+  
+  */
 
   const getData = async () => {
     const query = {
@@ -50,8 +53,9 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
     try {
       const res = await getRequest(url, query, true);
 
-      const { items } = res?.data as any;
+      const { items, totalCount } = res?.data as any;
       //const items = res?.data as T[];
+      setTotalPages(totalCount);
       setData(items);
     } catch (error) {
       console.error(error);
@@ -85,7 +89,9 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
             {column.key !== "index"
               ? column.render
                 ? column.render(ttd[key])
-                : String(ttd[key])
+                : column.key === "createdAt" || column.key === "createAt"
+                  ? formatDateString(ttd[key])
+                  : String(ttd[key])
               : index + 1}
           </Table.Td>
         );
@@ -114,10 +120,6 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
       )}
     </Table.Tr>
   ));
-
-  useEffect(() => {
-    getDataCount();
-  }, []);
   useEffect(() => {
     getData();
   }, [activePage]);
