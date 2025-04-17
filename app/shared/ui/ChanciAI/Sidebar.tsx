@@ -23,7 +23,7 @@ const Sidebar = ({ drawer }: { drawer: boolean }) => {
   const { sidebarPostion, questionIndex, data, answers } = useChanci();
   const openCareerModal = () => {
     const desc =
-      "well done with the last part, now we collect your career preferences here";
+      "Well done with the last part, now we collect your career preferences here";
     modals.open({
       radius: "30px",
       size: "lg",
@@ -33,7 +33,7 @@ const Sidebar = ({ drawer }: { drawer: boolean }) => {
 
   const openNationalityModal = () => {
     const desc =
-      "well done with the last section, now let's talk about your visa status ";
+      "Well done with the last section, now let's talk about your visa status ";
     modals.open({
       radius: "30px",
       size: "lg",

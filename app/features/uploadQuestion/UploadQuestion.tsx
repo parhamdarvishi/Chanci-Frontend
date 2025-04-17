@@ -60,7 +60,7 @@ const UploadQuestion = () => {
           src="image/chanciAI/chanci.svg"
           alt="it's me"
           size={55}
-          className={style.questionImg}
+          className={style.questionImgChanci}
         />
         <Box className={style.questionTitle}>
           {/* <p>{question?.text}</p> */}

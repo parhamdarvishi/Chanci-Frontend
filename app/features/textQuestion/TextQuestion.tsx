@@ -7,7 +7,7 @@ import chanciIc from "@public/image/chanciAI/icon/chanciCh.svg";
 import Image from "next/image";
 import { IconArrowNarrowLeft, IconArrowNarrowRight, IconArrowRight } from "@tabler/icons-react";
 interface TextQuestionProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   
   question: any;
 }
 
@@ -36,7 +36,7 @@ const TextQuestion: React.FC<TextQuestionProps> = ({ question }) => {
           });
         }
 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+         
         updateAnswers(filterAnswer as any);
         updateQuestionIndex(questionIndex + 1);
         return;
@@ -48,7 +48,7 @@ const TextQuestion: React.FC<TextQuestionProps> = ({ question }) => {
         text: value,
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+       
       const allAnswer = answers; // Create a copy of the array
       allAnswer.push(answer);
       updateAnswers(allAnswer);
@@ -81,7 +81,7 @@ const TextQuestion: React.FC<TextQuestionProps> = ({ question }) => {
         });
       }
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+       
       updateAnswers(filterAnswer as any);
       updateQuestionIndex(questionIndex + 1);
       return;
@@ -114,7 +114,7 @@ const TextQuestion: React.FC<TextQuestionProps> = ({ question }) => {
           src="image/chanciAI/chanci.svg"
           alt="it's me"
           size={55}
-          className={style.questionImg}
+          className={style.questionImgChanci}
         />
         <Box className={style.questionTitle}>
           <p>{question?.text}</p>
@@ -143,7 +143,7 @@ const TextQuestion: React.FC<TextQuestionProps> = ({ question }) => {
           <Image
             src={chanciIc}
             alt="chanciIcon"
-            className={style.questionImg}
+            className={style.questionImgChanci}
           />
         </Box>
         <Box style={{ display: "flex", justifyContent: "end" }}>

@@ -6,11 +6,12 @@ import UploadQuestion from "@/features/uploadQuestion/UploadQuestion";
 import { postRequest } from "@/shared/api";
 import { userAddresses } from "@/shared/constants/relative-url/user";
 import { useChanci } from "@/shared/stateManagement/UseChanci/useChanci";
-import React, { useEffect } from "react";
-import { modals } from "@mantine/modals";
-import StepModal from "../stepModal/stepModal";
+import React, { useEffect, useState } from "react";
 import MultiSelectBox from "@/features/multiSelect/MultiSelect";
 import { useRouter } from "next/navigation";
+import { Avatar, Box } from "@mantine/core";
+import { IconArrowRight } from "@tabler/icons-react";
+import style from "@/features/shared/styles.module.scss";
 
 interface Question {
   inputType?: number;
@@ -30,9 +31,11 @@ const PsychologyTest: React.FC<PsychologyTestProps> = ({ question }) => {
     data,
   } = useChanci();
   const router = useRouter();
+  const [showWelcome, setShowWelcome] = useState(true);
+
   const sendAnswers = async () => {
     const reqbody = {
-       
+
       answers: answers.map(({ step, ...rest }) => rest),
     };
     const { data } = await postRequest(
@@ -42,19 +45,11 @@ const PsychologyTest: React.FC<PsychologyTestProps> = ({ question }) => {
     );
     router.push(`/ChanciAI/result/${(data as { id: string }).id}`);
   };
-  const openModal = () => {
-    const desc =
-      "Please read the statement and express if you agree or disagree";
-    modals.open({
-      radius: "30px",
-      size: "lg",
-      children: <StepModal paragraphWidth="480px" desc={desc} />,
-    });
-  };
 
-  useEffect(() => {
-    openModal();
-  }, []);
+  const handleStart = () => {
+    setShowWelcome(false);
+    updateQuestionIndex(0);
+  };
 
   useEffect(() => {
     if (data?.length > 0 && data?.length === questionIndex) {
@@ -77,20 +72,49 @@ const PsychologyTest: React.FC<PsychologyTestProps> = ({ question }) => {
     if (question?.type === 5) {
       UpdateSidebarPostion(5);
     }
-  }, [question]);  
+  }, [question, showWelcome]);
 
   return (
     <div style={{ height: "100%" }}>
-      {question?.inputType === 1 && <TextQuestion question={question} />}
-      {question?.inputType === 2 && <ProgressQuestion question={question} />}
-      {question?.inputType === 3 && (
-        <DropDownQuestion question={question} answers={answers} />
+      {showWelcome ? (
+        <div className={style.wrapper}>
+          <Box className={style.userBox}>
+            <Avatar
+              src="image/chanciAI/chanci.svg"
+              alt="it's me"
+              size={55}
+              className={style.questionImgChanci}
+            />
+            <Box className={style.questionTitle}>
+              <h3 style={{ marginTop: "0", marginBottom: "10px" }}>Hi, I am Chanci AI</h3>
+              <p style={{ fontSize: "16px", lineHeight: "1.5" }}>
+                Let me know how do you feel about each statement.
+              </p>
+            </Box>
+          </Box>
+          <Box className={style.questionPart}>
+
+            <Box style={{ display: "flex", justifyContent: "flex-end", marginTop: "30px" }}>
+              <div
+                onClick={handleStart}
+                className={style.btnChanci}
+              >
+                Start
+              </div>
+            </Box>
+          </Box>
+        </div>
+      ) : (
+        <>
+          {question?.inputType === 1 && <TextQuestion question={question} />}
+          {question?.inputType === 2 && <ProgressQuestion question={question} />}
+          {question?.inputType === 3 && (
+            <DropDownQuestion question={question} answers={answers} />
+          )}
+          {question?.inputType === 4 && <UploadQuestion />}
+          {question?.inputType === 5 && <MultiSelectBox question={question} />}
+        </>
       )}
-      {question?.inputType === 4 && <UploadQuestion />}
-      {question?.inputType === 5 && <MultiSelectBox question={question} />}
-      {/* {sidebarPostion === 6 && data?.length === questionIndex && (
-  
-      )} */}
     </div>
   );
 };

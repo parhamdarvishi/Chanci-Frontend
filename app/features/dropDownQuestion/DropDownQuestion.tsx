@@ -8,9 +8,9 @@ import Image from "next/image";
 import { IconArrowNarrowLeft, IconArrowNarrowRight, IconArrowRight } from "@tabler/icons-react";
 
 interface DropDownQuestionProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   
   question: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   
   answers: any;
 }
 
@@ -61,9 +61,9 @@ const DropDownQuestion = ({ question }: DropDownQuestionProps) => {
 
   const dropDownData = () => {
     if (question?.answers?.length > 0) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+       
       const drop: any = [];
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+       
       question?.answers?.forEach((element: any) => {
         const dropItem = {
           label: element?.text,
@@ -95,7 +95,7 @@ const DropDownQuestion = ({ question }: DropDownQuestionProps) => {
         });
       }
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+       
       updateAnswers(filterAnswer as any);
       updateQuestionIndex(questionIndex + 1);
       return;
@@ -105,7 +105,7 @@ const DropDownQuestion = ({ question }: DropDownQuestionProps) => {
       answerId: Number(val),
       step: Number(val),
     };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
     const allAnswer = answers; // Create a copy of the array
     allAnswer.push(answer);
     updateAnswers(allAnswer);
@@ -119,14 +119,13 @@ const DropDownQuestion = ({ question }: DropDownQuestionProps) => {
   useEffect(() => {
     // if()
     if (answers[questionIndex]?.step) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+       
       data[questionIndex]?.answers.forEach((element: any) => {
         if (element?.id === answers[questionIndex]?.step) {
           const answer = JSON.stringify(element?.id);
           setVal(answer);
         }
       });
-      return;
     }
     setVal(null);
   }, [questionIndex]);
@@ -138,7 +137,7 @@ const DropDownQuestion = ({ question }: DropDownQuestionProps) => {
           src="image/chanciAI/chanci.svg"
           alt="it's me"
           size={55}
-          className={style.questionImg}
+          className={style.questionImgChanci}
         />
         <Box className={style.questionTitle}>
           <p>{question?.text}</p>

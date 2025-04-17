@@ -19,7 +19,7 @@ interface ProgressQuestionProps {
 const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [answerLabelStep, setAnswerLabelStep] = useState(0);
-
+  const [clickedOn, setClickedOn] = useState(false);
   const { updateQuestionIndex, updateAnswers, questionIndex, answers, data } =
     useChanci();
 
@@ -103,10 +103,10 @@ const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
 
   const handleClick = (e: React.MouseEvent) => {
     if (!trackRef.current) return;
+    setClickedOn(true);
     const rect = trackRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const percentage = (x / rect.width) * 100;
-
     const closest = steps.reduce((prev, curr) => {
       return Math.abs(curr - percentage) < Math.abs(prev - percentage)
         ? curr
@@ -142,6 +142,7 @@ const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
        
       updateAnswers(filterAnswer as any);
       updateQuestionIndex(questionIndex + 1);
+      
       return;
     }
     const answer = {
@@ -154,6 +155,7 @@ const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
     setCurrentStep(0);
     updateAnswers(allAnswer);
     updateQuestionIndex(questionIndex + 1);
+    setClickedOn(false);
   };
 
   return (
@@ -275,7 +277,7 @@ const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
         </Box>
         {steps[currentStep] !== answers[questionIndex]?.step && (
           <Box style={{ display: "flex", justifyContent: "end", userSelect: 'none' }}>
-            <div className={styles.btnChanci} onClick={handleAnswer}>
+            <div className={`${styles.btnChanci} ${clickedOn? '': styles.disabled}`} onClick={handleAnswer}>
               Next <IconArrowRight />
             </div>
           </Box>
