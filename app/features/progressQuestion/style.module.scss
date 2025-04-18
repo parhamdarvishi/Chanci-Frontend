@@ -22,7 +22,9 @@
   color: #585858;
   transform: translateX(-50%);
 }
-
+.questionTitle{
+  width: 45%;
+}
 @media (max-width: 860px) {
   .progressBar {
     width: 470px;
@@ -49,6 +51,9 @@
   .btnBox {
     padding: 0 0.5rem;
   }
+  .questionCard{
+    min-width: 256px;
+  }
 }
 .progressBar {
   padding: 2rem 1rem;
@@ -63,9 +68,11 @@
   width: 100%;
   position: relative;
   margin-bottom: 2rem;
+  height: 30px;
 }
 
 .label {
+ 
   position: absolute;
   transform-origin: center;
   font-size: 0.875rem;
@@ -107,7 +114,6 @@
     background-color: #0db492 !important;
   }
 }
-
 .indicator {
   position: absolute;
   border: 3px solid white;
@@ -126,7 +132,7 @@
 @media (max-width: 860px) {
   .userBox {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     width: 100% !important;
     gap: 1rem;
     .questionTitle {
@@ -165,11 +171,16 @@
   .progressBar {
     padding: 2rem 1rem;
     position: relative;
-    width: 360px;
+    width: 256px;
   }
-  .questionImg,
-  .questionImgChanci {
-    display: none !important;
+  .label{
+    display: inline-block;        /* Makes the span behave like a block */
+    width: 60px;                  /* Tiny width */
+    font-size: 12px;
+    line-height: 1.2;
+    overflow-wrap: break-word;    /* Allow breaking within words */
+    word-break: break-word;
+    white-space: normal!important;   
   }
   .btnBox {
     padding: 0 0.5rem;

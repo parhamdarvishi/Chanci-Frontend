@@ -3,7 +3,6 @@ import { Button } from "@mantine/core";
 import React, { useEffect, useState } from "react";
 import style from "./header.module.scss";
 import { useRouter } from "next/navigation";
-
 const Header = () => {
   const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();

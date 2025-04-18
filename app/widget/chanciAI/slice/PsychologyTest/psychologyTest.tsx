@@ -77,30 +77,33 @@ const PsychologyTest: React.FC<PsychologyTestProps> = ({ question }) => {
   return (
     <div style={{ height: "100%" }}>
       {showWelcome ? (
-        <div className={style.wrapper}>
-          <Box className={style.userBox}>
-            <Avatar
-              src="image/chanciAI/chanci.svg"
-              alt="it's me"
-              size={55}
-              className={style.questionImgChanci}
-            />
-            <Box className={style.questionTitle}>
-              <h3 style={{ marginTop: "0", marginBottom: "10px" }}>Hi, I am Chanci AI</h3>
-              <p style={{ fontSize: "16px", lineHeight: "1.5" }}>
-                Let me know how do you feel about each statement.
-              </p>
-            </Box>
-          </Box>
-          <Box className={style.questionPart}>
+        <div className={style.startWrapper}>
+          <Box className={style.startBox}>
 
-            <Box style={{ display: "flex", justifyContent: "flex-end", marginTop: "30px" }}>
-              <div
-                onClick={handleStart}
-                className={style.btnChanci}
-              >
-                Start
-              </div>
+            <Box className={style.userBox}>
+              <Avatar
+                src="image/chanciAI/chanci.svg"
+                alt="it's me"
+                size={55}
+                className={style.questionImgChanci}
+              />
+              <Box className={style.questionTitle}>
+                <h3 style={{ marginTop: "0", marginBottom: "10px" }}>Hi, I am Chanci AI</h3>
+                <p style={{ fontSize: "16px", lineHeight: "1.5" }}>
+                  Let me know how do you feel about each statement.
+                </p>
+              </Box>
+            </Box>
+            <Box className={style.questionPart}>
+
+              <Box className={style.startBtnBox}>
+                <div
+                  onClick={handleStart}
+                  className={style.btnChanci}
+                >
+                  Start
+                </div>
+              </Box>
             </Box>
           </Box>
         </div>
@@ -114,8 +117,9 @@ const PsychologyTest: React.FC<PsychologyTestProps> = ({ question }) => {
           {question?.inputType === 4 && <UploadQuestion />}
           {question?.inputType === 5 && <MultiSelectBox question={question} />}
         </>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 };
 

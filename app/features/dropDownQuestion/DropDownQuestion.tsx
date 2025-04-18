@@ -6,6 +6,7 @@ import { useChanci } from "@/shared/stateManagement/UseChanci/useChanci";
 import chanciIc from "@public/image/chanciAI/icon/chanciCh.svg";
 import Image from "next/image";
 import { IconArrowNarrowLeft, IconArrowNarrowRight, IconArrowRight } from "@tabler/icons-react";
+import ChanciNavigation from "@/shared/ui/ChanciNavigation/ChanciNavigation";
 
 interface DropDownQuestionProps {
    
@@ -170,7 +171,7 @@ const DropDownQuestion = ({ question }: DropDownQuestionProps) => {
           <Image
             src={chanciIc}
             alt="chanciIcon"
-            className={style.questionImg}
+            className={style.chanciImg}
           />
         </Box>
         <Box style={{ display: "flex", justifyContent: "end" }}>
@@ -182,59 +183,7 @@ const DropDownQuestion = ({ question }: DropDownQuestionProps) => {
           </div>
         </Box>
       </Box>
-      <Box style={{ display: "flex", width: "100%" }}>
-        <Box></Box>
-        <Box
-          style={{
-            padding: "0 3rem",
-            opacity: questionIndex > 0 ? 1 : 0,
-            transform:
-              questionIndex > 0 ? "translateX(0)" : "translateX(-20px)",
-            transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-            visibility: questionIndex > 0 ? "visible" : "hidden",
-          }}
-        >
-          <Button
-            variant="light"
-            style={{
-              padding: "0.7rem",
-              transition: "transform 0.2s ease",
-              transform: "scale(1)",
-              ":hover": {
-                transform: "scale(1.05)",
-              },
-            }}
-            onClick={handleQustionIndex}
-          >
-            <IconArrowNarrowLeft size={30} />
-          </Button>
-        </Box>
-        <Box
-          style={{
-            opacity: answers[questionIndex]?.step ? 1 : 0,
-            transform: answers[questionIndex]?.step
-              ? "translateX(0)"
-              : "translateX(20px)",
-            transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-            visibility: answers[questionIndex]?.step ? "visible" : "hidden",
-          }}
-        >
-          <Button
-            variant="light"
-            style={{
-              padding: "0.7rem",
-              transition: "transform 0.2s ease",
-              transform: "scale(1)",
-              ":hover": {
-                transform: "scale(1.05)",
-              },
-            }}
-            onClick={handleQustionNext}
-          >
-            <IconArrowNarrowRight size={30} />
-          </Button>
-        </Box>
-      </Box>
+      <ChanciNavigation previousVisibleCondition={(questionIndex > 0)} forwardVisibleCondition={Boolean( answers[questionIndex]?.step)} handleNextQuestion={handleQustionNext} handlePreviousQuestion={handleQustionIndex} />
     </div>
   );
 };

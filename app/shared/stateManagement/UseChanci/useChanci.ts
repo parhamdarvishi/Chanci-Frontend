@@ -1,24 +1,20 @@
+import { AnsweriItem } from "@/shared/types/chanci/chanci";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 // Define the type for your Chanci data
 
-interface AnsweriItem {
-  questionId: string;
-  answerId: number;
-  step: number;
-  text?: string;
-}
+
 
 // Define the type for the store state
 interface ChanciState {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   
   data: any;
   fileName: string;
   answers: AnsweriItem[];
   multiAnswer: string[];
   sidebarPostion: number;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   
   updateData: (data: any) => void;
   updateAnswers: (data: AnsweriItem[]) => void;
   updateMultiAnswers: (data: string[]) => void;

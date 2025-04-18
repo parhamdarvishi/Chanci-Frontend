@@ -2,6 +2,7 @@
   margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
+  
   .assessmentHeader {
     display: flex;
     align-items: center;
@@ -56,11 +57,10 @@
     }
   }
 }
-// .avatarImg {
-//   transform: translateY(10px) !important;
-
-// }
 @media (max-width: 768px) {
+  .wrapper{
+    display: none;
+  }
   .HowItWorks {
     width: 60px!important;
     .HowItWorkL {

@@ -72,8 +72,8 @@ const Page = () => {
         />
       </GridCol>
       <GridCol span={{ base: 12, md: 9 }}>
-        <div onClick={open}>
-          <HeadRes />
+        <div>
+          <HeadRes menuClick={open} />
         </div>
 
         <ChanciHeader />

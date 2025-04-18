@@ -30,18 +30,24 @@ export interface ConvertAnswersToPromptResponse {
     industryScores?: IndustryScore[];
 }
 export interface GeneratedPrompt {
-  id: number;
-  userAnswerHeaderId: number;
-  generatedPrompt: any;
-  result: any;
-  promptTokens: number;
-  completionTokens: number;
-  totalTokens: number;
-  cachedTokens: number;
-  audioTokens: number;
-  reasoningTokensCompletion: number;
-  audioTokensCompletion: number;
-  acceptedPredictionTokensCompletion: number;
-  rejectedPredictionTokensCompletion: number;
-  isDeleted: boolean;
+    id: number;
+    userAnswerHeaderId: number;
+    generatedPrompt: any;
+    result: any;
+    promptTokens: number;
+    completionTokens: number;
+    totalTokens: number;
+    cachedTokens: number;
+    audioTokens: number;
+    reasoningTokensCompletion: number;
+    audioTokensCompletion: number;
+    acceptedPredictionTokensCompletion: number;
+    rejectedPredictionTokensCompletion: number;
+    isDeleted: boolean;
+}
+export interface AnsweriItem {
+    questionId: string;
+    answerId: number;
+    step: number;
+    text?: string;
 }

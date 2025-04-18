@@ -29,7 +29,7 @@
       border: 1px solid #eef1ff;
       border-radius: 16px;
       background-color: #eef1ff;
-      min-width: 310px;
+      min-width: 256px;
       min-height: 45px;
       padding: 1rem;
 
@@ -63,7 +63,7 @@
 }
     .questionBox {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       gap: 1rem;
       .questionCard {
         max-width: 620px;
@@ -114,10 +114,11 @@
     width: 100% !important;
     gap: 1rem;
     .questionTitle {
+      
       border: 1px solid #eef1ff;
       border-radius: 16px;
       background-color: #eef1ff;
-      min-width: 310px;
+      min-width: 256px;
       min-height: 45px;
       padding: 1rem;
 
@@ -148,8 +149,8 @@
 @media (max-width: 690px) {
   .questionBox {
     .questionCard {
-      width: 350px !important;
-      min-width: 350px !important;
+      width: 280px !important;
+      min-width: 256px !important;
     }
   }
 

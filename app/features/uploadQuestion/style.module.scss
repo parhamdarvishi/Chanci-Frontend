@@ -12,6 +12,7 @@
   .userBox {
     display: flex;
     align-items: center;
+    margin-top: 50px;
     width: 800px;
     gap: 1rem;
     .questionTitle {
@@ -35,7 +36,7 @@
     flex-direction: column;
     .questionBox {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       gap: 1rem;
       .questionCard {
         display: flex;
@@ -188,7 +189,7 @@
       border: 1px solid #eef1ff;
       border-radius: 16px;
       background-color: #eef1ff;
-      min-width: 310px;
+      min-width: 256px;
       min-height: 45px;
       padding: 1rem;
 
@@ -223,14 +224,14 @@
 @media (max-width: 690px) {
   .questionBox {
     .questionCard {
-      width: 350px !important;
-      min-width: 350px !important;
+      width: 280px !important;
+      min-width: 256px !important;
     }
   }
 
   .uploader {
-    width: 310px !important;
-    min-width: 310px !important;
+    width: 245px !important;
+    min-width: 220px !important;
   }
 
   .progressBar {

@@ -3,8 +3,6 @@ import React, { useState } from "react";
 import style from "./style.module.scss";
 import { Avatar, Box, Button, Card } from "@mantine/core";
 import {
-  IconArrowNarrowLeft,
-  IconArrowNarrowRight,
   IconArrowRight,
   IconPhotoDown,
 } from "@tabler/icons-react";
@@ -15,11 +13,13 @@ import chanciIcon from "@public/image/chanciAI/icon/chanciCh.svg";
 import Image from "next/image";
 import { postUploadRequest } from "@/shared/api";
 import { chanciAddresses } from "@/shared/constants/relative-url/chanci";
+import ChanciNavigation from "@/shared/ui/ChanciNavigation/ChanciNavigation";
 
 const UploadQuestion = () => {
-  const { updateQuestionIndex, questionIndex, updateFileName, fileName } =
+  const { updateQuestionIndex, questionIndex, updateFileName, fileName, answers } =
     useChanci();
   const [fileCh, setFileCh] = useState<File | null>(null);
+  const [hasNavigatedBack, setHasNavigatedBack] = useState<boolean>(false);
   const handleFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -47,6 +47,7 @@ const UploadQuestion = () => {
   };
 
   const handleQustionIndex = () => {
+    setHasNavigatedBack(true);
     updateQuestionIndex(questionIndex - 1);
   };
 
@@ -108,7 +109,7 @@ const UploadQuestion = () => {
           <Image
             src={chanciIcon}
             alt="chanciIcon"
-            className={style.questionImg}
+            className={style.chanciImg}
           />
         </Box>
         <Box style={{ display: "flex", justifyContent: "end" }}>
@@ -120,57 +121,7 @@ const UploadQuestion = () => {
           </div>
         </Box>
       </Box>
-      <Box style={{ display: "flex", width: "100%" }}>
-        <Box
-          style={{
-            padding: "0 3rem",
-            opacity: questionIndex > 0 ? 1 : 0,
-            transform:
-              questionIndex > 0 ? "translateX(0)" : "translateX(-20px)",
-            transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-            visibility: questionIndex > 0 ? "visible" : "hidden",
-          }}
-        >
-          <Button
-            variant="light"
-            style={{
-              padding: "0.7rem",
-              transition: "transform 0.2s ease",
-              transform: "scale(1)",
-              ":hover": {
-                transform: "scale(1.05)",
-              },
-            }}
-            onClick={handleQustionIndex}
-          >
-            <IconArrowNarrowLeft size={30} />
-          </Button>
-        </Box>
-        <Box
-          style={{
-            opacity: fileName !== "" ? 1 : 0,
-
-            transform: fileName !== "" ? "translateX(0)" : "translateX(20px)",
-            transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-            visibility: fileName !== "" ? "visible" : "hidden",
-          }}
-        >
-          <Button
-            variant="light"
-            style={{
-              padding: "0.7rem",
-              transition: "transform 0.2s ease",
-              transform: "scale(1)",
-              ":hover": {
-                transform: "scale(1.05)",
-              },
-            }}
-            onClick={handleQustionNext}
-          >
-            <IconArrowNarrowRight size={30} />
-          </Button>
-        </Box>
-      </Box>
+      <ChanciNavigation previousVisibleCondition={(questionIndex > 0)} forwardVisibleCondition={fileCh == null && (fileName !== "")} handleNextQuestion={handleQustionNext} handlePreviousQuestion={handleQustionIndex} />
     </div>
   );
 };

@@ -35,7 +35,7 @@ const Page = () => {
           padding="lg"
           radius="md"
           withBorder
-          /* className={style.cardDone} */
+          className={style.cardDone}
           style={{
             backgroundColor: "#eef1ff",
             display: "flex",

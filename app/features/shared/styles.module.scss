@@ -4,15 +4,38 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  gap: 3.8rem;
+  gap: 2.5rem;
   transform: translateY(-25px);
+}
+.backForwardBtnBox{
+  padding: 0 0.5rem;
+}
+.backForwardBtn{
+  border-radius: 8px;
+  padding: 0.7rem;
+  transition: transform 0.2s ease;
+  transform: scale(1);
+    &:hover {
+    transform: scale(1.05);
+  }
+  label{
+    gap: 0.25rem;
+  }
+}
+.backForwardWrapper{
+  display: flex; 
+  width: 100%;
+  position: absolute;
+  top: 10px;
+  left: -5px;
 }
 
 .userBox {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   width: 800px;
   gap: 1rem;
+
   .questionTitle {
     border: 1px solid #eef1ff;
     border-radius: 16px;
@@ -23,7 +46,6 @@
 
     p {
       color: #585858;
-      max-width: 395px;
     }
   }
 }
@@ -37,7 +59,7 @@
 
 .questionBox {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 1rem;
 }
 
@@ -66,11 +88,16 @@
   background-color: #4752f325;
 }
 
+.chanciImg {
+  height: fit-content;
+}
+
 .questionImg {
   position: absolute;
   right: -70px;
   top: -30px;
 }
+
 .btnChanci {
   position: relative;
   border-radius: 8px !important;
@@ -87,9 +114,11 @@
   font-weight: 400;
   background: linear-gradient(to right, #8e15ba, #6154fd);
   overflow: hidden;
+
   span {
     cursor: unset !important;
   }
+
   &::after {
     content: "";
     position: absolute;
@@ -103,11 +132,13 @@
     transition: opacity 0.4s ease;
     z-index: 1;
   }
+
   &.disabled {
     cursor: not-allowed !important;
     background: #F3F0F0 !important;
     transition: background 0.4s ease;
     color: #969696;
+
     &::after {
       opacity: 0.7;
     }
@@ -118,10 +149,33 @@
   animation: enableButton 0.6s ease-in-out;
 }
 
+.startWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 0.5rem;
+    transform: translateY(-25px);
+}
+
+.startBox {
+  width: 500px;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.startBtnBox{
+  display: flex;
+  width: 104%;
+  justify-content: flex-end
+}
+
 @keyframes enableButton {
   0% {
     opacity: 0.8;
   }
+
   100% {
     opacity: 1;
   }
@@ -131,9 +185,29 @@
 @media (max-width: 860px) {
   .userBox {
     width: 100% !important;
+
+    .questionTitle {
+      min-width: 256px !important;
+    }
   }
-  .btnChanci{
+
+  .btnChanci {
     width: 85px;
     height: 40px;
+  }
+
+}
+@media (max-width: 690px) {
+  .startBox {
+    width: 300px;
+  }
+  .startWrapper{
+    align-items: flex-start;
+  }
+  .questionCard{
+    min-width: 256px;
+  }
+  .startBtnBox{
+    width: 108%;
   }
 }

@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 import useGeneratedPrompts from "./useGeneratedPrompts";
-
 export const getWindow = (): Window | null => {
   return typeof window !== 'undefined' ? window : null;
 };

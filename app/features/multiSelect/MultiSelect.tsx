@@ -5,9 +5,10 @@ import React, { useEffect, useState } from "react";
 import style from "./style.module.scss";
 import { IconArrowNarrowLeft, IconArrowNarrowRight, IconArrowRight } from "@tabler/icons-react";
 import { useChanci } from "@/shared/stateManagement/UseChanci/useChanci";
+import ChanciNavigation from "@/shared/ui/ChanciNavigation/ChanciNavigation";
 
 interface DropDownQuestionProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   
   question: any;
 }
 
@@ -32,9 +33,9 @@ const MultiSelectBox = ({ question }: DropDownQuestionProps) => {
   };
   const fun = () => {
     if (question?.answers?.length > 0) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+       
       const drop: any = [];
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+       
       question?.answers?.forEach((element: any) => {
         const dropItem = {
           label: element?.text,
@@ -146,7 +147,7 @@ const MultiSelectBox = ({ question }: DropDownQuestionProps) => {
           src="image/chanciAI/chanci.svg"
           alt="it's me"
           size={55}
-          className={style.questionImg}
+          className={style.questionImgChanci}
         />
         <Box className={style.questionTitle}>
           <p>{question?.text}</p>
@@ -182,7 +183,7 @@ const MultiSelectBox = ({ question }: DropDownQuestionProps) => {
           <Image
             src={chanciIc}
             alt="chanciIcon"
-            className={style.questionImg}
+            className={style.chanciImg}
           />
         </Box>
         <Box style={{ display: "flex", justifyContent: "end" }}>
@@ -194,74 +195,7 @@ const MultiSelectBox = ({ question }: DropDownQuestionProps) => {
           </div>
         </Box>
       </Box>
-      <Box style={{ display: "flex", width: "100%" }}>
-        <Box
-          style={{
-            padding: "0 3rem",
-            opacity: questionIndex > 0 ? 1 : 0,
-            transform:
-              questionIndex > 0 ? "translateX(0)" : "translateX(-20px)",
-            transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-            visibility: questionIndex > 0 ? "visible" : "hidden",
-          }}
-        >
-          <Button
-            variant="light"
-            style={{
-              padding: "0.7rem",
-              transition: "transform 0.2s ease",
-              transform: "scale(1)",
-              ":hover": {
-                transform: "scale(1.05)",
-              },
-            }}
-            onClick={handleQustionIndex}
-          >
-            <IconArrowNarrowLeft size={30} />
-          </Button>
-        </Box>
-
-        <Box
-          style={{
-            opacity: answers[questionIndex]?.step ? 1 : 0,
-            transform: answers[questionIndex]?.step
-              ? "translateX(0)"
-              : "translateX(20px)",
-            transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-            visibility: answers[questionIndex]?.step ? "visible" : "hidden",
-          }}
-        >
-          <Button
-            variant="light"
-            style={{
-              padding: "0.7rem",
-              transition: "transform 0.2s ease",
-              transform: "scale(1)",
-              ":hover": {
-                transform: "scale(1.05)",
-              },
-            }}
-            onClick={handleQustionNext}
-          >
-            <IconArrowNarrowRight size={30} />
-          </Button>
-        </Box>
-        {answers[questionIndex]?.step && MultiSelect?.length === 3 && (
-          <Box
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "1rem",
-              marginLeft: "400px",
-            }}
-          >
-            <div style={{ color: "#0063F5" }}>your Answer : </div>
-            {multiAnswer?.map((item: string, index: number) => (
-              <div key={index}>{item}</div>
-            ))}
-          </Box>
-        )}
-      </Box>
+      <ChanciNavigation previousVisibleCondition={(questionIndex > 0)} forwardVisibleCondition={Boolean( answers[questionIndex]?.step)} handleNextQuestion={handleQustionNext} handlePreviousQuestion={handleQustionIndex} />
     </div>
   );
 };

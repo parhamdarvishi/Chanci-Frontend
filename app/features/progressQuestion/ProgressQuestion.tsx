@@ -10,9 +10,10 @@ import {
 import { useChanci } from "@/shared/stateManagement/UseChanci/useChanci";
 import Image from "next/image";
 import chanciIc from "@public/image/chanciAI/icon/chanciCh.svg";
+import ChanciNavigation from "@/shared/ui/ChanciNavigation/ChanciNavigation";
 
 interface ProgressQuestionProps {
-   
+
   question: any;
 }
 
@@ -35,6 +36,7 @@ const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
   };
   const handleQustionNext = () => {
     updateQuestionIndex(questionIndex + 1);
+    setCurrentStep(0);
   };
 
   useEffect(() => {
@@ -139,10 +141,10 @@ const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
         });
       }
       setCurrentStep(0);
-       
+
       updateAnswers(filterAnswer as any);
       updateQuestionIndex(questionIndex + 1);
-      
+
       return;
     }
     const answer = {
@@ -194,8 +196,8 @@ const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
                         index === 1
                           ? "translateX(-50%)"
                           : index === 2
-                          ? "translateX(-100%)"
-                          : "none",
+                            ? "translateX(-100%)"
+                            : "none",
                     }}
                   >
                     {/* {index == answerLabelIndex ? (
@@ -211,10 +213,10 @@ const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
                 ref={trackRef}
                 className={styles.track}
                 onClick={handleClick}
-                // onMouseDown={handleMouseDown}
-                // onMouseMove={handleMouseMove}
-                // onMouseUp={handleMouseUp}
-                // onMouseLeave={handleMouseUp}
+              // onMouseDown={handleMouseDown}
+              // onMouseMove={handleMouseMove}
+              // onMouseUp={handleMouseUp}
+              // onMouseLeave={handleMouseUp}
               >
                 <div
                   className={styles.progress}
@@ -236,9 +238,8 @@ const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
                 {steps?.map((step, index) => (
                   <div
                     key={index}
-                    className={`${styles.dot} ${
-                      index <= currentStep ? styles.active : ""
-                    }`}
+                    className={`${styles.dot} ${index <= currentStep ? styles.active : ""
+                      }`}
                     style={{
                       left: `${step}%`,
                       width: `${12 * getHeightMultiplier(index)}px`,
@@ -249,8 +250,8 @@ const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
                         steps[currentStep] === answers[questionIndex]?.step
                           ? `rgba(13, 180, 146, ${0.4 + index * 0.15})`
                           : index <= currentStep
-                          ? `rgba(96, 165, 250, ${0.4 + index * 0.15})`
-                          : "#e5e7eb",
+                            ? `rgba(96, 165, 250, ${0.4 + index * 0.15})`
+                            : "#e5e7eb",
                     }}
                   />
                 ))}
@@ -272,74 +273,24 @@ const ProgressQuestion = ({ question }: ProgressQuestionProps) => {
           <Image
             src={chanciIc}
             alt="chanciIcon"
-            className={styles.questionImg}
+            className={styles.chanciImg}
           />
         </Box>
         {steps[currentStep] !== answers[questionIndex]?.step && (
           <Box style={{ display: "flex", justifyContent: "end", userSelect: 'none' }}>
-            <div className={`${styles.btnChanci} ${clickedOn? '': styles.disabled}`} onClick={handleAnswer}>
+            <div className={`${styles.btnChanci} ${clickedOn ? '' : styles.disabled}`}
+              onClick={() => {
+                if (clickedOn) {
+
+                  handleAnswer()
+                } else { return false }
+              }}>
               Next <IconArrowRight />
             </div>
           </Box>
         )}
       </Box>
-      <Box style={{ display: "flex", width: "100%" }}>
-        <Box
-          className={styles.btnBox}
-          style={{
-            opacity: questionIndex > 0 ? 1 : 0,
-            transform:
-              questionIndex > 0 ? "translateX(0)" : "translateX(-20px)",
-            transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-            visibility: questionIndex > 0 ? "visible" : "hidden",
-          }}
-        >
-          <Button
-            variant="light"
-            style={{
-              padding: "0.7rem",
-              transition: "transform 0.2s ease",
-              transform: "scale(1)",
-              ":hover": {
-                transform: "scale(1.05)",
-              },
-            }}
-            onClick={handleQustionIndex}
-          >
-            <IconArrowNarrowLeft size={30} />
-          </Button>
-        </Box>
-        <Box
-          style={{
-            opacity:
-              steps[currentStep] === answers[questionIndex]?.step ? 1 : 0,
-            transform:
-              steps[currentStep] === answers[questionIndex]?.step
-                ? "translateX(0)"
-                : "translateX(20px)",
-            transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-            visibility:
-              steps[currentStep] === answers[questionIndex]?.step
-                ? "visible"
-                : "hidden",
-          }}
-        >
-          <Button
-            variant="light"
-            style={{
-              padding: "0.7rem",
-              transition: "transform 0.2s ease",
-              transform: "scale(1)",
-              ":hover": {
-                transform: "scale(1.05)",
-              },
-            }}
-            onClick={handleQustionNext}
-          >
-            <IconArrowNarrowRight size={30} />
-          </Button>
-        </Box>
-      </Box>
+      <ChanciNavigation previousVisibleCondition={(questionIndex > 0)} forwardVisibleCondition={(steps[currentStep] === answers[questionIndex]?.step)} handleNextQuestion={handleQustionNext} handlePreviousQuestion={handleQustionIndex} />
     </div>
   );
 };

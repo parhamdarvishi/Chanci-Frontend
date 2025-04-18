@@ -14,10 +14,11 @@
 
 @media (max-width: 860px) {
   .questionCard {
-    min-width: 350px;
+    min-width: 256px;
     
     .input {
-      min-width: 300px;
+      width: 230px;
+      min-width: 220px;
     }
   }
 }
