@@ -22,13 +22,15 @@ const DynamicSidebar: React.FC<DynamicSidebarProps> = ({
     { id: 'personality', label: 'Personality Analysis' },
     { id: 'cvEval', label: 'CV Evaluation' },
     { id: 'skillAssessment', label: 'Skill Assessmenet' },
-    { id: 'jobIndustryMatrix', label: 'Job-Industry Matrix' },
-    { id: 'actionableGuidance', label: 'ActionableGuidance' },
+    /* { id: 'jobIndustryMatrix', label: 'Job-Industry Matrix' },
+    { id: 'actionableGuidance', label: 'ActionableGuidance' }, */
   ];
 
   const handleSectionClick = (sectionId: string) => {
     onSectionChange(sectionId);
   };
+
+  
 
   return (
     <Card shadow="sm" padding="lg" className={style.wrapper}>

@@ -79,12 +79,10 @@ const ChanciHeader = () => {
           />
         </Box>
         <Avatar
-          src="image/chanciAI/chanci.svg"
+          src="/image/chanciAI/chanci.svg"
           alt="it's me"
+          className={style.questionImgChanci}
           size={55}
-          classNames={{
-            image: style.avatarImg,
-          }}
         />
         {/* <div style={{ width: "110px", height: "140px", borderRadius: "40%" }}>
           <Image

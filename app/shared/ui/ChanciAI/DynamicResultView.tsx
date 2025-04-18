@@ -23,7 +23,7 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
         switch (activeSection) {
             case 'personality':
                 return (
-                    <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+                    <div className={style.resultBox}>
                         {result?.TraitReview?.map((trait: any, index: number) => {
                             return (
                                 <Card
@@ -78,7 +78,7 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                 );
             case "cvEval":
                 return (
-                    <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+                    <div className={style.resultBox}>
                         {result?.CvFormat &&
                             <Card
                                 shadow="sm"
@@ -194,7 +194,7 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                 )
             case "skillAssessment":
                 return (
-                    <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+                    <div className={style.resultBox}>
                         {result?.Strengths &&
                             <Card
                                 shadow="sm"
