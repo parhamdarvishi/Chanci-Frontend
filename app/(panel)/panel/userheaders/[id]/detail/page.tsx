@@ -109,7 +109,7 @@ const UserHeaderDetailPage = () => {
           </Button>
           <Button 
             color="teal" 
-            onClick={() => router.push(`/ChanciAI/result/${params.id}/detail`)}
+            onClick={() => router.push(`/ChanciAI/result/${params.id}`)}
             disabled={generatedPrompt === undefined}
           >
             View Result in Chanci
