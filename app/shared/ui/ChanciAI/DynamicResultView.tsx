@@ -1,13 +1,16 @@
 "use client";
-import { Card, Center, Loader } from '@mantine/core';
+import { Card, Center, Loader, Table } from '@mantine/core';
 import React from 'react';
 import style from "./../../../(chanci)/style.module.scss";
+import { IndustryScore, JobRecommendation, TraitReview } from '@/shared/types/chanci/result';
 interface DynamicResultViewProps {
-    result: any;
+    industryScores: IndustryScore[]
+    result: JobRecommendation | undefined;
     activeSection: string;
 }
 
 const DynamicResultView: React.FC<DynamicResultViewProps> = ({
+    industryScores,
     result,
     activeSection,
 }) => {
@@ -21,10 +24,10 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
     const renderContent = () => {
 
         switch (activeSection) {
-            case 'personality':
+            case 'PersonalityAnalysis':
                 return (
                     <div className={style.resultBox}>
-                        {result?.TraitReview?.map((trait: any, index: number) => {
+                        {result?.traitReview?.map((trait: TraitReview, index: number) => {
                             return (
                                 <Card
                                     key={index}
@@ -34,29 +37,29 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                                     withBorder
                                     className={style.cardDone}
                                 >
-                                    {trait?.Analysis && (<><h4>Analysis: </h4>
+                                    {trait?.analysis && (<><h4>Analysis: </h4>
                                         <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                            {trait.Analysis}
+                                            {trait.analysis}
                                         </p></>)}
-                                    {result?.WhatResearchSays && <><h4>What Research Says: </h4>
+                                    {trait?.whatResearchSays && <><h4>What Research Says: </h4>
                                         <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                            {result.WhatResearchSays}
+                                            {trait.whatResearchSays}
                                         </p></>}
-                                    {trait?.WhereYouFitBest && <><h4>Where You Fit Best: </h4>
+                                    {trait?.whereYouFitBest && <><h4>Where You Fit Best: </h4>
                                         <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                            {trait.WhereYouFitBest}
+                                            {trait.whereYouFitBest}
                                         </p></>}
-                                    {trait?.PotentialChallenges && <><h4>Potential Challenges: </h4>
+                                    {trait?.potentialChallenges && <><h4>Potential Challenges: </h4>
                                         <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                            {trait.PotentialChallenges}
+                                            {trait.potentialChallenges}
                                         </p></>}
-                                    {trait?.WhyThisMatters && <><h4>Why This Matters: </h4>
+                                    {trait?.whyThisMatters && <><h4>Why This Matters: </h4>
                                         <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                            {trait.WhyThisMatters}
+                                            {trait.whyThisMatters}
                                         </p></>}
-                                    {trait?.MiniStorySnippet && <><h4>Mini Story Snippet: </h4>
+                                    {trait?.miniStorySnippet && <><h4>Mini Story Snippet: </h4>
                                         <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                            {trait.MiniStorySnippet}
+                                            {trait.miniStorySnippet}
                                         </p></>}
                                 </Card>
                             )
@@ -70,16 +73,16 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                         >
                             <h3>Personlaity: </h3>
                             <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                {result.Personality}
+                                {result?.personality}
                             </p>
 
                         </Card>
                     </div>
                 );
-            case "cvEval":
+            case "CvEvaluation":
                 return (
                     <div className={style.resultBox}>
-                        {result?.CvFormat &&
+                        {result?.cvFormat &&
                             <Card
                                 shadow="sm"
                                 padding="lg"
@@ -89,14 +92,14 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                             ><h3>📄 Overall Format and Contact Information: </h3>
                                 <h4>Assess: </h4>
                                 <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                    {result.CvFormat.Assess}
+                                    {result.cvFormat?.assess}
                                 </p>
                                 <h4>Improve: </h4>
                                 <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                    {result.CvFormat.Improve}
+                                    {result.cvFormat?.improve}
                                 </p>
                             </Card>}
-                        {result?.KeyInsight &&
+                        {result?.keyInsight &&
                             <Card
                                 shadow="sm"
                                 padding="lg"
@@ -106,14 +109,14 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                             ><h3>🧠 Professional Profile and Key Skills: </h3>
                                 <h4>Assess: </h4>
                                 <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                    {result.KeyInsight.Assess}
+                                    {result.keyInsight?.assess}
                                 </p>
                                 <h4>Improve: </h4>
                                 <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                    {result.KeyInsight.Improve}
+                                    {result.keyInsight?.improve}
                                 </p>
                             </Card>}
-                        {result?.CvEducationAndEmploymentHistory &&
+                        {result?.cvEducationAndEmploymentHistory &&
                             <Card
                                 shadow="sm"
                                 padding="lg"
@@ -123,11 +126,11 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                             ><h3>💼 Employment History and Education: </h3>
                                 <h4>Assess: </h4>
                                 <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                    {result.CvEducationAndEmploymentHistory.Assess}
+                                    {result.cvEducationAndEmploymentHistory?.assess}
                                 </p>
                                 <h4>Improve: </h4>
                                 <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                    {result.CvEducationAndEmploymentHistory.Improve}
+                                    {result.cvEducationAndEmploymentHistory?.improve}
                                 </p>
                             </Card>}
                         {result?.cvAdditionalSection &&
@@ -140,14 +143,14 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                             ><h3>🎓 Additional Sections and Final Checks</h3>
                                 <h4>Assess: </h4>
                                 <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                    {result.cvAdditionalSection.Assess}
+                                    {result.cvAdditionalSection?.assess}
                                 </p>
                                 <h4>Improve: </h4>
                                 <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                    {result.cvAdditionalSection.Improve}
+                                    {result.cvAdditionalSection?.improve}
                                 </p>
                             </Card>}
-                        {(result?.CvStrengths || result?.CvAreasForImprovment || result?.CvActionablePlan ) &&
+                        {(result?.cvStrengths || result?.cvAreasForImprovment || result?.cvActionablePlan) &&
                             <Card
                                 shadow="sm"
                                 padding="lg"
@@ -155,9 +158,9 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                                 withBorder
                                 className={style.cardDone}
                             ><h3>✅ Summary</h3>
-                                {result?.CvStrengths && <><h4>💪 Strengths:  </h4>
+                                {result?.cvStrengths && <><h4>💪 Strengths:  </h4>
                                     <ul style={{ padding: "15px" }}>
-                                        {result?.CvStrengths?.length > 0 && result?.CvStrengths?.map((strenght: string, index: number) => {
+                                        {result?.cvStrengths?.length > 0 && result?.cvStrengths?.map((strenght: string, index: number) => {
                                             return (
                                                 <li key={index} style={{ maxWidth: "700px", fontSize: "17px" }}>
                                                     {strenght}
@@ -166,9 +169,9 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                                         })
                                         }
                                     </ul></>}
-                                {result?.CvAreasForImprovment && <><h4>🛠️ Areas for Improvement: </h4>
+                                {result?.cvAreasForImprovment && <><h4>🛠️ Areas for Improvement: </h4>
                                     <ul style={{ padding: "15px" }}>
-                                        {result?.CvAreasForImprovment?.length > 0 && result?.CvAreasForImprovment?.map((strenght: string, index: number) => {
+                                        {result?.cvAreasForImprovment?.length > 0 && result?.cvAreasForImprovment?.map((strenght: string, index: number) => {
                                             return (
                                                 <li key={index} style={{ maxWidth: "700px", fontSize: "17px" }}>
                                                     {strenght}
@@ -177,9 +180,9 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                                         })
                                         }
                                     </ul></>}
-                                {result?.CvActionablePlan && <><h4>📌 Action Plan: </h4>
+                                {result?.cvActionablePlan && <><h4>📌 Action Plan: </h4>
                                     <ul style={{ padding: "15px" }}>
-                                        {result?.CvActionablePlan?.length > 0 && result?.CvActionablePlan?.map((strenght: string, index: number) => {
+                                        {result?.cvActionablePlan?.length > 0 && result?.cvActionablePlan?.map((strenght: string, index: number) => {
                                             return (
                                                 <li key={index} style={{ maxWidth: "700px", fontSize: "17px" }}>
                                                     {strenght}
@@ -192,10 +195,10 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                             </Card>}
                     </div>
                 )
-            case "skillAssessment":
+            case "SkillAssessment":
                 return (
                     <div className={style.resultBox}>
-                        {result?.Strengths &&
+                        {result?.strengths &&
                             <Card
                                 shadow="sm"
                                 padding="lg"
@@ -203,41 +206,41 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                                 withBorder
                                 className={style.cardDone}
                             ><h3>Your Strenghts: </h3>
-                            {result?.SoftSkillPotentialGaps && <><h4>✅ Soft Skills:</h4>
-                                <ul style={{ padding: "15px" }}>
-                                    {result?.SoftSkillPotentialGaps?.length > 0 && result?.SoftSkillPotentialGaps?.map((strenght: string, index: number) => {
-                                        return (
-                                            <li key={index} style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                                {strenght}
-                                            </li>
-                                        )
-                                    })
-                                    }
-                                </ul></>}
-                                {result?.HardSkillPotentialGaps && <><h4>✅ Technical Skills:</h4>
-                                <ul style={{ padding: "15px" }}>
-                                    {result?.HardSkillPotentialGaps?.length > 0 && result?.HardSkillPotentialGaps?.map((strenght: string, index: number) => {
-                                        return (
-                                            <li key={index} style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                                {strenght}
-                                            </li>
-                                        )
-                                    })
-                                    }
-                                </ul></>}
-                                {result?.Strengths && <><h4>✅ Certifications & Projects:</h4>
-                                <ul style={{ padding: "15px" }}>
-                                    {result?.Strengths?.length > 0 && result?.Strengths?.map((strenght: string, index: number) => {
-                                        return (
-                                            <li key={index} style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                                {strenght}
-                                            </li>
-                                        )
-                                    })
-                                    }
-                                </ul></>}
+                                {result?.softSkillPotentialGaps && <><h4>✅ Soft Skills:</h4>
+                                    <ul style={{ padding: "15px" }}>
+                                        {result?.softSkillPotentialGaps?.length > 0 && result?.softSkillPotentialGaps?.map((strenght: string, index: number) => {
+                                            return (
+                                                <li key={index} style={{ maxWidth: "700px", fontSize: "17px" }}>
+                                                    {strenght}
+                                                </li>
+                                            )
+                                        })
+                                        }
+                                    </ul></>}
+                                {result?.hardSkillPotentialGaps && <><h4>✅ Technical Skills:</h4>
+                                    <ul style={{ padding: "15px" }}>
+                                        {result?.hardSkillPotentialGaps?.length > 0 && result?.hardSkillPotentialGaps?.map((strenght: string, index: number) => {
+                                            return (
+                                                <li key={index} style={{ maxWidth: "700px", fontSize: "17px" }}>
+                                                    {strenght}
+                                                </li>
+                                            )
+                                        })
+                                        }
+                                    </ul></>}
+                                {result?.strengths && <><h4>✅ Certifications & Projects:</h4>
+                                    <ul style={{ padding: "15px" }}>
+                                        {result?.strengths?.length > 0 && result?.strengths?.map((strenght: string, index: number) => {
+                                            return (
+                                                <li key={index} style={{ maxWidth: "700px", fontSize: "17px" }}>
+                                                    {strenght}
+                                                </li>
+                                            )
+                                        })
+                                        }
+                                    </ul></>}
                             </Card>}
-                        {result?.IndustryAlignment &&
+                        {result?.industryAlignment &&
                             <Card
                                 shadow="sm"
                                 padding="lg"
@@ -246,10 +249,10 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                                 className={style.cardDone}
                             ><h3>Industry Alignment: </h3>
                                 <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                    {result.IndustryAlignment}
+                                    {result.industryAlignment}
                                 </p>
                             </Card>}
-                        {result?.WhereToGo &&
+                        {result?.whereToGo &&
                             <Card
                                 shadow="sm"
                                 padding="lg"
@@ -258,9 +261,41 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                                 className={style.cardDone}
                             ><h3>Where to Grow: </h3>
                                 <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                    {result.WhereToGo}
+                                    {result.whereToGo}
                                 </p>
                             </Card>}
+                    </div>
+                )
+            case "JobIndustryMatrix":
+                return (
+                    <div className={style.resultBox}>
+                        {industryScores && industryScores.length > 0 && <Card
+                            shadow="sm"
+                            padding="lg"
+                            radius="md"
+                            withBorder
+                            className={style.cardDone}
+                        >
+                            <h4>Industry Scores:</h4>
+                            <Table striped highlightOnHover withColumnBorders>
+                                <Table.Thead>
+                                    <Table.Tr>
+                                        <Table.Th>Index</Table.Th>
+                                        <Table.Th>Industry</Table.Th>
+                                        <Table.Th>Score</Table.Th>
+                                    </Table.Tr>
+                                </Table.Thead>
+                                <Table.Tbody>
+                                    {industryScores?.map((item, index) => (
+                                        <Table.Tr key={index}>
+                                            <Table.Td>{index + 1}</Table.Td>
+                                            <Table.Td>{item.name}</Table.Td>
+                                            <Table.Td>{item.score}</Table.Td>
+                                        </Table.Tr>
+                                    ))}
+                                </Table.Tbody>
+                            </Table>
+                        </Card>}
                     </div>
                 )
             default:

@@ -4,10 +4,9 @@ import React, { CSSProperties } from "react";
 import Menu from "@public/menu.svg";
 import style from "./style.module.scss";
 import QuestionSquare from "@public/image/chanciAI/icon/QuestionSquare.svg";
-import { modals } from "@mantine/modals";
-import StepModal from "@/widget/chanciAI/slice/stepModal/stepModal";
 import useIsMobile from "@/shared/hooks";
-import { howItWorksModal } from "@/shared/ui/ChanciAI/ChanciHeader";
+import { ModalComponent } from "@/shared/ui/ChanciAI/ChanciHeader";
+import { howItWorksText } from "@/shared/constants/data";
 const HeadRes = ({ menuClick }: { menuClick: () => void }) => {
   const isMobile = useIsMobile();
   return (
@@ -23,7 +22,7 @@ const HeadRes = ({ menuClick }: { menuClick: () => void }) => {
         <Card
           shadow="sm"
           padding="lg"
-          onClick={()=> howItWorksModal({isMobile})}
+          onClick={()=> ModalComponent({isMobile, desc: howItWorksText})}
           style={{ cursor: "pointer" }}
           className={style.wrapperCard}
         >

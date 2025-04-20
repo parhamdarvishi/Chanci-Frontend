@@ -1,6 +1,11 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import React from "react";
+//These folder will be deleted after we make sure no routes come to these files//
+
+
+
+
+/* import { useParams } from "next/navigation";
 import { Card, Divider, Drawer, Grid, GridCol } from "@mantine/core";
 import DynamicSidebar from "@/shared/ui/ChanciAI/DynamicSidebar";
 import DynamicResultView from "@/shared/ui/ChanciAI/DynamicResultView";
@@ -11,9 +16,9 @@ import Link from "next/link";
 import style from "./../../../../style.module.scss";
 import { useDisclosure } from "@mantine/hooks";
 import Image from "next/image";
-import Title from "@public/image/widget/Frame.svg";
+import Title from "@public/image/widget/Frame.svg"; */
 const Page = () => {
-  const { id } = useParams();
+/*   const { id } = useParams();
   const { generatedPrompt, fetchGeneratedPrompts } = useGeneratedPrompts(Number(id));
   const [activeSection, setActiveSection] = useState<string>("personality");
   const isMobile = useIsMobile();
@@ -25,10 +30,10 @@ const Page = () => {
     if (id) {
       fetchGeneratedPrompts();
     }
-  }, [id]);
+  }, [id]); */
   return (
-
-    <Grid
+    <>
+    {/* <Grid
       gutter={{ md: 15 }}
       style={{
         padding: "1rem",
@@ -91,7 +96,9 @@ const Page = () => {
         </Card>
       </GridCol>
     </Grid>
-
+    
+ */}
+ </>
   );
 };
 

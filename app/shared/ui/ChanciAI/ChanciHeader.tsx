@@ -8,7 +8,8 @@ import Image from "next/image";
 import useIsMobile from "@/shared/hooks";
 import { modals } from "@mantine/modals";
 import StepModal from "@/widget/chanciAI/slice/stepModal/stepModal";
-export const howItWorksModal = ({isMobile} : {isMobile: boolean | undefined}) => {
+import { howItWorksText } from "@/shared/constants/data";
+export const ModalComponent = ({isMobile, desc} : {isMobile: boolean | undefined, desc: string}) => {
   const mobileStyleConfig: Partial<
     Record<"content" | "inner", CSSProperties>
   > = {
@@ -37,8 +38,6 @@ export const howItWorksModal = ({isMobile} : {isMobile: boolean | undefined}) =>
       height: "100%", // Ensure it takes full space
     },
   };
-  const desc =
-    "This test connects your psychology assessment results to real-time job market data, offering opportunities across more than 20 industries. It includes a variety of test formats and takes approximately 10 minutes to complete. The results are presented in five key categories: psychology assessment outcomes, the Job Matrix, and your employability score, all tailored to live market trends.";
   modals.open({
     radius: "30px",
     size: "lg",
@@ -48,7 +47,6 @@ export const howItWorksModal = ({isMobile} : {isMobile: boolean | undefined}) =>
 };
 const ChanciHeader = () => {
   const isMobile = useIsMobile();
-  
   return (
     <Box className={style.wrapper}>
       <Box className={style.assessmentHeader}>
@@ -59,7 +57,7 @@ const ChanciHeader = () => {
         <Card
           shadow="sm"
           padding="lg"
-          onClick={()=> howItWorksModal({isMobile})}
+          onClick={()=> ModalComponent({isMobile, desc: howItWorksText})}
           style={{ cursor: "pointer" }}
           className={style.HowItWorks}
         >

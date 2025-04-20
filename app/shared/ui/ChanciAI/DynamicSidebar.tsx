@@ -1,35 +1,37 @@
 "use client";
 import React from 'react';
-import { Box, Card, Divider } from '@mantine/core';
+import { Box, Card, Center, Divider, Loader } from '@mantine/core';
 import style from './style/sidebar.module.scss';
 import Image from 'next/image';
 import Title from '@public/image/widget/Frame.svg';
 import Link from 'next/link';
+import { keyToLetter } from '@/shared/helpers';
+import { CvAnalysisSectionFlags } from '@/shared/types/chanci/result';
 
 interface DynamicSidebarProps {
+  sections: CvAnalysisSectionFlags | undefined;
   activeSection: string;
   onSectionChange: (section: string) => void;
   drawer?: boolean;
 }
 
 const DynamicSidebar: React.FC<DynamicSidebarProps> = ({
+  sections,
   activeSection,
   onSectionChange,
   drawer = false
 }) => {
   // Define sections based on the ConvertAnswersToPromptResponse structure
-  const sections = [
-    { id: 'personality', label: 'Personality Analysis' },
-    { id: 'cvEval', label: 'CV Evaluation' },
-    { id: 'skillAssessment', label: 'Skill Assessmenet' },
-    /* { id: 'jobIndustryMatrix', label: 'Job-Industry Matrix' },
-    { id: 'actionableGuidance', label: 'ActionableGuidance' }, */
-  ];
-
   const handleSectionClick = (sectionId: string) => {
     onSectionChange(sectionId);
   };
-
+  const LoadingSpinet = () => {
+    return (
+        <Center style={{ height: "100vh" }}>
+            <Loader color="blue" size="lg" />
+        </Center>
+    );
+};
   
 
   return (
@@ -61,19 +63,20 @@ const DynamicSidebar: React.FC<DynamicSidebarProps> = ({
         </div>
 
         <Box className={style.progressPart}>
-          {sections.map((section) => (
+          {sections ? Object.entries(sections).filter(([keyObj, value]) => (value == true /* || keyObj === "JobIndustryMatrix" */))
+              .map(([key]) => (
             <div
-              key={section.id}
+              key={key}
               className={
-                activeSection === section.id
+                activeSection === key
                   ? style.progressPartActive
                   : style.progressPartBox
               }
-              onClick={() => handleSectionClick(section.id)}
+              onClick={() => handleSectionClick(key)}
             >
-              <span>{section.label}</span>
+              <span>{keyToLetter(key)}</span>
             </div>
-          ))}
+          ) ) : (<LoadingSpinet />) }
         </Box>
       </Box>
     </Card>
