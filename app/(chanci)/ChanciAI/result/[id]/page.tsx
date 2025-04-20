@@ -159,7 +159,7 @@ const Page = () => {
     const res : ResultApiResponse = await getRequest(
       "/api/UserAnswers/ConvertAnswersToPromptCommand",
       reqBody,
-      false
+      true
     );
     
     if (res.isSuccess) {
