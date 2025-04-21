@@ -7,6 +7,8 @@ import Title from '@public/image/widget/Frame.svg';
 import Link from 'next/link';
 import { keyToLetter } from '@/shared/helpers';
 import { CvAnalysisSectionFlags } from '@/shared/types/chanci/result';
+import { ModalComponent } from './ChanciHeader';
+import useIsMobile from '@/shared/hooks';
 
 interface DynamicSidebarProps {
   sections: CvAnalysisSectionFlags | undefined;
@@ -21,9 +23,13 @@ const DynamicSidebar: React.FC<DynamicSidebarProps> = ({
   onSectionChange,
   drawer = false
 }) => {
+  const isMobile  = useIsMobile();
   // Define sections based on the ConvertAnswersToPromptResponse structure
   const handleSectionClick = (sectionId: string) => {
     onSectionChange(sectionId);
+  };
+  const handleDeactiveSection = () => {
+    ModalComponent({isMobile, desc: "Oops! It's not available yet! We're working on it"});
   };
   const LoadingSpinet = () => {
     return (
@@ -63,7 +69,7 @@ const DynamicSidebar: React.FC<DynamicSidebarProps> = ({
         </div>
 
         <Box className={style.progressPart}>
-          {sections ? Object.entries(sections).filter(([keyObj, value]) => (value == true /* || keyObj === "JobIndustryMatrix" */))
+          {sections ? Object.entries(sections)/* .filter(([keyObj, value]) => (value == true /* || keyObj === "JobIndustryMatrix" )) */
               .map(([key]) => (
             <div
               key={key}
@@ -72,7 +78,11 @@ const DynamicSidebar: React.FC<DynamicSidebarProps> = ({
                   ? style.progressPartActive
                   : style.progressPartBox
               }
-              onClick={() => handleSectionClick(key)}
+              onClick={() => {
+                if(sections?.[key as keyof CvAnalysisSectionFlags] === true){
+                  handleSectionClick(key)
+                } else handleDeactiveSection()
+              }}
             >
               <span>{keyToLetter(key)}</span>
             </div>
