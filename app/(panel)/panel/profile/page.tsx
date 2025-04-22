@@ -2,8 +2,9 @@
 import { getRequest } from "@/shared/api";
 import { chanciAddresses } from "@/shared/constants/relative-url/chanci";
 import { Avatar, Box } from "@mantine/core";
-import { IconMail } from "@tabler/icons-react";
+import { IconMail, IconLock } from "@tabler/icons-react";
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
 
 type userDataType = {
   userName: string;
@@ -11,6 +12,7 @@ type userDataType = {
 };
 const Page = () => {
   const [userData, setUserData] = useState<userDataType>();
+
   const getuserProfile = async () => {
     const res = await getRequest(chanciAddresses.profile, null, true);
     if (res?.isSuccess) {
@@ -62,6 +64,26 @@ const Page = () => {
             <div> {userData?.email}</div>
           </Box>
         </Box>
+      </Box>
+
+      <Box style={{ padding: "1rem", marginTop: "1rem" }}>
+        <Link href="/panel/updatepassword">
+          <Box
+            style={{
+              display: "flex",
+
+              alignItems: "center",
+              gap: "1rem",
+            }}
+          >
+            <Avatar color="indigo" size={60}>
+              <IconLock size={40} />
+            </Avatar>
+            <Box>
+              <div style={{ color: "#737373", fontSize: "18px" }}>Update Password</div>
+            </Box>
+          </Box>
+        </Link>
       </Box>
     </div>
   );

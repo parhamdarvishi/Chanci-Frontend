@@ -1,5 +1,5 @@
 "use client";
-import { Card, Center, Loader, Table } from '@mantine/core';
+import { Avatar, Box, Card, Center, Loader, Table } from '@mantine/core';
 import React from 'react';
 import style from "./../../../(chanci)/style.module.scss";
 import { IndustryScore, JobRecommendation, TraitReview } from '@/shared/types/chanci/result';
@@ -27,6 +27,38 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
             case 'PersonalityAnalysis':
                 return (
                     <div className={style.resultBox}>
+                        <Box className={style.chanciImgResult}>
+                            <Avatar
+                                src="/image/chanciAI/chanci.svg"
+                                alt="it's me"
+                                size={55}
+                                className={style.questionImgChanci}
+                            />
+                        </Box>
+                        <Card
+                            shadow="sm"
+                            padding="lg"
+                            radius="md"
+                            withBorder
+                            className={style.cardDone}
+                        >
+                            You&apos;ve just completed our modernised Big Five personality test—an updated version of the classic psychological framework used to understand your traits across five key dimensions: Openness, Conscientiousness, Extraversion, Agreeableness, and Neuroticism.
+
+                            Let&apos;s explore more:
+                        </Card>
+                        <Card
+                            shadow="sm"
+                            padding="lg"
+                            radius="md"
+                            withBorder
+                            className={style.cardDone}
+                        >
+                            <h3>Personlaity: </h3>
+                            <p style={{ maxWidth: "700px", fontSize: "17px" }}>
+                                {result?.personality}
+                            </p>
+
+                        </Card>
                         {result?.traitReview?.map((trait: TraitReview, index: number) => {
                             return (
                                 <Card
@@ -64,24 +96,20 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                                 </Card>
                             )
                         })}
-                        <Card
-                            shadow="sm"
-                            padding="lg"
-                            radius="md"
-                            withBorder
-                            className={style.cardDone}
-                        >
-                            <h3>Personlaity: </h3>
-                            <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                {result?.personality}
-                            </p>
 
-                        </Card>
                     </div>
                 );
             case "CvEvaluation":
                 return (
                     <div className={style.resultBox}>
+                        <Box className={style.chanciImgResult}>
+                            <Avatar
+                                src="/image/chanciAI/chanci.svg"
+                                alt="it's me"
+                                size={55}
+                                className={style.questionImgChanci}
+                            />
+                        </Box>
                         {result?.cvFormat &&
                             <Card
                                 shadow="sm"
@@ -198,6 +226,14 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
             case "SkillAssessment":
                 return (
                     <div className={style.resultBox}>
+                        <Box className={style.chanciImgResult}>
+                            <Avatar
+                                src="/image/chanciAI/chanci.svg"
+                                alt="it's me"
+                                size={55}
+                                className={style.questionImgChanci}
+                            />
+                        </Box>
                         {result?.strengths &&
                             <Card
                                 shadow="sm"
@@ -269,6 +305,14 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
             case "JobIndustryMatrix":
                 return (
                     <div className={style.resultBox}>
+                        <Box className={style.chanciImgResult}>
+                            <Avatar
+                                src="/image/chanciAI/chanci.svg"
+                                alt="it's me"
+                                size={55}
+                                className={style.questionImgChanci}
+                            />
+                        </Box>
                         {industryScores && industryScores.length > 0 && <Card
                             shadow="sm"
                             padding="lg"

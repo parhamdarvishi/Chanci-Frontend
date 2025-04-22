@@ -112,6 +112,16 @@
   gap: 1.5rem;
   align-items: center;
 }
+.resultFirstBox{
+  display: flex;
+  flex-direction: row;
+  gap:2rem
+}
+.chanciImgResult{
+  position: absolute;
+  top: 20px;
+  left: 120px;
+}
 
 @media (max-width: 980px) {
   .sidebar {

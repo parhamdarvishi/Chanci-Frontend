@@ -1,7 +1,15 @@
-import React from "react";
+"use client";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
-const page = () => {
-  return <div style={{ height: "100%" }}></div>;
+const Page = () => {
+  const router = useRouter();
+  
+  useEffect(() => {
+    router.push("/panel/profile");
+  }, [router]);
+  
+  return null;
 };
 
-export default page;
+export default Page;

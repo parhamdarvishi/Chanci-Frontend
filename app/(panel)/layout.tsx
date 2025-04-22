@@ -8,6 +8,9 @@ import Image from "next/image";
 import { useDisclosure } from "@mantine/hooks";
 import Title from "@public/image/widget/Frame.svg";
 import style from "./style.module.scss";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import cookie from "@/shared/helpers/cookie";
 
 export default function ChanciRootLayout({
   children,
@@ -15,7 +18,22 @@ export default function ChanciRootLayout({
   children: React.ReactNode;
 }) {
   const [opened, { open, close }] = useDisclosure(false);
+  const router = useRouter();
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  
+  useEffect(() => {
+    const token = typeof window !== "undefined" ? cookie.getCookie("USER_TOKEN") : null;
+    if (!token) {
+      router.replace("/user/login");
+    } else {
+      setIsAuthenticated(false);
+    }
+  }, [router]);
   // const getChan
+  if (isAuthenticated) {
+    return null; // Return nothing while checking authentication
+  }
+  
   return (
     <Grid
       gutter={{ md: 15 }}
