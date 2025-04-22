@@ -14,27 +14,12 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
     result,
     activeSection,
 }) => {
-    const LoadingSpinet = () => {
-        return (
-            <Center style={{ height: "100vh" }}>
-                <Loader color="blue" size="lg" />
-            </Center>
-        );
-    };
     const renderContent = () => {
 
         switch (activeSection) {
             case 'PersonalityAnalysis':
                 return (
                     <div className={style.resultBox}>
-                        <Box className={style.chanciImgResult}>
-                            <Avatar
-                                src="/image/chanciAI/chanci.svg"
-                                alt="it's me"
-                                size={55}
-                                className={style.questionImgChanci}
-                            />
-                        </Box>
                         <Card
                             shadow="sm"
                             padding="lg"
@@ -102,14 +87,6 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
             case "CvEvaluation":
                 return (
                     <div className={style.resultBox}>
-                        <Box className={style.chanciImgResult}>
-                            <Avatar
-                                src="/image/chanciAI/chanci.svg"
-                                alt="it's me"
-                                size={55}
-                                className={style.questionImgChanci}
-                            />
-                        </Box>
                         {result?.cvFormat &&
                             <Card
                                 shadow="sm"
@@ -226,14 +203,6 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
             case "SkillAssessment":
                 return (
                     <div className={style.resultBox}>
-                        <Box className={style.chanciImgResult}>
-                            <Avatar
-                                src="/image/chanciAI/chanci.svg"
-                                alt="it's me"
-                                size={55}
-                                className={style.questionImgChanci}
-                            />
-                        </Box>
                         {result?.strengths &&
                             <Card
                                 shadow="sm"
@@ -305,14 +274,6 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
             case "JobIndustryMatrix":
                 return (
                     <div className={style.resultBox}>
-                        <Box className={style.chanciImgResult}>
-                            <Avatar
-                                src="/image/chanciAI/chanci.svg"
-                                alt="it's me"
-                                size={55}
-                                className={style.questionImgChanci}
-                            />
-                        </Box>
                         {industryScores && industryScores.length > 0 && <Card
                             shadow="sm"
                             padding="lg"
@@ -343,16 +304,20 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                     </div>
                 )
             default:
-                return (
-                    <LoadingSpinet />
-                );
+                return null;
         }
     };
 
     return (
-        <div style={{ display: "flex", gap: "1rem", flexDirection: "column" }}>
-            {result ?
-                renderContent() : <LoadingSpinet />}
+        <div style={{ display: "flex", gap: "1rem", flexDirection: "row", justifyContent: 'center' }}>
+            <Box className={style.chanciImgResult}>
+                <Avatar
+                    src="/image/chanciAI/chanci.svg"
+                    alt="it's me"
+                    size={55}
+                    className={style.questionImgChanci}
+                /></Box>
+                {renderContent()}
         </div>
     );
 };
