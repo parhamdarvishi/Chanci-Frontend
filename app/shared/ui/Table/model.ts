@@ -2,7 +2,9 @@ import { JSX } from "react";
 
 export type ActionButtons = {
   name: string;
+  colName?: string;
   externalLink?: string;
+  keyForUrl?: string;
   url?: (id:any)=> string;
 };
 export type ActionModal = {
@@ -13,13 +15,15 @@ export type ActionModal = {
 export type TableColumns<T> = {
   head: string;
   key: keyof T;
-  render?: (value: T[keyof T]) => string;
+  render?: (value: any) => string;
 };
 export interface TableOnRequestProps<T> {
   rowsPerPage: number;
   url: string;
   columns: TableColumns<T>[];
+  filterColumns?: TableColumns<T>[];
   actionButtons?: ActionButtons[];
   actionModal?: ActionModal;
-  filters?: any
+  filters?: any;
+  showFilterBar?: boolean;
 }

@@ -1,6 +1,6 @@
 "use client";
-/* eslint-disable  @typescript-eslint/no-explicit-any */
-/* eslint-disable no-unused-expressions */
+ 
+ 
 import React, { useState, FormEvent, useEffect } from "react";
 import { Box, Card, Input, Button, Select } from "@mantine/core";
 import style from "./payment.module.scss";
@@ -33,11 +33,13 @@ const Payment: React.FC = () => {
     initialValues: {
       fullName: "",
       email: "",
+      linkedInProfile: "",
       eventPaymentTypeId: null as number | null,
     },
     validate: {
       fullName: (value) => (value === "" ? "Please field the fullName" : null),
       email: (value) => (value === "" ? "Please field the email" : null),
+      linkedInProfile: (value) => (value === "" ? "Please enter your LinkedIn profile" : null),
       eventPaymentTypeId: (value) =>
         value === null ? "Please choose an option" : null,
     },
@@ -113,7 +115,7 @@ const Payment: React.FC = () => {
           className={style.paymentCard}
         >
           <p>
-            Please enter your full name and email address and click the button
+            Please enter your full name, email address, and LinkedIn profile and click the button
             to proceed with your payment and complete the booking process for
             participating in the event.
           </p>
@@ -148,6 +150,21 @@ const Payment: React.FC = () => {
                   classNames={{ input: style.input }}
                   placeholder="For e.g. example@gmail.com"
                   {...fieldForm.getInputProps("email")}
+                />
+              </Input.Wrapper>
+              <Input.Wrapper
+                classNames={{
+                  root: style.root,
+                  label: style.label,
+                  description: style.description,
+                }}
+                withAsterisk
+                label="LinkedIn Profile"
+              >
+                <Input
+                  classNames={{ input: style.input }}
+                  placeholder="e.g. https://linkedin.com/in/yourprofile"
+                  {...fieldForm.getInputProps("linkedInProfile")}
                 />
               </Input.Wrapper>
               <Input.Wrapper

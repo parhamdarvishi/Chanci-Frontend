@@ -33,7 +33,7 @@ const ResetPassword = () => {
       const res = await postRequest(
         "/api/User/UpdatePasswordInPanel",
         passwordForm.values,
-        true
+        false
       );
 
       if (res?.isSuccess) {

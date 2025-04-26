@@ -10,6 +10,8 @@ type TPayment = {
   price: number;
   currency: string;
   paiedSuccessfull: boolean;
+  linkedInProfile?: string;
+  createAt: string;
 };
 const Payments = () => {
   const userid = useSearchParams().get("userId");
@@ -22,7 +24,9 @@ const Payments = () => {
     { head: "ID", key: "id" },
     { head: "Price", key: "price" },
     { head: "Currency", key: "currency" },
-    { head: "Paid", key: "paiedSuccessfull", render: (value) => (value ? "Yes" : "No") },
+    { head: "LinkedIn Profile", key: "linkedInProfile" },
+    { head: "Payment Date time", key: "createAt" },
+    { head: "Payment Success", key: "paiedSuccessfull", render: (value) => (value ? "Yes" : "No") },
   ];
 
   const actionButtons = [

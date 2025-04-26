@@ -1,6 +1,5 @@
- 
 import { getRequest } from "@/shared/api";
-import { Center, Loader, Pagination, Table, Text } from "@mantine/core";
+import { Button, Center, Flex, Group, Loader, Pagination, Table, Text, TextInput, Box } from "@mantine/core";
 import React, { JSX, useEffect, useState } from "react";
 import style from "./style.module.scss";
 import { TableOnRequestProps } from "./model";
@@ -13,11 +12,15 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
   columns,
   actionButtons,
   actionModal,
-  filters = {}
+  filters = {},
+  filterColumns = [],
+  showFilterBar = false
 }: TableOnRequestProps<T>): JSX.Element => {
   const [data, setData] = useState<T[]>();
   const [totalPages, setTotalPages] = useState(0);
   const [activePage, setPage] = useState(1);
+  const [filterValues, setFilterValues] = useState<Record<string, string>>({});
+  const [appliedFilters, setAppliedFilters] = useState<Record<string, string | number | boolean>>(filters);
   /* const getDataCount = async () => {
     try {
       const res = await getRequest(
@@ -45,6 +48,7 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
   const getData = async () => {
     const query = {
       ...filters,
+      ...appliedFilters,
       "Sorts[0].PropertyName": "id",
       "Sorts[0].isAscending": false,
       Skip: (activePage - 1) * rowsPerPage,
@@ -91,7 +95,7 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
                 ? column.render(ttd[key])
                 : column.key === "createdAt" || column.key === "createAt"
                   ? formatDateString(ttd[key])
-                  : String(ttd[key])
+                  : ttd[key] ? String(ttd[key]) : "-"
               : index + 1}
           </Table.Td>
         );
@@ -99,11 +103,12 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
       {actionButtons &&
         actionButtons.length > 0 &&
         actionButtons.map((btn, i: number) => {
+          const keyForUrl = btn?.keyForUrl? btn.keyForUrl : "id";
           return (
             <Table.Td key={i} style={{ fontSize: "15px" }}>
               <a
                 style={{ cursor: "pointer" }}
-                href={btn.externalLink? `${btn.externalLink + ttd?.id}/detail`: btn.url ? btn.url(ttd?.id as string): '#'}
+                href={btn.externalLink? `${btn.externalLink + ttd?.id}/detail`: btn.url ? btn.url(ttd[keyForUrl] as string): '#'}
               >
                 {btn.name}
               </a>
@@ -122,11 +127,67 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
   ));
   useEffect(() => {
     getData();
-  }, [activePage]);
+  }, [activePage, appliedFilters]);
+  
+  const handleFilterChange = (key: string, value: string) => {
+    setFilterValues(prev => ({
+      ...prev,
+      [key]: value
+    }));
+  };
+
+  const applyFilters = () => {
+    const newFilters: any = {};
+    
+    // Only add non-empty filter values
+    Object.entries(filterValues).forEach(([key, value]) => {
+      if (value.trim() && value !== '') {
+        newFilters["Filters[0].PropertyName"] = key;
+        newFilters["Filters[0].operation"] = 0;
+        newFilters["Filters[0].value"] = value;
+      }
+    });
+    setAppliedFilters(prev => ({
+      ...prev,
+      ...newFilters
+    }));
+  };
+  
+  const resetFilters = () => {
+    setFilterValues({});
+    setAppliedFilters({});
+  };
 
   const total = Math.ceil(totalPages / rowsPerPage); // Ensure integer
   return (
     <div className={style.tableContainer}>
+      {/* Filter Bar - Only show if showFilterBar is true */}
+      {showFilterBar && (
+        <Box mb="xs" p="xs" style={{ backgroundColor: "#f8f9fa", borderRadius: "8px" }}>
+          <Flex align="center" wrap="nowrap" gap="xs">
+            <Text fw={500} size="xs" c="dimmed" style={{ whiteSpace: "nowrap", fontSize: "11px" }}>Filter Data</Text>
+            <Flex flex={1} direction={'row'} gap="sm" justify={'flex-start'}>
+              {filterColumns.map((column, idx) => (
+                <TextInput
+                  key={String(column.key)}
+                  placeholder={`Filter by ${column.head}`}
+                  value={filterValues[String(column.key)] || ""}
+                  onChange={(e) => handleFilterChange(String(column.key), e.target.value)}
+                  size="xs"
+                  style={{  
+                    height: "100%!important", 
+                    fontSize: "12px"
+                  }}
+                />
+              ))}
+            </Flex>
+            <Group gap="xs" style={{ whiteSpace: "nowrap" }}>
+              <Button variant="outline" color="gray" onClick={resetFilters} size="xs" style={{ height: "24px", fontSize: "11px" }}>Reset</Button>
+              <Button color="blue" onClick={applyFilters} size="xs" style={{ height: "24px", fontSize: "11px" }}>Apply Filters</Button>
+            </Group>
+          </Flex>
+        </Box>
+      )}
       {data ? (
         data.length > 0 ? (
           <div style={{ overflowX: "auto" }}>
@@ -150,7 +211,7 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
                     actionButtons.map((btn, i: number) => {
                       return (
                         <Table.Th key={i} style={{ color: "#151e98" }}>
-                          Details
+                          {btn?.colName || btn?.name || "Details"}
                         </Table.Th>
                       );
                     })}

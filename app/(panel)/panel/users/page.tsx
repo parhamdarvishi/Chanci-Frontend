@@ -28,11 +28,19 @@ const Page = () => {
       rowsPerPage={10}
       url={userAddresses.GetAll}
       columns={columns}
+      filterColumns={[columns[1]]}
+      showFilterBar={true}
       actionModal={actionModal}
       actionButtons={[
         {
+          colName: "Payments",
           name: "User Payments",
           url : (id: any)=> `/panel/payments?userId=${id}`,
+        },
+        {
+          colName: "Resumes",
+          name: "User Resumes",
+          url : (id: any)=> `/panel/resumes?userId=${id}`,
         },
       ]}
     />

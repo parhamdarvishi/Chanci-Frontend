@@ -83,10 +83,9 @@ h6 {
   color: var(--background);
 }
 .m_8fb7ebe7 {
-  height: 72px !important;
   border-radius: 23px !important;
-  padding: 0 6rem !important;
-  font-size: 1.3rem !important;
+  padding: 0 1rem !important;
+  font-size: 1rem !important;
 }
 .bg {
   background-color: #e5e7ebf2;
