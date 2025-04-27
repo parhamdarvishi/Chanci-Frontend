@@ -14,6 +14,8 @@ const EventList = () => {
   const [events, setEvents] = useState<Event[]>([]);
   const allevents = async () => {
     const reqBody = {
+      "Sorts[0].PropertyName": "id",
+      "Sorts[0].isAscending": false,
       Skip: 0,
       Take: 100,
     };

@@ -19,6 +19,7 @@ export type Event = {
   bannerImagePath: string | null;
   hostDate: string;
   eventPaymentTypes: PaymentTypes[];
+  registerDisabled?: boolean;
 }
 export type Events = {
     data: Event[]
@@ -27,7 +28,7 @@ export type Events = {
 export interface EventsResponse {
     isSuccess?: boolean;
     data?: {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+       
       items: Event[]; // Adjust the type as necessary
     };
   }
