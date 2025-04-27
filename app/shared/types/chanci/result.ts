@@ -19,7 +19,15 @@ export type TraitReview = {
     whyThisMatters: string;
     miniStorySnippet: string;
 };
-
+export type ResultSection = {
+    id: number;
+    order: number;
+    innerHtml: string;
+    categoryType: number;
+    minValue: number | null;
+    maxValue: number | null;
+    isDeleted: boolean;
+};
 export type IndustryRecommendation = {
     industryName: string;
     industryDescription: string;
@@ -68,5 +76,6 @@ export interface ResultApiResponse {
         };
         jobRecommendation: JobRecommendation;
         industryScores: IndustryScore[];
+        sections?: ResultSection[];
     };
 }

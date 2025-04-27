@@ -2,17 +2,19 @@
 import { Avatar, Box, Card, Center, Loader, Table } from '@mantine/core';
 import React from 'react';
 import style from "./../../../(chanci)/style.module.scss";
-import { IndustryScore, JobRecommendation, TraitReview } from '@/shared/types/chanci/result';
+import { IndustryScore, JobRecommendation, ResultSection, TraitReview } from '@/shared/types/chanci/result';
 interface DynamicResultViewProps {
     industryScores: IndustryScore[]
     result: JobRecommendation | undefined;
     activeSection: string;
+    sections?: ResultSection[];
 }
 
 const DynamicResultView: React.FC<DynamicResultViewProps> = ({
     industryScores,
     result,
     activeSection,
+    sections
 }) => {
     const renderContent = () => {
 
@@ -20,18 +22,22 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
             case 'PersonalityAnalysis':
                 return (
                     <div className={style.resultBox}>
-                        <Card
-                            shadow="sm"
-                            padding="lg"
-                            radius="md"
-                            withBorder
-                            className={style.cardDone}
-                        >
-                            You&apos;ve just completed our modernised Big Five personality test—an updated version of the classic psychological framework used to understand your traits across five key dimensions: Openness, Conscientiousness, Extraversion, Agreeableness, and Neuroticism.
-
-                            Let&apos;s explore more:
-                        </Card>
-                        <Card
+                        {sections &&
+                            sections.sort((a, b) => a.order - b.order)?.map((section: ResultSection, index) => {
+                                return (
+                                    <Card
+                                        key={index}
+                                        shadow="sm"
+                                        padding="lg"
+                                        radius="md"
+                                        withBorder
+                                        className={style.cardDone}
+                                    >
+                                        <div dangerouslySetInnerHTML={{ __html: section.innerHtml }} />
+                                    </Card>
+                                )
+                            })}
+                        {/* <Card
                             shadow="sm"
                             padding="lg"
                             radius="md"
@@ -80,7 +86,7 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                                         </p></>}
                                 </Card>
                             )
-                        })}
+                        })} */}
 
                     </div>
                 );
@@ -317,7 +323,7 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                     size={55}
                     className={style.questionImgChanci}
                 /></Box>
-                {renderContent()}
+            {renderContent()}
         </div>
     );
 };

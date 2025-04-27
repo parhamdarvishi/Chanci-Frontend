@@ -15,7 +15,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Title from "@public/image/widget/Frame.svg";
 import { resultInstruction } from "@/shared/constants/data";
-import { CvAnalysisSectionFlags, IndustryScore, JobRecommendation, ResultApiResponse } from "@/shared/types/chanci/result";
+import { CvAnalysisSectionFlags, IndustryScore, JobRecommendation, ResultApiResponse, ResultSection } from "@/shared/types/chanci/result";
 import { modals } from "@mantine/modals";
 import LoadingModal from "@/widget/chanciAI/slice/loadingModal/loadingModal";
 /* const olComponent = ()=> {
@@ -113,6 +113,7 @@ const Page = () => {
   const [jobRecommendation, setJobRecommendation] = useState<JobRecommendation>();
   const [industryScores, setIndustryScores] = useState<IndustryScore[]>([]);
   const [sections, setSections] = useState<CvAnalysisSectionFlags>();
+  const [resultSections, setResultSections] = useState<ResultSection[]>();
   const [activeSection, setActiveSection] = useState<string>("PersonalityAnalysis");
   const isMobile = useIsMobile();
   const [opened, { open, close }] = useDisclosure(false);
@@ -151,6 +152,7 @@ const Page = () => {
     );
 
     if (res.isSuccess) {
+      console.log(res?.data)
       setLoading(false);
       // Refresh the data
       modals.closeAll();
@@ -160,7 +162,7 @@ const Page = () => {
       setSections(res?.data?.activeResult?.sections);
       setJobRecommendation(res?.data?.jobRecommendation);
       setIndustryScores(res?.data?.industryScores || []);
-
+      setResultSections(res?.data?.sections);
 
     } else {
       setLoading(false);
@@ -237,6 +239,7 @@ const Page = () => {
                 industryScores={industryScores}
                 result={jobRecommendation}
                 activeSection={activeSection}
+                sections={resultSections}
               />}
             </Card>
           </GridCol>
