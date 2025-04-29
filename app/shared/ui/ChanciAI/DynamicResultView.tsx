@@ -1,22 +1,69 @@
 "use client";
-import { Avatar, Box, Card, Center, Loader, Table } from '@mantine/core';
+import { Avatar, Box, Card, Table } from '@mantine/core';
 import React from 'react';
 import style from "./../../../(chanci)/style.module.scss";
-import { IndustryScore, JobRecommendation, ResultSection, TraitReview } from '@/shared/types/chanci/result';
+import { IndustryScore, JobRecommendation, ResultSection, Resume, TraitReview } from '@/shared/types/chanci/result';
+import PdfPreview from '../FilePreview/PdfPreview';
+import DocxIframePreview from '../FilePreview/DocxPreview';
 interface DynamicResultViewProps {
     industryScores: IndustryScore[]
     result: JobRecommendation | undefined;
     activeSection: string;
     sections?: ResultSection[];
+    resume?: Resume;
 }
 
 const DynamicResultView: React.FC<DynamicResultViewProps> = ({
     industryScores,
     result,
     activeSection,
-    sections
+    sections,
+    resume
 }) => {
     const renderContent = () => {
+        const renderLastPromptForPersonality = () => {
+            console.log(">>>>>>>")
+            console.log(result?.traitReview)
+            return (
+                <>
+                    {result?.traitReview?.map((trait: TraitReview, index: number) => {
+                        return (<Card
+                            key={index}
+                            shadow="sm"
+                            padding="lg"
+                            radius="md"
+                            withBorder
+                            className={style.cardDone}
+                        >
+                            {trait?.analysis && (<><h4>Analysis: </h4>
+                                <p style={{ maxWidth: "700px", fontSize: "17px" }}>
+                                    {trait.analysis}
+                                </p></>)}
+                            {trait?.whatResearchSays && <><h4>What Research Says: </h4>
+                                <p style={{ maxWidth: "700px", fontSize: "17px" }}>
+                                    {trait.whatResearchSays}
+                                </p></>}
+                            {trait?.whereYouFitBest && <><h4>Where You Fit Best: </h4>
+                                <p style={{ maxWidth: "700px", fontSize: "17px" }}>
+                                    {trait.whereYouFitBest}
+                                </p></>}
+                            {trait?.potentialChallenges && <><h4>Potential Challenges: </h4>
+                                <p style={{ maxWidth: "700px", fontSize: "17px" }}>
+                                    {trait.potentialChallenges}
+                                </p></>}
+                            {trait?.whyThisMatters && <><h4>Why This Matters: </h4>
+                                <p style={{ maxWidth: "700px", fontSize: "17px" }}>
+                                    {trait.whyThisMatters}
+                                </p></>}
+                            {trait?.miniStorySnippet && <><h4>Mini Story Snippet: </h4>
+                                <p style={{ maxWidth: "700px", fontSize: "17px" }}>
+                                    {trait.miniStorySnippet}
+                                </p></>}
+                        </Card>)
+                    })}
+                </>
+            )
+        }
 
         switch (activeSection) {
             case 'PersonalityAnalysis':
@@ -24,17 +71,38 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                     <div className={style.resultBox}>
                         {sections &&
                             sections.sort((a, b) => a.order - b.order)?.map((section: ResultSection, index) => {
+                                console.log(index)
+                                console.log(sections.length)
                                 return (
-                                    <Card
-                                        key={index}
-                                        shadow="sm"
-                                        padding="lg"
-                                        radius="md"
-                                        withBorder
-                                        className={style.cardDone}
-                                    >
-                                        <div dangerouslySetInnerHTML={{ __html: section.innerHtml }} />
-                                    </Card>
+                                    <>
+                                        <Card
+                                            key={index}
+                                            shadow="sm"
+                                            padding="lg"
+                                            radius="md"
+                                            withBorder
+                                            className={style.cardDone}
+                                        >
+                                            <div dangerouslySetInnerHTML={{ __html: section.innerHtml }} />
+                                        </Card>
+                                        {index === 0 ? (
+                                            <Card
+                                                shadow="sm"
+                                                padding="lg"
+                                                radius="md"
+                                                withBorder
+                                                className={style.cardDone}
+                                            >
+                                                <h3>Personlaity: </h3>
+                                                <p style={{ maxWidth: "700px", fontSize: "17px" }}>
+                                                    {result?.personality}
+                                                </p>
+
+                                            </Card>
+                                        ) : sections.length - 1 == index ?
+                                            renderLastPromptForPersonality()
+                                            : (<></>)}
+                                    </>
                                 )
                             })}
                         {/* <Card
@@ -93,6 +161,23 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
             case "CvEvaluation":
                 return (
                     <div className={style.resultBox}>
+                        {resume &&
+                            <Card
+                                shadow="sm"
+                                padding="lg"
+                                radius="md"
+                                withBorder
+                                className={style.cardDone}
+                            >
+                                <h3>Your CV:</h3>
+                                {resume?.extension === '.pdf' ?
+                                    (<PdfPreview filePath={resume.path} />
+                                    ) : (resume?.extension === '.doc' || resume?.extension === '.docx') ? (
+                                        <DocxIframePreview filePath={resume.path} />
+                                    ) : (<span>No Valid file to show.</span>)
+                                }
+                            </Card>
+                        }
                         {result?.cvFormat &&
                             <Card
                                 shadow="sm"

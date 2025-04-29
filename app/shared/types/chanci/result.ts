@@ -64,7 +64,17 @@ export interface JobRecommendation {
     industryRecommendations: IndustryRecommendation[];
     industryReOrder: string[];
 }
-
+export type Resume = {
+    id: string;
+    userId: string;
+    path: string;
+    extension: string;
+    size: number;
+    filename: string;
+    content: string;
+    isDeleted: boolean;
+  };
+  
 export interface ResultApiResponse {
     statusCode?: number;
     isSuccess?: boolean;
@@ -77,5 +87,6 @@ export interface ResultApiResponse {
         jobRecommendation: JobRecommendation;
         industryScores: IndustryScore[];
         sections?: ResultSection[];
+        resume?: Resume
     };
 }
