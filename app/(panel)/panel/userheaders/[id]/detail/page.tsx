@@ -3,11 +3,12 @@
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { postRequest, deleteRequest, getRequest } from "@/shared/api/chanci";
-import { Accordion, Box, Card, Center, Group, Loader, Text, Title, Button } from "@mantine/core";
+import { Accordion, Box, Card, Center, Group, Loader, Text, Title, Button, Table } from "@mantine/core";
 import { JsonView, darkStyles } from "react-json-view-lite";
 import "react-json-view-lite/dist/index.css";
 import toastAlert from "@/shared/helpers/toast";
 import useGeneratedPrompts from "@/shared/hooks/useGeneratedPrompts";
+import { ResultApiResponse, ResultBigFive } from "@/shared/types/chanci/result";
 
 // Using the interfaces from the useGeneratedPrompts hook
 
@@ -17,13 +18,7 @@ const UserHeaderDetailPage = () => {
   const { generatedPrompt, loading, fetchGeneratedPrompts } = useGeneratedPrompts(Number(params.id));
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const [isRegenerating, setIsRegenerating] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (params.id) {
-      fetchGeneratedPrompts();
-    }
-  }, [params.id]);
-
+  const [bifFive, setBigFive] = useState<ResultBigFive>();
   const handleDelete = async () => {
     if (!params.id) return;
     
@@ -48,8 +43,7 @@ const UserHeaderDetailPage = () => {
       setIsDeleting(false);
     }
   };
-
-  const handleRegenerate = async () => {
+  const handleRegenerate = async (fromButton = false) => {
     if (!params.id) return;
     
     setIsRegenerating(true);
@@ -57,14 +51,15 @@ const UserHeaderDetailPage = () => {
       const reqBody = {
         UserAnswerHeaderId: Number(params.id)
       };
-      const res = await getRequest(
+      const res: ResultApiResponse = await getRequest(
         "/api/UserAnswers/ConvertAnswersToPromptCommand",
         reqBody,
         true
       );
       
       if (res?.isSuccess) {
-        toastAlert("Result regenerated successfully", "success");
+        if(fromButton) toastAlert("Result regenerated successfully", "success");
+        setBigFive(res?.data?.bigFiveAverage);
         // Refresh the data
         await fetchGeneratedPrompts();
       } else {
@@ -77,7 +72,12 @@ const UserHeaderDetailPage = () => {
       setIsRegenerating(false);
     }
   };
-
+  useEffect(() => {
+    if (params.id) {
+      fetchGeneratedPrompts();
+      handleRegenerate();
+    }
+  }, [params.id]);
   if (loading) {
     return (
       <Center style={{ height: "100vh" }}>
@@ -85,7 +85,6 @@ const UserHeaderDetailPage = () => {
       </Center>
     );
   }
-
   return (
     <div style={{ padding: "20px" }}>
       <Group justify="space-between" mb="xl">
@@ -93,7 +92,7 @@ const UserHeaderDetailPage = () => {
         <Group justify="flex-end">
           <Button 
             color="blue" 
-            onClick={handleRegenerate} 
+            onClick={()=> handleRegenerate(true)} 
             loading={isRegenerating}
             disabled={generatedPrompt !== undefined}
           >
@@ -216,6 +215,31 @@ const UserHeaderDetailPage = () => {
                   </Box>
                 </Accordion.Panel>
               </Accordion.Item>
+              {bifFive && <Accordion.Item value="bigFiveAverage">
+                <Accordion.Control>
+                  <Text fw={500}>Big Five Average</Text>
+                </Accordion.Control>
+                <Accordion.Panel>
+                  <Box>
+                  <Table>
+                    <Table.Thead>
+                      <Table.Tr>
+                        {Object.entries(bifFive).map((colNames, index) => {
+                          return(<Table.Th key={index}>{colNames[0]}</Table.Th>)
+                        })}
+                      </Table.Tr>
+                    </Table.Thead>
+                    <Table.Tbody>
+                    <Table.Tr key={`bigFiveRow`}>
+                        {Object.entries(bifFive).map((scores, index) => {
+                          return(<Table.Td key={`value-${index}`}>{scores[1]}</Table.Td>)
+                        })}
+                        </Table.Tr>
+                    </Table.Tbody>
+                  </Table>
+                  </Box>
+                </Accordion.Panel>
+              </Accordion.Item>}
             </Accordion>
           </Card>
       )}

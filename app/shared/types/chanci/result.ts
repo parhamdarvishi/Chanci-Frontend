@@ -73,8 +73,14 @@ export type Resume = {
     filename: string;
     content: string;
     isDeleted: boolean;
-  };
-  
+};
+export type ResultBigFive = {
+    Openness: number;
+    Conscientiousness: number;
+    Extraversion: number;
+    Agreeableness: number;
+    Neuroticism: number;
+}
 export interface ResultApiResponse {
     statusCode?: number;
     isSuccess?: boolean;
@@ -87,6 +93,7 @@ export interface ResultApiResponse {
         jobRecommendation: JobRecommendation;
         industryScores: IndustryScore[];
         sections?: ResultSection[];
-        resume?: Resume
+        resume?: Resume;
+        bigFiveAverage?: ResultBigFive;
     };
 }
