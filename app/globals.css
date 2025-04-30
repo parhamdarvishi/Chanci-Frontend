@@ -82,11 +82,6 @@ h6 {
   background-color: var(--primary);
   color: var(--background);
 }
-.m_8fb7ebe7 {
-  border-radius: 23px !important;
-  padding: 0 1rem !important;
-  font-size: 1rem !important;
-}
 .bg {
   background-color: #e5e7ebf2;
   padding: 1rem;
@@ -129,7 +124,7 @@ h6 {
 @media screen and (max-width: 980px) {
   .m_8fb7ebe7 {
     height: 52px !important;
-    border-radius: 23px !important;
+    border-radius: 8px !important;
     padding: 0 2.7rem !important;
     font-size: 1rem !important;
   }

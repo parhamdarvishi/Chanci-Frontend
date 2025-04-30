@@ -182,6 +182,7 @@
     .inputBox {
       position: relative;
       margin: 2.2rem 0;
+      height: 100%;
       .comingSoon {
         position: absolute;
         left: -45px;
@@ -202,6 +203,8 @@
         min-width: 1027px;
         height: 72px !important;
         border-radius: 23px !important;
+        padding: 0 6rem !important;
+   font-size: 1.3rem !important;
       }
       .inputBtn {
         position: absolute;

@@ -11,6 +11,8 @@ import style from "./style.module.scss";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import cookie from "@/shared/helpers/cookie";
+import '@mantine/core/styles.css';
+import '@mantine/tiptap/styles.css';
 
 export default function ChanciRootLayout({
   children,

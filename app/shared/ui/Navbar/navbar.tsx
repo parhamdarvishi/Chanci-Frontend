@@ -219,11 +219,13 @@ const Navbar = () => {
           {/* <div className={style.comingSoon}>
             <span>Coming Soon!</span>
           </div> */}
-          <Input
-            type="text"
-            className={style.input}
-            placeholder="Search Jobs"
-          />
+          <Input.Wrapper style={{height: '100%'}}>
+            <Input
+              type="text"
+              classNames={{input: style.input}}
+              placeholder="Search Jobs"
+            />
+          </Input.Wrapper>
           <Button
             variant="outline"
             className={style.inputBtn}
