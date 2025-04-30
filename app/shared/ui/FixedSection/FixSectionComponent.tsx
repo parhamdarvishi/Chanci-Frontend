@@ -86,7 +86,7 @@ const FixSectionComponent = ({ id }: { id?: string }) => {
                 categoryType: Number(form.values.categoryType)
             };
 
-            const res = await putRequest(fixedSectionAddress.Update, formValues, true);
+            const res = await postRequest(fixedSectionAddress.Update, formValues, true);
             if (res?.isSuccess) {
                 toastAlert("Fixed Section updated successfully", "success");
                 // Refresh the question data
