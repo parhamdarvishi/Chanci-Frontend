@@ -2,7 +2,7 @@
 import { Avatar, Box, Card, Table } from '@mantine/core';
 import React from 'react';
 import style from "./../../../(chanci)/style.module.scss";
-import { IndustryScore, JobRecommendation, ResultSection, Resume, TraitReview } from '@/shared/types/chanci/result';
+import { IndustryScore, JobRecommendation, ResultBigFive, ResultSection, Resume, TraitReview } from '@/shared/types/chanci/result';
 import PdfPreview from '../FilePreview/PdfPreview';
 import DocxIframePreview from '../FilePreview/DocxPreview';
 interface DynamicResultViewProps {
@@ -11,6 +11,7 @@ interface DynamicResultViewProps {
     activeSection: string;
     sections?: ResultSection[];
     resume?: Resume;
+    bigFive?: ResultBigFive
 }
 
 const DynamicResultView: React.FC<DynamicResultViewProps> = ({
@@ -18,7 +19,8 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
     result,
     activeSection,
     sections,
-    resume
+    resume,
+    bigFive
 }) => {
     const renderContent = () => {
         const renderLastPromptForPersonality = () => {
@@ -67,10 +69,24 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                                                 withBorder
                                                 className={style.cardDone}
                                             >
-                                                <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                                    {result?.personality}
-                                                </p>
-
+                                                {bigFive && <>
+                                                    <Table>
+                                                        <Table.Thead>
+                                                            <Table.Tr>
+                                                                {Object.entries(bigFive).map((colNames, index) => {
+                                                                    return (<Table.Th key={index}>{colNames[0]}</Table.Th>)
+                                                                })}
+                                                            </Table.Tr>
+                                                        </Table.Thead>
+                                                        <Table.Tbody>
+                                                            <Table.Tr key={`bigFiveRow`}>
+                                                                {Object.entries(bigFive).map((scores, index) => {
+                                                                    return (<Table.Td key={`value-${index}`}>{scores[1]}</Table.Td>)
+                                                                })}
+                                                            </Table.Tr>
+                                                        </Table.Tbody>
+                                                    </Table>
+                                                </>}
                                             </Card>
                                         ) : sections.length - 1 == index ?
                                             renderLastPromptForPersonality()
