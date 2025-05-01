@@ -22,45 +22,19 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
 }) => {
     const renderContent = () => {
         const renderLastPromptForPersonality = () => {
-            console.log(">>>>>>>")
-            console.log(result?.traitReview)
             return (
                 <>
-                    {result?.traitReview?.map((trait: TraitReview, index: number) => {
-                        return (<Card
-                            key={index}
-                            shadow="sm"
-                            padding="lg"
-                            radius="md"
-                            withBorder
-                            className={style.cardDone}
-                        >
-                            {trait?.analysis && (<><h4>Analysis: </h4>
-                                <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                    {trait.analysis}
-                                </p></>)}
-                            {trait?.whatResearchSays && <><h4>What Research Says: </h4>
-                                <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                    {trait.whatResearchSays}
-                                </p></>}
-                            {trait?.whereYouFitBest && <><h4>Where You Fit Best: </h4>
-                                <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                    {trait.whereYouFitBest}
-                                </p></>}
-                            {trait?.potentialChallenges && <><h4>Potential Challenges: </h4>
-                                <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                    {trait.potentialChallenges}
-                                </p></>}
-                            {trait?.whyThisMatters && <><h4>Why This Matters: </h4>
-                                <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                    {trait.whyThisMatters}
-                                </p></>}
-                            {trait?.miniStorySnippet && <><h4>Mini Story Snippet: </h4>
-                                <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                    {trait.miniStorySnippet}
-                                </p></>}
-                        </Card>)
-                    })}
+                    <Card
+                        shadow="sm"
+                        padding="lg"
+                        radius="md"
+                        withBorder
+                        className={style.cardDone}
+                    >
+                        <p style={{ maxWidth: "700px", fontSize: "17px" }}>
+                            {result?.traitReview}
+                        </p>
+                    </Card>
                 </>
             )
         }
@@ -93,7 +67,6 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                                                 withBorder
                                                 className={style.cardDone}
                                             >
-                                                <h3>Personlaity: </h3>
                                                 <p style={{ maxWidth: "700px", fontSize: "17px" }}>
                                                     {result?.personality}
                                                 </p>

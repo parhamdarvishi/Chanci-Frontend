@@ -50,7 +50,7 @@ export interface JobRecommendation {
     cvStrengths: string[];
     cvAreasForImprovment: string[];
     cvActionablePlan: string[];
-    traitReview: TraitReview[];
+    traitReview: string;
     highestScoringPersonality: string;
     industryAlignment: string;
     whereToGo: string;
