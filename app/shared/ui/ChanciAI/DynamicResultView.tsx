@@ -40,7 +40,40 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                 </>
             )
         }
-
+        const renderBigFive = () => {
+            const scoreHighorLow = (score: number): string => {
+                if (score < 2.5) return "Low"
+                else return "High"
+            }
+            if (!bigFive) return <></>
+            return (
+                <>
+                    <div className={style.desktopShow}>
+                        <Table>
+                            <Table.Thead>
+                                <Table.Tr>
+                                    {Object.entries(bigFive).map((colNames, index) => {
+                                        return (<Table.Th key={index}>{colNames[0]}</Table.Th>)
+                                    })}
+                                </Table.Tr>
+                            </Table.Thead>
+                            <Table.Tbody>
+                                <Table.Tr key={`bigFiveRow`}>
+                                    {Object.entries(bigFive).map((scores, index) => {
+                                        return (<Table.Td key={`value-${index}`}><div style={{ display: 'flex', flexDirection: 'column' }}><span>{scores[1]}</span><span>({scoreHighorLow(scores[1])})</span></div></Table.Td>)
+                                    })}
+                                </Table.Tr>
+                            </Table.Tbody>
+                        </Table>
+                    </div>
+                    <div className={style.mobileShow}>
+                        {Object.entries(bigFive).map((scores, index) => {
+                            return (<p key={`average-${index}`}><span style={{ fontWeight: 700 }}>{scores[0]}</span>: {scores[1]} <span>({scoreHighorLow(scores[1])})</span> </p>)
+                        })}
+                    </div>
+                </>
+            )
+        }
         switch (activeSection) {
             case 'PersonalityAnalysis':
                 return (
@@ -69,24 +102,9 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                                                 withBorder
                                                 className={style.cardDone}
                                             >
-                                                {bigFive && <>
-                                                    <Table>
-                                                        <Table.Thead>
-                                                            <Table.Tr>
-                                                                {Object.entries(bigFive).map((colNames, index) => {
-                                                                    return (<Table.Th key={index}>{colNames[0]}</Table.Th>)
-                                                                })}
-                                                            </Table.Tr>
-                                                        </Table.Thead>
-                                                        <Table.Tbody>
-                                                            <Table.Tr key={`bigFiveRow`}>
-                                                                {Object.entries(bigFive).map((scores, index) => {
-                                                                    return (<Table.Td key={`value-${index}`}>{scores[1]}</Table.Td>)
-                                                                })}
-                                                            </Table.Tr>
-                                                        </Table.Tbody>
-                                                    </Table>
-                                                </>}
+                                                {bigFive &&
+                                                    renderBigFive()
+                                                }
                                             </Card>
                                         ) : sections.length - 1 == index ?
                                             renderLastPromptForPersonality()
