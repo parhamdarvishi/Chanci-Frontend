@@ -268,14 +268,14 @@ const Login = () => {
                 label="I want to receive event invitations and job market insights"
               />
             </Box> */}
-            {/* <p style={{ color: "#0063f5", cursor: "pointer", userSelect: "none" }} onClick={() => {
+            <p style={{ color: "#0063f5", cursor: "pointer", userSelect: "none" }} onClick={() => {
               modals.open({
                 radius: "lg",
                 size: "lg",
                 title: <strong className={style.modalTitle}>Forget Password</strong>,
                 children: <ForgetPasswordModal />,
               });
-            }}>Forgot your password?</p> */}
+            }}>Forgot your password?</p>
             <Button
               variant="filled"
               type="submit"
