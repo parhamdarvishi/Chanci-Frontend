@@ -6,8 +6,8 @@ import Sidebar from "./Sidebar";
 import { useDisclosure } from "@mantine/hooks";
 import style from "./../../../(chanci)/style.module.scss";
 import Title from "@public/image/widget/Frame.svg";
-import HomeIcon from "@public/image/chanciAI/icon/home.svg";
 import Image from "next/image";
+import useIsMobile from "@/shared/hooks";
 const TestSidebar = ({
     children,
     resultPage
@@ -16,6 +16,7 @@ const TestSidebar = ({
     resultPage?: boolean;
 }) => {
     const [opened, { open, close }] = useDisclosure(false);
+    const isMobile = useIsMobile();
     return (
         <Grid
             gutter={{ md: 15 }}
@@ -33,33 +34,23 @@ const TestSidebar = ({
             >
                 <Drawer.Overlay />
                 <Drawer.Content>
+                    {isMobile &&
+                        <Drawer.Header style={{ marginBottom: ".6rem" }}>
+                            <Drawer.Title style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                                <Link href="/Home">
+                                    <Image src={Title} alt="header" width={115} height={80} />
+                                </Link>
+                            </Drawer.Title>
+                            <Drawer.CloseButton size={42} color="#585858" />
+                        </Drawer.Header>}
                     <Drawer.Body>
                         <Divider />
-                        <Sidebar drawer={false} />
-                        {/* {links.map((item, index) => (
-                  <Box
-                    style={{ position: "relative" }}
-                    key={index}
-                    onClick={() => handleActiveNav(index)}
-                  >
-                    {loc === index && <div className={style.liActive}></div>}
-
-                    <Link
-                      href={index === 4 ? "/ComingSoon" : `/${item}`}
-                      className={
-                        loc === index ? style.liSidebarActive : style.liSidebar
-                      }
-                    >
-                      <p>{item}</p>
-                    </Link>
-                    <Divider />
-                  </Box>
-                ))} */}
+                        <Sidebar drawer={Boolean(isMobile)} />
                     </Drawer.Body>
                 </Drawer.Content>
             </Drawer.Root>
             <GridCol span={{ base: 12, md: 3 }} className={style.sidebar}>
-                
+
                 <Sidebar drawer={false} />
             </GridCol>
             <GridCol span={{ base: 12, md: 9 }}>
