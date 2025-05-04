@@ -1,12 +1,33 @@
-import { Link, RichTextEditor } from '@mantine/tiptap';
+import { Link, RichTextEditor, useRichTextEditorContext } from '@mantine/tiptap';
 import { useEditor } from '@tiptap/react';
 import Highlight from '@tiptap/extension-highlight';
 import StarterKit from '@tiptap/starter-kit';
 import TextAlign from '@tiptap/extension-text-align';
+import { ImageWithAlignment } from './ImageWithAlignment';
+import { IconPhoto } from '@tabler/icons-react';
+function InsertImageButton() {
+    const { editor } = useRichTextEditorContext();
 
+    const handleInsertImage = () => {
+        const url = window.prompt('Enter image URL');
+        if (url) {
+            editor?.chain().focus().setImage({ src: url }).run();
+        }
+    };
+
+    return (
+        <RichTextEditor.Control
+            onClick={handleInsertImage}
+            aria-label="Insert image"
+            title="Insert image"
+        >
+            <IconPhoto size={16} stroke={1.5} />
+        </RichTextEditor.Control>
+    );
+}
 const Editor = ({ content, onChange }: { content: string, onChange: (string: string) => void }) => {
     const editor = useEditor({
-        extensions: [StarterKit, Link, Highlight, TextAlign.configure({ types: ['heading', 'paragraph'] }),],
+        extensions: [StarterKit, Link, Highlight, ImageWithAlignment , TextAlign.configure({ types: ['heading', 'paragraph'] }),],
         content: content,
         onUpdate: ({ editor }) => {
             onChange(editor.getHTML());
@@ -40,6 +61,7 @@ const Editor = ({ content, onChange }: { content: string, onChange: (string: str
                 <RichTextEditor.ControlsGroup>
                     <RichTextEditor.Link />
                     <RichTextEditor.Unlink />
+                    <InsertImageButton />
                 </RichTextEditor.ControlsGroup>
                 <RichTextEditor.ControlsGroup>
                     <RichTextEditor.AlignLeft />

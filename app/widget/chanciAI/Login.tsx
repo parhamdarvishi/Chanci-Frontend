@@ -15,7 +15,6 @@ import Title from "@public/image/widget/Frame.svg";
 import avatars from "@public/image/chanciAI/avatars.svg";
 import style from "./login.module.scss";
 import { useRouter } from "next/navigation";
-import axios from "axios";
 import { API_BASE_URL } from "@/shared/config/env";
 import { useForm } from "@mantine/form";
 import { authAddresses } from "@/shared/constants/relative-url/auth";
@@ -23,6 +22,83 @@ import toastAlert from "@/shared/helpers/toast";
 import cookie from "@/shared/helpers/cookie";
 import { USER_TOKEN, VOLUNTEER } from "@/shared/helpers/cookie/types";
 import useIsMobile from "@/shared/hooks";
+import Link from "next/link";
+import { modals } from "@mantine/modals";
+import { postRequest } from "@/shared/api";
+import { ApiResponse } from "@/shared/types/other/other";
+import axios from "axios";
+
+const ForgetPasswordModal = () => {
+  const [loading, setLoading] = useState(false);
+
+  const form = useForm({
+    initialValues: {
+      email: '',
+    },
+    validate: {
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Please enter a valid email'),
+    },
+  });
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (form.validate().hasErrors) return;
+
+    setLoading(true);
+    try {
+
+      const response = await postRequest(
+        '/api/User/SendForgetPasswordLink',
+        { email: form.values.email },
+        false
+      );
+
+      if (response?.isSuccess) {
+        toastAlert('Password reset link has been sent to your email', 'success');
+        modals.closeAll();
+      } else {
+        toastAlert(response?.message as string || 'Failed to send reset link', 'error');
+      }
+    } catch (error: any) {
+      const message = error?.response?.data?.message || 'An error occurred while sending reset link';
+      toastAlert(message, 'error');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <form style={{ padding: '2rem' }} onSubmit={handleSubmit}>
+      <Box className={style.form} style={{ padding: '10px 0' }}>
+        <Box>
+          <Input.Wrapper
+            classNames={{
+              root: style.root,
+              label: style.label,
+            }}
+            label="Email address"
+          >
+            <Input
+              classNames={{ input: style.input }}
+              placeholder="example@gmail.com"
+              {...form.getInputProps('email')}
+            />
+          </Input.Wrapper>
+        </Box>
+        <Button
+          variant="filled"
+          type="submit"
+          className={loading ? style.submitBtn : style.submitBtnActive}
+          disabled={loading}
+          style={{ marginTop: '20px' }}
+        >
+          {loading ? <Loader color="#bdbcbc" /> : "Send Reset Link"}
+        </Button>
+      </Box>
+    </form>
+  );
+};
 
 const Login = () => {
   const router = useRouter();
@@ -92,7 +168,7 @@ const Login = () => {
           className={style.loginDesc}
           style={{
             marginTop: "3rem",
-            gap: "2rem",
+            gap: "0.5rem",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -192,15 +268,23 @@ const Login = () => {
                 label="I want to receive event invitations and job market insights"
               />
             </Box> */}
+            {/* <p style={{ color: "#0063f5", cursor: "pointer", userSelect: "none" }} onClick={() => {
+              modals.open({
+                radius: "lg",
+                size: "lg",
+                title: <strong className={style.modalTitle}>Forget Password</strong>,
+                children: <ForgetPasswordModal />,
+              });
+            }}>Forgot your password?</p> */}
             <Button
               variant="filled"
               type="submit"
               className={loading ? style.submitBtn : style.submitBtnActive}
-              style={{ marginTop: "2rem" }}
               disabled={loading}
             >
               {loading ? <Loader color="#bdbcbc" /> : "Sign In"}
             </Button>
+            <span>Need an account? <Link style={{ color: "#0063f5", cursor: "pointer", userSelect: "none" }} href={'/user/register'}>SIGN UP</Link></span>
           </Box>
         </GridCol>
         {isMobile === false && (

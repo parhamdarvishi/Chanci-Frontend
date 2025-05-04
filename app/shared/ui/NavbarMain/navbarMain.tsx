@@ -36,7 +36,7 @@ const NavbarMain = () => {
     setLoc(index);
   };
   const handleLogin = () => {
-    router.push("/user/register");
+    router.push("/user/login");
   };
   useEffect(() => {
     if (findPath === "ComingSoon") {

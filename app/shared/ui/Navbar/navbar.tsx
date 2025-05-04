@@ -43,7 +43,7 @@ const Navbar = () => {
       router.push("/panel/profile");
       return;
     }
-    router.push("/user/register");
+    router.push("/user/login");
   };
 
   const handleComingSoon = () => {
