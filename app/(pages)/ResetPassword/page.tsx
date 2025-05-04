@@ -19,8 +19,7 @@ import { useForm } from "@mantine/form";
 import toastAlert from "@/shared/helpers/toast";
 import style from "@/widget/chanciAI/login.module.scss";
 import { postRequest } from "@/shared/api";
-
-const Page = () => {
+const ResetPassword = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const [loading, setLoading] = useState(false);
@@ -81,92 +80,98 @@ const Page = () => {
             setLoading(false);
         }
     };
+    return (
+        <form onSubmit={handleResetPassword}>
+            <Grid className={style.wrapper}>
+                <GridCol
+                    span={{ base: 12, md: 6 }}
+                    className={style.loginDesc}
+                    style={{
+                        marginTop: "3rem",
+                        gap: "0.5rem",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                    }}
+                >
+                    <Box
+                        className={style.loginHeader}
+                        style={{ gap: "1.1rem !important" }}
+                    >
+                        <Image src={Title} alt="ChanciAI" width={250} loading="lazy" />
+                        <Image src={avatars} alt="ChanciAI" width={300} loading="lazy" />
+                        <Box>
+                            <h2
+                                style={{
+                                    textAlign: "center",
+                                    fontWeight: "400",
+                                    fontSize: "22px",
+                                    margin: ".1rem 0",
+                                }}
+                            >
+                                Reset Your Password
+                            </h2>
+                        </Box>
+                    </Box>
+                    <Box className={style.form}>
+                        <Box>
+                            <Input.Wrapper
+                                classNames={{
+                                    root: style.root,
+                                    label: style.label,
+                                }}
+                                label="New Password"
+                            >
+                                <PasswordInput
+                                    classNames={{ input: style.input }}
+                                    placeholder="Enter new password"
+                                    {...form.getInputProps("newPassword")}
+                                />
+                            </Input.Wrapper>
+                        </Box>
+                        <Box>
+                            <Input.Wrapper
+                                classNames={{
+                                    root: style.root,
+                                    label: style.label,
+                                }}
+                                label="Confirm Password"
+                            >
+                                <PasswordInput
+                                    classNames={{ input: style.input }}
+                                    placeholder="Confirm your password"
+                                    {...form.getInputProps("confirmPassword")}
+                                />
+                            </Input.Wrapper>
+                        </Box>
+                        <Button
+                            variant="filled"
+                            type="submit"
+                            className={loading ? style.submitBtn : style.submitBtnActive}
+                            disabled={loading}
+                        >
+                            {loading ? <Loader color="#bdbcbc" /> : "Reset Password"}
+                        </Button>
+                    </Box>
+                </GridCol>
+                <GridCol span={{ base: 12, md: 6 }} className={style.imgBox}>
+                    <Image
+                        src={ChanciLogin}
+                        alt="ChanciAI"
+                        className={style.img}
+                        loading="lazy"
+                    />
+                </GridCol>
+            </Grid>
+        </form>
+    )
+}
+const Page = () => {
+
 
     return (
         <Suspense>
-            <form onSubmit={handleResetPassword}>
-                <Grid className={style.wrapper}>
-                    <GridCol
-                        span={{ base: 12, md: 6 }}
-                        className={style.loginDesc}
-                        style={{
-                            marginTop: "3rem",
-                            gap: "0.5rem",
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "center",
-                        }}
-                    >
-                        <Box
-                            className={style.loginHeader}
-                            style={{ gap: "1.1rem !important" }}
-                        >
-                            <Image src={Title} alt="ChanciAI" width={250} loading="lazy" />
-                            <Image src={avatars} alt="ChanciAI" width={300} loading="lazy" />
-                            <Box>
-                                <h2
-                                    style={{
-                                        textAlign: "center",
-                                        fontWeight: "400",
-                                        fontSize: "22px",
-                                        margin: ".1rem 0",
-                                    }}
-                                >
-                                    Reset Your Password
-                                </h2>
-                            </Box>
-                        </Box>
-                        <Box className={style.form}>
-                            <Box>
-                                <Input.Wrapper
-                                    classNames={{
-                                        root: style.root,
-                                        label: style.label,
-                                    }}
-                                    label="New Password"
-                                >
-                                    <PasswordInput
-                                        classNames={{ input: style.input }}
-                                        placeholder="Enter new password"
-                                        {...form.getInputProps("newPassword")}
-                                    />
-                                </Input.Wrapper>
-                            </Box>
-                            <Box>
-                                <Input.Wrapper
-                                    classNames={{
-                                        root: style.root,
-                                        label: style.label,
-                                    }}
-                                    label="Confirm Password"
-                                >
-                                    <PasswordInput
-                                        classNames={{ input: style.input }}
-                                        placeholder="Confirm your password"
-                                        {...form.getInputProps("confirmPassword")}
-                                    />
-                                </Input.Wrapper>
-                            </Box>
-                            <Button
-                                variant="filled"
-                                type="submit"
-                                className={loading ? style.submitBtn : style.submitBtnActive}
-                                disabled={loading}
-                            >
-                                {loading ? <Loader color="#bdbcbc" /> : "Reset Password"}
-                            </Button>
-                        </Box>
-                    </GridCol>
-                    <GridCol span={{ base: 12, md: 6 }} className={style.imgBox}>
-                        <Image
-                            src={ChanciLogin}
-                            alt="ChanciAI"
-                            className={style.img}
-                            loading="lazy"
-                        />
-                    </GridCol>
-                </Grid>
-            </form>
+            <ResetPassword />
         </Suspense>
     );
 };
