@@ -1,6 +1,6 @@
 "use client";
 import { Box, Card, Divider } from "@mantine/core";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback } from "react";
 import style from "./style/panelSidebar.module.scss";
 import logoNav from "@public/image/icons/logoNav.svg";
 import Image from "next/image";
@@ -11,6 +11,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { UserMenu } from "@/shared/types/users/user";
 import { getUserIsVolunteer } from "@/shared/helpers/cookie/user";
 import { USER_TOKEN, VOLUNTEER } from "@/shared/helpers/cookie/types";
+
 const LogoutButton = () => {
   const router = useRouter();
   const handleSubmit = useCallback(() => {
@@ -39,13 +40,18 @@ const PanelSidebar = ({
   const volunteer = getUserIsVolunteer();
   const router = useRouter();
   const pathname = usePathname();
-  
+
   const handleSideItem = () => {
     setTimeout(() => {
       close();
     }, 1000);
   };
-  const usermenus : UserMenu[] = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("userMenu") || "[]") : [];
+
+  const usermenus: UserMenu[] =
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("userMenu") || "[]")
+      : [];
+
   return (
     <Card shadow="sm" className={style.wrapper}>
       {!drawer && (
@@ -72,19 +78,31 @@ const PanelSidebar = ({
                   : style.progressPartBox
               }
             >
-              {/* <IconUser /> */}
               <span style={{ transform: "translateY(3px)" }}>{menu.title}</span>
             </Link>
           );
         })}
+
+        <Link
+          href="/panel/events"
+          onClick={() => handleSideItem()}
+          className={
+            pathname === "/panel/events" || pathname.startsWith("/panel/events")
+              ? style.progressPartBoxActive
+              : style.progressPartBox
+          }
+        >
+          <span style={{ transform: "translateY(3px)" }}>Events</span>
+        </Link>
+
         <Link
           href="/ComingSoon"
           className={style.progressPartBox}
           onClick={(e) => {
-            //avoid hydration fail error in this way
+            // Avoid hydration fail error in this way
             if (volunteer) {
               e.preventDefault();
-              router.push('/ChanciAI');
+              router.push("/ChanciAI");
             }
           }}
         >

@@ -1,0 +1,89 @@
+.container {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #f8f9fc;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+.floatingButton {
+  text-align: right;
+  background-color: #2b32ff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #0003a0;
+  }
+
+  text-decoration: none;
+}
+.title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: #333;
+  border-bottom: 2px solid #5e62fc;
+  display: inline-block;
+  padding-bottom: 0.3rem;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.listItem {
+  padding: 0.75rem 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 1.75rem;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #f0f4ff;
+  }
+}
+
+.titleText {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #222;
+}
+
+.dateText {
+  color: #777;
+  font-size: 0.9rem;
+}
+.viewButton {
+  background-color: #5e62fc;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #4b4ee1;
+  }
+
+  text-decoration: none;
+}
+
+.hostDate {
+  color: #4b4ee1;
+}
+
+.eventTitle {
+  color: #6d00b6;
+}

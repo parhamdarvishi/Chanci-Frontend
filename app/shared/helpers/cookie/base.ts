@@ -45,6 +45,7 @@ class CookieManager {
   };
 
   getCookie: GetCookieFunction = (name) => {
+
     if (!isBrowser) return null;
     const cookies = document.cookie.split(";");
     for (let i = 0; i < cookies.length; i++) {

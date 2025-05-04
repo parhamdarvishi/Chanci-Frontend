@@ -1,0 +1,81 @@
+.wrapper {
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding-right: 10px;
+    
+  
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(94, 98, 252, 0.8);
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+  
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(75, 78, 225, 0.9);
+    }
+  
+    &::-webkit-scrollbar-track {
+      background-color: rgba(241, 241, 241, 0.5);
+      border-radius: 8px;
+      border: none;
+    }
+  
+    &::-webkit-scrollbar {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+  
+    &:hover::-webkit-scrollbar {
+      opacity: 1;
+    }
+  }
+  
+  .headerImg {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  .desc {
+    margin-top: 20px;
+    padding: 20px;
+  }
+  
+  .cardIc {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .cardPart {
+    display: flex;
+    align-items: center;
+  }
+  
+  .image {
+    margin-right: 10px;
+  }
+  
+  .cardExpect {
+    font-weight: bold;
+  }
+  
+  .goBackButton {
+    margin-bottom: 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .goBackButton:hover {
+    background-color: #5e62fc;
+    color: white;
+  }
+  

@@ -49,7 +49,19 @@ const EventList = () => {
             <span> Events</span>
           </h1>
         </div>
-        {events.length > 0 ? <EventSlider data={events.filter((e) => e.isShowable)} /> : <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}><Loader size={80} /> </div>}
+        {events.length > 0 ? (
+          <EventSlider data={events.filter((e) => e.isShowable)} />
+        ) : (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Loader size={80} />{" "}
+          </div>
+        )}
         <Businesses />
       </Container>
       <Comments />
