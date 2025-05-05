@@ -20,11 +20,9 @@ import { useForm } from "@mantine/form";
 import toastAlert from "@/shared/helpers/toast";
 import { postRequest } from "@/shared/api";
 import { authAddresses } from "@/shared/constants/relative-url/auth";
-import useIsMobile from "@/shared/hooks";
 
 const Register = () => {
   const router = useRouter();
-  const isMobile = useIsMobile();
   const [loading, setLoading] = useState(false);
 
   const fieldForm = useForm({
@@ -92,12 +90,6 @@ const Register = () => {
               >
                 Join for free and see your result
               </h2>
-              {/* <Button variant="default" className={style.googleBtn}>
-                <Image src={google} alt="ChanciAI" width={25} />
-                <span style={{ fontWeight: "400", color: "#585858" }}>
-                  Continue with Google
-                </span>
-              </Button> */}
             </Box>
           </Box>
           <Box className={style.dividerBox}>
@@ -201,16 +193,14 @@ const Register = () => {
             </Button>
           </Box>
         </GridCol>
-        {isMobile === false &&
-          <GridCol span={{ base: 12, md: 6 }} className={style.imgBox}>
-            <Image
-              src={ChanciLogin}
-              alt="ChanciAI"
-              className={style.img}
-              loading="lazy"
-            />
-          </GridCol>
-        }
+        <GridCol span={{ base: 12, md: 6 }} className={style.imgBox}>
+          <Image
+            src={ChanciLogin}
+            alt="ChanciAI"
+            className={style.img}
+            loading="lazy"
+          />
+        </GridCol>
       </Grid>
     </form>
   );

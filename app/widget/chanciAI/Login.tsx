@@ -21,11 +21,9 @@ import { authAddresses } from "@/shared/constants/relative-url/auth";
 import toastAlert from "@/shared/helpers/toast";
 import cookie from "@/shared/helpers/cookie";
 import { USER_TOKEN, VOLUNTEER } from "@/shared/helpers/cookie/types";
-import useIsMobile from "@/shared/hooks";
 import Link from "next/link";
 import { modals } from "@mantine/modals";
 import { postRequest } from "@/shared/api";
-import { ApiResponse } from "@/shared/types/other/other";
 import axios from "axios";
 
 const ForgetPasswordModal = () => {
@@ -50,8 +48,8 @@ const ForgetPasswordModal = () => {
 
       const response = await postRequest(
         '/api/User/SendForgetPasswordLink',
-        { email: form.values.email },
-        false
+        { Email: form.values.email },
+        true
       );
 
       if (response?.isSuccess) {
@@ -69,40 +67,44 @@ const ForgetPasswordModal = () => {
   };
 
   return (
-    <form style={{ padding: '2rem' }} onSubmit={handleSubmit}>
-      <Box className={style.form} style={{ padding: '10px 0' }}>
-        <Box>
-          <Input.Wrapper
-            classNames={{
-              root: style.root,
-              label: style.label,
-            }}
-            label="Email address"
-          >
-            <Input
-              classNames={{ input: style.input }}
-              placeholder="example@gmail.com"
-              {...form.getInputProps('email')}
-            />
-          </Input.Wrapper>
-        </Box>
-        <Button
-          variant="filled"
-          type="submit"
-          className={loading ? style.submitBtn : style.submitBtnActive}
-          disabled={loading}
-          style={{ marginTop: '20px' }}
-        >
-          {loading ? <Loader color="#bdbcbc" /> : "Send Reset Link"}
-        </Button>
-      </Box>
-    </form>
+    <div className={style.wrapper}>
+      <div className={style.loginDesc}>
+        <p>Enter your email address and we’ll send you a link to reset your password.</p>
+        <form style={{ padding: '1rem' }} onSubmit={handleSubmit}>
+          <Box className={style.form} style={{ padding: '10px 0' }}>
+            <Box>
+              <Input.Wrapper
+                classNames={{
+                  root: style.root,
+                  label: style.label,
+                }}
+                label="Email address"
+              >
+                <Input
+                  classNames={{ input: style.input }}
+                  placeholder="example@gmail.com"
+                  {...form.getInputProps('email')}
+                />
+              </Input.Wrapper>
+            </Box>
+            <Button
+              variant="filled"
+              type="submit"
+              className={loading ? style.submitBtn : style.submitBtnActive}
+              disabled={loading}
+              style={{ marginTop: '20px' }}
+            >
+              {loading ? <Loader color="#bdbcbc" /> : "Send Reset Link"}
+            </Button>
+          </Box>
+        </form>
+      </div>
+    </div>
   );
 };
 
 const Login = () => {
   const router = useRouter();
-  const isMobile = useIsMobile();
   const [loading, setLoading] = useState(false);
   const [isVolunteer, setIsVolunteer] = useState(false);
 
@@ -191,12 +193,6 @@ const Login = () => {
               >
                 Join for free and see your result
               </h2>
-              {/* <Button variant="default" className={style.googleBtn}>
-                <Image src={google} alt="ChanciAI" width={25} />
-                <span style={{ fontWeight: "400", color: "#585858" }}>
-                  Continue with Google
-                </span>
-              </Button> */}
             </Box>
           </Box>
           <Box className={style.dividerBox}>
@@ -205,17 +201,6 @@ const Login = () => {
             <div className={style.divider}></div>
           </Box>
           <Box className={style.form}>
-            {/* <Box>
-              <Input.Wrapper
-                classNames={{
-                  root: style.root,
-                  label: style.label,
-                }}
-                label="Name"
-              >
-                <Input classNames={{ input: style.input }} />
-              </Input.Wrapper>
-            </Box> */}
             <Box>
               <Input.Wrapper
                 classNames={{
@@ -245,29 +230,6 @@ const Login = () => {
                 />
               </Input.Wrapper>
             </Box>
-            {/* <Box className={style.Checkbox}>
-              <Checkbox
-                classNames={{
-                  root: style.root,
-                  label: style.labelCheck,
-                }}
-                label="I agree to the Terms & Privacy"
-              />
-              <Checkbox
-                classNames={{
-                  root: style.root,
-                  label: style.labelCheck,
-                }}
-                label="Share my CV with employers"
-              />
-              <Checkbox
-                classNames={{
-                  root: style.root,
-                  label: style.labelCheck,
-                }}
-                label="I want to receive event invitations and job market insights"
-              />
-            </Box> */}
             <p style={{ color: "#0063f5", cursor: "pointer", userSelect: "none" }} onClick={() => {
               modals.open({
                 radius: "lg",
@@ -287,16 +249,14 @@ const Login = () => {
             <span>Need an account? <Link style={{ color: "#0063f5", cursor: "pointer", userSelect: "none" }} href={'/user/register'}>SIGN UP</Link></span>
           </Box>
         </GridCol>
-        {isMobile === false && (
-          <GridCol span={{ base: 12, md: 6 }} className={style.imgBox}>
-            <Image
-              src={ChanciLogin}
-              alt="ChanciAI"
-              className={style.img}
-              loading="lazy"
-            />
-          </GridCol>
-        )}
+        <GridCol span={{ base: 12, md: 6 }} className={style.imgBox}>
+          <Image
+            src={ChanciLogin}
+            alt="ChanciAI"
+            className={style.img}
+            loading="lazy"
+          />
+        </GridCol>
       </Grid>
     </form>
   );

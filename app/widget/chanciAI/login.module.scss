@@ -114,7 +114,11 @@
 .root {
   width: 100%;
 }
-
+@media (max-width: 990px) {
+  .wrapper .imgBox {
+    display: none;
+  }
+}
 @media (max-width: 768px) {
   .wrapper {
     display: flex;
