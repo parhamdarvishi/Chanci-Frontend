@@ -68,7 +68,7 @@ const ResetPassword = () => {
                 toastAlert("Password has been reset successfully", "success");
                 setTimeout(() => {
                     router.push("/user/login");
-                }, 10000)
+                }, 3000)
             } else {
                 toastAlert(res?.message as string || "Failed to reset password", "error");
             }
