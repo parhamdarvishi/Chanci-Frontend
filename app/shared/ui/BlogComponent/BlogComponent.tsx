@@ -1,11 +1,6 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import {
-  getRequest,
-  deleteRequest,
-  putRequest,
-  postRequest,
-} from "@/shared/api";
+import { getRequest, deleteRequest, postRequest } from "@/shared/api";
 import {
   Button,
   Card,
@@ -16,29 +11,19 @@ import {
   Box,
   Center,
   Loader,
-  Select,
   NumberInput,
   Textarea,
 } from "@mantine/core";
-import { CategoryType } from "@/shared/constants/relative-url/question";
 import { modals } from "@mantine/modals";
 import toastAlert from "@/shared/helpers/toast";
 import { useForm } from "@mantine/form";
 import { relativePaths } from "@/shared/constants/relative-url/other";
-import {
-  FixedSection,
-  FixedSectionResponse,
-} from "@/shared/types/chanci/fixedSection";
 import { fixedSectionAddress } from "@/shared/constants/relative-url/fixedsection";
-import Editor from "@/shared/ui/RichTextEditor/RichTextEditor";
 import { BlogItem, BlogResponse } from "@/shared/types/chanci/blog";
 import { blogAddress } from "@/shared/constants/relative-url/blog";
 
 const BlogComponent = ({ id }: { id?: string }) => {
   const router = useRouter();
-  //   const [fixedSection, setFixedSection] = useState<FixedSection | undefined>(
-  //     undefined
-  //   );
   const [blog, setBlog] = useState<BlogItem | undefined>();
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -67,7 +52,7 @@ const BlogComponent = ({ id }: { id?: string }) => {
   const [formModified, setFormModified] = useState<boolean>(false);
 
   useEffect(() => {
-    const fetchFixedSection = async () => {
+    const fetchBlogs = async () => {
       const reqBody = {
         id: id,
         Skip: 0,
@@ -88,23 +73,24 @@ const BlogComponent = ({ id }: { id?: string }) => {
             id: sectionData.id || 0,
             index: sectionData.index || 0,
             title: sectionData.title || "",
-            // innerHtml: sectionData.innerHtml || "",
-            // minValue: sectionData?.minValue || null,
-            // maxValue: sectionData?.maxValue || null,
-            // categoryType: sectionData?.categoryType,
+            description: sectionData.description || "",
+            metaKey: sectionData.metaKey || "",
+            metaDescription: sectionData.metaDescription || "",
+            bannerImagePath: sectionData.bannerImagePath || "",
+            authorId: sectionData.authorId || 0,
           });
 
           // Reset form modified state when loading new data
           setFormModified(false);
         }
       } catch (error) {
-        console.error("Error fetching fixedSection:", error);
-        toastAlert("Failed to load fixedSection details", "error");
+        console.error("Error fetching blog:", error);
+        toastAlert("Failed to load blog details", "error");
       }
     };
 
     if (id) {
-      fetchFixedSection();
+      fetchBlogs();
     } else {
       setBlog(form.getInitialValues);
     }
@@ -117,24 +103,19 @@ const BlogComponent = ({ id }: { id?: string }) => {
       const formValues = {
         ...form.values,
         id: Number(id),
-        // categoryType: Number(form.values.categoryType),
       };
 
-      const res = await postRequest(
-        blogAddress.Update,
-        formValues,
-        true
-      );
+      const res = await postRequest(blogAddress.Update, formValues, true);
       if (res?.isSuccess) {
-        toastAlert("Fixed Section updated successfully", "success");
+        toastAlert("Blog updated successfully", "success");
         // Refresh the question data
         setBlog(formValues as BlogItem);
       } else {
-        toastAlert("Failed to update fixedSection", "error");
+        toastAlert("Failed to update blog", "error");
       }
     } catch (error) {
-      console.error("Error updating fixedSection:", error);
-      toastAlert("Failed to update fixedSection", "error");
+      console.error("Error updating blog:", error);
+      toastAlert("Failed to update blog", "error");
     } finally {
       setLoading(false);
     }
@@ -146,19 +127,18 @@ const BlogComponent = ({ id }: { id?: string }) => {
       // Convert string values back to numbers before sending to API
       const formValues = {
         ...form.values,
-        // categoryType: Number(form.values.categoryType),
       };
-      const res = await postRequest(fixedSectionAddress.Add, formValues, true);
+      const res = await postRequest(blogAddress.Add, formValues, true);
       if (res?.isSuccess) {
-        toastAlert("Fixed Section added successfully", "success");
+        toastAlert("Blog added successfully", "success");
         // Refresh the question data
-        router.push("/panel/fixedsections");
+        router.push("/panel/blogs");
       } else {
-        toastAlert("Failed to add fixedSection", "error");
+        toastAlert("Failed to add blog", "error");
       }
     } catch (error) {
-      console.error("Error adding fixedSection:", error);
-      toastAlert("Failed to create fixedSection", "error");
+      console.error("Error adding blog:", error);
+      toastAlert("Failed to create blog", "error");
     } finally {
       setLoading(false);
     }
@@ -174,8 +154,8 @@ const BlogComponent = ({ id }: { id?: string }) => {
       children: (
         <Box>
           <Text size="sm">
-            Are you sure you want to delete this fixedSection? This action
-            cannot be undone.
+            Are you sure you want to delete this blog? This action cannot be
+            undone.
           </Text>
         </Box>
       ),
@@ -188,11 +168,11 @@ const BlogComponent = ({ id }: { id?: string }) => {
             {},
             true
           );
-          toastAlert("FixedSection deleted successfully", "success");
+          toastAlert("Blog deleted successfully", "success");
           router.push(relativePaths.panel.fixedSectionList);
         } catch (error) {
-          console.error("Error deleting fixedSection:", error);
-          toastAlert("Failed to delete fixedSection", "error");
+          console.error("Error deleting blog:", error);
+          toastAlert("Failed to delete blog", "error");
         }
       },
     });
@@ -215,79 +195,82 @@ const BlogComponent = ({ id }: { id?: string }) => {
               }}
             >
               <Stack gap="md">
-                {/* <Box>
-                  <Text fw={500}>Order:</Text>
-                  <NumberInput
-                    {...form.getInputProps("order")}
-                    value={fixedSection.order}
-                    onChange={(value) => {
-                      form.setFieldValue("order", Number(value));
-                      setFormModified(true);
-                    }}
-                  />
-                </Box> */}
                 <Box>
                   <Text fw={500}>Title</Text>
-                  {/* <NumberInput
-                    {...form.getInputProps("minValue")}
-                    value={fixedSection?.minValue || ""}
-                    onChange={(value) => {
-                      form.setFieldValue("minValue", Number(value));
+                  <Textarea
+                    onChange={(e) => {
+                      form.setFieldValue("title", e.target.value);
                       setFormModified(true);
                     }}
-                  /> */}
+                  >
+                    {form.getInputProps("title").value}
+                  </Textarea>
                 </Box>
-                {/* <Box>
-                  <Text fw={500}>Maximum Value:</Text>
-                  <NumberInput
-                    {...form.getInputProps("maxValue")}
-                    value={fixedSection.maxValue || ""}
-                    onChange={(value) => {
-                      form.setFieldValue("maxValue", Number(value));
-                      setFormModified(true);
-                    }}
-                  />
-                </Box> */}
-                {/* <Box>
-                  <Text fw={500} mb={5}>
-                    Category Type:
-                  </Text>
-                  <Select
-                    data={Object.entries(CategoryType).map(
-                      ([label, value]) => ({
-                        value: value.toString(),
-                        label,
-                      })
-                    )}
-                    placeholder="Select category"
-                    {...form.getInputProps("categoryType")}
-                    value={
-                      form.getInputProps("categoryType").value.toString() ?? ""
-                    }
-                    onChange={(value) => {
-                      form.setFieldValue("categoryType", Number(value));
-                      setFormModified(true);
-                    }}
-                  />
-                </Box> */}
                 <Box>
                   <Text fw={500} mb={5}>
                     Description
                   </Text>
-                  <Box>
-                    <Textarea>
-                      {form.getInputProps("description").value}
-                    </Textarea>
-                    <Editor
-                      content={form.getInputProps("innerHtml").value}
-                      onChange={(editorText) => {
-                        form.setFieldValue("innerHtml", editorText);
-                        setFormModified(true);
-                      }}
-                    />
-                  </Box>
+                  <Textarea
+                    onChange={(e) => {
+                      form.setFieldValue("description", e.target.value);
+                      setFormModified(true);
+                    }}
+                  >
+                    {form.getInputProps("description").value}
+                  </Textarea>
                 </Box>
-
+                <Box>
+                  <Text fw={500} mb={5}>
+                    Meta key
+                  </Text>
+                  <Textarea
+                    onChange={(e) => {
+                      form.setFieldValue("metaKey", e.target.value);
+                      setFormModified(true);
+                    }}
+                  >
+                    {form.getInputProps("metaKey").value}
+                  </Textarea>
+                </Box>
+                <Box>
+                  <Text fw={500} mb={5}>
+                    Meta Description
+                  </Text>
+                  <Textarea
+                    onChange={(e) => {
+                      form.setFieldValue("metaDescription", e.target.value);
+                      setFormModified(true);
+                    }}
+                  >
+                    {form.getInputProps("metaDescription").value}
+                  </Textarea>
+                </Box>
+                <Box>
+                  <Text fw={500} mb={5}>
+                    Banner Image Path
+                  </Text>
+                  <Textarea
+                    onChange={(e) => {
+                      form.setFieldValue("bannerImagePath", e.target.value);
+                      setFormModified(true);
+                    }}
+                  >
+                    {form.getInputProps("bannerImagePath").value}
+                  </Textarea>
+                </Box>
+                <Box>
+                  <Text fw={500} mb={5}>
+                    Author ID
+                  </Text>
+                  <NumberInput
+                    {...form.getInputProps("authorId")}
+                    value={blog?.authorId || ""}
+                    onChange={(value) => {
+                      form.setFieldValue("authorId", Number(value));
+                      setFormModified(true);
+                    }}
+                  />
+                </Box>
                 <Group justify="flex-end" mt="md">
                   <Button
                     variant="filled"
@@ -321,7 +304,7 @@ const BlogComponent = ({ id }: { id?: string }) => {
                 </Group>
               </Stack>
             </form>
-          </Card>{" "}
+          </Card>
         </>
       ) : (
         <Center>
