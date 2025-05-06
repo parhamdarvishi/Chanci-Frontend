@@ -219,10 +219,10 @@ const Navbar = () => {
           {/* <div className={style.comingSoon}>
             <span>Coming Soon!</span>
           </div> */}
-          <Input.Wrapper style={{height: '100%'}}>
+          <Input.Wrapper style={{ height: "100%" }}>
             <Input
               type="text"
-              classNames={{input: style.input}}
+              classNames={{ input: style.input }}
               placeholder="Search Jobs"
             />
           </Input.Wrapper>
