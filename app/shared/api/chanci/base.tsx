@@ -85,11 +85,14 @@ const base = (authorization: boolean = false): AxiosInstance => {
         }
 
         if (error.response.status >= 400 && error.response.status < 500) {
-          toastAlert(
+          //Error 400 is a client error, so the message may vary and better to be handled in components rather here.
+          /* toastAlert(
             error.response.data?.Errors?.[0]?.Message ??
               error.response.statusText,
             "error"
-          );
+          ); */
+          //This could be in our log system to collect error details
+          console.log(error.response?.data?.message);
         }
 
         if (error.response.status >= 300 && error.response.status < 400) {
@@ -123,7 +126,7 @@ const base = (authorization: boolean = false): AxiosInstance => {
 
 export default base;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+ 
 export const postRequest = async (url: string, data: any, auth: boolean) => {
   const instance = base(auth);
   return await instance.post(url, data);

@@ -1,16 +1,17 @@
 "use client";
 
-import { Card } from "@mantine/core";
+import { Button, Card } from "@mantine/core";
 import { useSearchParams } from "next/navigation";
 import { IconCircleCheck } from "@tabler/icons-react";
 import { useEffect, useState, Suspense } from "react";
 import { getRequest } from "@/shared/api";
 import { authAddresses } from "@/shared/constants/relative-url/auth";
+import { useRouter } from "next/navigation";
 
 const VerificationPage = () => {
   const searchParams = useSearchParams();
   const TokenId = searchParams.get("token");
-
+  const router = useRouter();
   const [check, setCheck] = useState(false);
 
   const approveEmail = async () => {
@@ -19,10 +20,12 @@ const VerificationPage = () => {
       setCheck(true);
     }
   };
-
+  const redirectToChanci = () => {
+    router.push("/ChanciAI");
+  };
   useEffect(() => {
     approveEmail();
-  }, []);// eslint-disable-line react-hooks/exhaustive-deps
+  }, []); 
 
   return (
     <div
@@ -64,9 +67,27 @@ const VerificationPage = () => {
           >
             Your Email address was successfully Verified.
           </p>
+          <Button
+            variant="filled"
+            type="submit"
+            onClick={redirectToChanci}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '100%',
+              borderColor: '#d2d1d2 !important',
+              borderRadius: '16px',
+              backgroundColor: '#0063f5',
+              height: '100px'
+              }}
+            >
+              Continue to Chanci AI
+        </Button>
         </Card>
-      )}
-    </div>
+  )
+}
+    </div >
   );
 };
 
