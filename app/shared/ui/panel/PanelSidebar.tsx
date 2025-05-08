@@ -18,6 +18,7 @@ const LogoutButton = () => {
       cookie.deleteCookie(USER_TOKEN);
       cookie.deleteCookie(VOLUNTEER);
       localStorage.removeItem("userMenu"); // Remove localStorage item
+      localStorage.removeItem("userName"); // Remove localStorage item
     }
     router.push("/");
   }, [router]);

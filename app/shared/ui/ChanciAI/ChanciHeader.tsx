@@ -9,6 +9,8 @@ import useIsMobile from "@/shared/hooks";
 import { modals } from "@mantine/modals";
 import StepModal from "@/widget/chanciAI/slice/stepModal/stepModal";
 import { howItWorksText } from "@/shared/constants/data";
+import { useRouter } from "next/navigation";
+import { IconLogout } from "@tabler/icons-react";
 export const ModalComponent = ({isMobile, desc} : {isMobile: boolean | undefined, desc: string}) => {
   const mobileStyleConfig: Partial<
     Record<"content" | "inner", CSSProperties>
@@ -47,6 +49,11 @@ export const ModalComponent = ({isMobile, desc} : {isMobile: boolean | undefined
 };
 const ChanciHeader = () => {
   const isMobile = useIsMobile();
+  const router = useRouter();
+  const userName = JSON.parse(localStorage.getItem("userName") || "");
+  const redirectToPanel = ()=> {
+    router.push('/panel')
+  }
   return (
     <Box className={style.wrapper}>
       <Box className={style.assessmentHeader}>
@@ -66,6 +73,19 @@ const ChanciHeader = () => {
             <span>How it works?</span>
           </div>
           <Image src={arrow} alt="arrow" />
+        </Card>
+        <Card
+          shadow="sm"
+          padding="md"
+          onClick={redirectToPanel}
+          style={{ cursor: "pointer" }}
+          className={style.UserBadge}
+        >
+          <div className={style.UserBadgeL}>
+            <span>{userName}</span>
+            <span style={{fontWeight: 0, fontSize: 12}}>panel</span>
+          </div>
+          <IconLogout width={21} height={21}  />
         </Card>
       </Box>
       <Box className={style.assessmentNotif}>

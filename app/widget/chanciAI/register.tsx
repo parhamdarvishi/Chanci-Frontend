@@ -163,7 +163,7 @@ const Register = () => {
                   root: style.root,
                   label: style.label,
                 }}
-                label="FullName"
+                label="Full Name"
               >
                 <Input
                   classNames={{ input: style.input }}

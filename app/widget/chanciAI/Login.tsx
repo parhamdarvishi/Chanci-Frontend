@@ -120,11 +120,12 @@ const Login = () => {
   });
 
   const handleChanci = () => {
-    if (isVolunteer) {
+    router.push("/ChanciAI");
+    /* if (isVolunteer) {
       router.push("/ChanciAI");
     } else {
       router.push("/panel/profile");
-    }
+    } */
   };
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -147,7 +148,7 @@ const Login = () => {
       // TODO: for testing ChanciAI
       cookie.setCookie(VOLUNTEER, JSON.stringify(res?.data?.data?.isVolunteer));
       setIsVolunteer(res?.data?.data?.isVolunteer);
-
+      localStorage.setItem("userName", JSON.stringify(res?.data?.data?.userName))
       localStorage.setItem(
         "userMenu",
         JSON.stringify(res?.data?.data?.menus) || "[]"
