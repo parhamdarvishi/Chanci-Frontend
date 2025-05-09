@@ -50,7 +50,7 @@ export const ModalComponent = ({isMobile, desc} : {isMobile: boolean | undefined
 const ChanciHeader = () => {
   const isMobile = useIsMobile();
   const router = useRouter();
-  const userName = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("userName") || "") : "";
+  const userName = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("userName") || "null") : "";
   const redirectToPanel = ()=> {
     router.push('/panel')
   }
