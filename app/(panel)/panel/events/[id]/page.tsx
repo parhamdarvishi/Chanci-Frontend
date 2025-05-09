@@ -1,4 +1,4 @@
-import EventDetails from "@/widget/Events/Slice/EventDetails/eventDetails";
+import EventDetails from "@/shared/ui/EventDetails/eventDetails";
 
 export default async function Event({
     params,

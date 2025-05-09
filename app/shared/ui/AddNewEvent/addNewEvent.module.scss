@@ -122,3 +122,41 @@
     }
   }
   
+  .goBackBtn {
+    position: fixed;
+    bottom: 64px;
+    right: 94px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    overflow: hidden;
+    width: 40px;
+    height: 40px;
+    transition: width 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
+    white-space: nowrap;
+    padding: 0.9rem;
+    background-color: rgba(94, 98, 252, 0.8);
+    color: white;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 1000;
+    opacity: 0.9;
+    font-weight: 100;
+    &:hover {
+      width: 120px;
+      background-color: rgba(94, 98, 252, 1);
+      opacity: 1;
+    }
+  }
+  
+  .goBackText {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .goBackBtn:hover .goBackText {
+    opacity: 1;
+  }
+   

@@ -1,54 +1,51 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Container, Loader } from "@mantine/core";
-import EventTable from "@/widget/Events/Slice/EventTable/eventTable";
-import { Event, EventsResponse } from "@/shared/types/events/event";
-import { getRequest } from "@/shared/api";
+
 import { eventAddresses } from "@/shared/constants/relative-url/event";
+import { TableOnRequest } from "@/shared/ui/Table";
+import { ActionButtons, TableColumns } from "@/shared/ui/Table/model";
+import PageHeader from "@/shared/ui/PageHeader/pageHeader";
+import { useRouter } from "next/navigation";
 
-const EventsPage = () => {
-  const [events, setEvents] = useState<Event[]>([]);
+type TEventRow = {
+  id: number;
+  index: number
+  shortTitle: string;
+  hostDate: string;
+};
 
+const columns: TableColumns<TEventRow>[] = [
+  { head: "index", key: "index" },
+  { head: "Title", key: "shortTitle" },
+  {
+    head: "Date",
+    key: "hostDate",
+  },
+];
 
-  const fetchEvents = async () => {
-    const reqBody = {
-      "Sorts[0].PropertyName": "id",
-      "Sorts[0].isAscending": false,
-      Skip: 0,
-      Take: 100,
-    };
+const actionButtons: ActionButtons[] = [
+  {
+    name: "View Details",
+    url: (id: number) => `/panel/events/${id}`,
+  },
+];
 
-    const res: EventsResponse = await getRequest(
-      eventAddresses.GetAll,
-      reqBody,
-      false
-    );
-    if (res?.isSuccess) {
-      setEvents(res.data?.items ?? []);
-    }
-  };
-
-  useEffect(() => {
-    fetchEvents();
-  }, []);
-
+const Page = () => {
+  const router = useRouter();
   return (
     <>
-      {events.length > 0 ? (
-        <EventTable events={events} />
-      ) : (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Loader size={80} />
-        </div>
-      )}
+      <PageHeader
+        title="All Events"
+        onAddClick={() => router.push("/panel/events/add")}
+      />
+
+      <TableOnRequest<TEventRow>
+        url={eventAddresses.GetAll}
+        rowsPerPage={10}
+        columns={columns}
+        actionButtons={actionButtons}
+      />
     </>
   );
 };
 
-export default EventsPage;
+export default Page;

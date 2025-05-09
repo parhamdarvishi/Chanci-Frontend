@@ -1,4 +1,4 @@
-import AddNewEvent from '@/widget/Events/Slice/AddNewEvent/addNewEvent'
+import AddNewEvent from '@/shared/ui/AddNewEvent/addNewEvent'
 import React from 'react'
 
 const page = () => {

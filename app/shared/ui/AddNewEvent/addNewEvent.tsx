@@ -2,11 +2,11 @@
 import React, { useState } from "react";
 import toastAlert from "@shared/helpers/toast";
 import styles from "./AddNewEvent.module.scss";
-import { postRequest } from "@/shared/api/chanci/baseUpload";
-import cookie from "@/shared/helpers/cookie";
+import { postRequest } from "@/shared/api/chanci/base";
 
 const AddNewEvent = () => {
   const [formData, setFormData] = useState({
+    amount: 0,
     shortTitle: "",
     longTitle: "",
     hostedBy: "",
@@ -31,17 +31,22 @@ const AddNewEvent = () => {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value } = e.target;
+    const { name, value, type } = e.target;
+
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]:
+        type === "number"
+          ? parseFloat(value)
+          : type === "checkbox"
+          ? (e.target as HTMLInputElement).checked
+          : value,
     }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      debugger;
       const jsonData = JSON.stringify(formData);
       const response = await postRequest(
         "https://api10.ukngn.com/api/Event/Add",
@@ -51,7 +56,6 @@ const AddNewEvent = () => {
 
       if (response.status === 200) {
         toastAlert("Event added successfully!", "success");
-
         window.location.href = "/panel/events";
       } else {
         toastAlert("Failed to add event", "error");
@@ -61,11 +65,28 @@ const AddNewEvent = () => {
       toastAlert("An error occurred while adding the event", "error");
     }
   };
+  const handleGoBack = () => window.history.back();
 
-  return (
+  return (<>
+        <button onClick={handleGoBack} className={styles.goBackBtn}>
+          X <span className={styles.goBackText}>Go Back</span>
+        </button>
     <div className={styles.container}>
       <h2 className={styles.title}>Add New Event</h2>
       <form onSubmit={handleSubmit} className={styles.form}>
+        <div className={styles.formGroup}>
+          <label htmlFor="amount">Amount</label>
+          <input
+            type="number"
+            id="amount"
+            name="amount"
+            value={formData.amount}
+            onChange={handleChange}
+            step="any"
+            required
+            />
+        </div>
+
         <div className={styles.formGroup}>
           <label htmlFor="shortTitle">Short Title</label>
           <input
@@ -75,7 +96,7 @@ const AddNewEvent = () => {
             value={formData.shortTitle}
             onChange={handleChange}
             required
-          />
+            />
         </div>
 
         <div className={styles.formGroup}>
@@ -86,7 +107,7 @@ const AddNewEvent = () => {
             value={formData.longTitle}
             onChange={handleChange}
             required
-          ></textarea>
+            ></textarea>
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="description">Description</label>
@@ -96,7 +117,7 @@ const AddNewEvent = () => {
             value={formData.description}
             onChange={handleChange}
             required
-          ></textarea>
+            ></textarea>
         </div>
 
         <div className={styles.formGroup}>
@@ -109,7 +130,7 @@ const AddNewEvent = () => {
             onChange={handleChange}
             step="any"
             required
-          />
+            />
         </div>
 
         <div className={styles.formGroup}>
@@ -122,7 +143,7 @@ const AddNewEvent = () => {
             onChange={handleChange}
             step="any"
             required
-          />
+            />
         </div>
 
         <div className={styles.formGroup}>
@@ -134,7 +155,7 @@ const AddNewEvent = () => {
             value={formData.hostedBy}
             onChange={handleChange}
             required
-          />
+            />
         </div>
 
         <div className={styles.formGroup}>
@@ -146,7 +167,7 @@ const AddNewEvent = () => {
             value={formData.supportedBy}
             onChange={handleChange}
             required
-          />
+            />
         </div>
 
         <div className={styles.formGroup}>
@@ -158,7 +179,7 @@ const AddNewEvent = () => {
             value={formData.address}
             onChange={handleChange}
             required
-          />
+            />
         </div>
 
         <div className={styles.formGroup}>
@@ -169,7 +190,7 @@ const AddNewEvent = () => {
             value={formData.content}
             onChange={handleChange}
             required
-          ></textarea>
+            ></textarea>
         </div>
 
         <div className={styles.formGroup}>
@@ -181,7 +202,7 @@ const AddNewEvent = () => {
             value={formData.hostDate}
             onChange={handleChange}
             required
-          />
+            />
         </div>
 
         <div className={styles.formGroup}>
@@ -193,7 +214,7 @@ const AddNewEvent = () => {
             value={formData.start}
             onChange={handleChange}
             required
-          />
+            />
         </div>
 
         <div className={styles.formGroup}>
@@ -205,7 +226,7 @@ const AddNewEvent = () => {
             value={formData.end}
             onChange={handleChange}
             required
-          />
+            />
         </div>
 
         <div className={styles.formGroup}>
@@ -216,7 +237,7 @@ const AddNewEvent = () => {
             name="redirectUrl"
             value={formData.redirectUrl}
             onChange={handleChange}
-          />
+            />
         </div>
 
         <div className={styles.formGroup}>
@@ -227,7 +248,7 @@ const AddNewEvent = () => {
             name="bannerImagePath"
             value={formData.bannerImagePath}
             onChange={handleChange}
-          />
+            />
         </div>
 
         <div className={styles.formGroup}>
@@ -238,7 +259,7 @@ const AddNewEvent = () => {
             name="cardImagePath"
             value={formData.cardImagePath}
             onChange={handleChange}
-          />
+            />
         </div>
 
         <div className={styles.formGroup}>
@@ -249,7 +270,7 @@ const AddNewEvent = () => {
             name="mobileImagePath"
             value={formData.mobileImagePath}
             onChange={handleChange}
-          />
+            />
         </div>
 
         <div className={styles.formGroup}>
@@ -260,7 +281,7 @@ const AddNewEvent = () => {
             name="hostedByLogoPath"
             value={formData.hostedByLogoPath}
             onChange={handleChange}
-          />
+            />
         </div>
 
         <div className={styles.formGroup}>
@@ -271,7 +292,7 @@ const AddNewEvent = () => {
             name="supportedByLogoPath"
             value={formData.supportedByLogoPath}
             onChange={handleChange}
-          />
+            />
         </div>
 
         <div className={styles.formGroup}>
@@ -281,10 +302,8 @@ const AddNewEvent = () => {
             id="isShowable"
             name="isShowable"
             checked={formData.isShowable}
-            onChange={(e) =>
-              setFormData({ ...formData, isShowable: e.target.checked })
-            }
-          />
+            onChange={handleChange}
+            />
         </div>
 
         <button type="submit" className={styles.submitButton}>
@@ -292,6 +311,7 @@ const AddNewEvent = () => {
         </button>
       </form>
     </div>
+            </>
   );
 };
 
