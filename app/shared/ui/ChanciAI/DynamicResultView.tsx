@@ -80,8 +80,6 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                     <div className={style.resultBox}>
                         {sections &&
                             sections.sort((a, b) => a.order - b.order)?.map((section: ResultSection, index) => {
-                                console.log(index)
-                                console.log(sections.length)
                                 return (
                                     <>
                                         <Card

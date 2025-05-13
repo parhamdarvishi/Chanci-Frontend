@@ -7,6 +7,7 @@ import { useEffect, useState, Suspense } from "react";
 import { getRequest } from "@/shared/api";
 import { authAddresses } from "@/shared/constants/relative-url/auth";
 import { useRouter } from "next/navigation";
+import { getUserData, saveUserData } from "@/shared/helpers/util";
 
 const VerificationPage = () => {
   const searchParams = useSearchParams();
@@ -15,8 +16,10 @@ const VerificationPage = () => {
   const [check, setCheck] = useState(false);
 
   const approveEmail = async () => {
+    const user = getUserData();
     const res = await getRequest(authAddresses.VerifyEmail, { TokenId }, false);
     if (res?.isSuccess) {
+      saveUserData({...user, isVerified: true});
       setCheck(true);
     }
   };

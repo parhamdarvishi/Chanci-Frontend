@@ -25,6 +25,7 @@ import Link from "next/link";
 import { modals } from "@mantine/modals";
 import { postRequest } from "@/shared/api";
 import axios from "axios";
+import { saveUserData } from "@/shared/helpers/util";
 
 const ForgetPasswordModal = () => {
   const [loading, setLoading] = useState(false);
@@ -147,12 +148,16 @@ const Login = () => {
       cookie.setCookie(USER_TOKEN, JSON.stringify(res?.data?.data?.token));
       // TODO: for testing ChanciAI
       cookie.setCookie(VOLUNTEER, JSON.stringify(res?.data?.data?.isVolunteer));
+      const userData = {
+        email: res?.data?.data?.email,
+        isVerified: res?.data?.data?.isVerified,
+        isVolunteer: res?.data?.data?.isVolunteer,
+        menus: res?.data?.data?.menus,
+        roles: res?.data?.data?.roles,
+        userName: res?.data?.data?.userName,
+      };
       setIsVolunteer(res?.data?.data?.isVolunteer);
-      localStorage.setItem("userName", JSON.stringify(res?.data?.data?.userName))
-      localStorage.setItem(
-        "userMenu",
-        JSON.stringify(res?.data?.data?.menus) || "[]"
-      );
+      saveUserData(userData);
       setLoading(false);
       handleChanci();
     } catch (error: any) {
