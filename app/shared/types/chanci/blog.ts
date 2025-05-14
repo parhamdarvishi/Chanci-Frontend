@@ -1,11 +1,4 @@
-type Author = {
-  id: number;
-  fullName: string;
-  linkToProfile: string;
-  jobTitle: string;
-  isDeleted: boolean;
-  blogs: any;
-};
+import { Author } from "./author";
 
 export type BlogItem = {
   id: number;
@@ -17,11 +10,6 @@ export type BlogItem = {
   bannerImagePath: string;
   authorId: number;
   author: Author;
-};
-
-export type BlogData = {
-  items: BlogItem[];
-  totalCount: number;
 };
 
 export type BlogResponse = {

@@ -13,6 +13,7 @@ import {
   Loader,
   NumberInput,
   Textarea,
+  Select,
 } from "@mantine/core";
 import { modals } from "@mantine/modals";
 import toastAlert from "@/shared/helpers/toast";
@@ -21,10 +22,16 @@ import { relativePaths } from "@/shared/constants/relative-url/other";
 import { fixedSectionAddress } from "@/shared/constants/relative-url/fixedsection";
 import { BlogItem, BlogResponse } from "@/shared/types/chanci/blog";
 import { blogAddress } from "@/shared/constants/relative-url/blog";
+import Editor from "../RichTextEditor/RichTextEditor";
+import { authorAddresses } from "@/shared/constants/relative-url/author";
+import { truncate } from "node:fs";
+import { Author, AuthorResponse } from "@/shared/types/chanci/author";
+import test from "node:test";
 
 const BlogComponent = ({ id }: { id?: string }) => {
   const router = useRouter();
   const [blog, setBlog] = useState<BlogItem | undefined>();
+  const [authors, setAuthors] = useState<Author[] | undefined[]>();
   const [loading, setLoading] = useState<boolean>(false);
 
   const form = useForm<BlogItem>({
@@ -88,9 +95,24 @@ const BlogComponent = ({ id }: { id?: string }) => {
         toastAlert("Failed to load blog details", "error");
       }
     };
+    const fetchAuthors = async () => {
+      try {
+        const res: AuthorResponse = await getRequest(
+          authorAddresses.GetAll,
+          { skip: 0, take: 1000 },
+          true
+        );
 
+        const items = res?.data?.items;
+        setAuthors(items);
+      } catch (error) {
+        console.error("Error fetching authors:", error);
+        toastAlert("Failed to load authors", "error");
+      }
+    };
     if (id) {
       fetchBlogs();
+      fetchAuthors();
     } else {
       setBlog(form.getInitialValues);
     }
@@ -132,7 +154,7 @@ const BlogComponent = ({ id }: { id?: string }) => {
       if (res?.isSuccess) {
         toastAlert("Blog added successfully", "success");
         // Refresh the question data
-        router.push("/panel/blogs");
+        router.push(relativePaths.panel.blogList);
       } else {
         toastAlert("Failed to add blog", "error");
       }
@@ -145,7 +167,7 @@ const BlogComponent = ({ id }: { id?: string }) => {
   };
   const handleDelete = () => {
     modals.openConfirmModal({
-      title: "Delete Question",
+      title: "Delete",
       centered: true,
       styles: {
         content: { padding: "20px" },
@@ -163,13 +185,9 @@ const BlogComponent = ({ id }: { id?: string }) => {
       confirmProps: { color: "red" },
       onConfirm: async () => {
         try {
-          await deleteRequest(
-            `${fixedSectionAddress.Delete}?Id=${id}`,
-            {},
-            true
-          );
+          await deleteRequest(`${blogAddress.Delete}?Id=${id}`, {}, true);
           toastAlert("Blog deleted successfully", "success");
-          router.push(relativePaths.panel.fixedSectionList);
+          router.push(relativePaths.panel.blogList);
         } catch (error) {
           console.error("Error deleting blog:", error);
           toastAlert("Failed to delete blog", "error");
@@ -202,22 +220,20 @@ const BlogComponent = ({ id }: { id?: string }) => {
                       form.setFieldValue("title", e.target.value);
                       setFormModified(true);
                     }}
-                  >
-                    {form.getInputProps("title").value}
-                  </Textarea>
+                    defaultValue={form.getInputProps("title").value}
+                  />
                 </Box>
                 <Box>
                   <Text fw={500} mb={5}>
                     Description
                   </Text>
-                  <Textarea
-                    onChange={(e) => {
-                      form.setFieldValue("description", e.target.value);
+                  <Editor
+                    content={form.getInputProps("description").value}
+                    onChange={(editorText) => {
+                      form.setFieldValue("description", editorText);
                       setFormModified(true);
                     }}
-                  >
-                    {form.getInputProps("description").value}
-                  </Textarea>
+                  />
                 </Box>
                 <Box>
                   <Text fw={500} mb={5}>
@@ -228,9 +244,8 @@ const BlogComponent = ({ id }: { id?: string }) => {
                       form.setFieldValue("metaKey", e.target.value);
                       setFormModified(true);
                     }}
-                  >
-                    {form.getInputProps("metaKey").value}
-                  </Textarea>
+                    defaultValue={form.getInputProps("metaKey").value}
+                  />
                 </Box>
                 <Box>
                   <Text fw={500} mb={5}>
@@ -241,9 +256,8 @@ const BlogComponent = ({ id }: { id?: string }) => {
                       form.setFieldValue("metaDescription", e.target.value);
                       setFormModified(true);
                     }}
-                  >
-                    {form.getInputProps("metaDescription").value}
-                  </Textarea>
+                    defaultValue={form.getInputProps("metaDescription").value}
+                  />
                 </Box>
                 <Box>
                   <Text fw={500} mb={5}>
@@ -254,17 +268,22 @@ const BlogComponent = ({ id }: { id?: string }) => {
                       form.setFieldValue("bannerImagePath", e.target.value);
                       setFormModified(true);
                     }}
-                  >
-                    {form.getInputProps("bannerImagePath").value}
-                  </Textarea>
+                    defaultValue={form.getInputProps("bannerImagePath").value}
+                  />
                 </Box>
                 <Box>
                   <Text fw={500} mb={5}>
-                    Author ID
+                    Author
                   </Text>
-                  <NumberInput
-                    {...form.getInputProps("authorId")}
-                    value={blog?.authorId || ""}
+                  <Select
+                    data={
+                      authors?.map((author) => ({
+                        value: String(author?.id ?? ""),
+                        label: author?.fullName ?? "Unknown Author",
+                      })) ?? []
+                    }
+                    placeholder="Select author"
+                    value={form.values.authorId?.toString() || ""}
                     onChange={(value) => {
                       form.setFieldValue("authorId", Number(value));
                       setFormModified(true);
@@ -308,7 +327,6 @@ const BlogComponent = ({ id }: { id?: string }) => {
         </>
       ) : (
         <Center>
-          {" "}
           <Loader color="blue" />{" "}
         </Center>
       )}
