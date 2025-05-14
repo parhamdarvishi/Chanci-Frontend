@@ -88,7 +88,10 @@ const Footer = () => {
           <div className={style.copyrightLine}>
             <Image alt="footerLine" src={footerLineN} />
           </div>
-          <p>© 2025 New Generation Network-All Rights Reserved.</p>
+          <p>
+            © 2025 New Generation Network-All Rights Reserved.{" "}
+            <span style={{ fontSize: "10px" }}>V 1.0</span>
+          </p>
         </div>
       </div>
     </footer>
