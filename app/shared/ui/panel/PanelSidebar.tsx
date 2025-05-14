@@ -8,16 +8,17 @@ import { IconLogout } from "@tabler/icons-react";
 import Link from "next/link";
 import cookie from "@/shared/helpers/cookie";
 import { useRouter, usePathname } from "next/navigation";
-import { UserMenu } from "@/shared/types/users/user";
+import { TUserLocal } from "@/shared/types/users/user";
 import { getUserIsVolunteer } from "@/shared/helpers/cookie/user";
 import { USER_TOKEN, VOLUNTEER } from "@/shared/helpers/cookie/types";
+import { clearUserData, getUserData } from "@/shared/helpers/util";
 const LogoutButton = () => {
   const router = useRouter();
   const handleSubmit = useCallback(() => {
     if (typeof window !== "undefined") {
       cookie.deleteCookie(USER_TOKEN);
       cookie.deleteCookie(VOLUNTEER);
-      localStorage.removeItem("userMenu"); // Remove localStorage item
+      clearUserData();
     }
     router.push("/");
   }, [router]);
@@ -39,13 +40,17 @@ const PanelSidebar = ({
   const volunteer = getUserIsVolunteer();
   const router = useRouter();
   const pathname = usePathname();
-  
+  const [user, setUser] = useState<TUserLocal | undefined>(undefined);
   const handleSideItem = () => {
     setTimeout(() => {
       close();
     }, 1000);
   };
-  const usermenus : UserMenu[] = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("userMenu") || "[]") : [];
+  
+  useEffect(() => {
+    const userData = getUserData();
+    setUser(userData);
+  }, []);
   return (
     <Card shadow="sm" className={style.wrapper}>
       {!drawer && (
@@ -60,7 +65,7 @@ const PanelSidebar = ({
       )}
 
       <Box className={style.progressPart}>
-        {usermenus?.map((menu, index) => {
+        {user?.menus?.map((menu, index) => {
           return (
             <Link
               key={`menu-${index}`}

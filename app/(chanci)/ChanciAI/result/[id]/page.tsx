@@ -140,7 +140,7 @@ const Page = () => {
                     justifyContent: "center",
                 }
             },
-            children: <LoadingModal width={isMobile ? 64 : 116} paragraphWidth="480px" desc={"Wait a few second to see your result!"} />,
+            children: <LoadingModal width={isMobile ? 64 : 116} paragraphWidth="480px" desc={"Wait a few seconds to see your result!"} />,
         })
         return (<></>)
     }

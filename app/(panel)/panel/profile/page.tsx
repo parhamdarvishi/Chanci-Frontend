@@ -1,10 +1,12 @@
 "use client";
-import { getRequest } from "@/shared/api";
+import { getRequest, postRequest } from "@/shared/api";
 import { chanciAddresses } from "@/shared/constants/relative-url/chanci";
-import { Avatar, Box } from "@mantine/core";
-import { IconMail, IconLock } from "@tabler/icons-react";
+import { Avatar, Box, Button, Alert } from "@mantine/core";
+import { IconMail, IconLock, IconAlertCircle } from "@tabler/icons-react";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import toastAlert from "@/shared/helpers/toast";
+import { getUserData } from "@/shared/helpers/util";
 
 type userDataType = {
   userName: string;
@@ -12,19 +14,64 @@ type userDataType = {
 };
 const Page = () => {
   const [userData, setUserData] = useState<userDataType>();
+  const [isVerified, setIsVerified] = useState<boolean>(true);
+  const [resendingEmail, setResendingEmail] = useState<boolean>(false);
 
   const getuserProfile = async () => {
     const res = await getRequest(chanciAddresses.profile, null, true);
     if (res?.isSuccess) {
       setUserData(res?.data as userDataType);
+      
+      // Check if user is verified from localStorage
+      const isUserVerified = getUserData()?.isVerified;// localStorage.getItem('user.isVerified') === 'true';
+      setIsVerified(isUserVerified);
     }
   };
+  
+  const handleResendVerification = async () => {
+    setResendingEmail(true);
+    try {
+      const res = await postRequest('/api/User/ResendVerificationEmail', {}, true);
+      if (res?.isSuccess) {
+        toastAlert('Verification email has been sent successfully', 'success');
+      } else {
+        toastAlert(res?.message as string || 'Failed to send verification email', 'error');
+      }
+    } catch (error) {
+      console.error('Error sending verification email:', error);
+      toastAlert('Error sending verification email', 'error');
+    } finally {
+      setResendingEmail(false);
+    }
+  };
+  
   useEffect(() => {
     getuserProfile();
   }, []);
 
   return (
     <div>
+      {!isVerified && (
+        <Alert 
+          icon={<IconAlertCircle size="1rem" />} 
+          title="Email not verified" 
+          color="yellow"
+          mb="md"
+        >
+          Your email is not verified yet. Please verify your email to access all features.
+          <Button 
+            variant="filled" 
+            color="yellow" 
+            onClick={handleResendVerification} 
+            loading={resendingEmail}
+            ml="md"
+            size="xs"
+          >
+            Resend verification email
+          </Button>
+        </Alert>
+      )}
+      
       <Box
         style={{
           padding: "1rem",

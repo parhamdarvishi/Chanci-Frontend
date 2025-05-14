@@ -1,4 +1,4 @@
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, useEffect, useState } from "react";
 import style from "./style/chanciHeader.module.scss";
 import { Avatar, Box, Card } from "@mantine/core";
 import QuestionSquare from "@public/image/chanciAI/icon/QuestionSquare.svg";
@@ -9,6 +9,10 @@ import useIsMobile from "@/shared/hooks";
 import { modals } from "@mantine/modals";
 import StepModal from "@/widget/chanciAI/slice/stepModal/stepModal";
 import { howItWorksText } from "@/shared/constants/data";
+import { useRouter } from "next/navigation";
+import { IconLogout } from "@tabler/icons-react";
+import { TUserLocal } from "@/shared/types/users/user";
+import { getUserData } from "@/shared/helpers/util";
 export const ModalComponent = ({isMobile, desc} : {isMobile: boolean | undefined, desc: string}) => {
   const mobileStyleConfig: Partial<
     Record<"content" | "inner", CSSProperties>
@@ -47,6 +51,15 @@ export const ModalComponent = ({isMobile, desc} : {isMobile: boolean | undefined
 };
 const ChanciHeader = () => {
   const isMobile = useIsMobile();
+  const router = useRouter();
+  const [user, setUser] = useState<TUserLocal | undefined>(undefined);
+  const redirectToPanel = ()=> {
+    router.push('/panel')
+  }
+  useEffect(() => {
+    const userData = getUserData();
+    setUser(userData);
+  }, []);
   return (
     <Box className={style.wrapper}>
       <Box className={style.assessmentHeader}>
@@ -66,6 +79,19 @@ const ChanciHeader = () => {
             <span>How it works?</span>
           </div>
           <Image src={arrow} alt="arrow" />
+        </Card>
+        <Card
+          shadow="sm"
+          padding="md"
+          onClick={redirectToPanel}
+          style={{ cursor: "pointer" }}
+          className={style.UserBadge}
+        >
+          <div className={style.UserBadgeL}>
+            <span>{user?.userName}</span>
+            <span style={{fontWeight: 0, fontSize: 12}}>panel</span>
+          </div>
+          <IconLogout width={21} height={21}  />
         </Card>
       </Box>
       <Box className={style.assessmentNotif}>
