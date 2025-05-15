@@ -2,17 +2,18 @@ import HeadRes from "@/features/headRes/HeadRes";
 import { Grid, Drawer, Divider, GridCol, Card } from "@mantine/core";
 import Link from "next/link";
 import ChanciHeader from "./ChanciHeader";
-import Sidebar from "./Sidebar";
 import { useDisclosure } from "@mantine/hooks";
 import style from "./../../../(chanci)/style.module.scss";
 import Title from "@public/image/widget/Frame.svg";
 import Image from "next/image";
 import useIsMobile from "@/shared/hooks";
-const TestSidebar = ({
+const ChanciContainer = ({
     children,
+    SideBar,
     resultPage
 }: {
     children: React.ReactNode;
+    SideBar: React.ReactNode;
     resultPage?: boolean;
 }) => {
     const [opened, { open, close }] = useDisclosure(false);
@@ -45,19 +46,19 @@ const TestSidebar = ({
                         </Drawer.Header>}
                     <Drawer.Body>
                         <Divider />
-                        <Sidebar drawer={Boolean(isMobile)} />
+                        {SideBar}
                     </Drawer.Body>
                 </Drawer.Content>
             </Drawer.Root>
             <GridCol span={{ base: 12, md: 3 }} className={style.sidebar}>
-
-                <Sidebar drawer={false} />
+                {SideBar}
             </GridCol>
             <GridCol span={{ base: 12, md: 9 }}>
+                {/* Header of the page including Hamburger menu visible in mobile view */}
                 <div>
                     <HeadRes menuClick={open} />
                 </div>
-
+                {/* Header of the page desktop view */}
                 <ChanciHeader />
                 <Card
                     shadow="sm"
@@ -72,4 +73,4 @@ const TestSidebar = ({
         </Grid>
     )
 };
-export default TestSidebar;
+export default ChanciContainer;

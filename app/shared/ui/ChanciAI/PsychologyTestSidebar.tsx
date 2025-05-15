@@ -10,14 +10,15 @@ import StepModal from "@/widget/chanciAI/slice/stepModal/stepModal";
 import { modals } from "@mantine/modals";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
+import useIsMobile from "@/shared/hooks";
 
-const Sidebar = ({ drawer }: { drawer: boolean }) => {
+const PsychologyTestSidebar: React.FC = () => {
   const [progress, setProgress] = useState(0);
   const [sidebarLoc, setSidebarLoc] = useState([1]);
   const router = useRouter();
   const pathname = usePathname();
   const { id } = useParams();
-
+  const isMobile = useIsMobile();
   const isResult = pathname.includes("result");
 
   const { sidebarPostion, questionIndex, data, answers } = useChanci();
@@ -97,7 +98,7 @@ const Sidebar = ({ drawer }: { drawer: boolean }) => {
 
   return (
     <Card shadow="sm" padding="lg" className={style.wrapper}>
-      {!drawer && (
+      {!isMobile && (
         <>
           <Box style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <Link href="/Home">
@@ -225,4 +226,4 @@ const Sidebar = ({ drawer }: { drawer: boolean }) => {
   );
 };
 
-export default Sidebar;
+export default PsychologyTestSidebar;
