@@ -95,6 +95,14 @@ const BlogComponent = ({ id }: { id?: string }) => {
         toastAlert("Failed to load blog details", "error");
       }
     };
+
+    if (id) {
+      fetchBlogs();
+    } else {
+      setBlog(form.getInitialValues());
+    }
+  }, [id]);
+  useEffect(() => {
     const fetchAuthors = async () => {
       try {
         const res: AuthorResponse = await getRequest(
@@ -102,7 +110,6 @@ const BlogComponent = ({ id }: { id?: string }) => {
           { skip: 0, take: 1000 },
           true
         );
-
         const items = res?.data?.items;
         setAuthors(items);
       } catch (error) {
@@ -110,14 +117,9 @@ const BlogComponent = ({ id }: { id?: string }) => {
         toastAlert("Failed to load authors", "error");
       }
     };
-    if (id) {
-      fetchBlogs();
-      fetchAuthors();
-    } else {
-      setBlog(form.getInitialValues);
-    }
-  }, [id]);
-
+  
+    fetchAuthors(); // Always fetch authors independently of the blog
+  }, []);
   const handleUpdate = async () => {
     setLoading(true);
     try {
