@@ -35,27 +35,27 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
   resume,
   bigFive,
 }) => {
+  const [industries, setIndustries] = useState<Industry[] | undefined[]>();
+  useEffect(() => {
+    const fetchIndustriess = async () => {
+      try {
+        const res: IndustryResponse = await getRequest(
+          industryAddress.GetAll,
+          { skip: 0, take: 1000 },
+          true
+        );
+
+        const items = res?.data?.items;
+        setIndustries(items);
+      } catch (error) {
+        console.error("Error fetching industries:", error);
+        toastAlert("Failed to load industries", "error");
+      }
+    };
+
+    fetchIndustriess();
+  }, []);
   const renderContent = () => {
-    const [industries, setIndustries] = useState<Industry[] | undefined[]>();
-    useEffect(() => {
-      const fetchIndustriess = async () => {
-        try {
-          const res: IndustryResponse = await getRequest(
-            industryAddress.GetAll,
-            { skip: 0, take: 1000 },
-            true
-          );
-
-          const items = res?.data?.items;
-          setIndustries(items);
-        } catch (error) {
-          console.error("Error fetching industries:", error);
-          toastAlert("Failed to load industries", "error");
-        }
-      };
-
-      fetchIndustriess();
-    }, []);
     const renderLastPromptForPersonality = () => {
       return (
         <>
@@ -596,7 +596,7 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
             <Card radius="md" className={style.cardDone} shadow="none">
               Hello Stuti,
               <br />
-              Embarking on your career journey is an exciting adventure, and I'm
+              Embarking on your career journey is an exciting adventure, and I&apos;m
               here to help you navigate it with some tailored advice.
             </Card>
             <Card radius="md" className={style.cardDone} shadow="none">
