@@ -1,3 +1,3 @@
 export const industryAddress = {
-  GetAll: "/api/Industry/GetAll",
+  GetAll: "/api/UserAnswers/ConvertAnswersToPromptCommand",
 };
