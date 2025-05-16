@@ -2,11 +2,12 @@
   margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
-  
+
   .assessmentHeader {
     display: flex;
     align-items: center;
     gap: 1rem;
+
     .assessment {
       height: 52px;
       border-radius: 16px;
@@ -16,12 +17,14 @@
       display: flex;
       align-items: center;
       gap: 0.4rem;
+
       h4 {
         font-weight: 400;
         color: #0063f5;
         font-size: 14px;
       }
     }
+
     .HowItWorks {
       height: 52px;
       border-radius: 16px;
@@ -32,70 +35,88 @@
       align-items: center;
       flex-direction: row;
       justify-content: space-between;
+
       .HowItWorkL {
         display: flex;
         align-items: center;
         gap: 0.6rem;
       }
-      span{
+
+      span {
         font-size: 14px;
       }
     }
-    .UserBadge {
-      height: 52px;
-      border-radius: 16px;
-      min-width: 214px;
-      width: 100%;
-      padding: 1.5rem;
-      display: flex;
-      align-items: center;
-      flex-direction: row;
-      justify-content: space-between;
-      .UserBadgeL {
-        display: flex;
-        flex-direction: column;
-      }
-      span{
-        font-size: 14px;
-      }
-    }
-  }
-  .assessmentNotif {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding-right: 0.8rem;
-    .assessmentNotifBox {
-      cursor: pointer;
-      width: 46px;
-      height: 46px;
-      border-radius: 8px;
-      background-color: #ffffff;
-      display: flex;
-      justify-content: center;
-      .assessmentNotifImg {
-        width: 30px;
-      }
+
+    span {
+      font-size: 14px;
     }
   }
 }
+.UserBadge {
+  height: 52px;
+  border-radius: 16px;
+  min-width: 214px;
+  width: 100%;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  .UserBadgeL {
+    display: flex;
+    flex-direction: column;
+  }
+}
+.assessmentNotif {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-right: 0.8rem;
+
+  .assessmentNotifBox {
+    cursor: pointer;
+    width: 46px;
+    height: 46px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+
+    .assessmentNotifImg {
+      width: 30px;
+    }
+  }
+}
+
 @media (max-width: 768px) {
-  .wrapper{
+  .wrapper {
     display: none;
   }
+
   .HowItWorks {
-    width: 60px!important;
+    width: 60px !important;
+
     .HowItWorkL {
       width: 100%;
     }
   }
+
   .assessmentNotif {
     display: none !important;
   }
+
   .assessmentHeader {
     width: 100%;
+
     .assessment {
       width: 100% !important;
     }
+  }
+  .UserBadge {
+    box-shadow: none;
+    padding: 1rem;
+    height: 100%;
   }
 }
