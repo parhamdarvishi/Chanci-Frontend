@@ -14,10 +14,15 @@ import Image from "next/image";
 import chanciIc from "@public/image/chanciAI/icon/chanciCh.svg";
 import PdfPreview from "../FilePreview/PdfPreview";
 import DocxIframePreview from "../FilePreview/DocxPreview";
-import { Industry, IndustryResponse } from "@/shared/types/chanci/industry";
+import {
+  Industry,
+  IndustryRecommendation,
+  IndustryResponse,
+} from "@/shared/types/chanci/industry";
 import { getRequest } from "@/shared/api";
 import { industryAddress } from "@/shared/constants/relative-url/industry";
 import toastAlert from "@/shared/helpers/toast";
+import { useParams } from "next/navigation";
 interface DynamicResultViewProps {
   industryScores: IndustryScore[];
   result: JobRecommendation | undefined;
@@ -35,18 +40,30 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
   resume,
   bigFive,
 }) => {
-  const [industries, setIndustries] = useState<Industry[] | undefined[]>();
+  const [industries, setIndustries] = useState<IndustryScore[] | undefined[]>();
+  const [industryName, setIndustryName] = useState<string>();
+  const [industryRecommendations, setIndustryRecommendations] = useState<
+    IndustryRecommendation[] | undefined[]
+  >();
+  const selectedIndustry = industryRecommendations?.find(
+    (industry) => industry?.industryName === industryName
+  );
+  const params = useParams();
   useEffect(() => {
     const fetchIndustriess = async () => {
       try {
         const res: IndustryResponse = await getRequest(
           industryAddress.GetAll,
-          { skip: 0, take: 1000 },
+          { UserAnswerHeaderId: params.id },
           true
         );
 
-        const items = res?.data?.items;
-        setIndustries(items);
+        const items = res?.data;
+        setIndustries(items?.industryScores);
+        setIndustryRecommendations(
+          items?.jobRecommendation.industryRecommendations
+        );
+        console.log(items?.jobRecommendation.industryRecommendations, "test");
       } catch (error) {
         console.error("Error fetching industries:", error);
         toastAlert("Failed to load industries", "error");
@@ -554,6 +571,40 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                 })}
               </>
             )}
+            {selectedIndustry && (
+              <div className={style.resultBox}>
+                <Card radius="md" className={style.cardDone} shadow="none">
+                  <h4 style={{ padding: "10px" }}>
+                    {selectedIndustry.industryName}
+                  </h4>
+                  <h4
+                    style={{
+                      fontWeight: "600",
+                      fontSize: "14px",
+                      padding: "10px",
+                    }}
+                  >
+                    Sub-Industries, Job Titles, and Salary Ranges:
+                  </h4>
+                  {selectedIndustry.jobTitles.map((job, index) => (
+                    <p
+                      key={job.title}
+                      style={{
+                        padding: "10px",
+                        paddingLeft: "20px",
+                        fontSize: "14px",
+                      }}
+                    >
+                      <span style={{ fontWeight: "500" }}>
+                        {index + 1 + ". " + job.title + ": "}
+                      </span>
+                      £{job.minimumSalaryPerYear.toLocaleString()}–£
+                      {job.maximumSalaryPerYear.toLocaleString()} per year​.
+                    </p>
+                  ))}
+                </Card>
+              </div>
+            )}
             <Box className={style.questionBox}>
               <Card shadow="none" radius="md" className={style.questionCard}>
                 <Select
@@ -564,21 +615,23 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                   style={{
                     marginTop: ".4rem",
                     transform: "translateY(-6px)",
+                    marginBottom: "1rem",
                     width: "90%",
                   }}
                   data={
                     industries?.map((industry) => ({
-                      value: String(industry?.id ?? ""),
-                      label: industry?.title ?? "Unknown Industry",
+                      value: String(industry?.name ?? ""),
+                      label: industry?.name ?? "Unknown Industry",
                     })) ?? []
                   }
-                  // onChange={(value) => handleUserValue(value ? value : "")}
+                  onChange={(value) => setIndustryName(value ?? "")}
                   // defaultValue={val !== "" ? val : ""}
                   // value={val}
                   comboboxProps={{
                     middlewares: { flip: false, shift: false },
                     withinPortal: false,
                     shadow: "sm",
+                    dropdownPadding: "0 0 1rem 0",
                   }}
                 />
               </Card>
@@ -596,8 +649,8 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
             <Card radius="md" className={style.cardDone} shadow="none">
               Hello Stuti,
               <br />
-              Embarking on your career journey is an exciting adventure, and I&apos;m
-              here to help you navigate it with some tailored advice.
+              Embarking on your career journey is an exciting adventure, and
+              I&apos;m here to help you navigate it with some tailored advice.
             </Card>
             <Card radius="md" className={style.cardDone} shadow="none">
               Please select the industry you want to get your customised
@@ -617,8 +670,8 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                   }}
                   data={
                     industries?.map((industry) => ({
-                      value: String(industry?.id ?? ""),
-                      label: industry?.title ?? "Unknown Industry",
+                      value: String(industry?.order ?? ""),
+                      label: industry?.name ?? "Unknown Industry",
                     })) ?? []
                   }
                   // onChange={(value) => handleUserValue(value ? value : "")}
