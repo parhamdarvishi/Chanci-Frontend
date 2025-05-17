@@ -7,7 +7,7 @@ import {
   JobRecommendation,
   ResultBigFive,
   ResultSection,
-  Resume
+  Resume,
 } from "@/shared/types/chanci/result";
 import Image from "next/image";
 import chanciIc from "@public/image/chanciAI/icon/chanciCh.svg";
@@ -606,6 +606,9 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
             <Box className={style.questionBox}>
               <Card shadow="none" radius="md" className={style.questionCard}>
                 <Select
+                  classNames={{
+                    dropdown: style.dropdownOpen,
+                  }}
                   searchable
                   placeholder="Select your industries"
                   nothingFoundMessage="Nothing found..."
@@ -613,7 +616,6 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                   style={{
                     marginTop: ".4rem",
                     transform: "translateY(-6px)",
-                    marginBottom: "1rem",
                     width: "90%",
                   }}
                   data={
@@ -629,7 +631,6 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                     middlewares: { flip: false, shift: false },
                     withinPortal: false,
                     shadow: "sm",
-                    dropdownPadding: "0 0 1rem 0",
                   }}
                 />
               </Card>
@@ -657,6 +658,9 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
             <Box className={style.questionBox}>
               <Card shadow="none" radius="md" className={style.questionCard}>
                 <Select
+                  classNames={{
+                    dropdown: style.dropdownOpen,
+                  }}
                   searchable
                   placeholder="Select your industries"
                   nothingFoundMessage="Nothing found..."
