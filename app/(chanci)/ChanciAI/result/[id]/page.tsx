@@ -28,6 +28,7 @@ import {
 } from "@/shared/types/chanci/result";
 import { modals } from "@mantine/modals";
 import LoadingModal from "@/widget/chanciAI/slice/loadingModal/loadingModal";
+import ChanciContainer from "@/shared/ui/ChanciAI/ChanciContainer";
 /* const olComponent = ()=> {
   return(
     <TestSidebar>

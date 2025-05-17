@@ -55,7 +55,14 @@
     }
   }
 }
-
+.logOutBtn {
+  color: red;
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  width: 123px;
+}
 @media (max-width: 980px) {
   .wrapper {
     span {

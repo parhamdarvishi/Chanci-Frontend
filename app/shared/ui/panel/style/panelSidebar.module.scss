@@ -3,21 +3,25 @@
   height: 100%;
   min-height: 96vh;
   background-color: #02063a !important;
+
   .progressAction {
     display: flex;
     justify-content: start;
     padding-left: 0.9rem;
     gap: 1.8rem;
     margin: 1rem 0;
+
     li {
       font-size: 13px;
     }
   }
+
   .progressPart {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
     margin-top: 0.5rem;
+
     .progressPartBox {
       cursor: pointer;
       border-radius: 12px;
@@ -30,6 +34,7 @@
       display: flex;
       align-items: center;
     }
+
     .progressPartBoxActive {
       cursor: pointer;
       border-radius: 12px;

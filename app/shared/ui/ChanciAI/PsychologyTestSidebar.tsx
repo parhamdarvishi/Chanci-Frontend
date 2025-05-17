@@ -10,14 +10,16 @@ import StepModal from "@/widget/chanciAI/slice/stepModal/stepModal";
 import { modals } from "@mantine/modals";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
+import useIsMobile from "@/shared/hooks";
+import { LogoutButton } from "../panel/PanelSidebar";
 
-const Sidebar = ({ drawer }: { drawer: boolean }) => {
+const PsychologyTestSidebar: React.FC = () => {
   const [progress, setProgress] = useState(0);
   const [sidebarLoc, setSidebarLoc] = useState([1]);
   const router = useRouter();
   const pathname = usePathname();
   const { id } = useParams();
-
+  const isMobile = useIsMobile();
   const isResult = pathname.includes("result");
 
   const { sidebarPostion, questionIndex, data, answers } = useChanci();
@@ -97,7 +99,7 @@ const Sidebar = ({ drawer }: { drawer: boolean }) => {
 
   return (
     <Card shadow="sm" padding="lg" className={style.wrapper}>
-      {!drawer && (
+      {!isMobile && (
         <>
           <Box style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <Link href="/Home">
@@ -129,100 +131,103 @@ const Sidebar = ({ drawer }: { drawer: boolean }) => {
           </div>
         </Card>
       )}
-      <Box>
-        <h4
-          style={{
-            marginBottom: ".8rem",
-            fontWeight: "400",
-            color: "#9F9F9F",
-            margin: ".6rem 0",
-          }}
-        >
-          Total Progress
-        </h4>
-        <Progress
-          value={progress}
-          color={progress < 100 ? "#0063F5" : "#08CD6A"}
-          transitionDuration={200}
-        />
-        {sidebarPostion === 6 && data?.length === questionIndex ? (
-          <div style={{ color: "#08CD6A" }}>
-            Click on each section to expand the results
-          </div>
-        ) : (
-          <>
-            <Box>
-              <ul className={style.progressAction}>
-                <li style={{ color: "#74727B" }}>Not Started</li>
-                <li style={{ color: "#0063F5" }}>In Progress</li>
-                <li style={{ color: "#08CD6A" }}>Done</li>
-              </ul>
-            </Box>
-          </>
-        )}
+      <Box style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between' }}>
+        <Box>
+          <h4
+            style={{
+              marginBottom: ".8rem",
+              fontWeight: "400",
+              color: "#9F9F9F",
+              margin: ".6rem 0",
+            }}
+          >
+            Total Progress
+          </h4>
+          <Progress
+            value={progress}
+            color={progress < 100 ? "#0063F5" : "#08CD6A"}
+            transitionDuration={200}
+          />
+          {sidebarPostion === 6 && data?.length === questionIndex ? (
+            <div style={{ color: "#08CD6A" }}>
+              Click on each section to expand the results
+            </div>
+          ) : (
+            <>
+              <Box>
+                <ul className={style.progressAction}>
+                  <li style={{ color: "#74727B" }}>Not Started</li>
+                  <li style={{ color: "#0063F5" }}>In Progress</li>
+                  <li style={{ color: "#08CD6A" }}>Done</li>
+                </ul>
+              </Box>
+            </>
+          )}
 
-        <Box className={style.progressPart}>
-          <div
-            className={
-              sidebarLoc.includes(1) && sidebarLoc.includes(2)
-                ? style.progressPartDone
-                : sidebarLoc.includes(1)
-                  ? style.progressPartActive
-                  : style.progressPartBox
-            }
-          >
-            <span onClick={() => handleResultShow("Psychology")}>
-              Psychology test (20 questions)
-            </span>
-          </div>
-          <div
-            className={
-              sidebarLoc.includes(2) && sidebarLoc.includes(3)
-                ? style.progressPartDone
-                : sidebarLoc.includes(2)
-                  ? style.progressPartActive
-                  : style.progressPartBox
-            }
-          >
-            <span>Career Preference (6 Questions) </span>
-          </div>
-          <div
-            className={
-              sidebarLoc.includes(3) && sidebarLoc.includes(4)
-                ? style.progressPartDone
-                : sidebarLoc.includes(3)
-                  ? style.progressPartActive
-                  : style.progressPartBox
-            }
-          >
-            <span>Nationality & Visa (3 Questions)</span>
-          </div>
-          <div
-            className={
-              sidebarLoc.includes(4) && sidebarLoc.includes(5)
-                ? style.progressPartDone
-                : sidebarLoc.includes(4)
-                  ? style.progressPartActive
-                  : style.progressPartBox
-            }
-          >
-            <span>CV Section ( 1 Question)</span>
-          </div>
-          <div
-            className={
-              sidebarLoc.includes(5) && sidebarLoc.includes(6)
-                ? style.progressPartDone
-                : sidebarLoc.includes(5)
-                  ? style.progressPartActive
-                  : style.progressPartBox
-            }
-          >
-            <span>Skills & Certificate ( 2 Questions)</span>
-          </div>
+          <Box className={style.progressPart}>
+            <div
+              className={
+                sidebarLoc.includes(1) && sidebarLoc.includes(2)
+                  ? style.progressPartDone
+                  : sidebarLoc.includes(1)
+                    ? style.progressPartActive
+                    : style.progressPartBox
+              }
+            >
+              <span onClick={() => handleResultShow("Psychology")}>
+                Psychology test (20 questions)
+              </span>
+            </div>
+            <div
+              className={
+                sidebarLoc.includes(2) && sidebarLoc.includes(3)
+                  ? style.progressPartDone
+                  : sidebarLoc.includes(2)
+                    ? style.progressPartActive
+                    : style.progressPartBox
+              }
+            >
+              <span>Career Preference (6 Questions) </span>
+            </div>
+            <div
+              className={
+                sidebarLoc.includes(3) && sidebarLoc.includes(4)
+                  ? style.progressPartDone
+                  : sidebarLoc.includes(3)
+                    ? style.progressPartActive
+                    : style.progressPartBox
+              }
+            >
+              <span>Nationality & Visa (3 Questions)</span>
+            </div>
+            <div
+              className={
+                sidebarLoc.includes(4) && sidebarLoc.includes(5)
+                  ? style.progressPartDone
+                  : sidebarLoc.includes(4)
+                    ? style.progressPartActive
+                    : style.progressPartBox
+              }
+            >
+              <span>CV Section ( 1 Question)</span>
+            </div>
+            <div
+              className={
+                sidebarLoc.includes(5) && sidebarLoc.includes(6)
+                  ? style.progressPartDone
+                  : sidebarLoc.includes(5)
+                    ? style.progressPartActive
+                    : style.progressPartBox
+              }
+            >
+              <span>Skills & Certificate ( 2 Questions)</span>
+            </div>
+          </Box>
         </Box>
+        <LogoutButton className={style.logOutBtn} />
       </Box>
     </Card>
   );
 };
 
-export default Sidebar;
+export default PsychologyTestSidebar;

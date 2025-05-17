@@ -112,9 +112,6 @@ h6 {
   --container-size: var(--container-size-md);
   max-width: var(--container-size);
 }
-.m_dee7bd2f {
-  background-color: #fff;
-}
 .mantine-Select-input {
   height: 50px !important;
   padding: 0 1rem !important;

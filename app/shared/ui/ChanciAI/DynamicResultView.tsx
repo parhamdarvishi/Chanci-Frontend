@@ -7,8 +7,7 @@ import {
   JobRecommendation,
   ResultBigFive,
   ResultSection,
-  Resume,
-  TraitReview,
+  Resume
 } from "@/shared/types/chanci/result";
 import Image from "next/image";
 import chanciIc from "@public/image/chanciAI/icon/chanciCh.svg";
