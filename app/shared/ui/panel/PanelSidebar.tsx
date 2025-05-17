@@ -12,7 +12,7 @@ import { TUserLocal } from "@/shared/types/users/user";
 import { getUserIsVolunteer } from "@/shared/helpers/cookie/user";
 import { USER_TOKEN, VOLUNTEER } from "@/shared/helpers/cookie/types";
 import { clearUserData, getUserData } from "@/shared/helpers/util";
-const LogoutButton = () => {
+export const LogoutButton = ({...props}: React.HTMLAttributes<HTMLDivElement>): React.ReactElement => {
   const router = useRouter();
   const handleSubmit = useCallback(() => {
     if (typeof window !== "undefined") {
@@ -23,9 +23,9 @@ const LogoutButton = () => {
     router.push("/");
   }, [router]);
   return (
-    <div onClick={() => handleSubmit()} className={style.progressPartBox}>
-      <IconLogout />
-      <span style={{ transform: "translateY(3px)" }}>Logout</span>
+    <div onClick={() => handleSubmit()} className={style.progressPartBox} {...props}>
+      <IconLogout style={{ transform: 'scaleX(-1)' }} />
+      <span>Log out</span>
     </div>
   );
 };
