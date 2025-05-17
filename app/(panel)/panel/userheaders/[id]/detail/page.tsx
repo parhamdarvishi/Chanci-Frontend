@@ -30,7 +30,7 @@ const UserHeaderDetailPage = () => {
       );
       
       if (res?.isSuccess) {
-        toastAlert("Result deleted successfully", "success");
+        toastAlert("Result deleted successfully, Please wait and refesh page after 3 minute", "success");
         // Refresh the data
         await fetchGeneratedPrompts();
       } else {
@@ -90,21 +90,21 @@ const UserHeaderDetailPage = () => {
       <Group justify="space-between" mb="xl">
         <Title order={2}>User Header Details</Title>
         <Group justify="flex-end">
-          <Button 
+          {/* <Button 
             color="blue" 
             onClick={()=> handleRegenerate(true)} 
             loading={isRegenerating}
             disabled={generatedPrompt !== undefined}
           >
             Regenerate Result
-          </Button>
+          </Button> */}
           <Button 
             color="red" 
             onClick={handleDelete} 
             loading={isDeleting}
             disabled={generatedPrompt === undefined}
           >
-            Delete Current Result
+            Delete Old Answer and Regenrate Current Result
           </Button>
           <Button 
             color="teal" 
