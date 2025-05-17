@@ -7,7 +7,7 @@ import {
   JobRecommendation,
   ResultBigFive,
   ResultSection,
-  Resume
+  Resume,
 } from "@/shared/types/chanci/result";
 import Image from "next/image";
 import chanciIc from "@public/image/chanciAI/icon/chanciCh.svg";
@@ -62,7 +62,6 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
         setIndustryRecommendations(
           items?.jobRecommendation.industryRecommendations
         );
-        console.log(items?.jobRecommendation.industryRecommendations, "test");
       } catch (error) {
         console.error("Error fetching industries:", error);
         toastAlert("Failed to load industries", "error");
@@ -114,7 +113,7 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                         <div
                           style={{ display: "flex", flexDirection: "column" }}
                         >
-                          <span>{scores[1]}</span>
+                          <span>{scores[1]}/5</span>
                           <span>({scoreHighorLow(scores[1])})</span>
                         </div>
                       </Table.Td>
@@ -607,6 +606,9 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
             <Box className={style.questionBox}>
               <Card shadow="none" radius="md" className={style.questionCard}>
                 <Select
+                  classNames={{
+                    dropdown: style.dropdownOpen,
+                  }}
                   searchable
                   placeholder="Select your industries"
                   nothingFoundMessage="Nothing found..."
@@ -614,7 +616,6 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                   style={{
                     marginTop: ".4rem",
                     transform: "translateY(-6px)",
-                    marginBottom: "1rem",
                     width: "90%",
                   }}
                   data={
@@ -630,7 +631,6 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                     middlewares: { flip: false, shift: false },
                     withinPortal: false,
                     shadow: "sm",
-                    dropdownPadding: "0 0 1rem 0",
                   }}
                 />
               </Card>
@@ -658,6 +658,9 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
             <Box className={style.questionBox}>
               <Card shadow="none" radius="md" className={style.questionCard}>
                 <Select
+                  classNames={{
+                    dropdown: style.dropdownOpen,
+                  }}
                   searchable
                   placeholder="Select your industries"
                   nothingFoundMessage="Nothing found..."
