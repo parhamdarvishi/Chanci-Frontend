@@ -45,7 +45,7 @@ const ChanciContainer = ({
                             </Drawer.Title>
                             <Drawer.CloseButton size={42} color="#585858" />
                         </Drawer.Header>
-                        <PanelCard style={{height: '42px'}} /></>}
+                        <PanelCard style={{height: '42px', justifyContent: 'start', gap: '2rem', marginBottom: "1rem"}} /></>}
                     <Drawer.Body>
                         <Divider />
                         {SideBar}

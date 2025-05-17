@@ -1,6 +1,5 @@
 import { getUserData } from "@/shared/helpers/util";
 import { TUserLocal } from "@/shared/types/users/user";
-import { Card } from "@mantine/core";
 import { IconLogout } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";

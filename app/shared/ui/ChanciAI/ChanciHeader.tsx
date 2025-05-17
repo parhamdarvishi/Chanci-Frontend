@@ -1,4 +1,4 @@
-import React, { CSSProperties, useEffect, useState } from "react";
+import React, { CSSProperties } from "react";
 import style from "./style/chanciHeader.module.scss";
 import { Avatar, Box, Card } from "@mantine/core";
 import QuestionSquare from "@public/image/chanciAI/icon/QuestionSquare.svg";
@@ -10,7 +10,7 @@ import { modals } from "@mantine/modals";
 import StepModal from "@/widget/chanciAI/slice/stepModal/stepModal";
 import { howItWorksText } from "@/shared/constants/data";
 import PanelCard from "./PanelCard";
-export const ModalComponent = ({isMobile, desc} : {isMobile: boolean | undefined, desc: string}) => {
+export const ModalComponent = ({ isMobile, desc }: { isMobile: boolean | undefined, desc: string }) => {
   const mobileStyleConfig: Partial<
     Record<"content" | "inner", CSSProperties>
   > = {
@@ -48,7 +48,7 @@ export const ModalComponent = ({isMobile, desc} : {isMobile: boolean | undefined
 };
 const ChanciHeader = () => {
   const isMobile = useIsMobile();
-  
+
   return (
     <Box className={style.wrapper}>
       <Box className={style.assessmentHeader}>
@@ -59,7 +59,7 @@ const ChanciHeader = () => {
         <Card
           shadow="sm"
           padding="lg"
-          onClick={()=> ModalComponent({isMobile, desc: howItWorksText})}
+          onClick={() => ModalComponent({ isMobile, desc: howItWorksText })}
           style={{ cursor: "pointer" }}
           className={style.HowItWorks}
         >
