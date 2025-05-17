@@ -63,7 +63,6 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
         setIndustryRecommendations(
           items?.jobRecommendation.industryRecommendations
         );
-        console.log(items?.jobRecommendation.industryRecommendations, "test");
       } catch (error) {
         console.error("Error fetching industries:", error);
         toastAlert("Failed to load industries", "error");
