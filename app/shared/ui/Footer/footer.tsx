@@ -90,7 +90,7 @@ const Footer = () => {
           </div>
           <p>
             © 2025 New Generation Network-All Rights Reserved.{" "}
-            <span style={{ fontSize: "10px" }}>V 1.1</span>
+            <span style={{ fontSize: "10px" }}>V 1.2</span>
           </p>
         </div>
       </div>

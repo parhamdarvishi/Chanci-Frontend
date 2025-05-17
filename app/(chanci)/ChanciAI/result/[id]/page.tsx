@@ -165,50 +165,53 @@ const Page = () => {
     return <></>;
   };
   useEffect(() => {
+    let timeout: NodeJS.Timeout;
+  
     const pollReportStatus = async () => {
       try {
         const reqBody = {
           UserAnswerHeaderId: Number(params.id),
         };
-
         const res: ResultApiResponse = await getRequest(
           "/api/UserAnswers/ConvertAnswersToPromptCommand",
           reqBody,
           true
         );
-
         const code = res?.data?.reportStatus;
         setReportStatus(code);
-
         if (code === 3) {
-          clearInterval(interval);
+          // DONE
           setLoading(false);
           modals.closeAll();
-
           setTimeout(() => {
             ModalComponent({ isMobile, desc: resultInstruction });
           }, 2000);
-
+  
           setSections(res?.data?.activeResult?.sections);
           setJobRecommendation(res?.data?.jobRecommendation);
           setIndustryScores(res?.data?.industryScores || []);
           setResultSections(res?.data?.sections);
           setBigFive(res?.data?.bigFiveAverage);
           setResume(res?.data?.resume);
+        } else if (code === 1) {
+          // PROCCESSING – poll again in 30 seconds
+          timeout = setTimeout(pollReportStatus, 30000);
+          console.log("Still processing... will poll again in 30 seconds.");
         } else {
-          console.log(`Polling reportStatus: ${code}`);
+          console.log(`Report status: ${code}`);
         }
       } catch (error) {
         console.error("Polling failed:", error);
       }
     };
-
-    const interval = setInterval(pollReportStatus, 3000);
-    pollReportStatus(); // Run immediately once
-
-    return () => clearInterval(interval); // Clean up on unmount
+  
+    pollReportStatus(); // Call immediately once
+  
+    return () => {
+      if (timeout) clearTimeout(timeout); // Cleanup on unmount
+    };
   }, []);
-
+  
   return (
     <>
       {loading && loadingModal()}
