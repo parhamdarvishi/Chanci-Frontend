@@ -113,7 +113,7 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                         <div
                           style={{ display: "flex", flexDirection: "column" }}
                         >
-                          <span>{scores[1]}</span>
+                          <span>{scores[1]}/5</span>
                           <span>({scoreHighorLow(scores[1])})</span>
                         </div>
                       </Table.Td>
