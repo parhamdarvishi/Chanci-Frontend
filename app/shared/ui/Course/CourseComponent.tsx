@@ -1,7 +1,20 @@
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getRequest, deleteRequest, postRequest } from "@/shared/api";
-import { Button, Card, Group, Text, Title, Stack, Box, Center, Loader, Select, NumberInput } from "@mantine/core";
+import {
+    Button,
+    Card,
+    Group,
+    Text,
+    Title,
+    Stack,
+    Box,
+    Center,
+    Loader,
+    Select,
+    NumberInput,
+    Textarea
+} from "@mantine/core";
 import { CategoryType } from "@/shared/constants/relative-url/question";
 import { modals } from "@mantine/modals";
 import toastAlert from "@/shared/helpers/toast";
@@ -10,12 +23,15 @@ import { relativePaths } from "@/shared/constants/relative-url/other";
 import Editor from "@/shared/ui/RichTextEditor/RichTextEditor";
 import {Course, CourseResponse} from "@shared/types/chanci/course";
 import {courseAddress} from "@shared/constants/relative-url/course";
+import {IndustryResponse, OnlyIndustryResponse} from "@shared/types/chanci/industry";
+import {industryAddress} from "@shared/constants/relative-url/industry";
 
 const CourseComponent = ({ id }: { id?: string }) => {
     const router = useRouter();
     const [course, setCourse] = useState<Course | undefined>(undefined);
     const [loading, setLoading] = useState<boolean>(false);
-
+    const [industries, setIndustry] = useState<any>([]);
+    
     const form = useForm<Course>({
         initialValues: {
             id: 0,
@@ -36,6 +52,28 @@ const CourseComponent = ({ id }: { id?: string }) => {
     const [formModified, setFormModified] = useState<boolean>(false);
 
     useEffect(() => {
+        const fetchIndustries = async () => {
+            try {
+                const reqBody = {
+                    Skip: 0,
+                    Take: 10000
+                }
+                const res: OnlyIndustryResponse = await getRequest(industryAddress.GetAllFromIndustryModule, reqBody, false);
+                const industryOptions = res?.data?.items?.map((industry) => ({
+                    value: industry.id.toString(),
+                    label: industry.title,
+                }));
+                setIndustry(industryOptions);
+            } catch (error) {
+                console.error("Failed to fetch roles", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchIndustries();
+    }, []);
+    
+    useEffect(() => {
         const fetchCourse = async () => {
             const reqBody = {
                 id: id,
@@ -46,11 +84,12 @@ const CourseComponent = ({ id }: { id?: string }) => {
                 const res: CourseResponse = await getRequest(courseAddress.GetById, reqBody, false);
                 const courseData = res?.data?.items?.[0];
                 setCourse(courseData);
-
                 if (courseData) {
+                    debugger;
                     // Convert numeric values to strings for Select components
                     form.setValues({
                         id: courseData.id || 0,
+                        industryId: courseData.industryId.toString() || "0",
                         review: courseData.review,
                         platform: courseData.platform,
                         cost: courseData?.cost,
@@ -107,21 +146,22 @@ const CourseComponent = ({ id }: { id?: string }) => {
         if(form.validate().hasErrors) return
         setLoading(true);
         try {
+            debugger
             // Convert string values back to numbers before sending to API
             const formValues = {
                 ...form.values
             };
             const res = await postRequest(courseAddress.Add, formValues, true);
             if (res?.isSuccess) {
-                toastAlert("Fixed Section added successfully", "success");
+                toastAlert("course added successfully", "success");
                 // Refresh the question data
-                router.push('/panel/fixedsections')
+                router.push('/panel/courses')
             } else {
-                toastAlert("Failed to add fixedSection", "error");
+                toastAlert("Failed to add course", "error");
             }
         } catch (error) {
-            console.error("Error adding fixedSection:", error);
-            toastAlert("Failed to create fixedSection", "error");
+            console.error("Error adding course:", error);
+            toastAlert("Failed to create course", "error");
         } finally {
             setLoading(false);
         }
@@ -172,26 +212,121 @@ const CourseComponent = ({ id }: { id?: string }) => {
                         else handleCreate();
                     }}>
                         <Stack gap="md">
+                            <Select
+                                label="Idnustries"
+                                placeholder="Select a Industry"
+                                data={industries}
+                                mb="md"
+                                required
+                                {...form.getInputProps("industryId")}
+                            />
                             <Box>
-                                <Text fw={500}>Name:</Text>
-                                <NumberInput {...form.getInputProps('order')} value={course.name} onChange={(value) => {
-                                    form.setFieldValue('order', Number(value));
-                                    setFormModified(true);
-                                }} />
+                                <Text fw={500} mb={5}>
+                                    Name:
+                                </Text>
+                                <Textarea
+                                    onChange={(e) => {
+                                        form.setFieldValue("name", e.target.value);
+                                        setFormModified(true);
+                                    }}
+                                    defaultValue={form.getInputProps("name").value}
+                                />
                             </Box>
                             <Box>
-                                <Text fw={500}>Level:</Text>
-                                <NumberInput {...form.getInputProps('minValue')} value={course?.level || ""} onChange={(value) => {
-                                    form.setFieldValue('minValue', Number(value));
-                                    setFormModified(true);
-                                }} />
+                                <Text fw={500} mb={5}>
+                                    level:
+                                </Text>
+                                <Textarea
+                                    onChange={(e) => {
+                                        form.setFieldValue("level", e.target.value);
+                                        setFormModified(true);
+                                    }}
+                                    defaultValue={form.getInputProps("level").value}
+                                />
                             </Box>
                             <Box>
-                                <Text fw={500}>Cost:</Text>
-                                <NumberInput {...form.getInputProps('maxValue')} value={course?.cost || ""} onChange={(value) => {
-                                    form.setFieldValue('maxValue', Number(value));
-                                    setFormModified(true);
-                                }} />
+                                <Text fw={500} mb={5}>
+                                    Cost:
+                                </Text>
+                                <Textarea
+                                    onChange={(e) => {
+                                        form.setFieldValue("cost", e.target.value);
+                                        setFormModified(true);
+                                    }}
+                                    defaultValue={form.getInputProps("cost").value}
+                                />
+                            </Box>
+                            <Box>
+                                <Text fw={500} mb={5}>
+                                    Duration:
+                                </Text>
+                                <Textarea
+                                    onChange={(e) => {
+                                        form.setFieldValue("duration", e.target.value);
+                                        setFormModified(true);
+                                    }}
+                                    defaultValue={form.getInputProps("duration").value}
+                                />
+                            </Box>
+                            <Box>
+                                <Text fw={500} mb={5}>
+                                    Credential:
+                                </Text>
+                                <Textarea
+                                    onChange={(e) => {
+                                        form.setFieldValue("credential", e.target.value);
+                                        setFormModified(true);
+                                    }}
+                                    defaultValue={form.getInputProps("credential").value}
+                                />
+                            </Box>
+                            <Box>
+                                <Text fw={500} mb={5}>
+                                    Impact:
+                                </Text>
+                                <Textarea
+                                    onChange={(e) => {
+                                        form.setFieldValue("impact", e.target.value);
+                                        setFormModified(true);
+                                    }}
+                                    defaultValue={form.getInputProps("impact").value}
+                                />
+                            </Box>
+                            <Box>
+                                <Text fw={500} mb={5}>
+                                    Platform:
+                                </Text>
+                                <Textarea
+                                    onChange={(e) => {
+                                        form.setFieldValue("platform", e.target.value);
+                                        setFormModified(true);
+                                    }}
+                                    defaultValue={form.getInputProps("platform").value}
+                                />
+                            </Box>
+                            <Box>
+                                <Text fw={500} mb={5}>
+                                    Link:
+                                </Text>
+                                <Textarea
+                                    onChange={(e) => {
+                                        form.setFieldValue("link", e.target.value);
+                                        setFormModified(true);
+                                    }}
+                                    defaultValue={form.getInputProps("link").value}
+                                />
+                            </Box>
+                            <Box>
+                                <Text fw={500} mb={5}>
+                                    Review:
+                                </Text>
+                                <Textarea
+                                    onChange={(e) => {
+                                        form.setFieldValue("review", e.target.value);
+                                        setFormModified(true);
+                                    }}
+                                    defaultValue={form.getInputProps("review").value}
+                                />
                             </Box>
                             <Group justify="flex-end" mt="md">
                                 <Button

@@ -1,6 +1,6 @@
 export type Course = {
     id: number;
-    industryId: number;
+    industryId: string;
     industryTitle?: string;
     level: string;
     cost: string;

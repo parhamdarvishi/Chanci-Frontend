@@ -7,14 +7,6 @@ import { useRouter } from "next/navigation";
 import {Course} from "@shared/types/chanci/course";
 import {courseAddress} from "@shared/constants/relative-url/course";
 
-const getCategoryType = (type: number | undefined): string => {
-    if (type === undefined) return "NONE";
-    return (
-        Object.entries(CategoryType).find(([_, value]) => value === type)?.[0] ||
-        "NONE"
-    );
-};
-
 const columns: TableColumns<Course>[] = [
     { 
         head: "Index", 
@@ -23,10 +15,6 @@ const columns: TableColumns<Course>[] = [
     {
         head: "Course Name",
         key: "name"
-    },
-    {
-        head: "Industry Name",
-        key: "industryTitle"
     }
 ];
 
