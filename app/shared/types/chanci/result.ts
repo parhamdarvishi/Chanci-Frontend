@@ -74,6 +74,19 @@ export type Resume = {
   content: string;
   isDeleted: boolean;
 };
+export type Course = {
+  id: number;
+  industryTitle: string;
+  industryId: number;
+  name: string;
+  level: string;
+  cost: string;
+  duration: string;
+  credential: string;
+  reviews: string;
+  impact: string;
+  platform: string;
+};
 export type ResultBigFive = {
   Openness: number;
   Conscientiousness: number;
@@ -96,5 +109,7 @@ export interface ResultApiResponse {
     resume?: Resume;
     bigFiveAverage?: ResultBigFive;
     reportStatus?: number;
+    courses?: Course[];
   };
 }
+

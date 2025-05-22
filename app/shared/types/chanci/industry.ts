@@ -1,3 +1,5 @@
+import {Course} from "@shared/types/chanci/result";
+
 export type Industry = {
   id: number;
   parentId: number;
@@ -20,6 +22,7 @@ export type IndustryResponse = {
       assess: string;
       industryRecommendations: IndustryRecommendation[];
     };
+    courses: Course[];
     totalCount: number;
   };
 };

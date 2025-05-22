@@ -3,6 +3,7 @@ import { Avatar, Box, Card, Select, Table } from "@mantine/core";
 import React, { useEffect, useState } from "react";
 import style from "./../../../(chanci)/style.module.scss";
 import {
+  Course,
   IndustryScore,
   JobRecommendation,
   ResultBigFive,
@@ -44,24 +45,36 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
   const [industryRecommendations, setIndustryRecommendations] = useState<
     IndustryRecommendation[] | undefined[]
   >();
+  const [courses, setCourses] = useState<
+      Course[] | undefined[]
+  >();
   const selectedIndustry = industryRecommendations?.find(
     (industry) => industry?.industryName === industryName
   );
+  const selectedCourses = courses?.filter(
+      (course) => course?.industryTitle?.trim().toLowerCase() === industryName?.trim().toLowerCase()
+  );
+  console.log("Filtered selectedCourses:", selectedCourses);
   const params = useParams();
+  useEffect(() => {
+    console.log("Updated industryName:", industryName);
+  }, [industryName]);
   useEffect(() => {
     const fetchIndustriess = async () => {
       try {
+        debugger;
         const res: IndustryResponse = await getRequest(
           industryAddress.GetAll,
           { UserAnswerHeaderId: params.id },
           true
         );
-
+  
         const items = res?.data;
         setIndustries(items?.industryScores);
         setIndustryRecommendations(
           items?.jobRecommendation.industryRecommendations
         );
+        setCourses(items?.courses);
       } catch (error) {
         console.error("Error fetching industries:", error);
         toastAlert("Failed to load industries", "error");
@@ -144,8 +157,6 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
               sections
                 .sort((a, b) => a.order - b.order)
                 ?.map((section: ResultSection, index) => {
-                  console.log(index);
-                  console.log(sections.length);
                   return (
                     <>
                       <Card
@@ -180,56 +191,6 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                     </>
                   );
                 })}
-            {/* <Card
-                            shadow="sm"
-                            padding="lg"
-                            radius="md"
-                            withBorder
-                            className={style.cardDone}
-                        >
-                            <h3>Personlaity: </h3>
-                            <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                {result?.personality}
-                            </p>
-
-                        </Card>
-                        {result?.traitReview?.map((trait: TraitReview, index: number) => {
-                            return (
-                                <Card
-                                    key={index}
-                                    shadow="sm"
-                                    padding="lg"
-                                    radius="md"
-                                    withBorder
-                                    className={style.cardDone}
-                                >
-                                    {trait?.analysis && (<><h4>Analysis: </h4>
-                                        <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                            {trait.analysis}
-                                        </p></>)}
-                                    {trait?.whatResearchSays && <><h4>What Research Says: </h4>
-                                        <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                            {trait.whatResearchSays}
-                                        </p></>}
-                                    {trait?.whereYouFitBest && <><h4>Where You Fit Best: </h4>
-                                        <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                            {trait.whereYouFitBest}
-                                        </p></>}
-                                    {trait?.potentialChallenges && <><h4>Potential Challenges: </h4>
-                                        <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                            {trait.potentialChallenges}
-                                        </p></>}
-                                    {trait?.whyThisMatters && <><h4>Why This Matters: </h4>
-                                        <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                            {trait.whyThisMatters}
-                                        </p></>}
-                                    {trait?.miniStorySnippet && <><h4>Mini Story Snippet: </h4>
-                                        <p style={{ maxWidth: "700px", fontSize: "17px" }}>
-                                            {trait.miniStorySnippet}
-                                        </p></>}
-                                </Card>
-                            )
-                        })} */}
           </div>
         );
       case "CvEvaluation":
@@ -569,40 +530,6 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                 })}
               </>
             )}
-            {selectedIndustry && (
-              <div className={style.resultBox}>
-                <Card radius="md" className={style.cardDone} shadow="none">
-                  <h4 style={{ padding: "10px" }}>
-                    {selectedIndustry.industryName}
-                  </h4>
-                  <h4
-                    style={{
-                      fontWeight: "600",
-                      fontSize: "14px",
-                      padding: "10px",
-                    }}
-                  >
-                    Sub-Industries, Job Titles, and Salary Ranges:
-                  </h4>
-                  {selectedIndustry.jobTitles.map((job, index) => (
-                    <p
-                      key={job.title}
-                      style={{
-                        padding: "10px",
-                        paddingLeft: "20px",
-                        fontSize: "14px",
-                      }}
-                    >
-                      <span style={{ fontWeight: "500" }}>
-                        {index + 1 + ". " + job.title + ": "}
-                      </span>
-                      £{job.minimumSalaryPerYear.toLocaleString()}–£
-                      {job.maximumSalaryPerYear.toLocaleString()} per year​.
-                    </p>
-                  ))}
-                </Card>
-              </div>
-            )}
             <Box className={style.questionBox}>
               <Card shadow="none" radius="md" className={style.questionCard}>
                 <Select
@@ -640,14 +567,48 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                 className={style.chanciImg}
               />
             </Box>
+            {selectedIndustry && (
+                <div className={style.resultBox}>
+                  <Card radius="md" className={style.cardDone} shadow="none">
+                    <h4 style={{ padding: "10px" }}>
+                      {selectedIndustry.industryName}
+                    </h4>
+                    <h4
+                        style={{
+                          fontWeight: "600",
+                          fontSize: "14px",
+                          padding: "10px",
+                        }}
+                    >
+                      Sub-Industries, Job Titles, and Salary Ranges:
+                    </h4>
+                    {selectedIndustry.jobTitles.map((job, index) => (
+                        <p
+                            key={job.title}
+                            style={{
+                              padding: "10px",
+                              paddingLeft: "20px",
+                              fontSize: "14px",
+                            }}
+                        >
+                      <span style={{ fontWeight: "500" }}>
+                        {index + 1 + ". " + job.title + ": "}
+                      </span>
+                          £{job.minimumSalaryPerYear.toLocaleString()}–£
+                          {job.maximumSalaryPerYear.toLocaleString()} per year​.
+                        </p>
+                    ))}
+                  </Card>
+                </div>
+            )}
           </div>
         );
       case "ActionableGuidence":
         return (
           <div className={style.resultBox}>
             <Card radius="md" className={style.cardDone} shadow="none">
-              Hello Stuti,
-              <br />
+              {/*Hello Stuti,*/}
+              {/*<br />*/}
               Embarking on your career journey is an exciting adventure, and
               I&apos;m here to help you navigate it with some tailored advice.
             </Card>
@@ -672,11 +633,13 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                   }}
                   data={
                     industries?.map((industry) => ({
-                      value: String(industry?.order ?? ""),
+                      value: String(industry?.name ?? ""),
                       label: industry?.name ?? "Unknown Industry",
                     })) ?? []
                   }
-                  // onChange={(value) => handleUserValue(value ? value : "")}
+                  onChange={(value) => {
+                    setIndustryName(value ?? "");
+                  }}
                   // defaultValue={val !== "" ? val : ""}
                   // value={val}
                   comboboxProps={{
@@ -692,6 +655,32 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                 className={style.chanciImg}
               />
             </Box>
+            {selectedCourses && selectedCourses.length > 0 && (
+                <div className={style.resultBox}>
+                  <Card radius="md" className={style.cardDone} shadow="none">
+                    <h4 style={{padding: "10px"}}>
+                      {selectedCourses[0]?.industryTitle ?? "Unknown Industry"}
+                    </h4>
+                    <h5 style={{padding: "10px"}}>
+                      Courses to take:
+                    </h5>
+                    {selectedCourses.map((course, index) => (
+                        <div key={index}>
+                          
+                          <p
+                              style={{
+                                padding: "10px",
+                                paddingLeft: "20px",
+                                fontSize: "14px",
+                              }}
+                          >
+                            {course?.name ?? "Unknown Industry"}
+                          </p>
+                        </div>
+                    ))}
+                  </Card>
+                </div>
+            )}
           </div>
         );
       default:
@@ -700,18 +689,18 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        gap: "1rem",
-        flexDirection: "row",
-        justifyContent: "center",
-      }}
-    >
-      <Box className={style.chanciImgResult}>
-        <Avatar
-          src="/image/chanciAI/chanci.svg"
-          alt="it's me"
+      <div
+            style={{
+                display: "flex",
+                gap: "1rem",
+                flexDirection: "row",
+                justifyContent: "center",
+            }}
+        >
+            <Box className={style.chanciImgResult}>
+                <Avatar
+                    src="/image/chanciAI/chanci.svg"
+                    alt="it's me"
           size={55}
           className={style.questionImgChanci}
         />
