@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getRequest, deleteRequest, putRequest, postRequest } from "@/shared/api";
+import { getRequest, deleteRequest, postRequest } from "@/shared/api";
 import { Button, Card, Group, Text, Title, Stack, Box, Center, Loader, Select, NumberInput } from "@mantine/core";
 import { CategoryType } from "@/shared/constants/relative-url/question";
 import { modals } from "@mantine/modals";
