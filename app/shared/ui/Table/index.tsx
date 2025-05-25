@@ -21,29 +21,6 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
   const [activePage, setPage] = useState(1);
   const [filterValues, setFilterValues] = useState<Record<string, string>>({});
   const [appliedFilters, setAppliedFilters] = useState<Record<string, string | number | boolean>>(filters);
-  /* const getDataCount = async () => {
-    try {
-      const res = await getRequest(
-        url,
-        {
-          ...filters,
-          "Sorts[0].PropertyName": "id",
-          "Sorts[0].isAscending": false,
-          Skip: 0,
-          Take: 1000,
-        },
-        true
-      );
-
-      const { totalCount } = res?.data as any;
-      //const items = res?.data as T[];
-      setTotalPages(totalCount);
-    } catch (error) {
-      console.error(error);
-    }
-  }; //Commented out because the beloew function if Taken as 10 or 1, but returns the total Count data, so no need for this extra api call. 
-  
-  */
 
   const getData = async () => {
     const query = {
@@ -56,7 +33,7 @@ export const TableOnRequest = <T extends Record<string, unknown>>({
     };
     try {
       const res = await getRequest(url, query, true);
-
+      debugger;
       const { items, totalCount } = res?.data as any;
       //const items = res?.data as T[];
       setTotalPages(totalCount);

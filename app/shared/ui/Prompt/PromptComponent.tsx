@@ -96,12 +96,6 @@ const PromptComponent: React.FC<PromptComponentProps> = ({
             {...form.getInputProps("content")}
           />
 
-          {/* <Switch
-            label="Active"
-            mb="xl"
-            {...form.getInputProps("isActive", { type: "checkbox" })}
-          /> */}
-
           {!readOnly && <Button type="submit" loading={loading}>
             Add Prompt
           </Button>}

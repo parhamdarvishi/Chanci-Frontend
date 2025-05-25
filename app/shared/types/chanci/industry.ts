@@ -12,6 +12,15 @@ export type IndustryScore = {
   name: string;
   score: number;
 };
+
+export type OnlyIndustryResponse = {
+  isSuccess?: boolean;
+  message?: string;
+  data?: {
+    items?: Industry[];
+    totalCount: number;
+  };
+}
 export type IndustryResponse = {
   isSuccess?: boolean;
   message?: string;
