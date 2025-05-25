@@ -89,7 +89,7 @@ const CourseComponent = ({ id }: { id?: string }) => {
                     // Convert numeric values to strings for Select components
                     form.setValues({
                         id: courseData.id || 0,
-                        industryId: courseData.industryId.toString() || "0",
+                        industryId: courseData.industryId,
                         review: courseData.review,
                         platform: courseData.platform,
                         cost: courseData?.cost,
