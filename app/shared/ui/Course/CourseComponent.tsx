@@ -35,7 +35,7 @@ const CourseComponent = ({ id }: { id?: string }) => {
     const form = useForm<Course>({
         initialValues: {
             id: 0,
-            industryId: 0,
+            industryId: "0",
             name: "",
             cost: "",
             credential: "",
