@@ -45,7 +45,7 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                                                                  bigFive,
                                                              }) => {
     const [industries, setIndustries] = useState<IndustryScore[] | undefined[]>();
-    const [allIndustries, setAllIndustries] = useState<any[] | undefined[]>();
+    const [allIndustries, setAllIndustries] = useState<Industry[] | undefined[]>();
     const [jobs, setJobs] = useState<Job[] | undefined[]>();
     const [industryName, setIndustryName] = useState<string>();
     const [industryRecommendations, setIndustryRecommendations] = useState<
@@ -95,7 +95,10 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
         setIndustryName(selectedIndustry);
         debugger;
         if (selectedIndustry) {
-            var foundedIndustry = allIndustries?.find(x => x.title?.toLowerCase()?.includes(selectedIndustry.toLowerCase()));
+            let foundedIndustry: Industry | undefined = allIndustries?.find(
+                (x) =>
+                    x?.title?.toLowerCase().includes(selectedIndustry?.toLowerCase() ?? "") ?? false
+            );
             if (foundedIndustry) {
                 const res: JobResponse = await getRequest(
                     jobAddress.GetAll,
