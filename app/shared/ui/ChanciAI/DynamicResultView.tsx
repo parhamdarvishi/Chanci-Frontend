@@ -95,7 +95,7 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
         setIndustryName(selectedIndustry);
         debugger;
         if (selectedIndustry) {
-            let foundedIndustry: Industry | undefined = allIndustries?.find(
+            const foundedIndustry: Industry | undefined = allIndustries?.find(
                 (x) =>
                     x?.title?.toLowerCase().includes(selectedIndustry?.toLowerCase() ?? "") ?? false
             );
