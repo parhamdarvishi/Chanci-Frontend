@@ -32,6 +32,7 @@ export type IndustryResponse = {
       industryRecommendations: IndustryRecommendation[];
     };
     courses: Course[];
+    industries: Industry[];
     totalCount: number;
   };
 };
