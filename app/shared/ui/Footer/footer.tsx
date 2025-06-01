@@ -51,7 +51,7 @@ const Footer = () => {
               <div onClick={openModal}>Get in Touch</div>
             </nav>
             <div className={style.navigationField}>
-              <input type="text" placeholder="Enter your Email Address" />
+              <input type="text" placeholder="Sign up for our newsletter" />
               <Link href="/ComingSoon" className={style.button}>
                 Subscribe
                 <Image

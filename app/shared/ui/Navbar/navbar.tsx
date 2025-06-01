@@ -57,7 +57,7 @@ const Navbar = () => {
     "Candidates",
     "Events",
     "Academy",
-    "AboutUs",
+    "About Us",
   ];
 
   //checkUserToken

@@ -91,6 +91,7 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
         fetchIndustriess();
     }, []);
     const handleIndustryChange = async (value: string | null) => {
+        debugger;
         const selectedIndustry = value ?? "";
         setIndustryName(selectedIndustry);
         debugger;
@@ -743,8 +744,6 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                                         })) ?? []
                                     }
                                     onChange={handleIndustryChange}
-                                    // defaultValue={val !== "" ? val : ""}
-                                    // value={val}
                                     comboboxProps={{
                                         middlewares: {flip: false, shift: false},
                                         withinPortal: false,
