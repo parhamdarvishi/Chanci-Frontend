@@ -757,6 +757,38 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                                 className={style.chanciImg}
                             />
                         </Box>
+                        {
+                            <div>
+                                <Card radius="md" className={style.cardDone} shadow="none">
+                                    <span style={{
+                                        fontWeight: "bold",
+                                    }}>
+                                        Key technical skills to improve for a career in industry {selectedIndustry?.industryName} :
+                                    </span>
+                                    <span>
+                                        {industryRecommendations
+                                            ?.find((item) => item?.industryName === selectedIndustry?.industryName)
+                                            ?.technicalSkillForImporvment}
+                                    </span>
+                                </Card>
+                            </div>
+                        }
+                        {
+                            <div>
+                                <Card radius="md" className={style.cardDone} shadow="none">
+                                    <span style={{
+                                        fontWeight: "bold",
+                                    }}>
+                                        Key soft skills to improve for a career in industry {selectedIndustry?.industryName} : 
+                                    </span>
+                                    <span >
+                                        {industryRecommendations
+                                            ?.find((item) => item?.industryName === selectedIndustry?.industryName)
+                                            ?.softSkillForImporvment}
+                                    </span>
+                                </Card>
+                            </div>
+                        }
                         {selectedCourses && selectedCourses.length > 0 && (
                             <div className={style.resultBox}>
                                 <Card radius="md" className={style.cardDone} shadow="none">
