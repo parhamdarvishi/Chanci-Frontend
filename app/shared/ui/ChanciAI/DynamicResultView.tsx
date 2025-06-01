@@ -581,9 +581,8 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                                             label: industry?.name ?? "Unknown Industry",
                                         })) ?? []
                                     }
-                                    onChange={(value) => setIndustryName(value ?? "")}
-                                    // defaultValue={val !== "" ? val : ""}
-                                    // value={val}
+                                    // onChange={(value) => setIndustryName(value ?? "")}
+                                    onChange={handleIndustryChange}
                                     comboboxProps={{
                                         middlewares: {flip: false, shift: false},
                                         withinPortal: false,
@@ -603,6 +602,23 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                                     <h4 style={{padding: "10px"}}>
                                         {selectedIndustry.industryName}
                                     </h4>
+                                    <h4 style={{
+                                        fontWeight: "600",
+                                        fontSize: "14px",
+                                        padding: "10px",
+                                    }}>
+                                        Your employability score for {selectedIndustry?.industryName} is{" "}
+                                        {industryScores.find(
+                                            (x) => x.name === selectedIndustry?.industryName
+                                        )?.score}%
+                                    </h4>
+                                    <p style={{
+                                        fontSize: "14px",
+                                        padding: "10px",
+                                    }}>
+                                        {industryRecommendations
+                                            ?.find((item) => item?.industryName === selectedIndustry?.industryName)?.industryDescription}
+                                    </p>
                                     <h4
                                         style={{
                                             fontWeight: "600",
@@ -621,14 +637,75 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                                                 fontSize: "14px",
                                             }}
                                         >
-                      <span style={{fontWeight: "500"}}>
-                        {index + 1 + ". " + job.title + ": "}
-                      </span>
+                                              <span style={{fontWeight: "500"}}>
+                                                {index + 1 + ". " + job.title + ": "}
+                                              </span>
                                             £{job.minimumSalaryPerYear.toLocaleString()}–£
                                             {job.maximumSalaryPerYear.toLocaleString()} per year​.
                                         </p>
                                     ))}
+                                    <h4
+                                        style={{
+                                            fontWeight: "600",
+                                            fontSize: "14px",
+                                            padding: "10px",
+                                        }}
+                                    >
+                                        Top companies hiring in {selectedIndustry.industryName} industry:
+                                    </h4>
+                                    <p>
+                                        {industryRecommendations
+                                            ?.find((item) => item?.industryName === selectedIndustry?.industryName)
+                                            ?.companyForInustry
+                                            ?.map((item, index) => (
+                                                <p
+                                                    key={item}
+                                                    style={{
+                                                        padding: "10px",
+                                                        paddingLeft: "20px",
+                                                        fontSize: "14px",
+                                                    }}
+                                                >
+                                                      <span style={{ fontWeight: "500" }}>
+                                                        {`${index + 1}. `}
+                                                      </span>
+                                                    {item}
+                                                </p>
+                                            ))}
+                                    </p>
                                 </Card>
+                                {jobs && jobs.length > 0 && (
+                                    <div className={style.resultBox}>
+                                        <Card radius="md" className={style.cardDone} shadow="none">
+                                            <h4 style={{padding: "10px"}}>
+                                                Job Opportunities:
+                                            </h4>
+                                            {jobs.map((job, index) => (
+                                                <div key={index}>
+                                                    <p
+                                                        style={{
+                                                            padding: "10px",
+                                                            paddingLeft: "20px",
+                                                            fontSize: "14px",
+                                                        }}
+                                                    >
+                                                        <div style={{
+                                                            marginBottom: "5px",
+                                                        }}>
+                                                      <span style={{
+                                                          fontWeight: "bold",
+                                                      }}> Title: </span>
+                                                            <span> {job?.title ?? "Unknown Job"}</span>
+                                                        </div>
+                                                        <div>
+                                                            <Link href={job?.link ?? "##"} target="_blank">show detail</Link>
+                                                        </div>
+                                                    </p>
+                                                </div>
+                                            ))}
+                                        </Card>
+                                    </div>
+                                )}
                             </div>
                         )}
                     </div>
@@ -729,38 +806,7 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                                 </Card>
                             </div>
                         )}
-                        {jobs && jobs.length > 0 && (
-                            <div className={style.resultBox}>
-                                <Card radius="md" className={style.cardDone} shadow="none">
-                                    <h4 style={{padding: "10px"}}>
-                                        Job Opportunities:
-                                    </h4>
-                                    {jobs.map((job, index) => (
-                                        <div key={index}>
-                                            <p
-                                                style={{
-                                                    padding: "10px",
-                                                    paddingLeft: "20px",
-                                                    fontSize: "14px",
-                                                }}
-                                            >
-                                                <div style={{
-                                                    marginBottom: "5px",
-                                                }}>
-                                                      <span style={{
-                                                          fontWeight: "bold",
-                                                      }}> Title: </span>
-                                                    <span> {job?.title ?? "Unknown Job"}</span>
-                                                </div>
-                                                <div>
-                                                    <Link href={job?.link ?? "##"} target="_blank">show detail</Link>
-                                                </div>
-                                            </p>
-                                        </div>
-                                    ))}
-                                </Card>
-                            </div>
-                        )}
+                        
                     </div>
                 );
             default:

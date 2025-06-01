@@ -46,5 +46,8 @@ export type IndustryRecommendation = {
   industryName: string;
   industryDescription: string;
   jobTitles: JobTitle[];
+  softSkillForImporvment: string;
+  technicalSkillForImporvment: string;
+  companyForInustry: string[];
 };
 
