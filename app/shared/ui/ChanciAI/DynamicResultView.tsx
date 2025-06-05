@@ -26,6 +26,7 @@ import {useParams} from "next/navigation";
 import {jobAddress} from "@shared/constants/relative-url/job";
 import {Job, JobResponse} from "@shared/types/chanci/job";
 import Link from "next/link";
+import {BarChart, LineChart} from "@mantine/charts";
 
 interface DynamicResultViewProps {
     industryScores: IndustryScore[];
@@ -60,6 +61,12 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
     const selectedCourses = courses?.filter(
         (course) => course?.industryTitle?.trim().toLowerCase() === industryName?.trim().toLowerCase()
     );
+    const data = [
+        { month: 'Jan', value: 100 },
+        { month: 'Feb', value: 120 },
+        { month: 'Mar', value: 90 },
+        { month: 'Apr', value: 130 },
+    ];
     console.log("Filtered selectedCourses:", selectedCourses);
     const params = useParams();
     useEffect(() => {
@@ -184,6 +191,7 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
             case "PersonalityAnalysis":
                 return (
                     <div className={style.resultBox}>
+                       
                         {sections &&
                             sections
                                 .sort((a, b) => a.order - b.order)
@@ -254,7 +262,7 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                                 withBorder
                                 className={style.cardDone}
                             >
-                                <h3>📄 Overall Format and Contact Information: </h3>
+                            <h3>📄 Overall Format and Contact Information: </h3>
                                 <h4>Assess: </h4>
                                 <p style={{maxWidth: "700px", fontSize: "17px"}}>
                                     {result.cvFormat?.assess}
@@ -504,6 +512,19 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
             case "JobIndustryMatrix":
                 return (
                     <div className={style.resultBox}>
+                        <Card
+                            radius="md"
+                            className={style.cardDone}
+                            shadow="none">
+                            <div style={{padding: 40}}>
+                                <BarChart
+                                    h={300}
+                                    data={industryScores}
+                                    dataKey="name"
+                                    series={[{name: 'score', color: 'blue'}]}
+                                />
+                            </div>
+                        </Card>
                         {industryScores && industryScores.length > 0 && (
                             <>
                                 {Array.from({
@@ -522,6 +543,7 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                                             {groupIndex === 0 && (
                                                 <h4>🏆 Job Matrix – Final Industry Rankings (UK)</h4>
                                             )}
+                                            
                                             <Table withRowBorders={false} horizontalSpacing={"xs"}>
                                                 <Table.Thead>
                                                     <Table.Tr>
@@ -667,7 +689,7 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                                                         fontSize: "14px",
                                                     }}
                                                 >
-                                                      <span style={{ fontWeight: "500" }}>
+                                                      <span style={{fontWeight: "500"}}>
                                                         {`${index + 1}. `}
                                                       </span>
                                                     {item}
@@ -699,7 +721,8 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                                                             <span> {job?.title ?? "Unknown Job"}</span>
                                                         </div>
                                                         <div>
-                                                            <Link href={job?.link ?? "##"} target="_blank">show detail</Link>
+                                                            <Link href={job?.link ?? "##"} target="_blank">show
+                                                                detail</Link>
                                                         </div>
                                                     </p>
                                                 </div>
