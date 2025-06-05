@@ -17,6 +17,7 @@ const poppins = Poppins({
   display: "swap",
 });
 
+
 export const metadata: Metadata = {
   title: "NGN",
   description: "Welcome to NGN",
