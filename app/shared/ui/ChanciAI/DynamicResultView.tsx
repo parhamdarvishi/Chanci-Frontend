@@ -86,7 +86,6 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                 setIndustryRecommendations(
                     items?.jobRecommendation.industryRecommendations
                 );
-                debugger;
                 setCourses(items?.courses);
                 setAllIndustries(items?.industries);
             } catch (error) {
@@ -98,10 +97,8 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
         fetchIndustriess();
     }, []);
     const handleIndustryChange = async (value: string | null) => {
-        debugger;
         const selectedIndustry = value ?? "";
         setIndustryName(selectedIndustry);
-        debugger;
         if (selectedIndustry) {
             const foundedIndustry: Industry | undefined = allIndustries?.find(
                 (x) =>
@@ -116,7 +113,6 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                     },
                     true
                 );
-                debugger;
                 setJobs(res.data?.items);
             }
         }
@@ -516,7 +512,7 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                             radius="md"
                             className={style.cardDone}
                             shadow="none">
-                            <div style={{padding: 40}}>
+                            <div style={{padding: 10}}>
                                 <BarChart
                                     h={300}
                                     data={industryScores}
@@ -547,11 +543,14 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                                             <Table withRowBorders={false} horizontalSpacing={"xs"}>
                                                 <Table.Thead>
                                                     <Table.Tr>
-                                                        <Table.Th style={{textAlign: "left"}}>
+                                                        <Table.Th style={{
+                                                            textAlign: "left",
+                                                            width: "10%",
+                                                        }}>
                                                             Rank
                                                         </Table.Th>
-                                                        <Table.Th>Industry</Table.Th>
-                                                        <Table.Th style={{textAlign: "right"}}>
+                                                        <Table.Th style={{textAlign: "left"}}>Industry</Table.Th>
+                                                        <Table.Th style={{textAlign: "left"}}>
                                                             Final Score
                                                         </Table.Th>
                                                     </Table.Tr>
@@ -560,17 +559,17 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                                                     {group.map((item, index) => (
                                                         <Table.Tr key={index}>
                                                             <Table.Td
-                                                                style={{textAlign: "left", width: "33%"}}
+                                                                style={{textAlign: "left", width: "10%"}}
                                                             >
                                                                 {start + index + 1}
                                                             </Table.Td>
                                                             <Table.Td
-                                                                style={{textAlign: "left", width: "33%"}}
+                                                                style={{textAlign: "left", width: "43%"}}
                                                             >
                                                                 {item.name}
                                                             </Table.Td>
                                                             <Table.Td
-                                                                style={{textAlign: "right", width: "33%"}}
+                                                                style={{textAlign: "left", width: "43%"}}
                                                             >
                                                                 {item.score}%
                                                             </Table.Td>
