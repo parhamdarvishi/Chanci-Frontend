@@ -2,5 +2,6 @@ export const chanciAddresses = {
   GetAll: "/api/Questions/GetAll",
   profile: "/api/User/Profile",
   Add: "/api/Resume/Add",
-  getUserHeaders: "/api/UserAnswers/GetAllHeaders"
+  getUserHeaders: "/api/UserAnswers/GetAllHeaders",
+  PayForSubscription: "/api/UserSubscription/Pay"
 };
