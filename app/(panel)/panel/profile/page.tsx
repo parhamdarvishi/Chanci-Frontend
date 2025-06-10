@@ -38,8 +38,8 @@ const Page = () => {
             true);
         debugger;
         if (res?.data) {
-            const finalRes = res?.data;
-            const paymenturl = finalRes?.checkout_Url;
+            const finalRes:any = res?.data;
+            const paymenturl: any = finalRes?.checkout_Url;
             window.location.href = paymenturl;
         } else {
             return;
