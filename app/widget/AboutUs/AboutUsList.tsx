@@ -135,58 +135,58 @@ const AboutUsList = () => {
           </p>
         </div>
       </Container>
-      <Box className={style.aboutAreas}>
-        <Container className={style.container}>
-          <h2>Focus Areas</h2>
-          <div className={style.areaBox}>
-            <div
-                style={{display: "flex", gap: ".5rem", alignItems: "center"}}
-            >
-            <Image src={check} alt="check"/>
-              <h3>Gen Z Empowerment</h3>
-            </div>
-            <p>
-              By 2030, Gen Z is set to become a major part of the global
-              workforce. Yet, challenges like outdated corporate practices and
-              academic resistance to AI still persist. We aim to change this.
-              Through Chanci AI, our Ambassador Programme, NGN Academy, and
-              networking events, we offer young talent in the UK the tools and
-              community to thrive.
-            </p>
-          </div>
-          <div className={style.areaBox}>
-            <div
-              style={{ display: "flex", gap: ".5rem", alignItems: "center" }}
-            >
-              <Image src={check} alt="check" />
-              <h3>Employer Rebranding</h3>
-            </div>
-            <p>
-              By 2030, Gen Z is set to become a major part of the global
-              workforce. Yet, challenges like outdated corporate practices and
-              academic resistance to AI still persist. We aim to change this.
-              Through Chanci AI, our Ambassador Programme, NGN Academy, and
-              networking events, we offer young talent in the UK the tools and
-              community to thrive.
-            </p>
-          </div>
-          <div className={style.areaBox}>
-            <div
-              style={{ display: "flex", gap: ".5rem", alignItems: "center" }}
-            >
-              <Image src={check} alt="check" />
-              <h3>Promoting Diversity</h3>
-            </div>
-            <p>
-              As a diverse team ourselves, we know the value that inclusivity
-              brings. We are committed to increasing opportunities for minority
-              groups and Black heritage communities in the job market.
-              Additionally, we provide tailored services for the neurodivergent
-              community, ensuring everyone has a chance to succeed.
-            </p>
-          </div>
-        </Container>
-      </Box>
+      {/*<Box className={style.aboutAreas}>*/}
+      {/*  <Container className={style.container}>*/}
+      {/*    <h2>Focus Areas</h2>*/}
+      {/*    <div className={style.areaBox}>*/}
+      {/*      <div*/}
+      {/*          style={{display: "flex", gap: ".5rem", alignItems: "center"}}*/}
+      {/*      >*/}
+      {/*      <Image src={check} alt="check"/>*/}
+      {/*        <h3>Gen Z Empowerment</h3>*/}
+      {/*      </div>*/}
+      {/*      <p>*/}
+      {/*        By 2030, Gen Z is set to become a major part of the global*/}
+      {/*        workforce. Yet, challenges like outdated corporate practices and*/}
+      {/*        academic resistance to AI still persist. We aim to change this.*/}
+      {/*        Through Chanci AI, our Ambassador Programme, NGN Academy, and*/}
+      {/*        networking events, we offer young talent in the UK the tools and*/}
+      {/*        community to thrive.*/}
+      {/*      </p>*/}
+      {/*    </div>*/}
+      {/*    <div className={style.areaBox}>*/}
+      {/*      <div*/}
+      {/*        style={{ display: "flex", gap: ".5rem", alignItems: "center" }}*/}
+      {/*      >*/}
+      {/*        <Image src={check} alt="check" />*/}
+      {/*        <h3>Employer Rebranding</h3>*/}
+      {/*      </div>*/}
+      {/*      <p>*/}
+      {/*        By 2030, Gen Z is set to become a major part of the global*/}
+      {/*        workforce. Yet, challenges like outdated corporate practices and*/}
+      {/*        academic resistance to AI still persist. We aim to change this.*/}
+      {/*        Through Chanci AI, our Ambassador Programme, NGN Academy, and*/}
+      {/*        networking events, we offer young talent in the UK the tools and*/}
+      {/*        community to thrive.*/}
+      {/*      </p>*/}
+      {/*    </div>*/}
+      {/*    <div className={style.areaBox}>*/}
+      {/*      <div*/}
+      {/*        style={{ display: "flex", gap: ".5rem", alignItems: "center" }}*/}
+      {/*      >*/}
+      {/*        <Image src={check} alt="check" />*/}
+      {/*        <h3>Promoting Diversity</h3>*/}
+      {/*      </div>*/}
+      {/*      <p>*/}
+      {/*        As a diverse team ourselves, we know the value that inclusivity*/}
+      {/*        brings. We are committed to increasing opportunities for minority*/}
+      {/*        groups and Black heritage communities in the job market.*/}
+      {/*        Additionally, we provide tailored services for the neurodivergent*/}
+      {/*        community, ensuring everyone has a chance to succeed.*/}
+      {/*      </p>*/}
+      {/*    </div>*/}
+      {/*  </Container>*/}
+      {/*</Box>*/}
       <Container>
         <div className={style.ourValue}>
           {/*<h1 style={{ fontWeight: "300" }}>*/}
