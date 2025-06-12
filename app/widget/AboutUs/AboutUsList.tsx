@@ -189,123 +189,123 @@ const AboutUsList = () => {
       </Box>
       <Container>
         <div className={style.ourValue}>
-          <h1 style={{ fontWeight: "300" }}>
-            <span
-              style={{ borderBottom: "4px solid #5e62fc", borderRadius: "4px" }}
-            >
-              O
-            </span>
-            ur
-            <strong> Values</strong>
-          </h1>
-          <Grid className={style.ourGrid}>
-            <Grid.Col span={{ base: 12, md: 4 }}>
-              <div className={style.ourValueCard}>
-                <div>
-                  <div className={style.valueHeader}>
-                    <Image src={value1} alt="icon" width={58} height={58} />
-                  </div>
-                  <Divider color="#ececec" />
-                  <p>Focusing on student-first services</p>
-                </div>
-              </div>
-            </Grid.Col>
-            <Grid.Col span={{ base: 12, md: 4 }}>
-              <div className={style.ourValueCard}>
-                <div>
-                  <div className={style.valueHeader}>
-                    <Image src={value2} alt="icon" width={58} height={58} />
-                  </div>
-                  <Divider color="#ececec" />
-                  <p>Bridging the gap between education and industry</p>
-                </div>
-              </div>
-            </Grid.Col>
-            <Grid.Col span={{ base: 12, md: 4 }}>
-              <div className={style.ourValueCard}>
-                <div>
-                  <div className={style.valueHeader}>
-                    <Image src={value3} alt="icon" width={58} height={58} />
-                  </div>
-                  <Divider color="#ececec" />
-                  <p>Empowering women in leadership roles</p>
-                </div>
-              </div>
-            </Grid.Col>
-          </Grid>
-          <Grid className={style.ourGrid}>
-            <Grid.Col span={{ base: 12, md: 3 }}>
-              <div className={style.ourValueCard}>
-                <div>
-                  <div className={style.valueHeader}>
-                    <Image src={value4} alt="icon" width={58} height={58} />
-                  </div>
-                  <Divider color="#ececec" />
-                  <p>Promoting inclusivity and diversity</p>
-                </div>
-              </div>
-            </Grid.Col>
-            <Grid.Col span={{ base: 12, md: 3 }}>
-              <div className={style.ourValueCard}>
-                <div>
-                  <div className={style.valueHeader}>
-                    <Image src={value5} alt="icon" width={58} height={58} />
-                  </div>
-                  <Divider color="#ececec" />
-                  <p>
-                    Reducing job search time and making career coaching
-                    accessible for all
-                  </p>
-                </div>
-              </div>
-            </Grid.Col>
-            <Grid.Col span={{ base: 12, md: 3 }}>
-              <div className={style.ourValueCard}>
-                <div>
-                  <div className={style.valueHeader}>
-                    <Image src={value6} alt="icon" width={58} height={58} />
-                  </div>
-                  <Divider color="#ececec" />
-                  <p>
-                    Helping companies embrace Gen Z culture and rebrand
-                    effectively
-                  </p>
-                </div>
-              </div>
-            </Grid.Col>
-            <Grid.Col span={{ base: 12, md: 3 }}>
-              <div className={style.ourValueCard}>
-                <div>
-                  <div className={style.valueHeader}>
-                    <Image src={value7} alt="icon" width={58} height={58} />
-                  </div>
-                  <Divider color="#ececec" />
-                  <p>
-                    Using AI to balance the power between candidates and
-                    companies
-                  </p>
-                </div>
-              </div>
-            </Grid.Col>
-          </Grid>
+          {/*<h1 style={{ fontWeight: "300" }}>*/}
+          {/*  <span*/}
+          {/*    style={{ borderBottom: "4px solid #5e62fc", borderRadius: "4px" }}*/}
+          {/*  >*/}
+          {/*    O*/}
+          {/*  </span>*/}
+          {/*  ur*/}
+          {/*  <strong> Values</strong>*/}
+          {/*</h1>*/}
+          {/*<Grid className={style.ourGrid}>*/}
+          {/*  <Grid.Col span={{ base: 12, md: 4 }}>*/}
+          {/*    <div className={style.ourValueCard}>*/}
+          {/*      <div>*/}
+          {/*        <div className={style.valueHeader}>*/}
+          {/*          <Image src={value1} alt="icon" width={58} height={58} />*/}
+          {/*        </div>*/}
+          {/*        <Divider color="#ececec" />*/}
+          {/*        <p>Focusing on student-first services</p>*/}
+          {/*      </div>*/}
+          {/*    </div>*/}
+          {/*  </Grid.Col>*/}
+          {/*  <Grid.Col span={{ base: 12, md: 4 }}>*/}
+          {/*    <div className={style.ourValueCard}>*/}
+          {/*      <div>*/}
+          {/*        <div className={style.valueHeader}>*/}
+          {/*          <Image src={value2} alt="icon" width={58} height={58} />*/}
+          {/*        </div>*/}
+          {/*        <Divider color="#ececec" />*/}
+          {/*        <p>Bridging the gap between education and industry</p>*/}
+          {/*      </div>*/}
+          {/*    </div>*/}
+          {/*  </Grid.Col>*/}
+          {/*  <Grid.Col span={{ base: 12, md: 4 }}>*/}
+          {/*    <div className={style.ourValueCard}>*/}
+          {/*      <div>*/}
+          {/*        <div className={style.valueHeader}>*/}
+          {/*          <Image src={value3} alt="icon" width={58} height={58} />*/}
+          {/*        </div>*/}
+          {/*        <Divider color="#ececec" />*/}
+          {/*        <p>Empowering women in leadership roles</p>*/}
+          {/*      </div>*/}
+          {/*    </div>*/}
+          {/*  </Grid.Col>*/}
+          {/*</Grid>*/}
+          {/*<Grid className={style.ourGrid}>*/}
+          {/*  <Grid.Col span={{ base: 12, md: 3 }}>*/}
+          {/*    <div className={style.ourValueCard}>*/}
+          {/*      <div>*/}
+          {/*        <div className={style.valueHeader}>*/}
+          {/*          <Image src={value4} alt="icon" width={58} height={58} />*/}
+          {/*        </div>*/}
+          {/*        <Divider color="#ececec" />*/}
+          {/*        <p>Promoting inclusivity and diversity</p>*/}
+          {/*      </div>*/}
+          {/*    </div>*/}
+          {/*  </Grid.Col>*/}
+          {/*  <Grid.Col span={{ base: 12, md: 3 }}>*/}
+          {/*    <div className={style.ourValueCard}>*/}
+          {/*      <div>*/}
+          {/*        <div className={style.valueHeader}>*/}
+          {/*          <Image src={value5} alt="icon" width={58} height={58} />*/}
+          {/*        </div>*/}
+          {/*        <Divider color="#ececec" />*/}
+          {/*        <p>*/}
+          {/*          Reducing job search time and making career coaching*/}
+          {/*          accessible for all*/}
+          {/*        </p>*/}
+          {/*      </div>*/}
+          {/*    </div>*/}
+          {/*  </Grid.Col>*/}
+          {/*  <Grid.Col span={{ base: 12, md: 3 }}>*/}
+          {/*    <div className={style.ourValueCard}>*/}
+          {/*      <div>*/}
+          {/*        <div className={style.valueHeader}>*/}
+          {/*          <Image src={value6} alt="icon" width={58} height={58} />*/}
+          {/*        </div>*/}
+          {/*        <Divider color="#ececec" />*/}
+          {/*        <p>*/}
+          {/*          Helping companies embrace Gen Z culture and rebrand*/}
+          {/*          effectively*/}
+          {/*        </p>*/}
+          {/*      </div>*/}
+          {/*    </div>*/}
+          {/*  </Grid.Col>*/}
+          {/*  <Grid.Col span={{ base: 12, md: 3 }}>*/}
+          {/*    <div className={style.ourValueCard}>*/}
+          {/*      <div>*/}
+          {/*        <div className={style.valueHeader}>*/}
+          {/*          <Image src={value7} alt="icon" width={58} height={58} />*/}
+          {/*        </div>*/}
+          {/*        <Divider color="#ececec" />*/}
+          {/*        <p>*/}
+          {/*          Using AI to balance the power between candidates and*/}
+          {/*          companies*/}
+          {/*        </p>*/}
+          {/*      </div>*/}
+          {/*    </div>*/}
+          {/*  </Grid.Col>*/}
+          {/*</Grid>*/}
           <Box className={style.mission}>
-            <h1 style={{ fontWeight: "300", textAlign: "center" }}>
-              <span
-                style={{
-                  borderBottom: "4px solid #5e62fc",
-                  borderRadius: "4px",
-                }}
-              >
-                O
-              </span>
-              ur
-              <strong> Mission</strong>
-            </h1>
-            <p>
-              We use AI to support Gen Z in the UK job market and beyond. Our
-              mission is to build a network that values people as individuals,
-              not just users, empowering them to achieve their career goals.
-            </p>
+            {/*<h1 style={{ fontWeight: "300", textAlign: "center" }}>*/}
+            {/*  <span*/}
+            {/*    style={{*/}
+            {/*      borderBottom: "4px solid #5e62fc",*/}
+            {/*      borderRadius: "4px",*/}
+            {/*    }}*/}
+            {/*  >*/}
+            {/*    O*/}
+            {/*  </span>*/}
+            {/*  ur*/}
+            {/*  <strong> Mission</strong>*/}
+            {/*</h1>*/}
+            {/*<p>*/}
+            {/*  We use AI to support Gen Z in the UK job market and beyond. Our*/}
+            {/*  mission is to build a network that values people as individuals,*/}
+            {/*  not just users, empowering them to achieve their career goals.*/}
+            {/*</p>*/}
             <div className={style.missionBtn}>
               <div
                 style={{
