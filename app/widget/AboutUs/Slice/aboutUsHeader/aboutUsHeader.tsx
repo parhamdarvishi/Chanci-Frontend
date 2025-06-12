@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import aboutUsHeader from "@public/image/widget/aboutUs/AboutUs.png";
-import aboutRes from "@public/image/responsive/aboutRes.png";
+import aboutUsHeader from "@public/image/widget/aboutUs/AboutUsVesrion2.jpg";
+import aboutRes from "@public/image/widget/aboutUs/AboutUsVesrion2.jpg";
 import style from "./aboutusHeader.module.scss";
 
 const AboutUsHeader = () => {

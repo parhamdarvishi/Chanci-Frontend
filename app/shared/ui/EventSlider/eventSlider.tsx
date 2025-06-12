@@ -186,7 +186,14 @@ const EventSlider: React.FC<Events> = ({ data }) => {
           &gt;
         </button> */}
       </div>
-      <UpComing content={data[activeIndex]?.content} />
+      <p style={{
+        display: "flex",
+        padding: "1rem",
+        textAlign:"justify",
+        fontSize: "19px",
+      }}>
+        At New Generation Network, we are dedicated to fostering the UK startup ecosystem through dynamic events that prioritise community building, learning opportunities, and talent matchmaking. Founded by Jasmine Syyari, our gatherings, which have attracted over 1000 people in London, offer a fresh approach to networking, featuring powerful talks from strong speakers, including award-winning founders, and numerous co-founding opportunities. We pride ourselves on the thoughtfulness behind each event, cultivating a uniquely strong network of entrepreneurs, VCs, and angels with a particular focus on empowering Gen Z. Join us to connect, grow, and contribute to the future of innovation.
+      </p>
     </>
   );
 };

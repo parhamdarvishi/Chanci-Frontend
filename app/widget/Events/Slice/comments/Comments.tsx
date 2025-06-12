@@ -8,18 +8,18 @@ const Comments = () => {
   const data = [
     {
       id: 1,
-      desc: "This was my first experience with NGN, and I was blown away! The energy, the connections, and the incredible speakers made it unforgettable. Kudos to Jasmine and the team for creating such an outstanding platform!",
-      emp: "Anahita (Journalist)",
+      desc: "You’re bringing together art, AI, vision, and technology in such a unique way.",
+      emp: "Julie Blair (AI Consultant)",
     },
     {
       id: 2,
-      desc: "NGN events have been a game-changer for me. The dynamic atmosphere and the chance to connect with top professionals in the UK’s start-up ecosystem have been truly inspiring. My network and insights have grown exponentially!",
-      emp: "Goodness (CEO of Immersely)",
+      desc: "Jasmine has built a platform that brings together founders, investors, and industry leaders, creating opportunities for collaboration and meaningful connections.",
+      emp: "Joanna Ou (Entrepreneur in the solar energy industry",
     },
     {
       id: 3,
-      desc: "I’ve always been excited about NGN’s events, and they never disappoint! The vibrant networking opportunities and high-quality connections have truly expanded my professional circle. Thank you for these exceptional experiences!",
-      emp: "Navid (Co-Founder of UBT Srl)",
+      desc: "This event did exactly that – offering visibility, support, and even funding opportunities to help founders turn their ideas into scalable businesses.",
+      emp: "Pritam Maiti ( Founder of Inspire Football Academy)",
     },
   ];
 
