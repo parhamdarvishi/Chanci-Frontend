@@ -3,5 +3,6 @@ export const chanciAddresses = {
   profile: "/api/User/Profile",
   Add: "/api/Resume/Add",
   getUserHeaders: "/api/UserAnswers/GetAllHeaders",
-  PayForSubscription: "/api/UserSubscription/Pay"
+  PayForSubscription: "/api/UserSubscription/Pay",
+  GetExpirationDateByUserId: "/api/UserSubscription/GetExpirationDateByUserId",
 };

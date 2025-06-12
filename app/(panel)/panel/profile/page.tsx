@@ -18,7 +18,8 @@ const Page = () => {
     const [userData, setUserData] = useState<userDataType>();
     const [isVerified, setIsVerified] = useState<boolean>(true);
     const [resendingEmail, setResendingEmail] = useState<boolean>(false);
-
+    const [remainingTime, setRemainingTime] = useState(null);
+    
     const getuserProfile = async () => {
         const res = await getRequest(chanciAddresses.profile, null, true);
         if (res?.isSuccess) {
@@ -46,6 +47,18 @@ const Page = () => {
         }
     };
 
+    const handleGetExpirationDateOfSubscription = async () => {
+        const res = await getRequest(chanciAddresses.GetExpirationDateByUserId, null,true);
+        debugger;
+        if (res?.data) {
+            const finalRes:any = res?.data;
+            if (finalRes?.isRemain){
+                setRemainingTime(finalRes?.remainingMessage);
+            }
+        } else {
+            return;
+        }
+    };
     const handleResendVerification = async () => {
         setResendingEmail(true);
         try {
@@ -65,6 +78,7 @@ const Page = () => {
 
     useEffect(() => {
         getuserProfile();
+        handleGetExpirationDateOfSubscription();
     }, []);
 
     return (
@@ -143,7 +157,20 @@ const Page = () => {
                     <Box>
                         <div style={{color: "#737373", fontSize: "18px"}}>Subscription</div>
                         <div>
-                            <button onClick={handlePayUserSubscription}>Add Subscription</button>
+                            {remainingTime ? (
+                                <div style={{fontSize: "16px"}}>{remainingTime}</div>
+                            ) : (
+                                <button
+                                    style={{
+                                        color: "#4752f3",
+                                        padding: ".2rem 1.2rem",
+                                        fontSize: "16px",
+                                        borderRadius: "8px",
+                                        border: "none",
+                                        background: "linear-gradient(90deg,#d4d6ff,#d4d6ff,#f7f8ff)"
+                                    }}
+                                    onClick={handlePayUserSubscription}>Add Subscription</button>
+                            )}
                         </div>
                     </Box>
                 </Box>
@@ -160,7 +187,7 @@ const Page = () => {
                         }}
                     >
                         <Avatar color="indigo" size={60}>
-                            <IconLock size={40}/>
+                        <IconLock size={40}/>
                         </Avatar>
                         <Box>
                             <div style={{color: "#737373", fontSize: "18px"}}>Update Password</div>
