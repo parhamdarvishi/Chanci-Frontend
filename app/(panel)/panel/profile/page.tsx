@@ -21,7 +21,7 @@ const Page = () => {
     const [isVerified, setIsVerified] = useState<boolean>(true);
     const [resendingEmail, setResendingEmail] = useState<boolean>(false);
     const [remainingTime, setRemainingTime] = useState(null);
-    const [industryScores, setIndustryScores] = useState<IndustryScore[] | undefined[]>();
+    const [industryScores, setIndustryScores] = useState<IndustryScore[]>();
     
     const containerStyle = {
         padding: "1rem",
