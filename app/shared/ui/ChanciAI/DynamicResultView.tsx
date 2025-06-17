@@ -26,7 +26,7 @@ import {useParams} from "next/navigation";
 import {jobAddress} from "@shared/constants/relative-url/job";
 import {Job, JobResponse} from "@shared/types/chanci/job";
 import Link from "next/link";
-import {BarChart, LineChart} from "@mantine/charts";
+import {BarChart} from "@mantine/charts";
 
 interface DynamicResultViewProps {
     industryScores: IndustryScore[];
@@ -36,6 +36,8 @@ interface DynamicResultViewProps {
     resume?: Resume;
     bigFive?: ResultBigFive;
 }
+
+
 
 const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                                                                  industryScores,
@@ -61,16 +63,8 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
     const selectedCourses = courses?.filter(
         (course) => course?.industryTitle?.trim().toLowerCase() === industryName?.trim().toLowerCase()
     );
-    const data = [
-        { month: 'Jan', value: 100 },
-        { month: 'Feb', value: 120 },
-        { month: 'Mar', value: 90 },
-        { month: 'Apr', value: 130 },
-    ];
-    console.log("Filtered selectedCourses:", selectedCourses);
     const params = useParams();
     useEffect(() => {
-        console.log("Updated industryName:", industryName);
     }, [industryName]);
     useEffect(() => {
         const fetchIndustriess = async () => {
@@ -89,7 +83,6 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                 setCourses(items?.courses);
                 setAllIndustries(items?.industries);
             } catch (error) {
-                console.error("Error fetching industries:", error);
                 toastAlert("Failed to load industries", "error");
             }
         };

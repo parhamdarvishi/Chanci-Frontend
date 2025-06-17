@@ -5,4 +5,5 @@ export const chanciAddresses = {
   getUserHeaders: "/api/UserAnswers/GetAllHeaders",
   PayForSubscription: "/api/UserSubscription/Pay",
   GetExpirationDateByUserId: "/api/UserSubscription/GetExpirationDateByUserId",
+  GetLastIndustryScore: "/api/UserAnswers/LastIndustryScoreCommand",
 };

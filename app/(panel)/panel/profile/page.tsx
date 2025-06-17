@@ -1,14 +1,16 @@
 "use client";
 import {getRequest, postRequest} from "@/shared/api";
 import {chanciAddresses} from "@/shared/constants/relative-url/chanci";
-import {Avatar, Box, Button, Alert} from "@mantine/core";
-import {IconMail, IconLock, IconAlertCircle, IconBrandMyOppo} from "@tabler/icons-react";
-import React, {FormEvent, useEffect, useState} from "react";
+import {Avatar, Box, Button, Alert, Card} from "@mantine/core";
+import {IconMail, IconLock, IconAlertCircle, IconBrandMyOppo, IconChartLine } from "@tabler/icons-react";
+import React, {useEffect, useState} from "react";
 import Link from "next/link";
 import toastAlert from "@/shared/helpers/toast";
 import {getUserData} from "@/shared/helpers/util";
-import axios from "axios";
-import {API_BASE_URL} from "@shared/config/env";
+import style from "@/(chanci)/style.module.scss";
+import {BarChart} from "@mantine/charts";
+import {IndustryScore} from "@shared/types/chanci/chanci";
+import {IndustryResponse} from "@shared/types/chanci/industry";
 
 type userDataType = {
     userName: string;
@@ -19,6 +21,22 @@ const Page = () => {
     const [isVerified, setIsVerified] = useState<boolean>(true);
     const [resendingEmail, setResendingEmail] = useState<boolean>(false);
     const [remainingTime, setRemainingTime] = useState(null);
+    const [industryScores, setIndustryScores] = useState<IndustryScore[] | undefined[]>();
+    
+    const containerStyle = {
+        padding: "1rem",
+        display: "grid",
+        gap: "3rem",
+        gridTemplateColumns: "1fr"
+    };
+
+    const responsiveStyle = `
+      @media (min-width: 768px) {
+        .card-container {
+          grid-template-columns: repeat(4, 1fr); /* 4 cards per row */
+        }
+      }
+    `;
     
     const getuserProfile = async () => {
         const res = await getRequest(chanciAddresses.profile, null, true);
@@ -31,6 +49,15 @@ const Page = () => {
         }
     };
 
+    const getLastIndustryScore = async () => {
+        const res: IndustryResponse = await getRequest(chanciAddresses.GetLastIndustryScore, null, true);
+        if (res?.isSuccess) {
+            debugger;
+            const result: any =  res?.data?.industryScores;
+            setIndustryScores(result);
+        }
+    };
+    
     const handlePayUserSubscription = async () => {
         const res = await postRequest(chanciAddresses.PayForSubscription,
             {
@@ -78,6 +105,7 @@ const Page = () => {
 
     useEffect(() => {
         getuserProfile();
+        getLastIndustryScore();
         handleGetExpirationDateOfSubscription();
     }, []);
 
@@ -105,12 +133,7 @@ const Page = () => {
             )}
 
             <Box
-                style={{
-                    padding: "1rem",
-                    display: "flex",
-                    flexWrap: "wrap",
-                    gap: "3rem",
-                }}
+                className="card-container" style={containerStyle}
             >
                 <Box
                     style={{
@@ -174,27 +197,62 @@ const Page = () => {
                         </div>
                     </Box>
                 </Box>
-            </Box>
+                <Box style={{}}>
+                    <Link href="/panel/updatepassword">
+                        <Box
+                            style={{
+                                display: "flex",
 
-            <Box style={{padding: "1rem", marginTop: "1rem"}}>
-                <Link href="/panel/updatepassword">
-                    <Box
-                        style={{
-                            display: "flex",
-
-                            alignItems: "center",
-                            gap: "1rem",
-                        }}
-                    >
-                        <Avatar color="indigo" size={60}>
-                        <IconLock size={40}/>
-                        </Avatar>
-                        <Box>
-                            <div style={{color: "#737373", fontSize: "18px"}}>Update Password</div>
+                                alignItems: "center",
+                                gap: "1rem",
+                            }}
+                        >
+                            <Avatar color="indigo" size={60}>
+                                <IconLock size={40}/>
+                            </Avatar>
+                            <Box>
+                                <div style={{color: "#737373", fontSize: "18px"}}>Update Password</div>
+                            </Box>
                         </Box>
-                    </Box>
-                </Link>
+                    </Link>
+                </Box>
+                {
+                    industryScores && industryScores.length > 0 && (
+                        <>
+                            <Box style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "1rem",
+                            }}>
+                                <Avatar color="indigo" size={60}>
+                                    <IconChartLine size={40}/>
+                                </Avatar>
+                                <Box style={{color: "#737373", fontSize: "18px"}}>
+                                    Your Last Score
+                                </Box>
+                            </Box>
+                            <Box>
+                                <Card
+                                    radius="md"
+                                    className={style.cardDone}
+                                    shadow="none">
+                                    <div style={{padding: 10}}>
+                                        <BarChart
+                                            h={300}
+                                            data={industryScores}
+                                            dataKey="name"
+                                            series={[{name: 'score', color: 'blue'}]}
+                                        />
+                                    </div>
+                                </Card>
+                            </Box>
+                        </>
+                    )
+                }
+                
             </Box>
+
+            
         </div>
     );
 };
