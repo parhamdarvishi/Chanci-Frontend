@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, {useState} from "react";
 import Link from "next/link";
 import Image from "next/image";
 import style from "./footer.module.scss";
@@ -11,8 +11,33 @@ import footerLineN from "@public/image/LineFooterN.svg";
 import arrowRight from "@public/arrowRight.svg";
 import { modals } from "@mantine/modals";
 import ModalTouch from "../ModalTouch/modalTouch";
+import {postRequest} from "@shared/api";
+import {getInTouchAddress} from "@shared/constants/relative-url/getIntouch";
+import toastAlert from "@shared/helpers/toast";
+import {newsletterSubscriberAddress} from "@shared/constants/relative-url/newsletterSubscriber";
 
 const Footer = () => {
+
+  const [email, setEmail] = useState('');
+  
+  const handleSubscribe= async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if(!email || email.length < 1) {
+      toastAlert("Please enter valid email!", "error");
+      return;
+    }
+    
+    const res = await postRequest(
+        newsletterSubscriberAddress.add,
+        { email : email },
+        false
+    );
+    if (!res?.isSuccess) {
+      toastAlert("Oops! Something went wrong. Please try again later.", "error");
+    }
+    toastAlert("Thanks for reaching out! We’ll get back to you shortly.", "success");
+  };
+  
   const openModal = () =>
     modals.open({
       radius: "lg",
@@ -51,8 +76,12 @@ const Footer = () => {
               <div onClick={openModal}>Get in Touch</div>
             </nav>
             <div className={style.navigationField}>
-              <input type="text" placeholder="Sign up for our newsletter" />
-              <Link href="/ComingSoon" className={style.button}>
+              <input 
+                  type="text"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Sign up for our newsletter" />
+              <button className={style.button} onClick={handleSubscribe}>
                 Subscribe
                 <Image
                   className={style.cardArrow}
@@ -60,7 +89,7 @@ const Footer = () => {
                   alt="arrowRight"
                   width={22}
                 />
-              </Link>
+              </button>
             </div>
           </div>
 

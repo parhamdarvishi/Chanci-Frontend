@@ -31,7 +31,7 @@ const ModalTouch = () => {
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    debugger;
     if (fieldForm.validate().hasErrors) return;
     setLoading(true);
     const res = await postRequest(
@@ -41,9 +41,9 @@ const ModalTouch = () => {
     );
     if (!res?.isSuccess) {
       setLoading(false);
-      toastAlert("Something got wrong", "error");
+      toastAlert("Oops! Something went wrong. Please try again later.", "error");
     }
-    toastAlert("success", "success");
+    toastAlert("Thanks for reaching out! We’ll get back to you shortly.", "success");
     modals.closeAll();
     setLoading(false);
   };
