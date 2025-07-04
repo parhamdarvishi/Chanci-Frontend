@@ -57,7 +57,7 @@ const ClearPlan = () => {
           </div>
           <div className={style.cardSpanPart}>
             <p>
-              It Made everything about my next career move so clear. Seriously,
+              It made everything about my next career move so clear. Seriously,
               mind blown!
             </p>
             <span className={style.cardSpan}>Mia, Bsc in Computer Science</span>
