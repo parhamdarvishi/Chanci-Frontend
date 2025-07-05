@@ -26,12 +26,14 @@ export type GetRequestFunction = <T>(
   authorization?: boolean,
   excel?: boolean
 ) => Promise<ResponseData>;
+
 export type PostRequestFunction = <T>(
   url: string,
   data: T,
   authorization?: boolean,
   formData?: boolean
 ) => Promise<ResponseData>;
+
 export type PutRequestFunction = <T>(
   url: string,
   data: T,
