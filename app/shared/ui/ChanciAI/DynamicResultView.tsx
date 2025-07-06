@@ -2,6 +2,8 @@
 import {Avatar, Box, Card, Select, Table} from "@mantine/core";
 import React, {useEffect, useState} from "react";
 import style from "./../../../(chanci)/style.module.scss";
+import { IconDeviceDesktopDown } from "@tabler/icons-react";
+
 import {
     Course,
     IndustryScore,
@@ -19,7 +21,7 @@ import {
     IndustryRecommendation,
     IndustryResponse,
 } from "@/shared/types/chanci/industry";
-import {getRequest} from "@/shared/api";
+import {getRequest, postRequest} from "@/shared/api";
 import {industryAddress} from "@/shared/constants/relative-url/industry";
 import toastAlert from "@/shared/helpers/toast";
 import {useParams} from "next/navigation";
@@ -27,6 +29,7 @@ import {jobAddress} from "@shared/constants/relative-url/job";
 import {Job, JobResponse} from "@shared/types/chanci/job";
 import Link from "next/link";
 import {BarChart} from "@mantine/charts";
+import {chanciAddresses} from "@shared/constants/relative-url/chanci";
 
 interface DynamicResultViewProps {
     industryScores: IndustryScore[];
@@ -66,6 +69,30 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
     const params = useParams();
     useEffect(() => {
     }, [industryName]);
+    const handleSaveCourseClick = async (courseId: number) => {
+        const res = await postRequest(jobAddress.SaveCourse,
+            {
+                courseId: courseId
+            },
+            true);
+        if (res?.isSuccess) {
+            toastAlert("Course saved successfully!", "success");
+        } else {
+            return;
+        }
+    };
+    const handleSaveJobClick = async (jobId: number) => {
+        const res = await postRequest(jobAddress.SaveJob,
+            {
+                jobId: jobId
+            },
+            true);
+        if (res?.isSuccess) {
+            toastAlert("Course saved successfully!", "success");
+        } else {
+            return;
+        }
+    };
     useEffect(() => {
         const fetchIndustriess = async () => {
             try {
@@ -716,6 +743,24 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                                                             <Link href={job?.link ?? "##"} target="_blank">show
                                                                 detail</Link>
                                                         </div>
+                                                        <div>
+                                                            <span
+                                                                onClick={() => handleSaveJobClick(job?.id as number)}
+                                                                style={{
+                                                                    marginTop: "5px",
+                                                                    border: "1px solid gray",
+                                                                    borderRadius: "10px",
+                                                                    padding: "5px",
+                                                                    display: "flex",
+                                                                    alignItems: "center",
+                                                                    justifyContent: "space-between",
+                                                                    width: "130px",
+                                                                    cursor: "pointer"
+                                                                }}>
+                                                                <span>Save Job</span>
+                                                                <span><IconDeviceDesktopDown size={20}/></span>
+                                                            </span>
+                                                        </div>
                                                     </p>
                                                 </div>
                                             ))}
@@ -829,6 +874,7 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                                                           fontWeight: "bold",
                                                       }}> Title: </span>
                                                     <span> {course?.name ?? "Unknown Industry"} ({course?.level ?? "Unknown Industry"})</span>
+                                                    
                                                 </div>
                                                 <div style={{
                                                     marginBottom: "5px",
@@ -846,6 +892,24 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
                                                   }}> Duration: </span>
                                                     <span> {course?.duration ?? "Unknown Platform"}</span>
                                                 </div>
+                                                <div>
+                                                    <span
+                                                        onClick={() => handleSaveCourseClick(course?.id as number)}
+                                                        style={{
+                                                            marginTop: "5px",
+                                                            border: "1px solid gray",
+                                                            borderRadius: "10px",
+                                                            padding: "5px",
+                                                            display: "flex",
+                                                            alignItems: "center",
+                                                            justifyContent: "space-between",
+                                                            width: "130px",
+                                                            cursor: "pointer"
+                                                        }}>
+                                                            <span>Save Course</span>
+                                                            <span><IconDeviceDesktopDown size={20}/></span>
+                                                    </span>
+                                                </div>
                                             </p>
                                         </div>
                                     ))}
@@ -860,6 +924,8 @@ const DynamicResultView: React.FC<DynamicResultViewProps> = ({
         }
     };
 
+   
+    
     return (
         <div
             style={{

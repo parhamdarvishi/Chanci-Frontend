@@ -64,7 +64,6 @@ const Page = () => {
                 SubscriptionId: 1
             },
             true);
-        debugger;
         if (res?.data) {
             const finalRes:any = res?.data;
             const paymenturl: any = finalRes?.checkout_Url;
