@@ -66,10 +66,8 @@ const ModalTouch = () => {
             input: style.inputInquiry,
           }}
           defaultSearchValue="General Inquiry"
-          //   dropdownOpened
-          description="Please enter your inquiry subject"
           label="Inquiry Subject"
-          placeholder="Pick value"
+          placeholder="Please enter your inquiry subject"
           defaultValue="React"
           {...fieldForm.getInputProps("inquirySubject")}
         />
@@ -82,10 +80,10 @@ const ModalTouch = () => {
             description: style.description,
           }}
           withAsterisk
-          label="Full name"
-          description="Please enter your full name"
+          label="full name"
         >
           <Input
+              placeholder="Please enter your full name"
             classNames={{ input: style.input }}
             {...fieldForm.getInputProps("fullName")}
           />
@@ -100,10 +98,9 @@ const ModalTouch = () => {
           }}
           withAsterisk
           label="Email"
-          description="Please enter your email"
         >
           <Input
-            placeholder="For e.g. example@gmail.com"
+            placeholder="Please enter your email"
             classNames={{ input: style.input }}
             {...fieldForm.getInputProps("email")}
           />
@@ -124,10 +121,9 @@ const ModalTouch = () => {
           }}
           withAsterisk
           label="Phone Number"
-          description="Please enter your mobile number"
         >
           <Input
-            placeholder="For e.g. 44667788"
+            placeholder="Please enter your mobile number"
             classNames={{ input: style.input }}
             {...fieldForm.getInputProps("phoneNumber")}
           />
@@ -142,8 +138,7 @@ const ModalTouch = () => {
             input: style.inputTextArea,
           }}
           label="Your Message"
-          description="Please enter your message (Optional)"
-          placeholder="Placeholder text"
+          placeholder="Please enter your message (Optional)"
           minRows={6}
           {...fieldForm.getInputProps("message")}
         />
