@@ -14,6 +14,7 @@ export interface ExternalReferenceResponse {
     createAt: string;//"2025-03-27T11:07:54.416183",
     fullName: string;
     email: string;
+    reportStatusName: string;
     
     //userAnswers: null,
     isDeleted: boolean;

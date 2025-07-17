@@ -6,11 +6,11 @@ import { chanciAddresses } from "@/shared/constants/relative-url/chanci";
 import { TableColumns } from "@/shared/ui/Table/model";
 
 const columns: TableColumns<UserHeaders>[] = [
-  { head: "Index", key: "index" },
-  { head: "User Id", key: "userId" },
-  { head: "Full Name", key: "fullName" },
-  { head: "Email", key: "email" },
-  { head: "Created At", key: "createAt" },
+    { head: "Index", key: "index" },
+    { head: "User Id", key: "userId" },
+    { head: "Email", key: "email" },
+    { head: "Created At", key: "createAt" }, 
+    { head: "Status", key: "reportStatusName" },
 ];
 
 const Page = () => {

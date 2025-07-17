@@ -87,6 +87,12 @@ export type Course = {
   impact: string;
   platform: string;
 };
+export type UserAnswerHeader = {
+  id: number;
+  compeletedAt: string;
+  email: string;
+  userId: string;
+}
 export type ResultBigFive = {
   Openness: number;
   Conscientiousness: number;
@@ -110,6 +116,7 @@ export interface ResultApiResponse {
     bigFiveAverage?: ResultBigFive;
     reportStatus?: number;
     courses?: Course[];
+    userAnswerHeader?: UserAnswerHeader
   };
 }
 

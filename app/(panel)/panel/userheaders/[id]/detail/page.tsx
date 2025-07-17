@@ -8,7 +8,7 @@ import { JsonView, darkStyles } from "react-json-view-lite";
 import "react-json-view-lite/dist/index.css";
 import toastAlert from "@/shared/helpers/toast";
 import useGeneratedPrompts from "@/shared/hooks/useGeneratedPrompts";
-import { ResultApiResponse, ResultBigFive } from "@/shared/types/chanci/result";
+import {ResultApiResponse, ResultBigFive, UserAnswerHeader} from "@/shared/types/chanci/result";
 
 // Using the interfaces from the useGeneratedPrompts hook
 
@@ -19,6 +19,7 @@ const UserHeaderDetailPage = () => {
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const [isRegenerating, setIsRegenerating] = useState<boolean>(false);
   const [bifFive, setBigFive] = useState<ResultBigFive>();
+  const [userAnswerHeader, setUserAnswerHeader] = useState<UserAnswerHeader>();
   const handleDelete = async () => {
     if (!params.id) return;
     
@@ -45,7 +46,7 @@ const UserHeaderDetailPage = () => {
   };
   const handleRegenerate = async (fromButton = false) => {
     if (!params.id) return;
-    
+    debugger;
     setIsRegenerating(true);
     try {
       const reqBody = {
@@ -56,16 +57,19 @@ const UserHeaderDetailPage = () => {
         reqBody,
         true
       );
-      
+      debugger;
       if (res?.isSuccess) {
         if(fromButton) toastAlert("Result regenerated successfully", "success");
         setBigFive(res?.data?.bigFiveAverage);
+        debugger;
+        setUserAnswerHeader(res?.data?.userAnswerHeader);
         // Refresh the data
         await fetchGeneratedPrompts();
       } else {
         toastAlert(res?.message as string || "Failed to regenerate result", "error");
       }
     } catch (error) {
+      debugger;
       console.error("Error regenerating result:", error);
       toastAlert("Error regenerating result", "error");
     } finally {
@@ -183,6 +187,10 @@ const UserHeaderDetailPage = () => {
                     <Group>
                       <Text fw={500}>Is Deleted:</Text>
                       <Text>{generatedPrompt.isDeleted ? "Yes" : "No"}</Text>
+                    </Group>
+                    <Group>
+                      <Text fw={500}>Report Completed At:</Text>
+                      <Text>{userAnswerHeader?.compeletedAt}</Text>
                     </Group>
                   </Box>
                 </Accordion.Panel>
