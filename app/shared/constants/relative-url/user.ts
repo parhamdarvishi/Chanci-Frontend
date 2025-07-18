@@ -5,6 +5,6 @@ export const userAddresses = {
   usersRole: "/api/User/GetUserRoles",
   getAllRole: "/api/Role/GetAll",
   addNewRole: "/api/User/AddRole",
-  ConvertAnswersToPromptCommand:
-    "/api/UserAnswers/ConvertAnswersToPromptCommand",
+  ConvertAnswersToPromptCommand: "/api/UserAnswers/ConvertAnswersToPromptCommand",
+  AddByFile: "/api/User/AddByFile",
 };
