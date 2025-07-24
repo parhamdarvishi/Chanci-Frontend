@@ -52,7 +52,7 @@ const Page = () => {
 
   const [reportStatus, setReportStatus] = useState<number>();
   const loadingModal = () => {
-    modals.open({
+    modals?.open({
       radius: "30px",
       size: "lg",
       styles: {
@@ -82,6 +82,7 @@ const Page = () => {
   
     const pollReportStatus = async () => {
       try {
+        debugger;
         const reqBody = {
           UserAnswerHeaderId: Number(params.id),
         };
@@ -90,6 +91,7 @@ const Page = () => {
           reqBody,
           true
         );
+        debugger;
         const code = res?.data?.reportStatus;
         setReportStatus(code);
         if (code === 3) {

@@ -22,6 +22,7 @@ export interface ExternalReferenceResponse {
   export type TPrompt = {
     id: number;
     content: string;
+    minimalContent: string;
     role: number;
     parameters: any[];
     isActive: boolean;

@@ -18,6 +18,7 @@ export interface OptionsTypes {
   };
   options?: string;
   responseType?: string;
+  timeout?: number;
 }
 
 export type GetRequestFunction = <T>(

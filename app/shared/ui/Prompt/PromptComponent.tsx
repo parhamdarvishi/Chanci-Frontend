@@ -11,6 +11,7 @@ import { TPrompt } from "@/shared/types/other/other";
 type PromptFormValues = {
   role: string;
   content: string;
+  minimalContent: string;
   isActive: boolean;
 };
 
@@ -30,6 +31,7 @@ const PromptComponent: React.FC<PromptComponentProps> = ({
     initialValues: {
       role: prompt?.role.toString() || "1",
       content: prompt?.content || "",
+      minimalContent: prompt?.minimalContent || "",
       isActive: prompt?.isActive ?? true,
     },
     validate: {
@@ -43,6 +45,7 @@ const PromptComponent: React.FC<PromptComponentProps> = ({
       const payload = {
         role: parseInt(values.role),
         content: values.content,
+        minimalContent: values.minimalContent,
         isActive: values.isActive,
       };
 
@@ -96,6 +99,19 @@ const PromptComponent: React.FC<PromptComponentProps> = ({
             {...form.getInputProps("content")}
           />
 
+          <Textarea
+              label="Minimal Content"
+              placeholder="Enter prompt minimal content (For Demo)"
+              autosize
+              readOnly={readOnly}
+              minRows={9}
+              rows={10}
+              mb="md"
+              required
+              style={{ minHeight: "300px" }}
+              {...form.getInputProps("minimalContent")}
+          />
+          
           {!readOnly && <Button type="submit" loading={loading}>
             Add Prompt
           </Button>}

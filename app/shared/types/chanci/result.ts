@@ -89,9 +89,15 @@ export type Course = {
 };
 export type UserAnswerHeader = {
   id: number;
+  code:string;
   compeletedAt: string;
   email: string;
   userId: string;
+  fullName:string;
+  reportStatus: number;
+  createAt: string;
+  isDeleted: boolean;
+  reportStatusName:string;
 }
 export type ResultBigFive = {
   Openness: number;
@@ -116,7 +122,7 @@ export interface ResultApiResponse {
     bigFiveAverage?: ResultBigFive;
     reportStatus?: number;
     courses?: Course[];
-    userAnswerHeader?: UserAnswerHeader
+    userAnswerHeader?: UserAnswerHeader;
   };
 }
 

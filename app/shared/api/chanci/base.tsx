@@ -23,7 +23,7 @@ const base = (authorization: boolean = false): AxiosInstance => {
 
   const options: OptionsTypes = {
     baseURL: API_BASE_URL,
-    headers: headers,
+    headers: headers
   };
 
   if (authorization) {
