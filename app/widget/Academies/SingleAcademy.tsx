@@ -7,7 +7,6 @@ import Image from "next/image";
 import arrowRight from "@public/arrowRight.svg";
 import headerRes from "@public/image/events/singleEvents/eventRes.png";
 import { getRequest } from "@/shared/api";
-import SingleAcademyHeader from "@/widget/Academies/Slice/SingleAcademyHeader/SingleAcademyHeader";
 import {bootcamp, BootcampResponse} from "@shared/types/bootcamp/bootcamp";
 import {bootcampAddress} from "@shared/constants/relative-url/bootcamp";
 const SingleAcademy: React.FC<{ bootcampId: number }> = ({ bootcampId }) => {
@@ -55,7 +54,6 @@ const SingleAcademy: React.FC<{ bootcampId: number }> = ({ bootcampId }) => {
             unoptimized
             alt={bootcamp?.title || "Image Event"}
           /> : <Skeleton height={400} radius="md" width="full" />}
-        {bootcamp && <SingleAcademyHeader bootcamp={bootcamp} />}
         <Card
           shadow="sm"
           padding="lg"
