@@ -83,7 +83,6 @@ const Navbar = () => {
         router.push("/user/register");
       }
     } else {
-      //handleComingSoon();
       router.push("/waitlist");
     }
   };
@@ -93,10 +92,6 @@ const Navbar = () => {
     if (Token) {
       setAccess(true);
     }
-    if (findPath === "ComingSoon") {
-      setLoc(4);
-      return;
-    }
     links.forEach((element, index) => {
       if (element === findPath) {
         setLoc(index);
@@ -105,7 +100,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className={style.container}>
+    <div className={`${style.container} ${style.containerColor}`}>
       <Drawer.Root opened={opened} onClose={close} radius={8} size={"310px"}>
         <Drawer.Overlay />
         <Drawer.Content style={{ padding: ".5rem" }}>
@@ -127,7 +122,7 @@ const Navbar = () => {
                 {loc === index && <div className={style.liActive}></div>}
 
                 <Link
-                  href={index === 4 ? "/ComingSoon" : `/${item}`}
+                  href={`/${item}`}
                   className={
                     loc === index ? style.liSidebarActive : style.liSidebar
                   }
@@ -172,7 +167,7 @@ const Navbar = () => {
                 className={loc === index ? style.activeLi : style.li}
                 onClick={() => handleActiveNav(index)}
               >
-                <Link href={index === 4 ? "/ComingSoon" : `/${item}`}>
+                <Link href={`/${item}`}>
                   {item}{" "}
                 </Link>
                 {loc === index && <div className={style.line}></div>}
@@ -202,12 +197,6 @@ const Navbar = () => {
           <Image src={bubbleL} alt="bubbleR" />
         </div>
         <div className={style.takeMeBtn}>
-          {/* <div className={style.comingSoon}>
-            <span>Coming Soon!</span>
-          </div> */}
-          {/* <Link className={style.btnChanci} href="/find-talent">
-            Take me to Chanci AI
-          </Link> */}
           <Box className={style.btnChanci} onClick={handleChanci}>
             <p style={{ cursor: "pointer", fontSize: "19px" }}>
               Take me to Chanci AI
@@ -216,9 +205,6 @@ const Navbar = () => {
         </div>
 
         <div className={style.inputBox}>
-          {/* <div className={style.comingSoon}>
-            <span>Coming Soon!</span>
-          </div> */}
           <Input.Wrapper style={{ height: "100%" }}>
             <Input
               type="text"

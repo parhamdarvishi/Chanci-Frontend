@@ -1,3 +1,5 @@
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+
 "use client";
 import { Avatar, Box, Card } from "@mantine/core";
 import React from "react";

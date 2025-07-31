@@ -1,3 +1,5 @@
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+
 import axios, { AxiosInstance, CreateAxiosDefaults } from "axios";
 import toastAlert from "@shared/helpers/toast";
 import { log } from "@shared/helpers";

@@ -20,6 +20,7 @@ import {relativePaths} from "@/shared/constants/relative-url/other";
 import Link from "next/link";
 import {bootcamp, BootcampResponse} from "@shared/types/bootcamp/bootcamp";
 import {bootcampAddress} from "@shared/constants/relative-url/bootcamp";
+import Editor from "@shared/ui/RichTextEditor/RichTextEditor";
 
 const BootcampComponent = ({id}: { id?: string }) => {
 
@@ -272,14 +273,14 @@ const BootcampComponent = ({id}: { id?: string }) => {
                             </Box>
                             <Box>
                                 <Text fw={500} mb={5}>
-                                    Description:
+                                    Description
                                 </Text>
-                                <Textarea
-                                    onChange={(e) => {
-                                        form.setFieldValue("description", e.target.value);
+                                <Editor
+                                    content={form.getInputProps("description").value}
+                                    onChange={(editorText) => {
+                                        form.setFieldValue("description", editorText);
                                         setFormModified(true);
                                     }}
-                                    defaultValue={form.getInputProps("description").value}
                                 />
                             </Box>
                             <Box>

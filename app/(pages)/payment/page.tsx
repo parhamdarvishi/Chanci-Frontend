@@ -1,11 +1,11 @@
 "use client";
-import Payment from "@/widget/Payment/Payment";
 import { Suspense } from "react";
+import EventPayment from "@/widget/Payment/Event/EventPayment";
 
 const PaymentPage = () => {
   return (
     <Suspense fallback={<div></div>}>
-      <Payment />
+      <EventPayment />
     </Suspense>
   );
 };

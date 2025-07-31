@@ -1,4 +1,3 @@
-import {Job} from "@shared/types/chanci/job";
 
 export type bootcamp = {
     id: number,
@@ -15,6 +14,17 @@ export type bootcamp = {
     currency: string;
     isActive: boolean;
     isDeleted: boolean;
+    bootcampPaymentTypes?: BootcampPaymentTypes[];
+}
+
+export type BootcampPaymentTypes = {
+        id: number,
+        title: string;
+        amount: number,
+        currency: string;
+        bootcampId: number,
+        bootcamp: null,
+        isDeleted: boolean;
 }
 
 export interface BootcampResponse {

@@ -39,10 +39,6 @@ const NavbarMain = () => {
     router.push("/user/login");
   };
   useEffect(() => {
-    if (findPath === "ComingSoon") {
-      setLoc(4);
-      return;
-    }
     links.forEach((element, index) => {
       if (element === findPath) {
         setLoc(index);
@@ -112,7 +108,7 @@ const NavbarMain = () => {
               key={index}
               onClick={() => handleActiveNav(index)}
             >
-              <Link href={index === 4 ? "/ComingSoon" : `/${item}`}>
+              <Link href={`/${item}`}>
                 {item}{" "}
               </Link>
               {loc === index && <div className={style.line}></div>}

@@ -1,11 +1,11 @@
 "use client";
-import PaymentVerify from "@/widget/Payment/PaymentVerify";
 import { Suspense } from "react";
+import EventPaymentVerify from "@/widget/Payment/Event/EventPaymentVerify";
 
 const PaymentVerifyPage = ()=> {
     return(
         <Suspense fallback={<div></div>}>
-        <PaymentVerify />
+        <EventPaymentVerify />
       </Suspense>
     )
 }
