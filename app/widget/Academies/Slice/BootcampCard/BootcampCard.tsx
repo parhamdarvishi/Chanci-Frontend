@@ -32,7 +32,7 @@ const BootcampCard: React.FC<{ bootcamp: bootcamp }> = ({bootcamp}) => {
                         <h3 className={style.title}>{bootcamp.title}</h3>
                         {/*<span className={style.bootcampBadge}>Get in Touch</span>*/}
                         <div className={style.actionContainer}>
-                            <Link href={`/Academy/${bootcamp.id}`}>Add to Card</Link>
+                            <Link href={`/Academy/${bootcamp.id}`}>Learn more</Link>
                         </div>
                     </div>
                 </div>
@@ -51,7 +51,7 @@ const BootcampCard: React.FC<{ bootcamp: bootcamp }> = ({bootcamp}) => {
                         <h3 className={style.title}>{bootcamp.title}</h3>
                         {/*<span className={style.bootcampBadge}>Get in Touch</span>*/}
                         <div className={style.actionContainer}>
-                            <Link href={`/Academy/${bootcamp.id}`}>Add to Card</Link>
+                            <Link href={`/Academy/${bootcamp.id}`}>Learn more</Link>
                         </div>
                     </div>
                 </div>

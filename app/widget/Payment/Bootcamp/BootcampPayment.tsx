@@ -15,6 +15,7 @@ import {useForm} from "@mantine/form";
 import {getRequest} from "@/shared/api";
 import {bootcamp, BootcampResponse} from "@shared/types/bootcamp/bootcamp";
 import {bootcampAddress} from "@shared/constants/relative-url/bootcamp";
+import {API_BASE_URL} from "@shared/config/env";
 
 const formatCurrency = (amount: number): string => {
     return new Intl.NumberFormat("en-GB", {
@@ -53,6 +54,7 @@ const BootcampPayment: React.FC = () => {
     // Validate using Yup
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        debugger;
         if (fieldForm.validate().hasErrors) return;
         // Submit form data via Axios if validation passes
         setLoading(true);
@@ -61,7 +63,7 @@ const BootcampPayment: React.FC = () => {
                 fieldForm.values.bootcampPaymentTypeId
             );
             const res = await axios.post(
-                bootcampAddress.Pay,
+                `${API_BASE_URL}/api/Bootcamp/pay`,
                 {...fieldForm.values, id: Number(bootcampId)},
                 {
                     headers: {
@@ -84,7 +86,7 @@ const BootcampPayment: React.FC = () => {
             setLoading(false);
         }
     };
-    const eventFetch = async () => {
+    const bootcampFetch = async () => {
         const reqBody = {
             Id: bootcampId,
             Skip: 0,
@@ -101,7 +103,7 @@ const BootcampPayment: React.FC = () => {
         return [];
     };
     useEffect(() => {
-        eventFetch();
+        bootcampFetch();
     }, []);
     return (
         <>
@@ -117,7 +119,7 @@ const BootcampPayment: React.FC = () => {
                     <p>
                         Please enter your full name, email address, and LinkedIn profile and click the button
                         to proceed with your payment and complete the booking process for
-                        participating in the event.
+                        participating in the bootcamp.
                     </p>
                     <form onSubmit={handleSubmit}>
                         <Box>
@@ -192,7 +194,7 @@ const BootcampPayment: React.FC = () => {
                                     }}
                                     //   dropdownOpened
                                     placeholder="Choose a payment type"
-                                    {...fieldForm.getInputProps("eventPaymentTypeId")}
+                                    {...fieldForm.getInputProps("bootcampPaymentTypeId")}
                                 />
                             </Input.Wrapper>
                         </Box>
