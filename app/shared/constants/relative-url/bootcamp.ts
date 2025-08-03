@@ -5,4 +5,5 @@ export const bootcampAddress = {
     Delete: "/api/Bootcamp/Delete",
     Update: "/api/Bootcamp/Update",
     Pay: "/api/Bootcamp/Pay",
+    UploadImage: "api/Bootcamp/UploadImage",
 };

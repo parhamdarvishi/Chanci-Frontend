@@ -21,13 +21,18 @@ import Link from "next/link";
 import {bootcamp, BootcampResponse} from "@shared/types/bootcamp/bootcamp";
 import {bootcampAddress} from "@shared/constants/relative-url/bootcamp";
 import Editor from "@shared/ui/RichTextEditor/RichTextEditor";
+import {courseAddress} from "@shared/constants/relative-url/course";
 
-const BootcampComponent = ({id}: { id?: string }) => {
+const BootcampComponent = ({id}: { id: string }) => {
 
     const router = useRouter();
     const [item, setItem] = useState<bootcamp | undefined>(undefined);
     const [loading, setLoading] = useState<boolean>(false);
-
+    
+    const [file, setFile] = useState(null);
+    const [uploading, setUploading] = useState(false);
+    const [message, setMessage] = useState('');
+    
     const form = useForm<bootcamp>({
         initialValues: {
             id: 0,
@@ -47,9 +52,38 @@ const BootcampComponent = ({id}: { id?: string }) => {
         }
     });
 
-    // Track if form has been modified
     const [formModified, setFormModified] = useState<boolean>(false);
+    const handleFileChange = (e: any) => {
+        setFile(e.target.files[0]);
+        setMessage('');
+    };
 
+    const handleUpload = async (type: any) => {
+        if (!file) {
+            setMessage('Please select a file first.');
+            return;
+        }
+
+        try {
+            const formData = new FormData();
+            formData.append('File', file); 
+            formData.append('Type', type); 
+            formData.append('BootcampId', id); 
+
+            const res = await postRequest(bootcampAddress.UploadImage, formData, true,true);
+            if (res?.isSuccess) {
+                toastAlert("Course updated successfully", "success");
+                window.location.reload();
+            } else {
+                toastAlert("Failed to update Course", "error");
+            }
+        } catch (error) {
+            console.error("Error updating Course:", error);
+            toastAlert("Failed to update Course", "error");
+        } finally {
+        }
+
+    };
     useEffect(() => {
         const fetchData = async () => {
             const reqBody = {
@@ -88,7 +122,7 @@ const BootcampComponent = ({id}: { id?: string }) => {
             }
         };
 
-        if (id) {
+        if (id && id.length > 0) {
             fetchData();
         } else {
             setItem(form.getInitialValues);
@@ -107,7 +141,6 @@ const BootcampComponent = ({id}: { id?: string }) => {
             const res = await postRequest(bootcampAddress.Update, formValues, true);
             if (res?.isSuccess) {
                 toastAlert("Job updated successfully", "success");
-                // Refresh the question data
                 setItem(formValues as bootcamp);
             } else {
                 toastAlert("Failed to update Job", "error");
@@ -123,7 +156,6 @@ const BootcampComponent = ({id}: { id?: string }) => {
         if (form.validate().hasErrors) return
         setLoading(true);
         try {
-            debugger
             // Convert string values back to numbers before sending to API
             const formValues = {
                 ...form.values
@@ -258,6 +290,50 @@ const BootcampComponent = ({id}: { id?: string }) => {
                                     }}
                                     defaultValue={form.getInputProps("bannerImagePath").value}
                                 />
+                                <hr style={{marginTop: '2rem', borderColor: '#ccc'}}/>
+
+                                <div
+                                    className="p-4 border rounded max-w-md mx-auto mt-10 shadow-lg"
+                                    style={{
+                                        backgroundColor: '#f9f9f9',
+                                        borderColor: '#ddd',
+                                    }}
+                                >
+                                    <input
+                                        type="file"
+                                        onChange={handleFileChange}
+                                        className="mb-4 w-full"
+                                        style={{
+                                            padding: '10px',
+                                            border: '1px solid #ccc',
+                                            borderRadius: '6px',
+                                            backgroundColor: '#fff',
+                                        }}
+                                    />
+
+                                    <button
+                                        onClick={() => handleUpload(1)}
+                                        disabled={uploading}
+                                        className="w-full px-4 py-2 text-white rounded transition-colors duration-200"
+                                        style={{
+                                            backgroundColor: uploading ? '#999' : '#2563eb',
+                                            cursor: uploading ? 'not-allowed' : 'pointer',
+                                        }}
+                                    >
+                                        {uploading ? 'Uploading...' : 'Upload'}
+                                    </button>
+
+                                    {message && (
+                                        <p
+                                            className="mt-4 text-sm text-center"
+                                            style={{color: '#444', fontStyle: 'italic'}}
+                                        >
+                                            {message}
+                                        </p>
+                                    )}
+                                </div>
+
+                                <hr style={{marginTop: '2rem', borderColor: '#ccc'}}/>
                             </Box>
                             <Box>
                                 <Text fw={500} mb={5}>
@@ -270,6 +346,106 @@ const BootcampComponent = ({id}: { id?: string }) => {
                                     }}
                                     defaultValue={form.getInputProps("cardImagePath").value}
                                 />
+                                <hr style={{marginTop: '2rem', borderColor: '#ccc'}}/>
+
+                                <div
+                                    className="p-4 border rounded max-w-md mx-auto mt-10 shadow-lg"
+                                    style={{
+                                        backgroundColor: '#f9f9f9',
+                                        borderColor: '#ddd',
+                                    }}
+                                >
+                                    <input
+                                        type="file"
+                                        onChange={handleFileChange}
+                                        className="mb-4 w-full"
+                                        style={{
+                                            padding: '10px',
+                                            border: '1px solid #ccc',
+                                            borderRadius: '6px',
+                                            backgroundColor: '#fff',
+                                        }}
+                                    />
+
+                                    <button
+                                        onClick={() => handleUpload(2)}
+                                        disabled={uploading}
+                                        className="w-full px-4 py-2 text-white rounded transition-colors duration-200"
+                                        style={{
+                                            backgroundColor: uploading ? '#999' : '#2563eb',
+                                            cursor: uploading ? 'not-allowed' : 'pointer',
+                                        }}
+                                    >
+                                        {uploading ? 'Uploading...' : 'Upload'}
+                                    </button>
+
+                                    {message && (
+                                        <p
+                                            className="mt-4 text-sm text-center"
+                                            style={{color: '#444', fontStyle: 'italic'}}
+                                        >
+                                            {message}
+                                        </p>
+                                    )}
+                                </div>
+
+                                <hr style={{marginTop: '2rem', borderColor: '#ccc'}}/>
+                            </Box>
+                            <Box>
+                                <Text fw={500} mb={5}>
+                                    mobileImagePath:
+                                </Text>
+                                <Textarea
+                                    onChange={(e) => {
+                                        form.setFieldValue("mobileImagePath", e.target.value);
+                                        setFormModified(true);
+                                    }}
+                                    defaultValue={form.getInputProps("mobileImagePath").value}
+                                />
+                                <hr style={{marginTop: '2rem', borderColor: '#ccc'}}/>
+
+                                <div
+                                    className="p-4 border rounded max-w-md mx-auto mt-10 shadow-lg"
+                                    style={{
+                                        backgroundColor: '#f9f9f9',
+                                        borderColor: '#ddd',
+                                    }}
+                                >
+                                    <input
+                                        type="file"
+                                        onChange={handleFileChange}
+                                        className="mb-4 w-full"
+                                        style={{
+                                            padding: '10px',
+                                            border: '1px solid #ccc',
+                                            borderRadius: '6px',
+                                            backgroundColor: '#fff',
+                                        }}
+                                    />
+
+                                    <button
+                                        onClick={() => handleUpload(3)}
+                                        disabled={uploading}
+                                        className="w-full px-4 py-2 text-white rounded transition-colors duration-200"
+                                        style={{
+                                            backgroundColor: uploading ? '#999' : '#2563eb',
+                                            cursor: uploading ? 'not-allowed' : 'pointer',
+                                        }}
+                                    >
+                                        {uploading ? 'Uploading...' : 'Upload'}
+                                    </button>
+
+                                    {message && (
+                                        <p
+                                            className="mt-4 text-sm text-center"
+                                            style={{color: '#444', fontStyle: 'italic'}}
+                                        >
+                                            {message}
+                                        </p>
+                                    )}
+                                </div>
+
+                                <hr style={{marginTop: '2rem', borderColor: '#ccc'}}/>
                             </Box>
                             <Box>
                                 <Text fw={500} mb={5}>
@@ -283,18 +459,7 @@ const BootcampComponent = ({id}: { id?: string }) => {
                                     }}
                                 />
                             </Box>
-                            <Box>
-                                <Text fw={500} mb={5}>
-                                    mobileImagePath:
-                                </Text>
-                                <Textarea
-                                    onChange={(e) => {
-                                        form.setFieldValue("mobileImagePath", e.target.value);
-                                        setFormModified(true);
-                                    }}
-                                    defaultValue={form.getInputProps("mobileImagePath").value}
-                                />
-                            </Box>
+
                             <Box>
                                 <Text fw={500} mb={5}>
                                     instructorImagePath:
