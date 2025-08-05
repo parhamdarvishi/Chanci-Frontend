@@ -42,6 +42,7 @@ const BootcampComponent = ({id}: { id: string }) => {
             price: 0,
             discount: 0,
             description: "",
+            shortDescription: "",
             bannerImagePath: "",
             cardImagePath: "",
             mobileImagePath: "",
@@ -459,7 +460,18 @@ const BootcampComponent = ({id}: { id: string }) => {
                                     }}
                                 />
                             </Box>
-
+                            <Box>
+                                <Text fw={500} mb={5}>
+                                    Short Description:
+                                </Text>
+                                <Textarea
+                                    onChange={(e) => {
+                                        form.setFieldValue("shortDescription", e.target.value);
+                                        setFormModified(true);
+                                    }}
+                                    defaultValue={form.getInputProps("shortDescription").value}
+                                />
+                            </Box>
                             <Box>
                                 <Text fw={500} mb={5}>
                                     instructorImagePath:

@@ -49,6 +49,9 @@ const BootcampCard: React.FC<{ bootcamp: bootcamp }> = ({bootcamp}) => {
                     </div>
                     <div className={style.bootcampCardItemData}>
                         <h3 className={style.title}>{bootcamp.title}</h3>
+                        <p>
+                            {bootcamp.shortDescription || ""}
+                        </p>
                         {/*<span className={style.bootcampBadge}>Get in Touch</span>*/}
                         <div className={style.actionContainer}>
                             <Link href={`/Academy/${bootcamp.id}`}>Learn more</Link>

@@ -7,6 +7,7 @@ export type bootcamp = {
     price: number;
     discount: number;
     description: string;
+    shortDescription: string;
     bannerImagePath: string;
     cardImagePath: string;
     mobileImagePath:string;

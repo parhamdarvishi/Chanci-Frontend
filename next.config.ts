@@ -11,6 +11,13 @@ const nextConfig: NextConfig = {
         pathname: '/WebsiteImages/**',
         search: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'bff-uploaded-images.s3.eu-west-2.amazonaws.com',
+        port: '',
+        pathname: '/**',
+        search: '',
+      },
     ],
   },
 };
