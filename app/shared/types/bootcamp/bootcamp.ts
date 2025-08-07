@@ -1,4 +1,3 @@
-
 export type bootcamp = {
     id: number,
     title: string;
@@ -10,7 +9,7 @@ export type bootcamp = {
     shortDescription: string;
     bannerImagePath: string;
     cardImagePath: string;
-    mobileImagePath:string;
+    mobileImagePath: string;
     instructorImagePath: string;
     currency: string;
     isActive: boolean;
@@ -19,19 +18,26 @@ export type bootcamp = {
 }
 
 export type BootcampPaymentTypes = {
-        id: number,
-        title: string;
-        amount: number,
-        currency: string;
-        bootcampId: number,
-        bootcamp: null,
-        isDeleted: boolean;
+    id: number,
+    title: string;
+    amount: number,
+    currency: string;
+    bootcampId: number,
+    isDeleted: boolean;
+}
+
+export interface BootcampPaymentTypesResponse {
+    isSuccess?: boolean;
+    message?: string;
+    data?: {
+        items?: BootcampPaymentTypes[];
+    };
 }
 
 export interface BootcampResponse {
     isSuccess?: boolean;
     message?: string;
     data?: {
-        items ?: bootcamp[];
+        items?: bootcamp[];
     };
 }

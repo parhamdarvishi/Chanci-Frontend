@@ -17,11 +17,9 @@ import {modals} from "@mantine/modals";
 import toastAlert from "@/shared/helpers/toast";
 import {useForm} from "@mantine/form";
 import {relativePaths} from "@/shared/constants/relative-url/other";
-import Link from "next/link";
 import {bootcamp, BootcampResponse} from "@shared/types/bootcamp/bootcamp";
 import {bootcampAddress} from "@shared/constants/relative-url/bootcamp";
 import Editor from "@shared/ui/RichTextEditor/RichTextEditor";
-import {courseAddress} from "@shared/constants/relative-url/course";
 
 const BootcampComponent = ({id}: { id: string }) => {
 
@@ -164,7 +162,7 @@ const BootcampComponent = ({id}: { id: string }) => {
             const res = await postRequest(bootcampAddress.Add, formValues, true);
             if (res?.isSuccess) {
                 toastAlert("data added successfully", "success");
-                router.push('/panel/bootcamp')
+                router.push('/panel/bootcamp');
             } else {
                 toastAlert("Failed to add data", "error");
             }
@@ -194,9 +192,9 @@ const BootcampComponent = ({id}: { id: string }) => {
             confirmProps: {color: "red"},
             onConfirm: async () => {
                 try {
-                    await deleteRequest(`${bootcampAddress}?Id=${id}`, {}, true);
+                    await deleteRequest(`${bootcampAddress.Delete}?Id=${id}`, {}, true);
                     toastAlert("deleted successfully", "success");
-                    router.push(relativePaths.panel.fixedSectionList);
+                    router.push('/panel/bootcamp');
                 } catch (error) {
                     console.error("Error deleting:", error);
                     toastAlert("Failed to delete", "error");
@@ -270,14 +268,14 @@ const BootcampComponent = ({id}: { id: string }) => {
                             </Box>
                             <Box>
                                 <Text fw={500} mb={5}>
-                                    discount:
+                                    title:
                                 </Text>
                                 <Textarea
                                     onChange={(e) => {
-                                        form.setFieldValue("discount", +(e.target.value));
+                                        form.setFieldValue("title", e.target.value);
                                         setFormModified(true);
                                     }}
-                                    defaultValue={form.getInputProps("discount").value}
+                                    defaultValue={form.getInputProps("title").value}
                                 />
                             </Box>
                             <Box>

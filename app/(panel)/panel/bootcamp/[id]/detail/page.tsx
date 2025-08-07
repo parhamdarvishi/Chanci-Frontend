@@ -14,20 +14,19 @@ const Page = () => {
         { head: "price", key: "price" },
         { head: "isActive", key: "isActive" }
     ];
-
     const params = useParams();
-
+    const url = `${bootcampPaymentTypeAddress.GetAll}?Filters[0].PropertyName=bootcampId&Filters[0].operation=0&Filters[0].value=${params.id as string}`;
     return (
         <>
             <TableOnRequest<bootcamp>
                 key={0}
                 rowsPerPage={10}
-                url={bootcampPaymentTypeAddress.GetAll}
+                url={url}
                 columns={columns}
                 actionButtons={[
                     {
                         name: "View Details",
-                        externalLink: "/panel/bootcamp/",
+                        externalLink: "/panel/bootcamppayment/",
                     },
                 ]}
             />
