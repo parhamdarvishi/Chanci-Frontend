@@ -34,13 +34,12 @@ const BootcampPayment: React.FC = () => {
         initialValues: {
             fullName: "",
             email: "",
-            linkedInProfile: "",
+            linkedInProfile: " ",
             bootcampPaymentTypeId: null as number | null,
         },
         validate: {
             fullName: (value) => (value === "" ? "Please field the fullName" : null),
             email: (value) => (value === "" ? "Please field the email" : null),
-            linkedInProfile: (value) => (value === "" ? "Please enter your LinkedIn profile" : null),
             bootcampPaymentTypeId: (value) =>
                 value === null ? "Please choose an option" : null,
         },
@@ -154,49 +153,35 @@ const BootcampPayment: React.FC = () => {
                                     {...fieldForm.getInputProps("email")}
                                 />
                             </Input.Wrapper>
-                            <Input.Wrapper
-                                classNames={{
-                                    root: style.root,
-                                    label: style.label,
-                                    description: style.description,
-                                }}
-                                withAsterisk
-                                label="LinkedIn Profile"
-                            >
-                                <Input
-                                    classNames={{input: style.input}}
-                                    placeholder="e.g. https://linkedin.com/in/yourprofile"
-                                    {...fieldForm.getInputProps("linkedInProfile")}
-                                />
-                            </Input.Wrapper>
-                            <Input.Wrapper
-                                classNames={{
-                                    root: style.root,
-                                    label: style.label,
-                                    description: style.description,
-                                }}
-                                label="Type"
-                            >
-                                <Select
-                                    checkIconPosition="right"
-                                    data={bootcamp?.bootcampPaymentTypes?.map((paymentType) => ({
-                                        value: paymentType.id.toString(),
-                                        label: `${paymentType.title} - ${
-                                            paymentType.currency === "GBP"
-                                                ? `${formatCurrency(paymentType.amount)}`
-                                                : paymentType.amount
-                                        }`,
-                                    }))}
+                            {bootcamp?.bootcampPaymentTypes && bootcamp?.bootcampPaymentTypes?.length > 0 && (
+                                <Input.Wrapper
                                     classNames={{
-                                        input: style.input,
+                                        root: style.root,
                                         label: style.label,
-                                        error: style.errorMessages,
+                                        description: style.description,
                                     }}
-                                    //   dropdownOpened
-                                    placeholder="Choose a payment type"
-                                    {...fieldForm.getInputProps("bootcampPaymentTypeId")}
-                                />
-                            </Input.Wrapper>
+                                    label="Type"
+                                >
+                                    <Select
+                                        checkIconPosition="right"
+                                        data={bootcamp.bootcampPaymentTypes.map((paymentType) => ({
+                                            value: paymentType.id.toString(),
+                                            label: `${paymentType.title} - ${
+                                                paymentType.currency === "GBP"
+                                                    ? `${formatCurrency(paymentType.amount)}`
+                                                    : paymentType.amount
+                                            }`,
+                                        }))}
+                                        classNames={{
+                                            input: style.input,
+                                            label: style.label,
+                                            error: style.errorMessages,
+                                        }}
+                                        placeholder="Choose a payment type"
+                                        {...fieldForm.getInputProps("bootcampPaymentTypeId")}
+                                    />
+                                </Input.Wrapper>
+                            )}
                         </Box>
 
                         <Button
