@@ -1,24 +1,29 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import {useParams, useRouter} from "next/navigation";
 import BootcampComponent from "@shared/ui/Bootcamp/BootcampComponent";
-import {bootcamp} from "@shared/types/bootcamp/bootcamp";
-import {bootcampAddress} from "@shared/constants/relative-url/bootcamp";
+import {bootcamp, BootcampPaymentTypes} from "@shared/types/bootcamp/bootcamp";
 import {TableOnRequest} from "@shared/ui/Table";
 import {TableColumns} from "@shared/ui/Table/model";
 import {bootcampPaymentTypeAddress} from "@shared/constants/relative-url/bootcampPaymentType";
+import PageHeader from "@shared/ui/PageHeader/pageHeader";
 const Page = () => {
-    const columns: TableColumns<bootcamp>[] = [
+    const columns: TableColumns<BootcampPaymentTypes>[] = [
         { head: "id", key: "id" },
         { head: "title", key: "title" },
-        { head: "price", key: "price" },
-        { head: "isActive", key: "isActive" }
+        { head: "amount", key: "amount" },
+        { head: "currency", key: "currency" }
     ];
+    const router = useRouter();
     const params = useParams();
     const url = `${bootcampPaymentTypeAddress.GetAll}?Filters[0].PropertyName=bootcampId&Filters[0].operation=0&Filters[0].value=${params.id as string}`;
     return (
         <>
-            <TableOnRequest<bootcamp>
+            <PageHeader
+                title="Bootcamp Payment Types"
+                onAddClick={()=> router.push(`/panel/bootcamppayment/add/${params.id}`)}
+            />
+            <TableOnRequest<BootcampPaymentTypes>
                 key={0}
                 rowsPerPage={10}
                 url={url}

@@ -16,14 +16,13 @@ import {
 import {modals} from "@mantine/modals";
 import toastAlert from "@/shared/helpers/toast";
 import {useForm} from "@mantine/form";
-import {relativePaths} from "@/shared/constants/relative-url/other";
 import {
     BootcampPaymentTypes,
     BootcampPaymentTypesResponse
 } from "@shared/types/bootcamp/bootcamp";
 import {bootcampPaymentTypeAddress} from "@shared/constants/relative-url/bootcampPaymentType";
 
-const BootcampPaymentComponent = ({id}: { id: string }) => {
+const BootcampPaymentComponent = ({id , bootcampId}: { id: string , bootcampId: string }) => {
 
     const router = useRouter();
     const [item, setItem] = useState<BootcampPaymentTypes | undefined>(undefined);
@@ -54,7 +53,6 @@ const BootcampPaymentComponent = ({id}: { id: string }) => {
                 const data = res?.data?.items?.[0];
                 setItem(data);
                 if (data) {
-                    debugger;
                     // Convert numeric values to strings for Select components
                     form.setValues({
                         id: data.id || 0,
@@ -71,7 +69,7 @@ const BootcampPaymentComponent = ({id}: { id: string }) => {
                 toastAlert("Failed to load job details", "error");
             }
         };
-
+        debugger;
         if (id && id.length > 0) {
             fetchData();
         } else {
@@ -103,10 +101,11 @@ const BootcampPaymentComponent = ({id}: { id: string }) => {
         }
     };
     const handleCreate = async () => {
-        if (form.validate().hasErrors) return
+        if (form.validate().hasErrors) 
+            return;
         setLoading(true);
         try {
-            // Convert string values back to numbers before sending to API
+            form.values.bootcampId = Number(bootcampId);
             const formValues = {
                 ...form.values
             };
