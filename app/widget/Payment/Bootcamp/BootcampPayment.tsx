@@ -53,7 +53,6 @@ const BootcampPayment: React.FC = () => {
     // Validate using Yup
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        debugger;
         if (fieldForm.validate().hasErrors) return;
         // Submit form data via Axios if validation passes
         setLoading(true);
@@ -115,6 +114,11 @@ const BootcampPayment: React.FC = () => {
                     withBorder
                     className={style.paymentCard}
                 >
+                    <p>
+                        You're purchasing <span style={{
+                            color: "#5175f0"
+                    }}>{bootcamp?.title}</span>.
+                    </p>
                     <p>
                         Please enter your full name, email address, and LinkedIn profile and click the button
                         to proceed with your payment and complete the booking process for
