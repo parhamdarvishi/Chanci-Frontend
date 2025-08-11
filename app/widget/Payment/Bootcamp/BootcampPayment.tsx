@@ -115,7 +115,7 @@ const BootcampPayment: React.FC = () => {
                     className={style.paymentCard}
                 >
                     <p>
-                        You're purchasing <span style={{
+                        You are purchasing <span style={{
                             color: "#5175f0"
                     }}>{bootcamp?.title}</span>.
                     </p>
