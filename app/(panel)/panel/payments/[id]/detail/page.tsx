@@ -24,6 +24,8 @@ type PaymentType = {
     createAt: string;
   };
   userPaymentLogs: any[];
+  email: string  | null;
+  entityId: number | null;
 };
 interface ApiResponse {
     isSuccess?: boolean;
@@ -103,15 +105,15 @@ const Page = () => {
           </GridCol>
 
           <GridCol span={6}>
-            <Text fw={500}>Price:</Text>
-            <Text mb="sm">{payment.price}</Text>
+            <Text fw={500}>Email:</Text>
+            <Text mb="sm">{payment.email}</Text>
           </GridCol>
-
+          
           <GridCol span={6}>
-            <Text fw={500}>Currency:</Text>
-            <Text mb="sm">{payment.currency || "N/A"}</Text>
+            <Text fw={500}>Price:</Text>
+            <Text mb="sm">{payment.price / 100} {payment.currency || "N/A"}</Text>
           </GridCol>
-
+          
           <GridCol span={6}>
             <Text fw={500}>Payment Status:</Text>
             <Text mb="sm">{payment.paiedSuccessfull ? "Successful" : "Failed"}</Text>
